@@ -1,0 +1,17 @@
+:Namespace write
+  ⎕ML←1 ⋄ ⎕IO←0
+
+  ∇ init lib
+    ⍎'i8←{(⍎⎕NA''',lib,'|MEMCPY P <I1[] U4'') ⍺ ⍵ (≢⍵)}'
+    ⍎'i16←{(⍎⎕NA''',lib,'|MEMCPY P <I2[] U4'') ⍺ ⍵ (2×≢⍵)}'
+    ⍎'i32←{(⍎⎕NA''',lib,'|MEMCPY P <I4[] U4'') ⍺ ⍵ (4×≢⍵)}'
+    ⍎'i64←{(⍎⎕NA''',lib,'|MEMCPY P <I8[] U4'') ⍺ ⍵ (8×≢⍵)}'
+    ⍎'u8←{(⍎⎕NA''',lib,'|MEMCPY P <U1[] U4'') ⍺ ⍵ (≢⍵)}'
+    ⍎'u16←{(⍎⎕NA''',lib,'|MEMCPY P <U2[] U4'') ⍺ ⍵ (2×≢⍵)}'
+    ⍎'u32←{(⍎⎕NA''',lib,'|MEMCPY P <U4[] U4'') ⍺ ⍵ (4×≢⍵)}'
+    ⍎'u64←{(⍎⎕NA''',lib,'|MEMCPY P <U8[] U4'') ⍺ ⍵ (8×≢⍵)}'
+    ⍎'float←{(⍎⎕NA''',lib,'|MEMCPY P <F4[] U4'') ⍺ ⍵ (4×≢⍵)}'
+    ⍎'double←{(⍎⎕NA''',lib,'|MEMCPY P <F8[] U4'') ⍺ ⍵ (8×≢⍵)}'
+    ⍎'string←{(⍎⎕NA''',lib,'|MEMCPY P <{U4 U1[12]}[] U4'') ⍺ ⍵ (16×≢⍵)}'
+  ∇
+:EndNamespace

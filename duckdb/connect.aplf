@@ -1,0 +1,10 @@
+_con←connect _db;st
+⍝ _db: pointer to database
+⍝ _con: pointer to connection
+
+(st _con)←api.duckdb_connect _db 0
+:if st
+    _con←0
+:endif
+
+⍝ KSL 1.0.2

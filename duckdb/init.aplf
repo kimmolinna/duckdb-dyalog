@@ -1,0 +1,14 @@
+ init folder;ext;linux
+ ⎕FR←1287 ⋄ ⎕ML←1 ⋄ ⎕IO←0 ⋄ ⎕PP←34
+ null←⎕NULL
+ ts_corr←-10 ⎕DT⊂2029 12 31 0 0 0 0
+ DuckDBSuccess←0
+ DuckDBError←1
+ STANDARD_VECTOR_SIZE←1024
+ ext←('.dll' '.so')⊃⍨linux←∨/'Linux'⍷⊃('.'⎕WG'APLVersion')
+ api.init folder,('duckdb.dll' 'libduckdb.so')⊃⍨linux
+ read.init'dyalog64',ext
+ write.init'dyalog64',ext
+ types_out←'' 'i8' 'i8' 'i16' 'i32' 'i64' 'u8' 'u16' 'u32' 'u64' 'float' 'double' 'i64' 'i32' 'i32'
+
+⍝ KSL 1.0.5

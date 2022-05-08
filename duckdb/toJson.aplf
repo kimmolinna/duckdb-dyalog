@@ -1,0 +1,6 @@
+json←toJson in
+col data←2↑in
+data←{a←⍵ ⋄ ∨/b←⍵∊⎕null:{(b/a)←⍵⋄a}⊂'null' ⋄ ⍵}¨data
+json←⎕json ⊂ 4 (data col)
+
+⍝ KSL 1.0.2

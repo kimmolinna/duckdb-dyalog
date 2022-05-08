@@ -1,0 +1,91 @@
+ (col type_id)←readChunk(_data_chunk data_chunk_ind);row_count;_vector;_column_type;_data;_validity;type_id;nullmask;a;b;l;fr;frac;exp;sign;toReal;split
+ row_count←api.duckdb_data_chunk_get_size _data_chunk
+ _vector←api.duckdb_data_chunk_get_vector _data_chunk data_chunk_ind
+ _column_type←api.duckdb_vector_get_column_type _vector
+ _data←api.duckdb_vector_get_data _vector
+ _validity←api.duckdb_vector_get_validity _vector
+ type_id←api.duckdb_get_type_id _column_type
+ split←{((≢⍵)⍴⍺↑1)⊂⍵}
+ frac←{⎕IO←1 ⋄ 1++/2*-(9↓⍵)/⍳23}
+ exp←{2*127-⍨+/2*(⌽8↑1↓⍵)/⍳8}
+ sign←{¯1*1↑⍵}
+ toReal←(sign×exp×frac),⊖[0]4 8⍴11 ⎕DR⊢ ⍝ thanks VMJ for pimping my code
+ :If _validity≡0
+ :OrIf ∨/nullmask←row_count↑{,⌽⍵ 8⍴11 ⎕DR ⍵ read.i8 _validity}⌈row_count÷8
+     :Select type_id
+     :CaseList 0
+     :CaseList 1 2       ⍝ boolean and tinyint
+         col←row_count read.i8 _data
+     :Case 3             ⍝ smallint
+         col←row_count read.i16 _data
+     :Case 4             ⍝ integer
+         col←row_count read.i32 _data
+     :Case 5             ⍝ bigint
+         col←row_count read.i64 _data
+     :Case 6             ⍝ utinyint
+         col←row_count read.u8 _data
+     :Case 7             ⍝ usmallint
+         col←row_count read.u16 _data
+     :Case 8             ⍝ uinteger
+         col←row_count read.u32 _data
+     :Case 9             ⍝ ubigint
+         col←row_count read.u64 _data
+     :Case 10            ⍝ float
+         :If 0≡_validity
+             col←row_count read.float _data
+         :Else
+             fr←⎕FR ⋄ ⎕FR←645
+             col←nullmask\{(sign×exp×frac),⊖[0]4 8⍴11 ⎕DR ⍵}¨4 split(4/nullmask)/(4×row_count)read.i8 _data
+             ⎕FR←fr
+         :EndIf
+     :Case 11            ⍝ double
+         :If 0≡_validity
+             col←row_count read.double _data
+         :Else
+             fr←⎕FR ⋄ ⎕FR←645
+             col←nullmask\645 ⎕DR(8/nullmask)/(8×row_count)read.i8 _data
+             ⎕FR←fr
+         :EndIf
+     :Case 12            ⍝ timestamp
+         col←10 ¯2 ⎕DT ts_corr+1000×row_count read.i64 _data
+     :Case 13            ⍝ date
+         col←3↑¨13 ¯1 ⎕DT row_count read.i32 _data
+     :Case 14            ⍝ time
+         col←3↓¨10 ¯2 ⎕DT 1000×row_count read.i64 _data
+     :Case 15            ⍝ interval
+         col←row_count read.interval _data(row_count×(4+4+8))
+         col←{b←⍵≠0 ⋄ 2=⍸b:0 0,0 60 60 1000000⊤2⊃⍵ ⋄ ⍵}¨col
+     :Case 16            ⍝ hugeint
+         col←api.duckdb_hugeint_to_double¨_data+16×⍳row_count
+     :CaseList 17 28     ⍝ varchar/json	
+         a←row_count read.string _data
+         col←⎕UCS¨1⊃¨a
+         :If 0≡_validity ⍝0=⎕nc 'nullmask'
+             b←13>l←,⊃¨a
+             (b/col)←(b/l){⍺↑⍵}¨b/col
+             b←~b
+         :Else
+             b←nullmask∧13>l←,⊃¨a
+             (b/col)←(b/l){⍺↑⍵}¨b/col
+             b←nullmask∧12<l←,⊃¨a
+         :EndIf
+         :If 1∊b
+             (b/col)←(b/l){⍺ read.utf8_l 256⊥⌽4↓1⊃⍵}¨b/a
+         :EndIf
+     :Case 18                  ⍝ blob
+         ∘
+     :Case 20
+         ∘
+     :Case 21
+         ∘
+     :Else
+         ∘
+     :EndSelect
+ :EndIf
+ :If 0≢_validity
+     :Trap 0
+         ((~nullmask)/col)←null
+     :Else
+         col←row_count⍴null
+     :End
+ :EndIf

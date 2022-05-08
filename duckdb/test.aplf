@@ -1,0 +1,102 @@
+ test;r;req
+ :If 0=⎕NC'null'
+     init
+ :EndIf
+ req←{0::⍺,' - failed' ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - failed'}
+ {r←⊂⍵
+     t←api.duckdb_create_logical_type(type.BIGINT)
+     r,←⊂'BIGINT'req type.BIGINT≡api.duckdb_get_type_id t
+     d←api.duckdb_destroy_logical_type t
+     d←api.duckdb_destroy_logical_type 0
+     ↑r
+ }'Test Logical Types C API'
+
+ {r←⊂⍵
+     db←open':memory:'
+     con←connect db
+     r,←⊂'Standard vector size'req api.duckdb_vector_size≡STANDARD_VECTOR_SIZE
+
+     _←query con'CREATE TABLE test(i BIGINT, j SMALLINT)'
+
+     types←2⍴⍬
+     types[0]←api.duckdb_create_logical_type type.BIGINT
+     types[1]←api.duckdb_create_logical_type type.SMALLINT
+
+     data_chunk←api.duckdb_create_data_chunk types 2
+
+     r,←⊂'Column count'req 2≡api.duckdb_data_chunk_get_column_count data_chunk
+
+     first_type←api.duckdb_vector_get_column_type(api.duckdb_data_chunk_get_vector data_chunk 0)
+     r,←⊂'First type'req type.BIGINT≡api.duckdb_get_type_id first_type
+     _←api.duckdb_destroy_logical_type first_type
+
+     second_type←api.duckdb_vector_get_column_type(api.duckdb_data_chunk_get_vector data_chunk 1)
+     r,←⊂'Second type'req type.SMALLINT≡api.duckdb_get_type_id second_type
+     _←api.duckdb_destroy_logical_type second_type
+
+     r,←⊂'Out of bounds'req 0≡api.duckdb_data_chunk_get_vector data_chunk 999
+     r,←⊂'Null data chunk'req 0≡api.duckdb_data_chunk_get_vector 0 0
+     r,←⊂'Null column type'req 0≡api.duckdb_vector_get_column_type 0
+
+     r,←⊂'Size of data chunk'req 0≡api.duckdb_data_chunk_get_size data_chunk
+     r,←⊂'Size of Null'req 0≡api.duckdb_data_chunk_get_size 0
+
+    ⍝ use the appender to insert a value using the data chunk API
+     status appender←api.duckdb_appender_create con'' 'test' 0
+     r,←⊂'Create appender'req 0≡status
+
+    ⍝ append standard primitive values
+     col1_ptr←api.duckdb_vector_get_data api.duckdb_data_chunk_get_vector data_chunk 0
+     _←col1_ptr write.u64 42
+     col2_ptr←api.duckdb_vector_get_data api.duckdb_data_chunk_get_vector data_chunk 1
+     _←col2_ptr write.u16 84
+
+     r,←⊂'Get data of null'req 0≡api.duckdb_vector_get_data 0
+
+     _←api.duckdb_data_chunk_set_size data_chunk 1
+     r,←⊂'Size of data chunk'req 1≡api.duckdb_data_chunk_get_size data_chunk
+
+     r,←⊂'Append chunk'req DuckDBSuccess≡api.duckdb_append_data_chunk appender data_chunk
+     r,←⊂'Append null chunk'req DuckDBError≡api.duckdb_append_data_chunk appender 0
+     r,←⊂'Append to null pointer'req DuckDBError≡api.duckdb_append_data_chunk 0 data_chunk
+
+    ⍝ append nulls
+     _←api.duckdb_data_chunk_reset data_chunk
+     r,←⊂'Get size of chunk after reset'req 0≡api.duckdb_data_chunk_get_size data_chunk
+
+     _←api.duckdb_vector_ensure_validity_writable api.duckdb_data_chunk_get_vector data_chunk 0
+     _←api.duckdb_vector_ensure_validity_writable api.duckdb_data_chunk_get_vector data_chunk 1
+
+     col1_validity←api.duckdb_vector_get_validity api.duckdb_data_chunk_get_vector data_chunk 0
+
+     r,←⊂'Validity of col1'req api.duckdb_validity_row_is_valid col1_validity 0
+     _←api.duckdb_validity_set_row_validity col1_validity 0 0
+     r,←⊂'Invalidity of col1'req~api.duckdb_validity_row_is_valid col1_validity 0
+
+     col2_validity←api.duckdb_vector_get_validity api.duckdb_data_chunk_get_vector data_chunk 1
+
+     r,←⊂'Validity of col2'req api.duckdb_validity_row_is_valid col2_validity 0
+     _←api.duckdb_validity_set_row_validity col2_validity 0 0
+     r,←⊂'Invalidity of col1'req~api.duckdb_validity_row_is_valid col2_validity 0
+
+     _←api.duckdb_data_chunk_set_size data_chunk 1
+     r,←⊂'Succesfull append of chunk'req DuckDBSuccess≡api.duckdb_append_data_chunk appender data_chunk
+     r,←⊂'Validity of null pointer'req 0≡api.duckdb_vector_get_validity 0
+
+     _←api.duckdb_appender_destroy appender
+     r,←⊂'Correct data in table'req(,¨'i' 'j')((42 ⎕NULL)(84 ⎕NULL))(5 3)≡query con'SELECT * FROM test'
+
+     _←api.duckdb_data_chunk_reset data_chunk
+     _←api.duckdb_data_chunk_reset 0
+     r,←⊂'Size of chunk after reset'req 0≡api.duckdb_data_chunk_get_size data_chunk
+
+     _←api.duckdb_destroy_data_chunk data_chunk
+
+     _←api.duckdb_destroy_data_chunk 0
+     _←api.duckdb_destroy_logical_type types[0]
+     _←api.duckdb_destroy_logical_type types[1]
+
+     _←disconnect con
+     _←close db
+     ↑r
+ }'Test DataChunk C API'

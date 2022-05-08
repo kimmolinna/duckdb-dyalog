@@ -1,0 +1,15 @@
+db_ptr←open db_str;st;con
+⍝ db_str: database name (with path) or :memory:
+⍝ db_ptr: pointer to database
+
+:if 0=⎕nc 'null'
+    init
+:endif
+
+(st db_ptr)←api.duckdb_open db_str 0
+
+:if st
+    db_ptr←0
+:endif
+
+⍝ KSL 1.03

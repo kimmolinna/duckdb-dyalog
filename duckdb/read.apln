@@ -1,0 +1,22 @@
+:Namespace read
+    ⎕ML←1 ⋄ ⎕IO←0
+    ∇ init lib
+      ⍎'i8←{(⍎⎕NA''',lib,'|MEMCPY >I1[] P U4'') ⍺ ⍵ ⍺}'
+      ⍎'i16←{(⍎⎕NA''',lib,'|MEMCPY >I2[] P U4'') ⍺ ⍵ (⍺×2)}'
+      ⍎'i32←{(⍎⎕NA''',lib,'|MEMCPY >I4[] P U4'') ⍺ ⍵ (⍺×4)}'
+      ⍎'i64←{(⍎⎕NA''',lib,'|MEMCPY >I8[] P U4'') ⍺ ⍵ (⍺×8)}'
+      ⍎'u8←{(⍎⎕NA''',lib,'|MEMCPY >U1[] P U4'') ⍺ ⍵ ⍺}'
+      ⍎'u16←{(⍎⎕NA''',lib,'|MEMCPY >U2[] P U4'') ⍺ ⍵ (⍺×2)}'
+      ⍎'u32←{(⍎⎕NA''',lib,'|MEMCPY >U4[] P U4'') ⍺ ⍵ (⍺×4)}'
+      ⍎'u64←{(⍎⎕NA''',lib,'|MEMCPY >U8[] P U4'') ⍺ ⍵ (⍺×8)}'
+      ⍎'float←{(⍎⎕NA''',lib,'|MEMCPY >F4[] P U4'') ⍺ ⍵ (⍺×4)}'
+      ⍎'double←{(⍎⎕NA''',lib,'|MEMCPY >F8[] P U4'') ⍺ ⍵ (⍺×8)}'
+      ⍎'interval←{(⍎⎕NA''',lib,'|MEMCPY >{I4 I4 I8}[] P U4'') ⍺ ⍵ (⍺×16)}'
+      ⍎'utf8←{''UTF-8''⎕UCS(⍎⎕NA''',lib,'|STRNCPY >0U1[] P U4'') ⍺ ⍵ ⍺}'
+      ⍎'utf8_l←{''UTF-8''⎕UCS(⍎⎕NA''',lib,'|MEMCPY >U1[] P U4'') ⍺ ⍵ ⍺}'
+      ⍎'hint←{(⍎⎕NA''',lib,'|MEMCPY >{U8 I8}[] P U4'') ⍺ ⍵ (⍺×16)}'
+      ⍎'string←{(⍎⎕NA''',lib,'|MEMCPY >{U4 U1[12]}[] P U4'') ⍺ ⍵ (⍺×16)}'
+    ∇
+:EndNamespace
+
+⍝ KSL 1.0.2

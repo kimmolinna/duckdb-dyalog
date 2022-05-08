@@ -1,0 +1,67 @@
+out←append (_con schema table data types);r;ty;_data_chunk;_;st;_appender;i;t;s;ii;d;validity;_vector;_data;_ltypes;us;l;data_chunk;sz;rows;nullmask;nm;_validity
+r←query _con ('DESCRIBE ',table)
+:if 2=⎕nc 'r'
+    ty←{type.⍎⍵}¨{↑(1⊃⍵)[(⊃⍵)⍳⊂'column_type']}r
+    :if ty≡types
+        :if (⍴ty)=⍴data
+            _ltypes←api.duckdb_create_logical_type¨types
+            _data_chunk←api.duckdb_create_data_chunk _ltypes (⍴_ltypes)
+            _←api.duckdb_destroy_logical_type ¨_ltypes	
+            (st _appender)←api.duckdb_appender_create _con schema table 0
+            :if st
+                out←'Unable to create an appender!'
+            :else
+                sz←≢⊃data
+                :while sz>0
+                    rows←(⌊/sz STANDARD_VECTOR_SIZE)
+                    data_chunk←rows↑¨data ⋄ data←rows↓¨data ⋄ sz-←rows
+                    nullmask←∨/¨¨data_chunk=null
+                    :if ∨/i←types∊type.TIMESTAMP
+                        (i/data_chunk)←1000÷⍨(-ts_corr)+10 ⎕dt¨i/data_chunk
+                    :endif
+
+                    :for i :in ⍳≢data_chunk
+                        _vector←api.duckdb_data_chunk_get_vector _data_chunk i
+                        _data←api.duckdb_vector_get_data _vector
+                        nm←i⊃nullmask
+
+                        :if 15>t←i⊃types
+                            (nm/i⊃data_chunk)←0
+                            _←_data(write.⍎t⊃types_out)i⊃data_chunk
+                        :elseif 17≡t
+                            d←(nm/i⊃data_chunk)←''
+                            us←('UTF-8'⎕UCS⊢)¨d
+                            s←≢¨us ⋄ l←≢us
+                            :if ∧/13>s
+                                _←_data write.string s(⊣,12↑⊢)¨us
+                            :else
+                                _←api.duckdb_vector_assign_string_element_len¨↓⍉↑(l⍴_vector)(⍳l) us s
+                            :endif
+                        :endif
+                        :if ∨/nm
+                            _←api.duckdb_vector_ensure_validity_writable _vector
+                            _validity←api.duckdb_vector_get_validity _vector
+                            _←api.duckdb_validity_set_row_invalid _validity, ⊢¨⍸nm
+                        :endif
+                    :endfor
+
+                    _←api.duckdb_data_chunk_set_size _data_chunk (≢⊃data_chunk)
+                    st←api.duckdb_append_data_chunk _appender _data_chunk
+                    _←api.duckdb_data_chunk_reset _data_chunk
+                :endwhile
+
+                _←api.duckdb_appender_destroy _appender
+            :endif
+            _←api.duckdb_destroy_data_chunk _data_chunk
+            out←'Success!'
+        :Else
+            out←'Check the number of columns!'
+        :EndIf
+    :else
+        out←'Data types do not match!'
+    :endif
+:else
+    out←r
+:endif
+
+⍝ KSL 1.0.3

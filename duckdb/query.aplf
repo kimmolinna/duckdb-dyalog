@@ -1,0 +1,35 @@
+out←query(_con sql);st;result;_error_message;cc;chunks;cd;datachunk_ind;column_names;data_chunk_ptr;count
+:if _con=0
+    out←'Connection is closed!' ⋄ →0
+:endif
+
+:trap 0
+    (st result)←api.duckdb_query _con sql 6
+:endtrap
+
+:if st
+    _error_message←api.duckdb_result_error ⊂result
+    out←1024 read.utf8 _error_message ⋄ →0
+:endif
+
+column_names←{1=≡⍵:,¨⍵ ⋄ ⍵}{
+    256 read.utf8 (api.duckdb_column_name result ⍵)
+    }¨⍳api.duckdb_column_count ⊂result
+
+
+count←api.duckdb_result_chunk_count ⊂result
+
+:if count=0
+    out←column_names
+    →0
+:endif
+
+chunks←{
+    _data_chunk←api.duckdb_result_get_chunk result ⍵
+    o←↑{readChunk _data_chunk ⍵}¨⍳api.duckdb_data_chunk_get_column_count _data_chunk
+    r←api.duckdb_destroy_data_chunk _data_chunk
+    o
+}¨⍳count
+{}api.duckdb_destroy_result ⊂result
+
+out←(⊂column_names),(↓[0],/[0]↑chunks)

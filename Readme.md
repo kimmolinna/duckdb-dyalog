@@ -1,1 +1,1 @@
-[DuckDB-notebook](./DuckDB.ipynb)
+[Dyalog-DuckDB -notebook](./duckdb-dyalog.ipynb)

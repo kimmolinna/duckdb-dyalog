@@ -1,22 +1,22 @@
 :Namespace read
     ⎕ML←1 ⋄ ⎕IO←0
     ∇ init lib
-      ⍎'i8←{(⍎⎕NA''',lib,'|MEMCPY >I1[] P U4'') ⍺ ⍵ ⍺}'
-      ⍎'i16←{(⍎⎕NA''',lib,'|MEMCPY >I2[] P U4'') ⍺ ⍵ (⍺×2)}'
-      ⍎'i32←{(⍎⎕NA''',lib,'|MEMCPY >I4[] P U4'') ⍺ ⍵ (⍺×4)}'
-      ⍎'i64←{(⍎⎕NA''',lib,'|MEMCPY >I8[] P U4'') ⍺ ⍵ (⍺×8)}'
-      ⍎'u8←{(⍎⎕NA''',lib,'|MEMCPY >U1[] P U4'') ⍺ ⍵ ⍺}'
-      ⍎'u16←{(⍎⎕NA''',lib,'|MEMCPY >U2[] P U4'') ⍺ ⍵ (⍺×2)}'
-      ⍎'u32←{(⍎⎕NA''',lib,'|MEMCPY >U4[] P U4'') ⍺ ⍵ (⍺×4)}'
-      ⍎'u64←{(⍎⎕NA''',lib,'|MEMCPY >U8[] P U4'') ⍺ ⍵ (⍺×8)}'
-      ⍎'float←{(⍎⎕NA''',lib,'|MEMCPY >F4[] P U4'') ⍺ ⍵ (⍺×4)}'
-      ⍎'double←{(⍎⎕NA''',lib,'|MEMCPY >F8[] P U4'') ⍺ ⍵ (⍺×8)}'
-      ⍎'interval←{(⍎⎕NA''',lib,'|MEMCPY >{I4 I4 I8}[] P U4'') ⍺ ⍵ (⍺×16)}'
-      ⍎'utf8←{''UTF-8''⎕UCS(⍎⎕NA''',lib,'|STRNCPY >0U1[] P U4'') ⍺ ⍵ ⍺}'
-      ⍎'utf8_l←{''UTF-8''⎕UCS(⍎⎕NA''',lib,'|MEMCPY >U1[] P U4'') ⍺ ⍵ ⍺}'
-      ⍎'hint←{(⍎⎕NA''',lib,'|MEMCPY >{U8 I8}[] P U4'') ⍺ ⍵ (⍺×16)}'
-      ⍎'string←{(⍎⎕NA''',lib,'|MEMCPY >{U4 U1[12]}[] P U4'') ⍺ ⍵ (⍺×16)}'
+      i8_←⍎⎕NA lib,'|MEMCPY >I1[] P U4' ⋄ i8←{i8_ ⍺ ⍵ ⍺}
+      i16_←⍎⎕NA lib,'|MEMCPY >I2[] P U4' ⋄ i16←{i16_ ⍺ ⍵ (⍺×2)}
+      i32_←⍎⎕NA lib,'|MEMCPY >I4[] P U4' ⋄ i32←{i32_ ⍺ ⍵ (⍺×4)}
+      i64_←⍎⎕NA lib,'|MEMCPY >I8[] P U4' ⋄ i64←{i64_ ⍺ ⍵ (⍺×8)}
+      u8_←⍎⎕NA lib,'|MEMCPY >U1[] P U4' ⋄ u8←{u8_ ⍺ ⍵ ⍺}
+      u16_←⍎⎕NA lib,'|MEMCPY >U2[] P U4' ⋄ u16←{u16_ ⍺ ⍵ (⍺×2)}
+      u32_←⍎⎕NA lib,'|MEMCPY >U4[] P U4' ⋄ u32←{u32_ ⍺ ⍵ (⍺×4)}
+      u64_←⍎⎕NA lib,'|MEMCPY >U8[] P U4' ⋄ u64←{u64_ ⍺ ⍵ (⍺×8)}
+      float_←⍎⎕NA lib,'|MEMCPY >F4[] P U4' ⋄ float←{float_ ⍺ ⍵ (⍺×4)}
+      double_←⍎⎕NA lib,'|MEMCPY >F8[] P U4' ⋄ double←{double_ ⍺ ⍵ (⍺×8)}
+      interval_←⍎⎕NA lib,'|MEMCPY >{I4 I4 I8}[] P U4' ⋄ interval←{interval_ ⍺ ⍵ (⍺×16)}
+      utf8_←⍎⎕NA lib,'|STRNCPY >0U1[] P U4' ⋄ utf8←{'UTF-8'⎕UCS utf8_ ⍺ ⍵ ⍺}
+      utf8_l_←⍎⎕NA lib,'|MEMCPY >U1[] P U4' ⋄ utf8_l←{'UTF-8'⎕UCS utf8_l_ ⍺ ⍵ ⍺}
+      hint_←⍎⎕NA lib,'|MEMCPY >{U8 I8}[] P U4' ⋄ hint←{hint_ ⍺ ⍵ (⍺×16)}
+      string_←⍎⎕NA lib,'|MEMCPY >{U4 U1[12]}[] P U4' ⋄ string←{string_ ⍺ ⍵ (⍺×16)}
     ∇
 :EndNamespace
 
-⍝ KSL 1.0.2
+⍝ KSL 1.0.3

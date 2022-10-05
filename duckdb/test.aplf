@@ -47,9 +47,9 @@
 
     ⍝ append standard primitive values
      col1_ptr←api.duckdb_vector_get_data api.duckdb_data_chunk_get_vector data_chunk 0
-     _←col1_ptr write.u64 42
+    _←col1_ptr write.i64 42
      col2_ptr←api.duckdb_vector_get_data api.duckdb_data_chunk_get_vector data_chunk 1
-     _←col2_ptr write.u16 84
+    _←col2_ptr write.i16 84
 
      r,←⊂'Get data of null'req 0≡api.duckdb_vector_get_data 0
 

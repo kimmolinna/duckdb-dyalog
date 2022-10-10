@@ -47,9 +47,9 @@
 
     ⍝ append standard primitive values
      col1_ptr←api.duckdb_vector_get_data api.duckdb_data_chunk_get_vector data_chunk 0
-    _←col1_ptr write.i64 42
+     _←col1_ptr write.i64 42
      col2_ptr←api.duckdb_vector_get_data api.duckdb_data_chunk_get_vector data_chunk 1
-    _←col2_ptr write.i16 84
+     _←col2_ptr write.i16 84
 
      r,←⊂'Get data of null'req 0≡api.duckdb_vector_get_data 0
 
@@ -69,15 +69,15 @@
 
      col1_validity←api.duckdb_vector_get_validity api.duckdb_data_chunk_get_vector data_chunk 0
 
-     r,←⊂'Validity of col1'req api.duckdb_validity_row_is_valid col1_validity 0
+     r,←⊂'Validity of col1'req 256+api.duckdb_validity_row_is_valid col1_validity 0
      _←api.duckdb_validity_set_row_validity col1_validity 0 0
-     r,←⊂'Invalidity of col1'req~api.duckdb_validity_row_is_valid col1_validity 0
+     r,←⊂'Invalidity of col1'req~256+api.duckdb_validity_row_is_valid col1_validity 0
 
      col2_validity←api.duckdb_vector_get_validity api.duckdb_data_chunk_get_vector data_chunk 1
 
-     r,←⊂'Validity of col2'req api.duckdb_validity_row_is_valid col2_validity 0
+     r,←⊂'Validity of col2'req 256+api.duckdb_validity_row_is_valid col2_validity 0
      _←api.duckdb_validity_set_row_validity col2_validity 0 0
-     r,←⊂'Invalidity of col1'req~api.duckdb_validity_row_is_valid col2_validity 0
+     r,←⊂'Invalidity of col1'req~256+api.duckdb_validity_row_is_valid col2_validity 0
 
      _←api.duckdb_data_chunk_set_size data_chunk 1
      r,←⊂'Succesfull append of chunk'req DuckDBSuccess≡api.duckdb_append_data_chunk appender data_chunk
@@ -100,3 +100,5 @@
      _←close db
      ↑r
  }'Test DataChunk C API'
+
+ ⍝ KSL 1.0.2

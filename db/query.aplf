@@ -33,3 +33,5 @@ chunks←{
 {}api.duckdb_destroy_result ⊂result
 
 out←(⊂column_names),(↓[0],/[0]↑chunks)
+
+⍝ KSL 1.0.1

@@ -29,7 +29,7 @@ r←query _con ('DESCRIBE ',table)
                             (nm/i⊃data_chunk)←0
                             _←_data(write.⍎t⊃types_out)i⊃data_chunk
                         :elseif 17≡t
-                            d←(nm/i⊃data_chunk)←''
+                            d←i⊃data_chunk ⋄ (nm/d)←''
                             us←('UTF-8'⎕UCS⊢)¨d
                             s←≢¨us ⋄ l←≢us
                             :if ∧/13>s

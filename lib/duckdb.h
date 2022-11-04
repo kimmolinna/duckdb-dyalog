@@ -121,6 +121,8 @@ typedef enum DUCKDB_TYPE {
 	DUCKDB_TYPE_UUID,
 	// const char*
 	DUCKDB_TYPE_JSON,
+	// union type, only useful as logical type
+	DUCKDB_TYPE_UNION,
 } duckdb_type;
 
 //! Days are stored as days since 1970-01-01
@@ -300,6 +302,13 @@ Closes the specified connection and de-allocates all memory allocated for that c
 * connection: The connection to close.
 */
 DUCKDB_API void duckdb_disconnect(duckdb_connection *connection);
+
+/*!
+Returns the version of the linked DuckDB, with a version postfix for dev versions
+
+Usually used for developing C extensions that must return this for a compatibility check.
+*/
+DUCKDB_API const char *duckdb_library_version();
 
 //===--------------------------------------------------------------------===//
 // Configuration

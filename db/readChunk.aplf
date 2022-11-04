@@ -53,8 +53,8 @@
      :Case 14            ⍝ time
          col←3↓¨10 ¯2 ⎕DT 1000×row_count read.i64 _data
      :Case 15            ⍝ interval
-         col←row_count read.interval _data(row_count×(4+4+8))
-         col←{b←⍵≠0 ⋄ 2=⍸b:0 0,0 60 60 1000000⊤2⊃⍵ ⋄ ⍵}¨col
+         col←row_count read.interval _data
+         col←{⍵[0 1],0 60 60 1000000⊤2⊃⍵}¨col ⍝ out: months days hours minutes seconds microseconds
      :Case 16            ⍝ hugeint
          col←api.duckdb_hugeint_to_double¨_data+16×⍳row_count
      :CaseList 17 28     ⍝ varchar/json	
@@ -90,4 +90,4 @@
      :End
  :EndIf
 
-⍝ KSL 1.0.2
+⍝ KSL 1.0.3

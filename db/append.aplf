@@ -1,6 +1,7 @@
 out←append (_con schema table data types);r;ty;_data_chunk;_;st;_appender;i;t;s;ii;d;validity;_vector;_data;_ltypes;us;l;data_chunk;sz;rows;nullmask;nm;_validity
 r←query _con ('DESCRIBE ',table)
 :if 2=⎕nc 'r'
+:andif 'Catalog Error'≢13↑r
     ty←{type.⍎⍵}¨{↑(1⊃⍵)[(⊃⍵)⍳⊂'column_type']}r
     :if ty≡types
         :if (⍴ty)=⍴data

@@ -1,13 +1,13 @@
  test;r;req
  :If 0=⎕NC'null'
-     init
+     init 'C:\users\kimmo\duckdb-dyalog\lib\'
  :EndIf
  req←{0::⍺,' - failed' ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - failed'}
  {r←⊂⍵
      t←api.duckdb_create_logical_type(type.BIGINT)
      r,←⊂'BIGINT'req type.BIGINT≡api.duckdb_get_type_id t
      d←api.duckdb_destroy_logical_type t
-     d←api.duckdb_destroy_logical_type 0
+     append←api.duckdb_destroy_logical_type 0
      ↑r
  }'Test Logical Types C API'
 

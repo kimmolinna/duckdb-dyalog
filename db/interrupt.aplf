@@ -1,0 +1,9 @@
+interrupt←{
+  ⍝ Interrupt a running query on a connection
+  ⍝ ⍵: connection pointer
+  ⍝ Returns: 1
+    api.duckdb_interrupt ⍵
+    1
+}
+
+⍝ KSL 1.0.0

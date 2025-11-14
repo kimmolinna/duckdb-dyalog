@@ -1,0 +1,61 @@
+ok←stmt bindParams params;st;i;val;type_id
+⍝ Bind parameters to a prepared statement
+⍝ stmt: prepared statement pointer
+⍝ params: vector of values to bind (in order, DuckDB uses 1-based indexing)
+⍝ Returns: 1 on success, 0 on error
+
+:If stmt=0
+    ok←0 ⋄ →0
+:EndIf
+
+ok←1
+
+:For i :In 1+⍳≢params
+    val←(i-1)⊃params
+    :If val≡null
+        st←api.duckdb_bind_null stmt i
+    :ElseIf (1=≡val)∧(1=⍴⍴val)∧(80=⎕DR⊃val)  ⍝ Enclosed character vector
+        st←api.duckdb_bind_varchar stmt i val
+    :ElseIf 0=≡val  ⍝ Simple scalar or array
+        :If 1=⍴⍴val  ⍝ Vector/string
+            :If 326=⎕DR val  ⍝ Character vector
+                st←api.duckdb_bind_varchar stmt i val
+            :ElseIf 83=⎕DR val  ⍝ Integer vector - bind as int64
+                st←api.duckdb_bind_int64 stmt i (⊃val)
+            :ElseIf 645=⎕DR val ⍝ Float vector
+                st←api.duckdb_bind_double stmt i (⊃val)
+            :Else
+                st←api.duckdb_bind_int64 stmt i (⊃val)
+            :EndIf
+        :ElseIf 0=⍴⍴val  ⍝ Scalar
+            :If 11=⎕DR val  ⍝ Boolean
+                st←api.duckdb_bind_boolean stmt i val
+            :ElseIf (⎕DR val)∊83 163 323  ⍝ Integer types
+                :If val>2147483647
+                    st←api.duckdb_bind_int64 stmt i val
+                :Else
+                    st←api.duckdb_bind_int32 stmt i val
+                :EndIf
+            :ElseIf (⎕DR val)∊645 1287  ⍝ Float types
+                st←api.duckdb_bind_double stmt i val
+            :ElseIf 326=⎕DR val  ⍝ Char
+                st←api.duckdb_bind_varchar stmt i (⍕val)
+            :Else
+                st←api.duckdb_bind_int64 stmt i val
+            :EndIf
+        :Else
+            ⎕←'Unsupported parameter type at index ',⍕i
+            ok←0 ⋄ →0
+        :EndIf
+    :Else
+        ⎕←'Unsupported parameter type at index ',⍕i
+        ok←0 ⋄ →0
+    :EndIf
+
+    :If st≠0
+        ⎕←'Bind error at parameter ',⍕i
+        ok←0 ⋄ →0
+    :EndIf
+:EndFor
+
+⍝ KSL 1.0.0

@@ -1,0 +1,21 @@
+out←queryParams(_con sql params);stmt
+⍝ Prepare, bind, and execute a parameterized query in one call
+⍝ _con: connection pointer
+⍝ sql: SQL query with parameters ($1, $2, etc.)
+⍝ params: vector of parameter values
+⍝ Returns: query results (same format as query function) or error message
+
+stmt←prepareQuery _con sql
+:If stmt=0
+    out←'Failed to prepare statement' ⋄ →0
+:EndIf
+
+:If 0=stmt bindParams params
+    {}destroyPrepared stmt
+    out←'Failed to bind parameters' ⋄ →0
+:EndIf
+
+out←executePrepared stmt
+{}destroyPrepared stmt
+
+⍝ KSL 1.0.0

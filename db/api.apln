@@ -1,5 +1,5 @@
 :Namespace api
-⎕ML←1 ⋄ ⎕IO←0
+⎕ML←1 ⋄ ⎕io←0
 
   ∇ init lib;wf;r
     ⍝ duckdb_state duckdb_open(const char *path, duckdb_database *out_database);
@@ -22,7 +22,7 @@
     ⎕NA'P ',lib,'|duckdb_column_logical_type <P[] U8'
     ⍝ idx_t duckdb_column_count(duckdb_result *result);
     ⎕NA'U8 ',lib,'|duckdb_column_count <P[]'
-    ⍝ idx_t duckdb_row_count(duckdb_result *result);
+    ⍝ idx_t duckdb_row_count(duckdb_result *result);                                  _
     ⎕NA'U8 ',lib,'|duckdb_row_count <P[]'
     ⍝ idx_t duckdb_rows_changed(duckdb_result *result);
     ⎕NA'U8 ',lib,'|duckdb_rows_changed <P[]'
@@ -37,9 +37,9 @@
     ⍝ idx_t duckdb_vector_size()
     ⎕NA'U8 ',lib,'|duckdb_vector_size'
     ⍝ duckdb_state duckdb_prepare(duckdb_connection connection, const char *query, duckdb_prepared_statement *out_prepared_statement);
-    ⎕NA'I4 ',lib,'|duckdb_prepare P <0UTF8[] P'
+    ⎕NA'I4 ',lib,'|duckdb_prepare P <0UTF8[] >P'
     ⍝ void duckdb_destroy_prepare(duckdb_prepared_statement *prepared_statement);
-    ⎕NA lib,'|duckdb_destroy_prepare P'
+    ⎕NA lib,'|duckdb_destroy_prepare <P'
     ⍝ duckdb_state duckdb_execute_prepared(duckdb_prepared_statement prepared_statement, duckdb_result *out_result);
     ⎕NA'I4 ',lib,'|duckdb_execute_prepared P >P[]'
     ⍝ duckdb_state duckdb_execute_prepared_arrow(duckdb_prepared_statement prepared_statement, duckdb_arrow *out_result);
@@ -71,7 +71,7 @@
     ⍝ uint64_t *duckdb_vector_get_validity(duckdb_vector vector);
     ⎕NA'U8 ',lib,'|duckdb_vector_get_validity P'
     ⍝ bool duckdb_validity_row_is_valid(uint64_t *validity, idx_t row)
-    ⎕NA'I4 ',lib,'|duckdb_validity_row_is_valid P U8'
+    ⎕NA'I1 ',lib,'|duckdb_validity_row_is_valid P U8'
     ⍝ void duckdb_validity_set_row_validity(uint64_t *validity, idx_t row, bool valid);
     ⎕NA lib,'|duckdb_validity_set_row_validity P U8 I1'
     ⍝ void duckdb_validity_set_row_invalid(uint64_t *validity, idx_t row);
@@ -95,7 +95,7 @@
     ⍝ duckdb_state duckdb_query_arrow_schema(duckdb_arrow result, duckdb_arrow_schema *out_schema);
     ⎕NA'I4 ',lib,'|duckdb_query_arrow_schema P P'
     ⍝ duckdb_state duckdb_query_arrow_array(duckdb_arrow result, duckdb_arrow_array *out_array);
-    ⎕NA'I4 ',lib,'|duckdb_query_arrow_schema P P'
+    ⎕NA'I4 ',lib,'|duckdb_query_arrow_array P P'
     ⍝ idx_t duckdb_arrow_column_count(duckdb_arrow result);
     ⎕NA'U8 ',lib,'|duckdb_arrow_column_count P'
     ⍝ idx_t duckdb_arrow_row_count(duckdb_arrow result);
@@ -108,5 +108,214 @@
     ⎕NA lib,'|duckdb_destroy_arrow <P'
     ⍝ double duckdb_hugeint_to_double(duckdb_hugeint val)
     ⎕NA'F8 ',lib,'|duckdb_hugeint_to_double P'
+
+    ⍝ ===== ERROR HANDLING =====
+    ⍝ duckdb_error_type duckdb_result_error_type(duckdb_result *result);
+    ⎕NA'I4 ',lib,'|duckdb_result_error_type <P[]'
+
+    ⍝ ===== CONFIGURATION =====
+    ⍝ duckdb_state duckdb_create_config(duckdb_config *out_config);
+    ⎕NA'I4 ',lib,'|duckdb_create_config >P'
+    ⍝ size_t duckdb_config_count();
+    ⎕NA'U8 ',lib,'|duckdb_config_count'
+    ⍝ duckdb_state duckdb_get_config_flag(size_t index, const char **out_name, const char **out_description);
+    ⎕NA'I4 ',lib,'|duckdb_get_config_flag U8 >P >P'
+    ⍝ duckdb_state duckdb_set_config(duckdb_config config, const char *name, const char *option);
+    ⎕NA'I4 ',lib,'|duckdb_set_config P <0UTF8[] <0UTF8[]'
+    ⍝ void duckdb_destroy_config(duckdb_config *config);
+    ⎕NA lib,'|duckdb_destroy_config <P'
+    ⍝ duckdb_state duckdb_open_ext(const char *path, duckdb_database *out_database, duckdb_config config, char **out_error);
+    ⎕NA'I4 ',lib,'|duckdb_open_ext <0UTF8[] >P P >P'
+
+    ⍝ ===== CONNECTION MANAGEMENT =====
+    ⍝ void duckdb_interrupt(duckdb_connection connection);
+    ⎕NA lib,'|duckdb_interrupt P'
+    ⍝ duckdb_query_progress_type duckdb_query_progress(duckdb_connection connection);
+    ⍝ Returns struct: {double percentage; uint64_t rows_processed; uint64_t total_rows_to_process;}
+    ⍝ TODO: Cannot return struct directly in ⎕NA, need to implement differently
+    ⍝ ⎕NA'{F8 U8 U8} ',lib,'|duckdb_query_progress P'
+    ⍝ const char *duckdb_library_version();
+    ⎕NA'U8 ',lib,'|duckdb_library_version'
+
+    ⍝ ===== RESULT METADATA =====
+    ⍝ duckdb_statement_type duckdb_result_statement_type(duckdb_result result);
+    ⎕NA'I4 ',lib,'|duckdb_result_statement_type <P[]'
+    ⍝ bool duckdb_result_is_streaming(duckdb_result result);
+    ⎕NA'I1 ',lib,'|duckdb_result_is_streaming <P[]'
+    ⍝ duckdb_result_type duckdb_result_return_type(duckdb_result result);
+    ⎕NA'I4 ',lib,'|duckdb_result_return_type <P[]'
+
+    ⍝ ===== RESULT VALUE EXTRACTION =====
+    ⍝ bool duckdb_value_boolean(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'I1 ',lib,'|duckdb_value_boolean <P[] U8 U8'
+    ⍝ int8_t duckdb_value_int8(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'I1 ',lib,'|duckdb_value_int8 <P[] U8 U8'
+    ⍝ int16_t duckdb_value_int16(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'I2 ',lib,'|duckdb_value_int16 <P[] U8 U8'
+    ⍝ int32_t duckdb_value_int32(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'I4 ',lib,'|duckdb_value_int32 <P[] U8 U8'
+    ⍝ int64_t duckdb_value_int64(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'I8 ',lib,'|duckdb_value_int64 <P[] U8 U8'
+    ⍝ duckdb_hugeint duckdb_value_hugeint(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'P ',lib,'|duckdb_value_hugeint <P[] U8 U8'
+    ⍝ duckdb_uhugeint duckdb_value_uhugeint(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'P ',lib,'|duckdb_value_uhugeint <P[] U8 U8'
+    ⍝ duckdb_decimal duckdb_value_decimal(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'P ',lib,'|duckdb_value_decimal <P[] U8 U8'
+    ⍝ uint8_t duckdb_value_uint8(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'U1 ',lib,'|duckdb_value_uint8 <P[] U8 U8'
+    ⍝ uint16_t duckdb_value_uint16(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'U2 ',lib,'|duckdb_value_uint16 <P[] U8 U8'
+    ⍝ uint32_t duckdb_value_uint32(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'U4 ',lib,'|duckdb_value_uint32 <P[] U8 U8'
+    ⍝ uint64_t duckdb_value_uint64(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'U8 ',lib,'|duckdb_value_uint64 <P[] U8 U8'
+    ⍝ float duckdb_value_float(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'F4 ',lib,'|duckdb_value_float <P[] U8 U8'
+    ⍝ double duckdb_value_double(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'F8 ',lib,'|duckdb_value_double <P[] U8 U8'
+    ⍝ duckdb_date duckdb_value_date(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'I4 ',lib,'|duckdb_value_date <P[] U8 U8'
+    ⍝ duckdb_time duckdb_value_time(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'I8 ',lib,'|duckdb_value_time <P[] U8 U8'
+    ⍝ duckdb_timestamp duckdb_value_timestamp(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'I8 ',lib,'|duckdb_value_timestamp <P[] U8 U8'
+    ⍝ duckdb_interval duckdb_value_interval(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'P ',lib,'|duckdb_value_interval <P[] U8 U8'
+    ⍝ char *duckdb_value_varchar(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'U8 ',lib,'|duckdb_value_varchar <P[] U8 U8'
+    ⍝ duckdb_string duckdb_value_string(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'P ',lib,'|duckdb_value_string <P[] U8 U8'
+    ⍝ char *duckdb_value_varchar_internal(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'U8 ',lib,'|duckdb_value_varchar_internal <P[] U8 U8'
+    ⍝ duckdb_string duckdb_value_string_internal(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'P ',lib,'|duckdb_value_string_internal <P[] U8 U8'
+    ⍝ duckdb_blob duckdb_value_blob(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'P ',lib,'|duckdb_value_blob <P[] U8 U8'
+    ⍝ bool duckdb_value_is_null(duckdb_result *result, idx_t col, idx_t row);
+    ⎕NA'I1 ',lib,'|duckdb_value_is_null <P[] U8 U8'
+
+    ⍝ ===== PREPARED STATEMENT METADATA =====
+    ⍝ const char *duckdb_prepare_error(duckdb_prepared_statement prepared_statement);
+    ⎕NA'U8 ',lib,'|duckdb_prepare_error P'
+    ⍝ idx_t duckdb_nparams(duckdb_prepared_statement prepared_statement);
+    ⎕NA'U8 ',lib,'|duckdb_nparams P'
+    ⍝ const char *duckdb_parameter_name(duckdb_prepared_statement prepared_statement, idx_t index);
+    ⎕NA'U8 ',lib,'|duckdb_parameter_name P U8'
+    ⍝ duckdb_type duckdb_param_type(duckdb_prepared_statement prepared_statement, idx_t param_idx);
+    ⎕NA'I4 ',lib,'|duckdb_param_type P U8'
+    ⍝ duckdb_logical_type duckdb_param_logical_type(duckdb_prepared_statement prepared_statement, idx_t param_idx);
+    ⎕NA'P ',lib,'|duckdb_param_logical_type P U8'
+    ⍝ duckdb_state duckdb_clear_bindings(duckdb_prepared_statement prepared_statement);
+    ⎕NA'I4 ',lib,'|duckdb_clear_bindings P'
+    ⍝ duckdb_statement_type duckdb_prepared_statement_type(duckdb_prepared_statement statement);
+    ⎕NA'I4 ',lib,'|duckdb_prepared_statement_type P'
+    ⍝ idx_t duckdb_prepared_statement_column_count(duckdb_prepared_statement prepared_statement);
+    ⎕NA'U8 ',lib,'|duckdb_prepared_statement_column_count P'
+    ⍝ const char *duckdb_prepared_statement_column_name(duckdb_prepared_statement prepared_statement, idx_t idx);
+    ⎕NA'U8 ',lib,'|duckdb_prepared_statement_column_name P U8'
+    ⍝ duckdb_logical_type duckdb_prepared_statement_column_logical_type(duckdb_prepared_statement prepared_statement, idx_t idx);
+    ⎕NA'P ',lib,'|duckdb_prepared_statement_column_logical_type P U8'
+    ⍝ duckdb_type duckdb_prepared_statement_column_type(duckdb_prepared_statement prepared_statement, idx_t idx);
+    ⎕NA'I4 ',lib,'|duckdb_prepared_statement_column_type P U8'
+
+    ⍝ ===== PREPARED STATEMENT BINDING =====
+    ⍝ duckdb_state duckdb_bind_value(duckdb_prepared_statement prepared_statement, idx_t param_idx, duckdb_value val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_value P U8 P'
+    ⍝ duckdb_state duckdb_bind_parameter_index(duckdb_prepared_statement prepared_statement, idx_t *param_idx_out, const char *name);
+    ⎕NA'I4 ',lib,'|duckdb_bind_parameter_index P >U8 <0UTF8[]'
+    ⍝ duckdb_state duckdb_bind_boolean(duckdb_prepared_statement prepared_statement, idx_t param_idx, bool val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_boolean P U8 I1'
+    ⍝ duckdb_state duckdb_bind_int8(duckdb_prepared_statement prepared_statement, idx_t param_idx, int8_t val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_int8 P U8 I1'
+    ⍝ duckdb_state duckdb_bind_int16(duckdb_prepared_statement prepared_statement, idx_t param_idx, int16_t val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_int16 P U8 I2'
+    ⍝ duckdb_state duckdb_bind_int32(duckdb_prepared_statement prepared_statement, idx_t param_idx, int32_t val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_int32 P U8 I4'
+    ⍝ duckdb_state duckdb_bind_int64(duckdb_prepared_statement prepared_statement, idx_t param_idx, int64_t val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_int64 P U8 I8'
+    ⍝ duckdb_state duckdb_bind_hugeint(duckdb_prepared_statement prepared_statement, idx_t param_idx, duckdb_hugeint val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_hugeint P U8 P'
+    ⍝ duckdb_state duckdb_bind_uhugeint(duckdb_prepared_statement prepared_statement, idx_t param_idx, duckdb_uhugeint val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_uhugeint P U8 P'
+    ⍝ duckdb_state duckdb_bind_decimal(duckdb_prepared_statement prepared_statement, idx_t param_idx, duckdb_decimal val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_decimal P U8 P'
+    ⍝ duckdb_state duckdb_bind_uint8(duckdb_prepared_statement prepared_statement, idx_t param_idx, uint8_t val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_uint8 P U8 U1'
+    ⍝ duckdb_state duckdb_bind_uint16(duckdb_prepared_statement prepared_statement, idx_t param_idx, uint16_t val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_uint16 P U8 U2'
+    ⍝ duckdb_state duckdb_bind_uint32(duckdb_prepared_statement prepared_statement, idx_t param_idx, uint32_t val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_uint32 P U8 U4'
+    ⍝ duckdb_state duckdb_bind_uint64(duckdb_prepared_statement prepared_statement, idx_t param_idx, uint64_t val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_uint64 P U8 U8'
+    ⍝ duckdb_state duckdb_bind_float(duckdb_prepared_statement prepared_statement, idx_t param_idx, float val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_float P U8 F4'
+    ⍝ duckdb_state duckdb_bind_double(duckdb_prepared_statement prepared_statement, idx_t param_idx, double val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_double P U8 F8'
+    ⍝ duckdb_state duckdb_bind_date(duckdb_prepared_statement prepared_statement, idx_t param_idx, duckdb_date val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_date P U8 I4'
+    ⍝ duckdb_state duckdb_bind_time(duckdb_prepared_statement prepared_statement, idx_t param_idx, duckdb_time val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_time P U8 I8'
+    ⍝ duckdb_state duckdb_bind_timestamp(duckdb_prepared_statement prepared_statement, idx_t param_idx, duckdb_timestamp val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_timestamp P U8 I8'
+    ⍝ duckdb_state duckdb_bind_timestamp_tz(duckdb_prepared_statement prepared_statement, idx_t param_idx, duckdb_timestamp val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_timestamp_tz P U8 I8'
+    ⍝ duckdb_state duckdb_bind_interval(duckdb_prepared_statement prepared_statement, idx_t param_idx, duckdb_interval val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_interval P U8 P'
+    ⍝ duckdb_state duckdb_bind_varchar(duckdb_prepared_statement prepared_statement, idx_t param_idx, const char *val);
+    ⎕NA'I4 ',lib,'|duckdb_bind_varchar P U8 <0UTF8[]'
+    ⍝ duckdb_state duckdb_bind_varchar_length(duckdb_prepared_statement prepared_statement, idx_t param_idx, const char *val, idx_t length);
+    ⎕NA'I4 ',lib,'|duckdb_bind_varchar_length P U8 <0U1[] U8'
+    ⍝ duckdb_state duckdb_bind_blob(duckdb_prepared_statement prepared_statement, idx_t param_idx, const void *data, idx_t length);
+    ⎕NA'I4 ',lib,'|duckdb_bind_blob P U8 <U1[] U8'
+    ⍝ duckdb_state duckdb_bind_null(duckdb_prepared_statement prepared_statement, idx_t param_idx);
+    ⎕NA'I4 ',lib,'|duckdb_bind_null P U8'
+
+    ⍝ ===== LOGICAL TYPE FUNCTIONS =====
+    ⍝ duckdb_logical_type duckdb_create_list_type(duckdb_logical_type child_type);
+    ⎕NA'P ',lib,'|duckdb_create_list_type P'
+    ⍝ duckdb_logical_type duckdb_list_type_child_type(duckdb_logical_type type);
+    ⎕NA'P ',lib,'|duckdb_list_type_child_type P'
+
+    ⍝ duckdb_logical_type duckdb_create_struct_type(duckdb_logical_type *member_types, const char **member_names, idx_t member_count);
+    ⎕NA'P ',lib,'|duckdb_create_struct_type <P[] <P[] U8'
+    ⍝ idx_t duckdb_struct_type_child_count(duckdb_logical_type type);
+    ⎕NA'U8 ',lib,'|duckdb_struct_type_child_count P'
+    ⍝ const char *duckdb_struct_type_child_name(duckdb_logical_type type, idx_t index);
+    ⎕NA'U8 ',lib,'|duckdb_struct_type_child_name P U8'
+    ⍝ duckdb_logical_type duckdb_struct_type_child_type(duckdb_logical_type type, idx_t index);
+    ⎕NA'P ',lib,'|duckdb_struct_type_child_type P U8'
+
+    ⍝ duckdb_logical_type duckdb_create_map_type(duckdb_logical_type key_type, duckdb_logical_type value_type);
+    ⎕NA'P ',lib,'|duckdb_create_map_type P P'
+    ⍝ duckdb_logical_type duckdb_map_type_key_type(duckdb_logical_type type);
+    ⎕NA'P ',lib,'|duckdb_map_type_key_type P'
+    ⍝ duckdb_logical_type duckdb_map_type_value_type(duckdb_logical_type type);
+    ⎕NA'P ',lib,'|duckdb_map_type_value_type P'
+
+    ⍝ duckdb_logical_type duckdb_create_enum_type(const char **member_names, idx_t member_count);
+    ⎕NA'P ',lib,'|duckdb_create_enum_type <P[] U8'
+    ⍝ uint32_t duckdb_enum_dictionary_size(duckdb_logical_type type);
+    ⎕NA'U4 ',lib,'|duckdb_enum_dictionary_size P'
+    ⍝ char *duckdb_enum_dictionary_value(duckdb_logical_type type, idx_t index);
+    ⎕NA'U8 ',lib,'|duckdb_enum_dictionary_value P U8'
+    ⍝ duckdb_logical_type duckdb_enum_internal_type(duckdb_logical_type type);
+    ⎕NA'P ',lib,'|duckdb_enum_internal_type P'
+
+    ⍝ duckdb_logical_type duckdb_create_union_type(duckdb_logical_type *member_types, const char **member_names, idx_t member_count);
+    ⎕NA'P ',lib,'|duckdb_create_union_type <P[] <P[] U8'
+
+    ⍝ ===== VECTOR FUNCTIONS FOR COMPLEX TYPES =====
+    ⍝ duckdb_vector duckdb_list_vector_get_child(duckdb_vector vector);
+    ⎕NA'P ',lib,'|duckdb_list_vector_get_child P'
+    ⍝ idx_t duckdb_list_vector_get_size(duckdb_vector vector);
+    ⎕NA'U8 ',lib,'|duckdb_list_vector_get_size P'
+    ⍝ duckdb_state duckdb_list_vector_set_size(duckdb_vector vector, idx_t size);
+    ⎕NA'I4 ',lib,'|duckdb_list_vector_set_size P U8'
+    ⍝ duckdb_state duckdb_list_vector_reserve(duckdb_vector vector, idx_t required_capacity);
+    ⎕NA'I4 ',lib,'|duckdb_list_vector_reserve P U8'
+
+    ⍝ duckdb_vector duckdb_struct_vector_get_child(duckdb_vector vector, idx_t index);
+    ⎕NA'P ',lib,'|duckdb_struct_vector_get_child P U8'
   ∇
 :EndNamespace

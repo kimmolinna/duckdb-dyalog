@@ -1,0 +1,13 @@
+out←executePrepared stmt;result;_error_message;column_names;count;chunks;st
+⍝ Execute a prepared statement and return results
+⍝ stmt: prepared statement pointer
+⍝ Returns: same format as query function
+⎕io←0
+:If stmt=0
+    out←'Invalid prepared statement!' ⋄ →0
+:EndIf
+
+(st result)←api.duckdb_execute_prepared stmt 6
+out←getResults (st result)
+
+⍝ KSL 1.0.1

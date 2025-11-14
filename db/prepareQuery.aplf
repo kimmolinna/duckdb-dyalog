@@ -1,0 +1,19 @@
+stmt←prepareQuery(_con sql);st;result
+⍝ Prepare a SQL statement with parameters
+⍝ _con: connection pointer
+⍝ sql: SQL query string (use $1, $2, etc. or ?name for parameters)
+⍝ Returns: prepared statement pointer or 0 on error
+
+:If _con=0
+    ⎕←'Connection is closed!'
+    stmt←0 ⋄ →0
+:EndIf
+
+(st stmt)←api.duckdb_prepare _con sql 6
+
+:if st
+  stmt←0
+:endif
+
+
+⍝ KSL 1.0.1

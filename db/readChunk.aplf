@@ -78,6 +78,14 @@
          ∘
      :Case 21
          ∘
+     :Case 23                  ⍝ ENUM
+         col←readEnumColumn _column_type _data row_count
+     :Case 24                  ⍝ LIST
+         col←readListColumn _vector _data row_count
+     :Case 25                  ⍝ STRUCT
+         col←readStructColumn _vector _column_type row_count
+     :Case 26                  ⍝ MAP
+         col←readMapColumn _vector _column_type row_count
      :Else
          ∘
      :EndSelect

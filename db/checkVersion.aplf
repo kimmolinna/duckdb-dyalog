@@ -1,0 +1,15 @@
+ checkVersion;ver
+ ⍝ Check DuckDB version
+
+ :If 0=⎕NC'null'
+     init 'C:\Users\kimmo\duckdb-dyalog\lib\'
+ :EndIf
+
+ ⎕←'Getting DuckDB version...'
+ ver←version ⍬
+ ⎕←'DuckDB Version: ',ver
+ ⎕←''
+ ⎕←'This implementation requires DuckDB v0.8.0 or later for bind functions.'
+ ⎕←'If your version is older, prepared statements with binding may not work.'
+
+⍝ KSL 1.0.0

@@ -1,0 +1,20 @@
+cfg←config pairs;st;pair;name;value
+⍝ Create a configuration object with settings
+⍝ pairs: vector of (name value) pairs, e.g. ('access_mode' 'READ_ONLY')('threads' '4')
+⍝ Returns: config pointer (must be destroyed with destroyConfig)
+
+(st cfg)←api.duckdb_create_config 0
+:If st≠0
+    cfg←0 ⋄ →0
+:EndIf
+
+:For pair :In pairs
+    name value←pair
+    st←api.duckdb_set_config cfg name value
+    :If st≠0
+        {}api.duckdb_destroy_config cfg
+        cfg←0 ⋄ →0
+    :EndIf
+:EndFor
+
+⍝ KSL 1.0.0

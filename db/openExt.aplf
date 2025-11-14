@@ -1,0 +1,21 @@
+db_ptr←openExt(db_str cfg);st;err
+⍝ Open database with configuration
+⍝ db_str: database name (with path) or :memory:
+⍝ cfg: configuration pointer (from config function) or 0 for default
+⍝ db_ptr: pointer to database or 0 on error
+
+:If 0=⎕NC'null'
+    init
+:EndIf
+
+(st db_ptr err)←api.duckdb_open_ext db_str 0 cfg 0
+
+:If st≠0
+    :If err≠0
+        ⎕←'Database open error: ',256 read.utf8 err
+        {}api.duckdb_free err
+    :EndIf
+    db_ptr←0
+:EndIf
+
+⍝ KSL 1.0.0

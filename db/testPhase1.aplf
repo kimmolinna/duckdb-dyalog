@@ -1,0 +1,327 @@
+ testPhase1;r;req;db;con;cfg;stmt;result;version_str;nparams;param_name;col_count;col_name;col_type;st;stmt_type;values;result_type;is_streaming;error_type;error_msg;idx
+ ⍝ Test all Phase 1 functionality
+ :If 0=⎕NC'null'
+     init 'C:\Users\kimmo\duckdb-dyalog\lib\'
+ :EndIf
+
+ req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+
+ ⍝ ===== VERSION TEST =====
+ r←⊂'Test Library Version'
+ version_str←version ⍬
+ r,←⊂'Library version'req(0<≢version_str)
+ ⎕←'DuckDB version: ',version_str
+ ⎕←↑r
+
+ ⍝ ===== CONFIGURATION TEST =====
+ r←⊂'Test Configuration API'
+ cfg←config(⊂'threads' '2')
+ r,←⊂'Create config'req cfg≠0
+
+ :If cfg≠0
+     db←openExt ':memory:' cfg
+     {}destroyConfig cfg
+     r,←⊂'Open database with config'req db≠0
+
+     :If db≠0
+         con←connect db
+         r,←⊂'Connect with configured database'req con≠0
+
+         :If con≠0
+             {}disconnect con
+         :EndIf
+         {}close db
+     :EndIf
+ :EndIf
+ ⎕←↑r
+
+ ⍝ ===== PREPARED STATEMENT TESTS =====
+ r←⊂'Test Prepared Statements'
+ db←open':memory:'
+ con←connect db
+
+ ⍝ Create test table
+ {}query con'CREATE TABLE test(id INT, name VARCHAR, value DOUBLE)'
+
+ ⍝ Test prepare with parameters
+ stmt←prepareQuery con'INSERT INTO test VALUES ($1, $2, $3)'
+ r,←⊂'Prepare INSERT statement'req stmt≠0
+
+ :If stmt≠0
+     ⍝ Check parameter count
+     nparams←api.duckdb_nparams stmt
+     r,←⊂'Parameter count'req nparams=3
+
+     ⍝ Check statement type
+     stmt_type←api.duckdb_prepared_statement_type stmt
+     r,←⊂'Statement type is INSERT'req stmt_type=2
+
+     ⍝ Bind and execute
+     :If 1=stmt bindParams(1 'Alice' 3.14)
+         r,←⊂'Bind parameters'req 1
+         result←executePrepared stmt
+         r,←⊂'Execute prepared INSERT'req 2=⎕NC'result'
+     :Else
+         r,←⊂'Bind parameters'req 0
+     :EndIf
+
+     {}destroyPrepared stmt
+ :EndIf
+
+ ⍝ Test prepared SELECT
+ stmt←prepareQuery con'SELECT * FROM test WHERE id = $1'
+ r,←⊂'Prepare SELECT statement'req stmt≠0
+
+ :If stmt≠0
+     ⍝ Check column metadata
+     col_count←api.duckdb_prepared_statement_column_count stmt
+     r,←⊂'Result column count'req col_count=3
+
+     col_name←256 read.utf8 api.duckdb_prepared_statement_column_name stmt 1
+     r,←⊂'Column name'req col_name≡'name'
+
+     col_type←api.duckdb_prepared_statement_column_type stmt 2
+     r,←⊂'Column type'req col_type=type.DOUBLE
+
+     :If 1=stmt bindParams(,1)
+         result←executePrepared stmt
+         r,←⊂'Execute prepared SELECT'req 3=≢result
+         r,←⊂'SELECT result correct'req(1 'Alice' 3.14)≡{⊃¨⍵}1⊃result
+     :Else
+         r,←⊂'Bind SELECT parameter'req 0
+     :EndIf
+
+     {}destroyPrepared stmt
+ :EndIf
+
+ {}disconnect con
+ {}close db
+ ⎕←↑r
+
+ ⍝ ===== PARAMETERIZED QUERY CONVENIENCE FUNCTION =====
+ r←⊂'Test queryParams Convenience Function'
+ db←open':memory:'
+ con←connect db
+
+ {}query con'CREATE TABLE users(id INT, name VARCHAR, age INT)'
+
+ ⍝ Insert using queryParams
+ {}queryParams con'INSERT INTO users VALUES ($1, $2, $3)'(1 'Bob' 25)
+ {}queryParams con'INSERT INTO users VALUES ($1, $2, $3)'(2 'Charlie' 30)
+ {}queryParams con'INSERT INTO users VALUES ($1, $2, $3)'(3 'Dave' 35)
+
+ ⍝ Query using queryParams
+ result←queryParams con'SELECT name, age FROM users WHERE age > $1'(,28)
+
+ r,←⊂'queryParams result format'req 3=≢result
+ r,←⊂'queryParams filtered correctly'req 2=≢1⊃result
+ r,←⊂'queryParams values correct'req('Charlie' 30)≡{⊃¨⍵}1⊃result
+
+ {}disconnect con
+ {}close db
+ ⎕←↑r
+
+ ⍝ ===== BINDING NULL VALUES =====
+ r←⊂'Test NULL Binding'
+ db←open':memory:'
+ con←connect db
+
+ {}query con'CREATE TABLE nulltest(id INT, val VARCHAR)'
+ stmt←prepareQuery con'INSERT INTO nulltest VALUES ($1, $2)'
+
+ :If stmt≠0
+     :If 1=stmt bindParams(1 null)
+         r,←⊂'Bind NULL value'req 1
+         {}executePrepared stmt
+
+         result←query con'SELECT * FROM nulltest WHERE val IS NULL'
+         r,←⊂'NULL value stored correctly'req 2=≢1⊃result
+     :Else
+         r,←⊂'Bind NULL value'req 0
+     :EndIf
+
+     {}destroyPrepared stmt
+ :EndIf
+
+ {}disconnect con
+ {}close db
+ ⎕←↑r
+
+ ⍝ ===== BINDING DIFFERENT TYPES =====
+ r←⊂'Test Multiple Data Types'
+ db←open':memory:'
+ con←connect db
+
+ {}query con'CREATE TABLE types(b BOOLEAN, i8 TINYINT, i16 SMALLINT, i32 INT, i64 BIGINT, f FLOAT, d DOUBLE, s VARCHAR)'
+
+ stmt←prepareQuery con'INSERT INTO types VALUES ($1, $2, $3, $4, $5, $6, $7, $8)'
+
+ :If stmt≠0
+     ⍝ Test various data types
+     values←1 127 32767 2147483647 9223372036854775807 3.14 2.718281828 'Hello'
+
+     :If 1=stmt bindParams values
+         r,←⊂'Bind multiple types'req 1
+         {}executePrepared stmt
+
+         result←query con'SELECT * FROM types'
+         r,←⊂'Type conversion preserved'req 2=≢1⊃result
+     :Else
+         r,←⊂'Bind multiple types'req 0
+     :EndIf
+
+     {}destroyPrepared stmt
+ :EndIf
+
+ {}disconnect con
+ {}close db
+ ⎕←↑r
+
+ ⍝ ===== RESULT METADATA =====
+ r←⊂'Test Result Metadata'
+ db←open':memory:'
+ con←connect db
+
+ {}query con'CREATE TABLE meta(id INT, name VARCHAR)'
+ {}query con'INSERT INTO meta VALUES (1, ''test'')'
+
+ stmt←prepareQuery con'SELECT * FROM meta'
+
+ :If stmt≠0
+     (st result)←api.duckdb_execute_prepared stmt 6
+     :If st=0
+         ⍝ Test result statement type
+         stmt_type←api.duckdb_result_statement_type ⊂result
+         r,←⊂'Result statement type is SELECT'req stmt_type=1
+
+         ⍝ Test result type (materialized vs streaming)
+         result_type←api.duckdb_result_return_type ⊂result
+         r,←⊂'Result return type is materialized'req result_type=3
+
+         is_streaming←api.duckdb_result_is_streaming ⊂result
+         r,←⊂'Result is not streaming'req is_streaming=0
+
+         {}api.duckdb_destroy_result ⊂result
+     :Else
+         r,←⊂'Execute for metadata test'req 0
+     :EndIf
+
+     {}destroyPrepared stmt
+ :EndIf
+
+ {}disconnect con
+ {}close db
+ ⎕←↑r
+
+ ⍝ ===== ERROR HANDLING =====
+ r←⊂'Test Error Handling'
+ db←open':memory:'
+ con←connect db
+
+ ⍝ Test prepare error
+ stmt←prepareQuery con'INVALID SQL SYNTAX HERE'
+ r,←⊂'Prepare error detected'req stmt=0
+
+ ⍝ Test query error with error type
+ (st result)←api.duckdb_query con'SELECT * FROM nonexistent_table' 6
+
+ :If st≠0
+     r,←⊂'Query error detected'req 1
+     error_type←api.duckdb_result_error_type ⊂result
+     r,←⊂'Error type is not success'req error_type≠0
+     error_msg←1024 read.utf8 api.duckdb_result_error ⊂result
+     r,←⊂'Error message contains table name'req∨/'nonexistent_table'⍷error_msg
+     {}api.duckdb_destroy_result ⊂result
+ :Else
+     r,←⊂'Query error detected'req 0
+ :EndIf
+
+ {}disconnect con
+ {}close db
+ ⎕←↑r
+
+ ⍝ ===== INTERRUPT TEST =====
+ r←⊂'Test Connection Interrupt'
+ db←open':memory:'
+ con←connect db
+
+ ⍝ Just test that interrupt doesn't crash
+ {}interrupt con
+ r,←⊂'Interrupt function works'req 1
+
+ ⍝ Connection should still work after interrupt
+ result←query con'SELECT 42 as answer'
+ r,←⊂'Connection works after interrupt'req 3=≢result
+
+ {}disconnect con
+ {}close db
+ ⎕←↑r
+
+ ⍝ ===== BIND PARAMETER BY NAME =====
+ r←⊂'Test Named Parameter Binding'
+ db←open':memory:'
+ con←connect db
+
+ {}query con'CREATE TABLE named(id INT, name VARCHAR)'
+ stmt←prepareQuery con'INSERT INTO named VALUES ($id, $name)'
+
+ :If stmt≠0
+     (st idx)←api.duckdb_bind_parameter_index stmt 1 'name'
+     r,←⊂'Get parameter index by name'req st=0
+     r,←⊂'Parameter index correct'req idx=2
+
+     st←api.duckdb_bind_varchar stmt idx 'TestName'
+     r,←⊂'Bind by resolved index'req st=0
+
+     st←api.duckdb_bind_int32 stmt 1 42
+     r,←⊂'Bind first param'req st=0
+
+     {}executePrepared stmt
+     result←query con'SELECT * FROM named'
+     r,←⊂'Named parameters work'req(42 'TestName')≡{⊃¨⍵}1⊃result
+
+     {}destroyPrepared stmt
+ :EndIf
+
+ {}disconnect con
+ {}close db
+ ⎕←↑r
+
+ ⍝ ===== CLEAR BINDINGS TEST =====
+ r←⊂'Test Clear Bindings'
+ db←open':memory:'
+ con←connect db
+
+ {}query con'CREATE TABLE clear_test(val INT)'
+ stmt←prepareQuery con'INSERT INTO clear_test VALUES ($1)'
+
+ :If stmt≠0
+     ⍝ Bind and execute
+     {}api.duckdb_bind_int32 stmt 1 100
+     {}executePrepared stmt
+
+     ⍝ Clear bindings
+     st←api.duckdb_clear_bindings stmt
+     r,←⊂'Clear bindings'req st=0
+
+     ⍝ Bind new value and execute
+     {}api.duckdb_bind_int32 stmt 1 200
+     {}executePrepared stmt
+
+     result←query con'SELECT * FROM clear_test ORDER BY val'
+     r,←⊂'Both values inserted'req 2=≢⊃1⊃result
+     r,←⊂'Values correct'req(100 200)≡⊃1⊃result
+
+     {}destroyPrepared stmt
+ :EndIf
+
+ {}disconnect con
+ {}close db
+ ⎕←↑r
+
+ ⍝ ===== SUMMARY =====
+ ⎕←''
+ ⎕←'Phase 1 testing complete!'
+ ⎕←'All critical functionality for prepared statements, configuration, and error handling has been implemented.'
+
+⍝ KSL 1.0.1

@@ -1,0 +1,22 @@
+folder←'c:/users/kimmo/duckdb-dyalog/'
+']link.create duck ',¯1↓folder
+⎕pw←32767
+duck.db.init folder,'lib/'
+_db←duck.db.open ':memory:'
+_con←duck.db.connect _db
+duck.db.toTable duck.db.query _con 'PRAGMA version'
+duck.db.toTable duck.db.query _con 'SELECT concat(''2022-11-03 13:30:00'','' '',''Europe/Helsinki'')::TIMESTAMPTZ as Time'
+duck.db.toTable duck.db.query _con ('SELECT * FROM "',folder,'airline_data/airline.parquet" LIMIT 5')
+duck.db.query _con 'DROP TABLE IF EXISTS test'
+duck.db.query _con 'CREATE TABLE test (a INT, b DOUBLE)'
+a←⍳1000000
+b←2 5 (16808⌶)'Beta' 1000000
+b[⍳10]
+duck.db.append _con '' 'test' (a b) (duck.db.type.INTEGER duck.db.type.DOUBLE)
+duck.db.toTable duck.db.query _con 'SELECT * FROM test LIMIT 5'
+duck.db.query _con ('COPY test TO "',folder,'test.parquet" (FORMAT PARQUET, CODEC ''ZSTD'')')
+(cols (aa bb) types)←duck.db.query _con ('SELECT * FROM "',folder,'test.parquet"')
+a≡aa
+b≡bb
+_←duck.db.disconnect _con
+_←duck.db.close _db

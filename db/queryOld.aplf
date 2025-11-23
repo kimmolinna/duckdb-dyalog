@@ -1,0 +1,13 @@
+out←queryOld(_con sql);st;result;_error_message;cc;chunks;cd;datachunk_ind;column_names;data_chunk_ptr;count
+⎕io←0
+:if _con=0
+    out←'Connection is closed!' ⋄ →0
+:endif
+
+:trap 0
+    (st result)←api.duckdb_query _con sql 6
+:endtrap
+
+
+out←getResultsOld (st result)
+⍝ KSL 1.0.1

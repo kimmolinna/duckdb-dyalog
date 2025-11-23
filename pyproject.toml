@@ -1,0 +1,12 @@
+[project]
+name = "duckdb-dyalog"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.1.0",
+]

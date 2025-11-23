@@ -1,0 +1,3018 @@
+15:08:44.010 [DEBUG] Executing line: ]link.create duck ../duckdb-dyalog
+15:08:44.011 [DEBUG] Collecting messages after execution...
+15:08:44.234 [DEBUG] Collected 1 batches, dq length: 7
+15:08:44.235 [DEBUG] Starting loop, dq length: 7
+15:08:44.235 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 6
+15:08:44.236 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 5
+15:08:44.236 [DEBUG] Iter 3: msg='FocusThread', dq left: 4
+15:08:44.237 [DEBUG] Iter 4: msg='SetPromptType', dq left: 3
+15:08:44.237 [DEBUG] SetPromptType pt=1
+15:08:44.237 [DEBUG] Prompt ready! Output len: 0
+15:08:44.238 [DEBUG] BREAKING after 4 iterations
+15:08:49.245 [DEBUG] Executing line: ⎕pw←32767
+15:08:49.246 [DEBUG] Collecting messages after execution...
+15:08:49.463 [DEBUG] Collected 1 batches, dq length: 11
+15:08:49.464 [DEBUG] Starting loop, dq length: 11
+15:08:49.464 [DEBUG] Iter 1: msg='AppendSessionOutput', dq left: 10
+15:08:49.465 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 9
+15:08:49.465 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 8
+15:08:49.466 [DEBUG] Iter 4: msg='FocusThread', dq left: 7
+15:08:49.466 [DEBUG] Iter 5: msg='SetPromptType', dq left: 6
+15:08:49.467 [DEBUG] SetPromptType pt=1
+15:08:49.467 [DEBUG] Prompt ready! Output len: 49
+15:08:49.468 [DEBUG] BREAKING after 5 iterations
+15:08:55.063 [DEBUG] Executing line: duck.db.init 'lib/'
+15:08:55.064 [DEBUG] Collecting messages after execution...
+15:08:55.388 [DEBUG] Collected 2 batches, dq length: 6
+15:08:55.388 [DEBUG] Starting loop, dq length: 6
+15:08:55.389 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:08:55.389 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:08:55.390 [DEBUG] SetPromptType pt=0
+15:08:55.390 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:08:55.391 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:08:55.391 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:08:55.392 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:08:55.392 [DEBUG] SetPromptType pt=1
+15:08:55.393 [DEBUG] Prompt ready! Output len: 0
+15:08:55.393 [DEBUG] BREAKING after 6 iterations
+15:08:57.952 [DEBUG] Executing line: _db←duck.db.open ':memory:'
+15:08:57.952 [DEBUG] Collecting messages after execution...
+15:08:58.321 [DEBUG] Collected 2 batches, dq length: 6
+15:08:58.321 [DEBUG] Starting loop, dq length: 6
+15:08:58.322 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:08:58.323 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:08:58.323 [DEBUG] SetPromptType pt=0
+15:08:58.324 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:08:58.324 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:08:58.325 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:08:58.326 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:08:58.326 [DEBUG] SetPromptType pt=1
+15:08:58.327 [DEBUG] Prompt ready! Output len: 0
+15:08:58.327 [DEBUG] BREAKING after 6 iterations
+15:08:58.328 [DEBUG] Executing line: _con←duck.db.connect _db
+15:08:58.328 [DEBUG] Collecting messages after execution...
+15:08:58.541 [DEBUG] Collected 1 batches, dq length: 6
+15:08:58.541 [DEBUG] Starting loop, dq length: 6
+15:08:58.542 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:08:58.542 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:08:58.543 [DEBUG] SetPromptType pt=0
+15:08:58.544 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:08:58.544 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:08:58.545 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:08:58.545 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:08:58.546 [DEBUG] SetPromptType pt=1
+15:08:58.546 [DEBUG] Prompt ready! Output len: 0
+15:08:58.547 [DEBUG] BREAKING after 6 iterations
+15:09:00.859 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'PRAGMA version'
+15:09:00.859 [DEBUG] Collecting messages after execution...
+15:09:01.097 [DEBUG] Collected 1 batches, dq length: 7
+15:09:01.097 [DEBUG] Starting loop, dq length: 7
+15:09:01.098 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:09:01.099 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:09:01.099 [DEBUG] SetPromptType pt=0
+15:09:01.100 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:09:01.100 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:09:01.101 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:09:01.101 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:09:01.102 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:09:01.102 [DEBUG] SetPromptType pt=1
+15:09:01.103 [DEBUG] Prompt ready! Output len: 67
+15:09:01.104 [DEBUG] BREAKING after 7 iterations
+15:09:07.128 [DEBUG] Executing line: duck.db.query _con 'SELECT concat(''2022-11-03 13:30:00'','' '',''Europe/Helsinki'')::TIMESTAMPTZ'
+15:09:07.129 [DEBUG] Collecting messages after execution...
+15:09:07.360 [DEBUG] Collected 1 batches, dq length: 7
+15:09:07.361 [DEBUG] Starting loop, dq length: 7
+15:09:07.361 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:09:07.362 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:09:07.362 [DEBUG] SetPromptType pt=0
+15:09:07.363 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:09:07.363 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:09:07.364 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:09:07.364 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:09:07.365 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:09:07.365 [DEBUG] SetPromptType pt=1
+15:09:07.366 [DEBUG] Prompt ready! Output len: 121
+15:09:07.367 [DEBUG] BREAKING after 7 iterations
+15:09:12.411 [DEBUG] Executing line: duck.db.query _con 'CREATE TABLE airline AS SELECT * FROM "airline_data/airline.parquet"'
+15:09:12.412 [DEBUG] Collecting messages after execution...
+15:09:12.633 [DEBUG] Collected 1 batches, dq length: 2
+15:09:12.635 [DEBUG] Starting loop, dq length: 2
+15:09:12.635 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:09:12.636 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:09:12.637 [DEBUG] SetPromptType pt=0
+15:09:12.638 [DEBUG] Iter 3: dq empty, waiting...
+15:09:12.856 [DEBUG] Wait done: 0.22s, dq: 0
+15:09:24.609 [DEBUG] Executing line: ]multiline
+15:09:24.610 [DEBUG] Collecting messages after execution...
+15:09:24.849 [DEBUG] Collected 1 batches, dq length: 15
+15:09:24.850 [DEBUG] Starting loop, dq length: 15
+15:09:24.850 [DEBUG] Iter 1: msg='AppendSessionOutput', dq left: 14
+15:09:24.851 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 13
+15:09:24.852 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 12
+15:09:24.852 [DEBUG] Iter 4: msg='FocusThread', dq left: 11
+15:09:24.853 [DEBUG] Iter 5: msg='SetPromptType', dq left: 10
+15:09:24.853 [DEBUG] SetPromptType pt=1
+15:09:24.854 [DEBUG] Prompt ready! Output len: 21
+15:09:24.855 [DEBUG] BREAKING after 5 iterations
+15:09:24.856 [DEBUG] Executing line: duck.db.toTable duck.db.query _con ```
+15:09:24.856 [DEBUG] Collecting messages after execution...
+15:09:25.072 [DEBUG] Collected 1 batches, dq length: 20
+15:09:25.072 [DEBUG] Starting loop, dq length: 20
+15:09:25.073 [DEBUG] Iter 1: msg='EchoInput', dq left: 19
+15:09:25.074 [DEBUG] Iter 2: msg='SetPromptType', dq left: 18
+15:09:25.074 [DEBUG] SetPromptType pt=0
+15:09:25.075 [DEBUG] Iter 3: msg='SetSessionLineGroup', dq left: 17
+15:09:25.076 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 16
+15:09:25.076 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 15
+15:09:25.077 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 14
+15:09:25.078 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 13
+15:09:25.078 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 12
+15:09:25.079 [DEBUG] Iter 9: msg='FocusThread', dq left: 11
+15:09:25.080 [DEBUG] Iter 10: msg='SetPromptType', dq left: 10
+15:09:25.080 [DEBUG] SetPromptType pt=1
+15:09:25.081 [DEBUG] Prompt ready! Output len: 128
+15:09:25.082 [DEBUG] BREAKING after 10 iterations
+15:09:25.083 [DEBUG] Executing line: SELECT *
+15:09:25.084 [DEBUG] Collecting messages after execution...
+15:09:25.305 [DEBUG] Collected 1 batches, dq length: 20
+15:09:25.306 [DEBUG] Starting loop, dq length: 20
+15:09:25.306 [DEBUG] Iter 1: msg='EchoInput', dq left: 19
+15:09:25.307 [DEBUG] Iter 2: msg='SetPromptType', dq left: 18
+15:09:25.307 [DEBUG] SetPromptType pt=0
+15:09:25.308 [DEBUG] Iter 3: msg='HadError', dq left: 17
+15:09:25.308 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 16
+15:09:25.308 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 15
+15:09:25.309 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 14
+15:09:25.309 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 13
+15:09:25.310 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 12
+15:09:25.310 [DEBUG] Iter 9: msg='FocusThread', dq left: 11
+15:09:25.311 [DEBUG] Iter 10: msg='SetPromptType', dq left: 10
+15:09:25.311 [DEBUG] SetPromptType pt=1
+15:09:25.312 [DEBUG] Prompt ready! Output len: 141
+15:09:25.313 [DEBUG] BREAKING after 10 iterations
+15:09:25.313 [DEBUG] Executing line: FROM airline
+15:09:25.314 [DEBUG] Collecting messages after execution...
+15:09:25.550 [DEBUG] Collected 1 batches, dq length: 20
+15:09:25.552 [DEBUG] Starting loop, dq length: 20
+15:09:25.552 [DEBUG] Iter 1: msg='EchoInput', dq left: 19
+15:09:25.553 [DEBUG] Iter 2: msg='SetPromptType', dq left: 18
+15:09:25.553 [DEBUG] SetPromptType pt=0
+15:09:25.554 [DEBUG] Iter 3: msg='HadError', dq left: 17
+15:09:25.554 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 16
+15:09:25.555 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 15
+15:09:25.555 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 14
+15:09:25.556 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 13
+15:09:25.556 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 12
+15:09:25.557 [DEBUG] Iter 9: msg='FocusThread', dq left: 11
+15:09:25.557 [DEBUG] Iter 10: msg='SetPromptType', dq left: 10
+15:09:25.558 [DEBUG] SetPromptType pt=1
+15:09:25.558 [DEBUG] Prompt ready! Output len: 58
+15:09:25.559 [DEBUG] BREAKING after 10 iterations
+15:09:25.560 [DEBUG] Executing line: LIMIT 5
+15:09:25.561 [DEBUG] Collecting messages after execution...
+15:09:25.774 [DEBUG] Collected 1 batches, dq length: 20
+15:09:25.775 [DEBUG] Starting loop, dq length: 20
+15:09:25.775 [DEBUG] Iter 1: msg='EchoInput', dq left: 19
+15:09:25.776 [DEBUG] Iter 2: msg='SetPromptType', dq left: 18
+15:09:25.776 [DEBUG] SetPromptType pt=0
+15:09:25.777 [DEBUG] Iter 3: msg='HadError', dq left: 17
+15:09:25.778 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 16
+15:09:25.778 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 15
+15:09:25.779 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 14
+15:09:25.780 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 13
+15:09:25.780 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 12
+15:09:25.781 [DEBUG] Iter 9: msg='FocusThread', dq left: 11
+15:09:25.781 [DEBUG] Iter 10: msg='SetPromptType', dq left: 10
+15:09:25.782 [DEBUG] SetPromptType pt=1
+15:09:25.782 [DEBUG] Prompt ready! Output len: 69
+15:09:25.783 [DEBUG] BREAKING after 10 iterations
+15:09:25.784 [DEBUG] Executing line: ```
+15:09:25.785 [DEBUG] Collecting messages after execution...
+15:09:26.010 [DEBUG] Collected 1 batches, dq length: 20
+15:09:26.011 [DEBUG] Starting loop, dq length: 20
+15:09:26.012 [DEBUG] Iter 1: msg='EchoInput', dq left: 19
+15:09:26.012 [DEBUG] Iter 2: msg='SetPromptType', dq left: 18
+15:09:26.012 [DEBUG] SetPromptType pt=0
+15:09:26.013 [DEBUG] Iter 3: msg='HadError', dq left: 17
+15:09:26.013 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 16
+15:09:26.014 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 15
+15:09:26.015 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 14
+15:09:26.015 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 13
+15:09:26.016 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 12
+15:09:26.016 [DEBUG] Iter 9: msg='FocusThread', dq left: 11
+15:09:26.017 [DEBUG] Iter 10: msg='SetPromptType', dq left: 10
+15:09:26.017 [DEBUG] SetPromptType pt=1
+15:09:26.017 [DEBUG] Prompt ready! Output len: 57
+15:09:26.018 [DEBUG] BREAKING after 10 iterations
+15:10:31.352 [DEBUG] Executing line: duck.db.toTable duck.db.query _con `SELECT * FROM airline LIMIT 5`
+15:10:31.353 [DEBUG] Collecting messages after execution...
+15:10:31.564 [DEBUG] Collected 1 batches, dq length: 14
+15:10:31.565 [DEBUG] Starting loop, dq length: 14
+15:10:31.565 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 13
+15:10:31.566 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 12
+15:10:31.566 [DEBUG] Iter 3: msg='FocusThread', dq left: 11
+15:10:31.567 [DEBUG] Iter 4: msg='SetPromptType', dq left: 10
+15:10:31.567 [DEBUG] SetPromptType pt=1
+15:10:31.567 [DEBUG] Prompt ready! Output len: 0
+15:10:31.568 [DEBUG] BREAKING after 4 iterations
+15:10:34.174 [DEBUG] Executing line: duck.db.query _con 'DROP TABLE IF EXISTS test'
+15:10:34.176 [DEBUG] Collecting messages after execution...
+15:10:34.406 [DEBUG] Collected 1 batches, dq length: 7
+15:10:34.407 [DEBUG] Starting loop, dq length: 7
+15:10:34.407 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:10:34.408 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:10:34.408 [DEBUG] SetPromptType pt=0
+15:10:34.409 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:10:34.409 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:10:34.410 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:10:34.410 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:10:34.411 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:10:34.411 [DEBUG] SetPromptType pt=1
+15:10:34.412 [DEBUG] Prompt ready! Output len: 10
+15:10:34.413 [DEBUG] BREAKING after 7 iterations
+15:10:37.413 [DEBUG] Executing line: duck.db.query _con 'CREATE TABLE test (a INT, b DOUBLE)'
+15:10:37.414 [DEBUG] Collecting messages after execution...
+15:10:37.641 [DEBUG] Collected 1 batches, dq length: 7
+15:10:37.641 [DEBUG] Starting loop, dq length: 7
+15:10:37.642 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:10:37.642 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:10:37.643 [DEBUG] SetPromptType pt=0
+15:10:37.643 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:10:37.644 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:10:37.645 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:10:37.645 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:10:37.646 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:10:37.646 [DEBUG] SetPromptType pt=1
+15:10:37.647 [DEBUG] Prompt ready! Output len: 8
+15:10:37.647 [DEBUG] BREAKING after 7 iterations
+15:10:41.301 [DEBUG] Executing line: a←⍳1000000
+15:10:41.302 [DEBUG] Collecting messages after execution...
+15:10:41.523 [DEBUG] Collected 1 batches, dq length: 6
+15:10:41.524 [DEBUG] Starting loop, dq length: 6
+15:10:41.524 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:10:41.525 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:10:41.525 [DEBUG] SetPromptType pt=0
+15:10:41.526 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:10:41.526 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:10:41.526 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:10:41.527 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:10:41.527 [DEBUG] SetPromptType pt=1
+15:10:41.528 [DEBUG] Prompt ready! Output len: 0
+15:10:41.528 [DEBUG] BREAKING after 6 iterations
+15:10:41.529 [DEBUG] Executing line: b←2 5 (16808⌶)'Beta' 1000000
+15:10:41.529 [DEBUG] Collecting messages after execution...
+15:10:41.744 [DEBUG] Collected 1 batches, dq length: 2
+15:10:41.745 [DEBUG] Starting loop, dq length: 2
+15:10:41.746 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:10:41.747 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:10:41.748 [DEBUG] SetPromptType pt=0
+15:10:41.748 [DEBUG] Iter 3: dq empty, waiting...
+15:10:42.025 [DEBUG] Wait done: 0.28s, dq: 4
+15:10:42.026 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:10:42.026 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:10:42.027 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:10:42.027 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:10:42.028 [DEBUG] SetPromptType pt=1
+15:10:42.028 [DEBUG] Prompt ready! Output len: 0
+15:10:42.029 [DEBUG] BREAKING after 6 iterations
+15:10:54.092 [DEBUG] Executing line: b[⍳10]
+15:10:54.093 [DEBUG] Collecting messages after execution...
+15:10:54.310 [DEBUG] Collected 1 batches, dq length: 11
+15:10:54.311 [DEBUG] Starting loop, dq length: 11
+15:10:54.311 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 10
+15:10:54.312 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 9
+15:10:54.312 [DEBUG] Iter 3: msg='FocusThread', dq left: 8
+15:10:54.313 [DEBUG] Iter 4: msg='SetPromptType', dq left: 7
+15:10:54.314 [DEBUG] SetPromptType pt=1
+15:10:54.314 [DEBUG] Prompt ready! Output len: 0
+15:10:54.315 [DEBUG] BREAKING after 4 iterations
+15:10:57.562 [DEBUG] Executing line: duck.db.append _con '' 'test' (a b) (duck.db.type.INTEGER duck.db.type.DOUBLE)
+15:10:57.563 [DEBUG] Collecting messages after execution...
+15:10:57.781 [DEBUG] Collected 1 batches, dq length: 2
+15:10:57.781 [DEBUG] Starting loop, dq length: 2
+15:10:57.782 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:10:57.782 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:10:57.783 [DEBUG] SetPromptType pt=0
+15:10:57.783 [DEBUG] Iter 3: dq empty, waiting...
+15:10:58.001 [DEBUG] Wait done: 0.22s, dq: 0
+15:10:59.899 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM test LIMIT 5'
+15:10:59.900 [DEBUG] Collecting messages after execution...
+15:11:00.116 [DEBUG] Collected 1 batches, dq length: 19
+15:11:00.116 [DEBUG] Starting loop, dq length: 19
+15:11:00.117 [DEBUG] Iter 1: msg='AppendSessionOutput', dq left: 18
+15:11:00.118 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 17
+15:11:00.118 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 16
+15:11:00.119 [DEBUG] Iter 4: msg='FocusThread', dq left: 15
+15:11:00.119 [DEBUG] Iter 5: msg='SetPromptType', dq left: 14
+15:11:00.120 [DEBUG] SetPromptType pt=1
+15:11:00.120 [DEBUG] Prompt ready! Output len: 9
+15:11:00.121 [DEBUG] BREAKING after 5 iterations
+15:11:07.587 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM test LIMIT 5'
+15:11:07.588 [DEBUG] Collecting messages after execution...
+15:11:07.811 [DEBUG] Collected 1 batches, dq length: 14
+15:11:07.812 [DEBUG] Starting loop, dq length: 14
+15:11:07.812 [DEBUG] Iter 1: msg='EchoInput', dq left: 13
+15:11:07.813 [DEBUG] Iter 2: msg='SetPromptType', dq left: 12
+15:11:07.813 [DEBUG] SetPromptType pt=0
+15:11:07.814 [DEBUG] Iter 3: msg='SetSessionLineGroup', dq left: 11
+15:11:07.815 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 10
+15:11:07.815 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 9
+15:11:07.816 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 8
+15:11:07.817 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 7
+15:11:07.817 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 6
+15:11:07.818 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 5
+15:11:07.818 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 4
+15:11:07.819 [DEBUG] Iter 11: msg='UpdateWindow', dq left: 3
+15:11:07.819 [DEBUG] Iter 12: msg='UpdateWindow', dq left: 2
+15:11:07.820 [DEBUG] Iter 13: msg='FocusThread', dq left: 1
+15:11:07.820 [DEBUG] Iter 14: msg='SetPromptType', dq left: 0
+15:11:07.821 [DEBUG] SetPromptType pt=1
+15:11:07.821 [DEBUG] Prompt ready! Output len: 114
+15:11:07.822 [DEBUG] BREAKING after 14 iterations
+15:11:13.644 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM test LIMIT 5'
+15:11:13.645 [DEBUG] Collecting messages after execution...
+15:11:13.869 [DEBUG] Collected 1 batches, dq length: 14
+15:11:13.869 [DEBUG] Starting loop, dq length: 14
+15:11:13.870 [DEBUG] Iter 1: msg='EchoInput', dq left: 13
+15:11:13.870 [DEBUG] Iter 2: msg='SetPromptType', dq left: 12
+15:11:13.871 [DEBUG] SetPromptType pt=0
+15:11:13.871 [DEBUG] Iter 3: msg='SetSessionLineGroup', dq left: 11
+15:11:13.872 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 10
+15:11:13.872 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 9
+15:11:13.873 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 8
+15:11:13.873 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 7
+15:11:13.874 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 6
+15:11:13.874 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 5
+15:11:13.875 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 4
+15:11:13.875 [DEBUG] Iter 11: msg='UpdateWindow', dq left: 3
+15:11:13.876 [DEBUG] Iter 12: msg='UpdateWindow', dq left: 2
+15:11:13.876 [DEBUG] Iter 13: msg='FocusThread', dq left: 1
+15:11:13.877 [DEBUG] Iter 14: msg='SetPromptType', dq left: 0
+15:11:13.878 [DEBUG] SetPromptType pt=1
+15:11:13.878 [DEBUG] Prompt ready! Output len: 114
+15:11:13.879 [DEBUG] BREAKING after 14 iterations
+15:11:18.463 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM test LIMIT 5'
+15:11:18.464 [DEBUG] Collecting messages after execution...
+15:11:18.690 [DEBUG] Collected 1 batches, dq length: 14
+15:11:18.691 [DEBUG] Starting loop, dq length: 14
+15:11:18.691 [DEBUG] Iter 1: msg='EchoInput', dq left: 13
+15:11:18.692 [DEBUG] Iter 2: msg='SetPromptType', dq left: 12
+15:11:18.692 [DEBUG] SetPromptType pt=0
+15:11:18.692 [DEBUG] Iter 3: msg='SetSessionLineGroup', dq left: 11
+15:11:18.693 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 10
+15:11:18.693 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 9
+15:11:18.694 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 8
+15:11:18.694 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 7
+15:11:18.695 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 6
+15:11:18.695 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 5
+15:11:18.696 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 4
+15:11:18.696 [DEBUG] Iter 11: msg='UpdateWindow', dq left: 3
+15:11:18.697 [DEBUG] Iter 12: msg='UpdateWindow', dq left: 2
+15:11:18.697 [DEBUG] Iter 13: msg='FocusThread', dq left: 1
+15:11:18.698 [DEBUG] Iter 14: msg='SetPromptType', dq left: 0
+15:11:18.698 [DEBUG] SetPromptType pt=1
+15:11:18.699 [DEBUG] Prompt ready! Output len: 114
+15:11:18.699 [DEBUG] BREAKING after 14 iterations
+15:11:35.207 [DEBUG] Executing line: _←duck.db.disconnect _con
+15:11:35.208 [DEBUG] Collecting messages after execution...
+15:11:35.432 [DEBUG] Collected 1 batches, dq length: 6
+15:11:35.433 [DEBUG] Starting loop, dq length: 6
+15:11:35.434 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:11:35.434 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:11:35.435 [DEBUG] SetPromptType pt=0
+15:11:35.435 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:11:35.436 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:11:35.436 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:11:35.437 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:11:35.437 [DEBUG] SetPromptType pt=1
+15:11:35.438 [DEBUG] Prompt ready! Output len: 0
+15:11:35.438 [DEBUG] BREAKING after 6 iterations
+15:11:35.439 [DEBUG] Executing line: _←duck.db.close _db
+15:11:35.439 [DEBUG] Collecting messages after execution...
+15:11:35.732 [DEBUG] Collected 1 batches, dq length: 6
+15:11:35.733 [DEBUG] Starting loop, dq length: 6
+15:11:35.734 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:11:35.734 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:11:35.735 [DEBUG] SetPromptType pt=0
+15:11:35.735 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:11:35.736 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:11:35.736 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:11:35.737 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:11:35.737 [DEBUG] SetPromptType pt=1
+15:11:35.738 [DEBUG] Prompt ready! Output len: 0
+15:11:35.738 [DEBUG] BREAKING after 6 iterations
+15:11:37.995 [DEBUG] Executing line: duck.db.test
+15:11:37.996 [DEBUG] Collecting messages after execution...
+15:11:38.241 [DEBUG] Collected 1 batches, dq length: 23
+15:11:38.242 [DEBUG] Starting loop, dq length: 23
+15:11:38.243 [DEBUG] Iter 1: msg='EchoInput', dq left: 22
+15:11:38.243 [DEBUG] Iter 2: msg='SetPromptType', dq left: 21
+15:11:38.244 [DEBUG] SetPromptType pt=0
+15:11:38.245 [DEBUG] Iter 3: msg='SetSessionLineGroup', dq left: 20
+15:11:38.245 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 19
+15:11:38.246 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 18
+15:11:38.246 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 17
+15:11:38.247 [DEBUG] Iter 7: msg='HadError', dq left: 16
+15:11:38.247 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 15
+15:11:38.248 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 14
+15:11:38.249 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 13
+15:11:38.249 [DEBUG] Iter 11: msg='OpenWindow', dq left: 12
+15:11:38.250 [DEBUG] Iter 12: msg='SetHighlightLine', dq left: 11
+15:11:38.250 [DEBUG] Iter 13: msg='UpdateWindow', dq left: 10
+15:11:38.251 [DEBUG] Iter 14: msg='UpdateWindow', dq left: 9
+15:11:38.252 [DEBUG] Iter 15: msg='UpdateWindow', dq left: 8
+15:11:38.252 [DEBUG] Iter 16: msg='UpdateWindow', dq left: 7
+15:11:38.253 [DEBUG] Iter 17: msg='FocusThread', dq left: 6
+15:11:38.254 [DEBUG] Iter 18: msg='UpdateWindow', dq left: 5
+15:11:38.254 [DEBUG] Iter 19: msg='UpdateWindow', dq left: 4
+15:11:38.255 [DEBUG] Iter 20: msg='FocusThread', dq left: 3
+15:11:38.255 [DEBUG] Iter 21: msg='SetPromptType', dq left: 2
+15:11:38.256 [DEBUG] SetPromptType pt=1
+15:11:38.256 [DEBUG] Prompt ready! Output len: 191
+15:11:38.257 [DEBUG] BREAKING after 21 iterations
+15:14:13.163 [DEBUG] Executing line: ]link.create duck ../duckdb-dyalog
+15:14:13.164 [DEBUG] Collecting messages after execution...
+15:14:13.379 [DEBUG] Collected 1 batches, dq length: 32
+15:14:13.380 [DEBUG] Starting loop, dq length: 32
+15:14:13.381 [DEBUG] Iter 1: msg='EchoInput', dq left: 31
+15:14:13.382 [DEBUG] Iter 2: msg='SetPromptType', dq left: 30
+15:14:13.382 [DEBUG] SetPromptType pt=0
+15:14:13.382 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 29
+15:14:13.383 [DEBUG] Iter 4: msg='SetHighlightLine', dq left: 28
+15:14:13.383 [DEBUG] Iter 5: msg='CloseWindow', dq left: 27
+15:14:13.384 [DEBUG] Iter 6: msg='UpdateWindow', dq left: 26
+15:14:13.384 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 25
+15:14:13.385 [DEBUG] Iter 8: msg='FocusThread', dq left: 24
+15:14:13.385 [DEBUG] Iter 9: msg='SetPromptType', dq left: 23
+15:14:13.386 [DEBUG] SetPromptType pt=1
+15:14:13.386 [DEBUG] Prompt ready! Output len: 0
+15:14:13.387 [DEBUG] BREAKING after 9 iterations
+15:14:15.000 [DEBUG] Executing line: ]link.create duck ../duckdb-dyalog
+15:14:15.001 [DEBUG] Collecting messages after execution...
+15:14:15.214 [DEBUG] Collected 1 batches, dq length: 7
+15:14:15.214 [DEBUG] Starting loop, dq length: 7
+15:14:15.215 [DEBUG] Iter 1: msg='AppendSessionOutput', dq left: 6
+15:14:15.216 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 5
+15:14:15.216 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 4
+15:14:15.217 [DEBUG] Iter 4: msg='FocusThread', dq left: 3
+15:14:15.217 [DEBUG] Iter 5: msg='SetPromptType', dq left: 2
+15:14:15.218 [DEBUG] SetPromptType pt=1
+15:14:15.218 [DEBUG] Prompt ready! Output len: 60
+15:14:15.219 [DEBUG] BREAKING after 5 iterations
+15:14:18.796 [DEBUG] Executing line: ⎕pw←32767
+15:14:18.797 [DEBUG] Collecting messages after execution...
+15:14:19.017 [DEBUG] Collected 1 batches, dq length: 11
+15:14:19.018 [DEBUG] Starting loop, dq length: 11
+15:14:19.019 [DEBUG] Iter 1: msg='AppendSessionOutput', dq left: 10
+15:14:19.019 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 9
+15:14:19.020 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 8
+15:14:19.020 [DEBUG] Iter 4: msg='FocusThread', dq left: 7
+15:14:19.021 [DEBUG] Iter 5: msg='SetPromptType', dq left: 6
+15:14:19.021 [DEBUG] SetPromptType pt=1
+15:14:19.021 [DEBUG] Prompt ready! Output len: 60
+15:14:19.022 [DEBUG] BREAKING after 5 iterations
+15:14:21.967 [DEBUG] Executing line: ⎕pw←32767
+15:14:21.968 [DEBUG] Collecting messages after execution...
+15:14:22.186 [DEBUG] Collected 1 batches, dq length: 6
+15:14:22.187 [DEBUG] Starting loop, dq length: 6
+15:14:22.188 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:14:22.188 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:14:22.189 [DEBUG] SetPromptType pt=0
+15:14:22.189 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:14:22.190 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:14:22.190 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:14:22.191 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:14:22.191 [DEBUG] SetPromptType pt=1
+15:14:22.192 [DEBUG] Prompt ready! Output len: 0
+15:14:22.192 [DEBUG] BREAKING after 6 iterations
+15:14:24.509 [DEBUG] Executing line: duck.db.init 'lib/'
+15:14:24.510 [DEBUG] Collecting messages after execution...
+15:14:24.727 [DEBUG] Collected 1 batches, dq length: 6
+15:14:24.728 [DEBUG] Starting loop, dq length: 6
+15:14:24.729 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:14:24.729 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:14:24.730 [DEBUG] SetPromptType pt=0
+15:14:24.730 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:14:24.731 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:14:24.731 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:14:24.732 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:14:24.732 [DEBUG] SetPromptType pt=1
+15:14:24.733 [DEBUG] Prompt ready! Output len: 0
+15:14:24.733 [DEBUG] BREAKING after 6 iterations
+15:14:26.659 [DEBUG] Executing line: _db←duck.db.open ':memory:'
+15:14:26.660 [DEBUG] Collecting messages after execution...
+15:14:26.895 [DEBUG] Collected 1 batches, dq length: 6
+15:14:26.896 [DEBUG] Starting loop, dq length: 6
+15:14:26.896 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:14:26.897 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:14:26.897 [DEBUG] SetPromptType pt=0
+15:14:26.898 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:14:26.898 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:14:26.899 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:14:26.899 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:14:26.900 [DEBUG] SetPromptType pt=1
+15:14:26.900 [DEBUG] Prompt ready! Output len: 0
+15:14:26.900 [DEBUG] BREAKING after 6 iterations
+15:14:26.901 [DEBUG] Executing line: _con←duck.db.connect _db
+15:14:26.901 [DEBUG] Collecting messages after execution...
+15:14:27.114 [DEBUG] Collected 1 batches, dq length: 6
+15:14:27.115 [DEBUG] Starting loop, dq length: 6
+15:14:27.115 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:14:27.116 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:14:27.116 [DEBUG] SetPromptType pt=0
+15:14:27.117 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:14:27.117 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:14:27.117 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:14:27.118 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:14:27.118 [DEBUG] SetPromptType pt=1
+15:14:27.119 [DEBUG] Prompt ready! Output len: 0
+15:14:27.119 [DEBUG] BREAKING after 6 iterations
+15:14:30.344 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'PRAGMA version'
+15:14:30.344 [DEBUG] Collecting messages after execution...
+15:14:30.559 [DEBUG] Collected 1 batches, dq length: 7
+15:14:30.560 [DEBUG] Starting loop, dq length: 7
+15:14:30.561 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:14:30.561 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:14:30.562 [DEBUG] SetPromptType pt=0
+15:14:30.562 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:14:30.563 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:14:30.563 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:14:30.564 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:14:30.565 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:14:30.565 [DEBUG] SetPromptType pt=1
+15:14:30.566 [DEBUG] Prompt ready! Output len: 67
+15:14:30.567 [DEBUG] BREAKING after 7 iterations
+15:14:33.970 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'PRAGMA version'
+15:14:33.970 [DEBUG] Collecting messages after execution...
+15:14:34.191 [DEBUG] Collected 1 batches, dq length: 7
+15:14:34.192 [DEBUG] Starting loop, dq length: 7
+15:14:34.192 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:14:34.193 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:14:34.194 [DEBUG] SetPromptType pt=0
+15:14:34.194 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:14:34.195 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:14:34.195 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:14:34.196 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:14:34.196 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:14:34.197 [DEBUG] SetPromptType pt=1
+15:14:34.197 [DEBUG] Prompt ready! Output len: 67
+15:14:34.198 [DEBUG] BREAKING after 7 iterations
+15:14:36.660 [DEBUG] Executing line: duck.db.query _con 'SELECT concat(''2022-11-03 13:30:00'','' '',''Europe/Helsinki'')::TIMESTAMPTZ'
+15:14:36.661 [DEBUG] Collecting messages after execution...
+15:14:36.880 [DEBUG] Collected 1 batches, dq length: 7
+15:14:36.880 [DEBUG] Starting loop, dq length: 7
+15:14:36.881 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:14:36.882 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:14:36.882 [DEBUG] SetPromptType pt=0
+15:14:36.883 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:14:36.883 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:14:36.884 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:14:36.884 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:14:36.885 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:14:36.885 [DEBUG] SetPromptType pt=1
+15:14:36.886 [DEBUG] Prompt ready! Output len: 121
+15:14:36.887 [DEBUG] BREAKING after 7 iterations
+15:14:42.354 [DEBUG] Executing line: duck.db.query _con 'CREATE TABLE airline AS SELECT * FROM "airline_data/airline.parquet"'
+15:14:42.355 [DEBUG] Collecting messages after execution...
+15:14:42.577 [DEBUG] Collected 1 batches, dq length: 6
+15:14:42.577 [DEBUG] Starting loop, dq length: 6
+15:14:42.578 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 5
+15:14:42.579 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 4
+15:14:42.580 [DEBUG] Iter 3: msg='FocusThread', dq left: 3
+15:14:42.581 [DEBUG] Iter 4: msg='SetPromptType', dq left: 2
+15:14:42.581 [DEBUG] SetPromptType pt=1
+15:14:42.582 [DEBUG] Prompt ready! Output len: 0
+15:14:42.583 [DEBUG] BREAKING after 4 iterations
+15:14:47.454 [DEBUG] Executing line: duck.db.toTable duck.db.query _con `SELECT * FROM airline LIMIT 5`
+15:14:47.454 [DEBUG] Collecting messages after execution...
+15:14:47.679 [DEBUG] Collected 1 batches, dq length: 15
+15:14:47.680 [DEBUG] Starting loop, dq length: 15
+15:14:47.680 [DEBUG] Iter 1: msg='AppendSessionOutput', dq left: 14
+15:14:47.680 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 13
+15:14:47.681 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 12
+15:14:47.681 [DEBUG] Iter 4: msg='FocusThread', dq left: 11
+15:14:47.682 [DEBUG] Iter 5: msg='SetPromptType', dq left: 10
+15:14:47.682 [DEBUG] SetPromptType pt=1
+15:14:47.683 [DEBUG] Prompt ready! Output len: 21
+15:14:47.684 [DEBUG] BREAKING after 5 iterations
+15:14:50.201 [DEBUG] Executing line: duck.db.toTable duck.db.query _con `SELECT * FROM airline LIMIT 5`
+15:14:50.202 [DEBUG] Collecting messages after execution...
+15:14:50.420 [DEBUG] Collected 1 batches, dq length: 10
+15:14:50.420 [DEBUG] Starting loop, dq length: 10
+15:14:50.421 [DEBUG] Iter 1: msg='EchoInput', dq left: 9
+15:14:50.422 [DEBUG] Iter 2: msg='SetPromptType', dq left: 8
+15:14:50.422 [DEBUG] SetPromptType pt=0
+15:14:50.423 [DEBUG] Iter 3: msg='HadError', dq left: 7
+15:14:50.423 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 6
+15:14:50.424 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 5
+15:14:50.424 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 4
+15:14:50.425 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 3
+15:14:50.425 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 2
+15:14:50.426 [DEBUG] Iter 9: msg='FocusThread', dq left: 1
+15:14:50.426 [DEBUG] Iter 10: msg='SetPromptType', dq left: 0
+15:14:50.427 [DEBUG] SetPromptType pt=1
+15:14:50.427 [DEBUG] Prompt ready! Output len: 195
+15:14:50.428 [DEBUG] BREAKING after 10 iterations
+15:15:04.341 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM airline LIMIT 5'
+15:15:04.341 [DEBUG] Collecting messages after execution...
+15:15:04.568 [DEBUG] Collected 1 batches, dq length: 32
+15:15:04.568 [DEBUG] Starting loop, dq length: 32
+15:15:04.569 [DEBUG] Iter 1: msg='EchoInput', dq left: 31
+15:15:04.569 [DEBUG] Iter 2: msg='SetPromptType', dq left: 30
+15:15:04.570 [DEBUG] SetPromptType pt=0
+15:15:04.570 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 29
+15:15:04.571 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 28
+15:15:04.571 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 27
+15:15:04.572 [DEBUG] Iter 6: msg='SetSessionLineGroup', dq left: 26
+15:15:04.572 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 25
+15:15:04.573 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 24
+15:15:04.573 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 23
+15:15:04.574 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 22
+15:15:04.574 [DEBUG] Iter 11: msg='AppendSessionOutput', dq left: 21
+15:15:04.575 [DEBUG] Iter 12: msg='AppendSessionOutput', dq left: 20
+15:15:04.576 [DEBUG] Iter 13: msg='AppendSessionOutput', dq left: 19
+15:15:04.576 [DEBUG] Iter 14: msg='AppendSessionOutput', dq left: 18
+15:15:04.578 [DEBUG] Iter 15: msg='AppendSessionOutput', dq left: 17
+15:15:04.578 [DEBUG] Iter 16: msg='AppendSessionOutput', dq left: 16
+15:15:04.579 [DEBUG] Iter 17: msg='AppendSessionOutput', dq left: 15
+15:15:04.579 [DEBUG] Iter 18: msg='AppendSessionOutput', dq left: 14
+15:15:04.579 [DEBUG] Iter 19: msg='AppendSessionOutput', dq left: 13
+15:15:04.580 [DEBUG] Iter 20: msg='AppendSessionOutput', dq left: 12
+15:15:04.580 [DEBUG] Iter 21: msg='AppendSessionOutput', dq left: 11
+15:15:04.581 [DEBUG] Iter 22: msg='AppendSessionOutput', dq left: 10
+15:15:04.581 [DEBUG] Iter 23: msg='AppendSessionOutput', dq left: 9
+15:15:04.582 [DEBUG] Iter 24: msg='AppendSessionOutput', dq left: 8
+15:15:04.582 [DEBUG] Iter 25: msg='AppendSessionOutput', dq left: 7
+15:15:04.582 [DEBUG] Iter 26: msg='AppendSessionOutput', dq left: 6
+15:15:04.583 [DEBUG] Iter 27: msg='AppendSessionOutput', dq left: 5
+15:15:04.583 [DEBUG] Iter 28: msg='AppendSessionOutput', dq left: 4
+15:15:04.584 [DEBUG] Iter 29: msg='UpdateWindow', dq left: 3
+15:15:04.584 [DEBUG] Iter 30: msg='UpdateWindow', dq left: 2
+15:15:04.585 [DEBUG] Iter 31: msg='FocusThread', dq left: 1
+15:15:04.585 [DEBUG] Iter 32: msg='SetPromptType', dq left: 0
+15:15:04.585 [DEBUG] SetPromptType pt=1
+15:15:04.586 [DEBUG] Prompt ready! Output len: 9678
+15:15:04.587 [DEBUG] BREAKING after 32 iterations
+15:15:27.330 [DEBUG] Executing line: _←duck.db.query _con 'CREATE TABLE airline AS SELECT * FROM "airline_data/airline.parquet"'
+15:15:27.331 [DEBUG] Collecting messages after execution...
+15:15:27.576 [DEBUG] Collected 1 batches, dq length: 6
+15:15:27.577 [DEBUG] Starting loop, dq length: 6
+15:15:27.577 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:15:27.578 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:15:27.578 [DEBUG] SetPromptType pt=0
+15:15:27.579 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:15:27.579 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:15:27.580 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:15:27.580 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:15:27.581 [DEBUG] SetPromptType pt=1
+15:15:27.581 [DEBUG] Prompt ready! Output len: 0
+15:15:27.581 [DEBUG] BREAKING after 6 iterations
+15:15:30.791 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM airline LIMIT 5'
+15:15:30.792 [DEBUG] Collecting messages after execution...
+15:15:31.018 [DEBUG] Collected 1 batches, dq length: 32
+15:15:31.019 [DEBUG] Starting loop, dq length: 32
+15:15:31.020 [DEBUG] Iter 1: msg='EchoInput', dq left: 31
+15:15:31.020 [DEBUG] Iter 2: msg='SetPromptType', dq left: 30
+15:15:31.021 [DEBUG] SetPromptType pt=0
+15:15:31.021 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 29
+15:15:31.022 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 28
+15:15:31.022 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 27
+15:15:31.023 [DEBUG] Iter 6: msg='SetSessionLineGroup', dq left: 26
+15:15:31.023 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 25
+15:15:31.024 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 24
+15:15:31.024 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 23
+15:15:31.025 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 22
+15:15:31.025 [DEBUG] Iter 11: msg='AppendSessionOutput', dq left: 21
+15:15:31.026 [DEBUG] Iter 12: msg='AppendSessionOutput', dq left: 20
+15:15:31.026 [DEBUG] Iter 13: msg='AppendSessionOutput', dq left: 19
+15:15:31.026 [DEBUG] Iter 14: msg='AppendSessionOutput', dq left: 18
+15:15:31.027 [DEBUG] Iter 15: msg='AppendSessionOutput', dq left: 17
+15:15:31.027 [DEBUG] Iter 16: msg='AppendSessionOutput', dq left: 16
+15:15:31.028 [DEBUG] Iter 17: msg='AppendSessionOutput', dq left: 15
+15:15:31.028 [DEBUG] Iter 18: msg='AppendSessionOutput', dq left: 14
+15:15:31.029 [DEBUG] Iter 19: msg='AppendSessionOutput', dq left: 13
+15:15:31.029 [DEBUG] Iter 20: msg='AppendSessionOutput', dq left: 12
+15:15:31.030 [DEBUG] Iter 21: msg='AppendSessionOutput', dq left: 11
+15:15:31.030 [DEBUG] Iter 22: msg='AppendSessionOutput', dq left: 10
+15:15:31.030 [DEBUG] Iter 23: msg='AppendSessionOutput', dq left: 9
+15:15:31.031 [DEBUG] Iter 24: msg='AppendSessionOutput', dq left: 8
+15:15:31.031 [DEBUG] Iter 25: msg='AppendSessionOutput', dq left: 7
+15:15:31.032 [DEBUG] Iter 26: msg='AppendSessionOutput', dq left: 6
+15:15:31.032 [DEBUG] Iter 27: msg='AppendSessionOutput', dq left: 5
+15:15:31.033 [DEBUG] Iter 28: msg='AppendSessionOutput', dq left: 4
+15:15:31.033 [DEBUG] Iter 29: msg='UpdateWindow', dq left: 3
+15:15:31.034 [DEBUG] Iter 30: msg='UpdateWindow', dq left: 2
+15:15:31.034 [DEBUG] Iter 31: msg='FocusThread', dq left: 1
+15:15:31.035 [DEBUG] Iter 32: msg='SetPromptType', dq left: 0
+15:15:31.035 [DEBUG] SetPromptType pt=1
+15:15:31.035 [DEBUG] Prompt ready! Output len: 9678
+15:15:31.036 [DEBUG] BREAKING after 32 iterations
+15:15:52.441 [DEBUG] Executing line: ]link.create duck ../duckdb-dyalog
+15:15:52.442 [DEBUG] Collecting messages after execution...
+15:15:52.669 [DEBUG] Collected 1 batches, dq length: 7
+15:15:52.669 [DEBUG] Starting loop, dq length: 7
+15:15:52.670 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 6
+15:15:52.671 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 5
+15:15:52.671 [DEBUG] Iter 3: msg='FocusThread', dq left: 4
+15:15:52.671 [DEBUG] Iter 4: msg='SetPromptType', dq left: 3
+15:15:52.672 [DEBUG] SetPromptType pt=1
+15:15:52.672 [DEBUG] Prompt ready! Output len: 0
+15:15:52.673 [DEBUG] BREAKING after 4 iterations
+15:15:58.268 [DEBUG] Executing line: ⎕pw←32767
+15:15:58.269 [DEBUG] Collecting messages after execution...
+15:15:58.489 [DEBUG] Collected 1 batches, dq length: 11
+15:15:58.489 [DEBUG] Starting loop, dq length: 11
+15:15:58.490 [DEBUG] Iter 1: msg='AppendSessionOutput', dq left: 10
+15:15:58.490 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 9
+15:15:58.491 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 8
+15:15:58.492 [DEBUG] Iter 4: msg='FocusThread', dq left: 7
+15:15:58.492 [DEBUG] Iter 5: msg='SetPromptType', dq left: 6
+15:15:58.492 [DEBUG] SetPromptType pt=1
+15:15:58.493 [DEBUG] Prompt ready! Output len: 49
+15:15:58.494 [DEBUG] BREAKING after 5 iterations
+15:16:01.268 [DEBUG] Executing line: ⎕pw←32767
+15:16:01.269 [DEBUG] Collecting messages after execution...
+15:16:01.490 [DEBUG] Collected 1 batches, dq length: 6
+15:16:01.491 [DEBUG] Starting loop, dq length: 6
+15:16:01.492 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:16:01.493 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:16:01.493 [DEBUG] SetPromptType pt=0
+15:16:01.493 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:16:01.494 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:16:01.494 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:16:01.495 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:16:01.495 [DEBUG] SetPromptType pt=1
+15:16:01.496 [DEBUG] Prompt ready! Output len: 0
+15:16:01.496 [DEBUG] BREAKING after 6 iterations
+15:16:04.459 [DEBUG] Executing line: duck.db.init 'lib/'
+15:16:04.460 [DEBUG] Collecting messages after execution...
+15:16:04.685 [DEBUG] Collected 1 batches, dq length: 6
+15:16:04.686 [DEBUG] Starting loop, dq length: 6
+15:16:04.687 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:16:04.687 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:16:04.687 [DEBUG] SetPromptType pt=0
+15:16:04.688 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:16:04.688 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:16:04.689 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:16:04.689 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:16:04.690 [DEBUG] SetPromptType pt=1
+15:16:04.690 [DEBUG] Prompt ready! Output len: 0
+15:16:04.690 [DEBUG] BREAKING after 6 iterations
+15:16:06.271 [DEBUG] Executing line: _db←duck.db.open ':memory:'
+15:16:06.272 [DEBUG] Collecting messages after execution...
+15:16:06.512 [DEBUG] Collected 1 batches, dq length: 6
+15:16:06.512 [DEBUG] Starting loop, dq length: 6
+15:16:06.513 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:16:06.513 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:16:06.514 [DEBUG] SetPromptType pt=0
+15:16:06.514 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:16:06.515 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:16:06.516 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:16:06.516 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:16:06.517 [DEBUG] SetPromptType pt=1
+15:16:06.517 [DEBUG] Prompt ready! Output len: 0
+15:16:06.517 [DEBUG] BREAKING after 6 iterations
+15:16:06.518 [DEBUG] Executing line: _con←duck.db.connect _db
+15:16:06.518 [DEBUG] Collecting messages after execution...
+15:16:06.732 [DEBUG] Collected 1 batches, dq length: 6
+15:16:06.733 [DEBUG] Starting loop, dq length: 6
+15:16:06.734 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:16:06.734 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:16:06.735 [DEBUG] SetPromptType pt=0
+15:16:06.735 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:16:06.736 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:16:06.736 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:16:06.737 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:16:06.737 [DEBUG] SetPromptType pt=1
+15:16:06.738 [DEBUG] Prompt ready! Output len: 0
+15:16:06.738 [DEBUG] BREAKING after 6 iterations
+15:16:08.334 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'PRAGMA version'
+15:16:08.335 [DEBUG] Collecting messages after execution...
+15:16:08.561 [DEBUG] Collected 1 batches, dq length: 7
+15:16:08.561 [DEBUG] Starting loop, dq length: 7
+15:16:08.562 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:16:08.562 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:16:08.563 [DEBUG] SetPromptType pt=0
+15:16:08.563 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:16:08.564 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:16:08.564 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:16:08.565 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:16:08.565 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:16:08.566 [DEBUG] SetPromptType pt=1
+15:16:08.566 [DEBUG] Prompt ready! Output len: 67
+15:16:08.567 [DEBUG] BREAKING after 7 iterations
+15:16:18.744 [DEBUG] Executing line: duck.db.query _con 'SELECT concat(''2022-11-03 13:30:00'','' '',''Europe/Helsinki'')::TIMESTAMPTZ'
+15:16:18.745 [DEBUG] Collecting messages after execution...
+15:16:18.968 [DEBUG] Collected 1 batches, dq length: 7
+15:16:18.968 [DEBUG] Starting loop, dq length: 7
+15:16:18.969 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:16:18.969 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:16:18.970 [DEBUG] SetPromptType pt=0
+15:16:18.971 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:16:18.971 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:16:18.972 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:16:18.972 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:16:18.973 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:16:18.973 [DEBUG] SetPromptType pt=1
+15:16:18.974 [DEBUG] Prompt ready! Output len: 121
+15:16:18.975 [DEBUG] BREAKING after 7 iterations
+15:16:33.885 [DEBUG] Executing line: duck.db.toTableduck.db.query _con 'SELECT concat(''2022-11-03 13:30:00'','' '',''Europe/Helsinki'')::TIMESTAMPTZ'
+15:16:33.886 [DEBUG] Collecting messages after execution...
+15:16:34.097 [DEBUG] Collected 1 batches, dq length: 10
+15:16:34.098 [DEBUG] Starting loop, dq length: 10
+15:16:34.099 [DEBUG] Iter 1: msg='EchoInput', dq left: 9
+15:16:34.099 [DEBUG] Iter 2: msg='SetPromptType', dq left: 8
+15:16:34.100 [DEBUG] SetPromptType pt=0
+15:16:34.100 [DEBUG] Iter 3: msg='HadError', dq left: 7
+15:16:34.101 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 6
+15:16:34.101 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 5
+15:16:34.102 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 4
+15:16:34.102 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 3
+15:16:34.103 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 2
+15:16:34.103 [DEBUG] Iter 9: msg='FocusThread', dq left: 1
+15:16:34.104 [DEBUG] Iter 10: msg='SetPromptType', dq left: 0
+15:16:34.104 [DEBUG] SetPromptType pt=1
+15:16:34.105 [DEBUG] Prompt ready! Output len: 176
+15:16:34.106 [DEBUG] BREAKING after 10 iterations
+15:16:39.958 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT concat(''2022-11-03 13:30:00'','' '',''Europe/Helsinki'')::TIMESTAMPTZ'
+15:16:39.959 [DEBUG] Collecting messages after execution...
+15:16:40.177 [DEBUG] Collected 1 batches, dq length: 7
+15:16:40.178 [DEBUG] Starting loop, dq length: 7
+15:16:40.179 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:16:40.179 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:16:40.180 [DEBUG] SetPromptType pt=0
+15:16:40.180 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:16:40.181 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:16:40.181 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:16:40.182 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:16:40.182 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:16:40.183 [DEBUG] SetPromptType pt=1
+15:16:40.183 [DEBUG] Prompt ready! Output len: 111
+15:16:40.184 [DEBUG] BREAKING after 7 iterations
+15:16:45.702 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT concat(''2022-11-03 13:30:00'','' '',''Europe/Helsinki'')::TIMESTAMPTZ'
+15:16:45.703 [DEBUG] Collecting messages after execution...
+15:16:45.920 [DEBUG] Collected 1 batches, dq length: 7
+15:16:45.921 [DEBUG] Starting loop, dq length: 7
+15:16:45.922 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:16:45.922 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:16:45.923 [DEBUG] SetPromptType pt=0
+15:16:45.923 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:16:45.923 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:16:45.924 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:16:45.924 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:16:45.925 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:16:45.925 [DEBUG] SetPromptType pt=1
+15:16:45.925 [DEBUG] Prompt ready! Output len: 111
+15:16:45.926 [DEBUG] BREAKING after 7 iterations
+15:16:47.765 [DEBUG] Executing line: _←duck.db.query _con 'CREATE TABLE airline AS SELECT * FROM "airline_data/airline.parquet"'
+15:16:47.766 [DEBUG] Collecting messages after execution...
+15:16:47.984 [DEBUG] Collected 1 batches, dq length: 2
+15:16:47.985 [DEBUG] Starting loop, dq length: 2
+15:16:47.986 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:16:47.986 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:16:47.987 [DEBUG] SetPromptType pt=0
+15:16:47.988 [DEBUG] Iter 3: dq empty, waiting...
+15:16:48.206 [DEBUG] Wait done: 0.22s, dq: 0
+15:16:50.598 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM airline LIMIT 5'
+15:16:50.599 [DEBUG] Collecting messages after execution...
+15:16:50.829 [DEBUG] Collected 1 batches, dq length: 40
+15:16:50.831 [DEBUG] Starting loop, dq length: 40
+15:16:50.831 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 39
+15:16:50.832 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 38
+15:16:50.832 [DEBUG] Iter 3: msg='FocusThread', dq left: 37
+15:16:50.832 [DEBUG] Iter 4: msg='SetPromptType', dq left: 36
+15:16:50.833 [DEBUG] SetPromptType pt=1
+15:16:50.833 [DEBUG] Prompt ready! Output len: 0
+15:16:50.834 [DEBUG] BREAKING after 4 iterations
+15:16:52.580 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM airline LIMIT 5'
+15:16:52.581 [DEBUG] Collecting messages after execution...
+15:16:52.805 [DEBUG] Collected 1 batches, dq length: 32
+15:16:52.806 [DEBUG] Starting loop, dq length: 32
+15:16:52.807 [DEBUG] Iter 1: msg='EchoInput', dq left: 31
+15:16:52.807 [DEBUG] Iter 2: msg='SetPromptType', dq left: 30
+15:16:52.808 [DEBUG] SetPromptType pt=0
+15:16:52.808 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 29
+15:16:52.809 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 28
+15:16:52.810 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 27
+15:16:52.810 [DEBUG] Iter 6: msg='SetSessionLineGroup', dq left: 26
+15:16:52.811 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 25
+15:16:52.811 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 24
+15:16:52.812 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 23
+15:16:52.812 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 22
+15:16:52.813 [DEBUG] Iter 11: msg='AppendSessionOutput', dq left: 21
+15:16:52.813 [DEBUG] Iter 12: msg='AppendSessionOutput', dq left: 20
+15:16:52.814 [DEBUG] Iter 13: msg='AppendSessionOutput', dq left: 19
+15:16:52.814 [DEBUG] Iter 14: msg='AppendSessionOutput', dq left: 18
+15:16:52.815 [DEBUG] Iter 15: msg='AppendSessionOutput', dq left: 17
+15:16:52.815 [DEBUG] Iter 16: msg='AppendSessionOutput', dq left: 16
+15:16:52.815 [DEBUG] Iter 17: msg='AppendSessionOutput', dq left: 15
+15:16:52.816 [DEBUG] Iter 18: msg='AppendSessionOutput', dq left: 14
+15:16:52.816 [DEBUG] Iter 19: msg='AppendSessionOutput', dq left: 13
+15:16:52.817 [DEBUG] Iter 20: msg='AppendSessionOutput', dq left: 12
+15:16:52.817 [DEBUG] Iter 21: msg='AppendSessionOutput', dq left: 11
+15:16:52.818 [DEBUG] Iter 22: msg='AppendSessionOutput', dq left: 10
+15:16:52.818 [DEBUG] Iter 23: msg='AppendSessionOutput', dq left: 9
+15:16:52.818 [DEBUG] Iter 24: msg='AppendSessionOutput', dq left: 8
+15:16:52.819 [DEBUG] Iter 25: msg='AppendSessionOutput', dq left: 7
+15:16:52.819 [DEBUG] Iter 26: msg='AppendSessionOutput', dq left: 6
+15:16:52.820 [DEBUG] Iter 27: msg='AppendSessionOutput', dq left: 5
+15:16:52.820 [DEBUG] Iter 28: msg='AppendSessionOutput', dq left: 4
+15:16:52.821 [DEBUG] Iter 29: msg='UpdateWindow', dq left: 3
+15:16:52.821 [DEBUG] Iter 30: msg='UpdateWindow', dq left: 2
+15:16:52.822 [DEBUG] Iter 31: msg='FocusThread', dq left: 1
+15:16:52.822 [DEBUG] Iter 32: msg='SetPromptType', dq left: 0
+15:16:52.823 [DEBUG] SetPromptType pt=1
+15:16:52.823 [DEBUG] Prompt ready! Output len: 9678
+15:16:52.824 [DEBUG] BREAKING after 32 iterations
+15:16:58.437 [DEBUG] Executing line: duck.db.query _con 'DROP TABLE IF EXISTS test'
+15:16:58.438 [DEBUG] Collecting messages after execution...
+15:16:58.657 [DEBUG] Collected 1 batches, dq length: 7
+15:16:58.658 [DEBUG] Starting loop, dq length: 7
+15:16:58.658 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:16:58.658 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:16:58.659 [DEBUG] SetPromptType pt=0
+15:16:58.659 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:16:58.660 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:16:58.660 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:16:58.661 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:16:58.661 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:16:58.662 [DEBUG] SetPromptType pt=1
+15:16:58.662 [DEBUG] Prompt ready! Output len: 10
+15:16:58.663 [DEBUG] BREAKING after 7 iterations
+15:17:04.831 [DEBUG] Executing line: duck.db.query _con 'CREATE TABLE test (a INT, b DOUBLE)'
+15:17:04.832 [DEBUG] Collecting messages after execution...
+15:17:05.054 [DEBUG] Collected 1 batches, dq length: 7
+15:17:05.055 [DEBUG] Starting loop, dq length: 7
+15:17:05.056 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:17:05.057 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:17:05.057 [DEBUG] SetPromptType pt=0
+15:17:05.058 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:17:05.058 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:17:05.059 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:17:05.059 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:17:05.060 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:17:05.061 [DEBUG] SetPromptType pt=1
+15:17:05.061 [DEBUG] Prompt ready! Output len: 8
+15:17:05.063 [DEBUG] BREAKING after 7 iterations
+15:17:08.377 [DEBUG] Executing line: a←⍳1000000
+15:17:08.378 [DEBUG] Collecting messages after execution...
+15:17:08.606 [DEBUG] Collected 1 batches, dq length: 6
+15:17:08.607 [DEBUG] Starting loop, dq length: 6
+15:17:08.607 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:17:08.608 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:17:08.609 [DEBUG] SetPromptType pt=0
+15:17:08.609 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:17:08.610 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:17:08.610 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:17:08.611 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:17:08.611 [DEBUG] SetPromptType pt=1
+15:17:08.612 [DEBUG] Prompt ready! Output len: 0
+15:17:08.612 [DEBUG] BREAKING after 6 iterations
+15:17:08.613 [DEBUG] Executing line: b←2 5 (16808⌶)'Beta' 1000000
+15:17:08.613 [DEBUG] Collecting messages after execution...
+15:17:08.827 [DEBUG] Collected 1 batches, dq length: 2
+15:17:08.828 [DEBUG] Starting loop, dq length: 2
+15:17:08.829 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:17:08.829 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:17:08.830 [DEBUG] SetPromptType pt=0
+15:17:08.830 [DEBUG] Iter 3: dq empty, waiting...
+15:17:09.112 [DEBUG] Wait done: 0.28s, dq: 4
+15:17:09.112 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:17:09.113 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:17:09.113 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:17:09.114 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:17:09.114 [DEBUG] SetPromptType pt=1
+15:17:09.114 [DEBUG] Prompt ready! Output len: 0
+15:17:09.115 [DEBUG] BREAKING after 6 iterations
+15:17:11.668 [DEBUG] Executing line: b[⍳10]
+15:17:11.669 [DEBUG] Collecting messages after execution...
+15:17:11.903 [DEBUG] Collected 1 batches, dq length: 7
+15:17:11.904 [DEBUG] Starting loop, dq length: 7
+15:17:11.904 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:17:11.905 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:17:11.905 [DEBUG] SetPromptType pt=0
+15:17:11.906 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:17:11.906 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:17:11.906 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:17:11.907 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:17:11.908 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:17:11.908 [DEBUG] SetPromptType pt=1
+15:17:11.909 [DEBUG] Prompt ready! Output len: 131
+15:17:11.910 [DEBUG] BREAKING after 7 iterations
+15:17:21.939 [DEBUG] Executing line: duck.db.toTableduck.db.append _con '' 'test' (a b) (duck.db.type.INTEGER duck.db.type.DOUBLE)
+15:17:21.941 [DEBUG] Collecting messages after execution...
+15:17:22.157 [DEBUG] Collected 1 batches, dq length: 10
+15:17:22.157 [DEBUG] Starting loop, dq length: 10
+15:17:22.158 [DEBUG] Iter 1: msg='EchoInput', dq left: 9
+15:17:22.158 [DEBUG] Iter 2: msg='SetPromptType', dq left: 8
+15:17:22.159 [DEBUG] SetPromptType pt=0
+15:17:22.159 [DEBUG] Iter 3: msg='HadError', dq left: 7
+15:17:22.160 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 6
+15:17:22.160 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 5
+15:17:22.161 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 4
+15:17:22.162 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 3
+15:17:22.162 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 2
+15:17:22.163 [DEBUG] Iter 9: msg='FocusThread', dq left: 1
+15:17:22.163 [DEBUG] Iter 10: msg='SetPromptType', dq left: 0
+15:17:22.164 [DEBUG] SetPromptType pt=1
+15:17:22.164 [DEBUG] Prompt ready! Output len: 154
+15:17:22.165 [DEBUG] BREAKING after 10 iterations
+15:17:27.072 [DEBUG] Executing line: duck.db.toTable duck.db.append _con '' 'test' (a b) (duck.db.type.INTEGER duck.db.type.DOUBLE)
+15:17:27.072 [DEBUG] Collecting messages after execution...
+15:17:27.286 [DEBUG] Collected 1 batches, dq length: 2
+15:17:27.286 [DEBUG] Starting loop, dq length: 2
+15:17:27.287 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:17:27.287 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:17:27.288 [DEBUG] SetPromptType pt=0
+15:17:27.288 [DEBUG] Iter 3: dq empty, waiting...
+15:17:27.508 [DEBUG] Wait done: 0.22s, dq: 0
+15:17:31.783 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM test LIMIT 5'
+15:17:31.783 [DEBUG] Collecting messages after execution...
+15:17:32.004 [DEBUG] Collected 1 batches, dq length: 19
+15:17:32.005 [DEBUG] Starting loop, dq length: 19
+15:17:32.005 [DEBUG] Iter 1: msg='AppendSessionOutput', dq left: 18
+15:17:32.005 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 17
+15:17:32.006 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 16
+15:17:32.007 [DEBUG] Iter 4: msg='FocusThread', dq left: 15
+15:17:32.007 [DEBUG] Iter 5: msg='SetPromptType', dq left: 14
+15:17:32.008 [DEBUG] SetPromptType pt=1
+15:17:32.008 [DEBUG] Prompt ready! Output len: 3
+15:17:32.009 [DEBUG] BREAKING after 5 iterations
+15:17:33.926 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM test LIMIT 5'
+15:17:33.927 [DEBUG] Collecting messages after execution...
+15:17:34.150 [DEBUG] Collected 1 batches, dq length: 14
+15:17:34.151 [DEBUG] Starting loop, dq length: 14
+15:17:34.152 [DEBUG] Iter 1: msg='EchoInput', dq left: 13
+15:17:34.152 [DEBUG] Iter 2: msg='SetPromptType', dq left: 12
+15:17:34.152 [DEBUG] SetPromptType pt=0
+15:17:34.153 [DEBUG] Iter 3: msg='SetSessionLineGroup', dq left: 11
+15:17:34.153 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 10
+15:17:34.154 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 9
+15:17:34.154 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 8
+15:17:34.155 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 7
+15:17:34.155 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 6
+15:17:34.155 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 5
+15:17:34.156 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 4
+15:17:34.156 [DEBUG] Iter 11: msg='UpdateWindow', dq left: 3
+15:17:34.157 [DEBUG] Iter 12: msg='UpdateWindow', dq left: 2
+15:17:34.157 [DEBUG] Iter 13: msg='FocusThread', dq left: 1
+15:17:34.158 [DEBUG] Iter 14: msg='SetPromptType', dq left: 0
+15:17:34.158 [DEBUG] SetPromptType pt=1
+15:17:34.159 [DEBUG] Prompt ready! Output len: 108
+15:17:34.160 [DEBUG] BREAKING after 14 iterations
+15:17:47.434 [DEBUG] Executing line: _←duck.db.append _con '' 'test' (a b) (duck.db.type.INTEGER duck.db.type.DOUBLE)
+15:17:47.434 [DEBUG] Collecting messages after execution...
+15:17:47.660 [DEBUG] Collected 1 batches, dq length: 2
+15:17:47.661 [DEBUG] Starting loop, dq length: 2
+15:17:47.661 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:17:47.662 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:17:47.663 [DEBUG] SetPromptType pt=0
+15:17:47.663 [DEBUG] Iter 3: dq empty, waiting...
+15:17:47.884 [DEBUG] Wait done: 0.22s, dq: 0
+15:17:49.386 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM test LIMIT 5'
+15:17:49.387 [DEBUG] Collecting messages after execution...
+15:17:49.751 [DEBUG] Collected 2 batches, dq length: 22
+15:17:49.752 [DEBUG] Starting loop, dq length: 22
+15:17:49.752 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 21
+15:17:49.753 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 20
+15:17:49.753 [DEBUG] Iter 3: msg='FocusThread', dq left: 19
+15:17:49.754 [DEBUG] Iter 4: msg='SetPromptType', dq left: 18
+15:17:49.754 [DEBUG] SetPromptType pt=1
+15:17:49.755 [DEBUG] Prompt ready! Output len: 0
+15:17:49.755 [DEBUG] BREAKING after 4 iterations
+15:17:51.401 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM test LIMIT 5'
+15:17:51.402 [DEBUG] Collecting messages after execution...
+15:17:51.627 [DEBUG] Collected 1 batches, dq length: 14
+15:17:51.627 [DEBUG] Starting loop, dq length: 14
+15:17:51.628 [DEBUG] Iter 1: msg='EchoInput', dq left: 13
+15:17:51.629 [DEBUG] Iter 2: msg='SetPromptType', dq left: 12
+15:17:51.629 [DEBUG] SetPromptType pt=0
+15:17:51.630 [DEBUG] Iter 3: msg='SetSessionLineGroup', dq left: 11
+15:17:51.630 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 10
+15:17:51.631 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 9
+15:17:51.631 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 8
+15:17:51.632 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 7
+15:17:51.632 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 6
+15:17:51.633 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 5
+15:17:51.633 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 4
+15:17:51.634 [DEBUG] Iter 11: msg='UpdateWindow', dq left: 3
+15:17:51.634 [DEBUG] Iter 12: msg='UpdateWindow', dq left: 2
+15:17:51.635 [DEBUG] Iter 13: msg='FocusThread', dq left: 1
+15:17:51.636 [DEBUG] Iter 14: msg='SetPromptType', dq left: 0
+15:17:51.636 [DEBUG] SetPromptType pt=1
+15:17:51.637 [DEBUG] Prompt ready! Output len: 108
+15:17:51.638 [DEBUG] BREAKING after 14 iterations
+15:18:02.485 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT count(*) FROM test LIMIT 5'
+15:18:02.486 [DEBUG] Collecting messages after execution...
+15:18:02.725 [DEBUG] Collected 1 batches, dq length: 7
+15:18:02.726 [DEBUG] Starting loop, dq length: 7
+15:18:02.727 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:18:02.728 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:18:02.728 [DEBUG] SetPromptType pt=0
+15:18:02.728 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:18:02.729 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:18:02.729 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:18:02.730 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:18:02.730 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:18:02.731 [DEBUG] SetPromptType pt=1
+15:18:02.731 [DEBUG] Prompt ready! Output len: 23
+15:18:02.732 [DEBUG] BREAKING after 7 iterations
+15:18:13.658 [DEBUG] Executing line: a←⍳1000000
+15:18:13.659 [DEBUG] Collecting messages after execution...
+15:18:13.881 [DEBUG] Collected 1 batches, dq length: 6
+15:18:13.881 [DEBUG] Starting loop, dq length: 6
+15:18:13.882 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:18:13.883 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:18:13.883 [DEBUG] SetPromptType pt=0
+15:18:13.884 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:18:13.884 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:18:13.885 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:18:13.885 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:18:13.886 [DEBUG] SetPromptType pt=1
+15:18:13.886 [DEBUG] Prompt ready! Output len: 0
+15:18:13.887 [DEBUG] BREAKING after 6 iterations
+15:18:13.888 [DEBUG] Executing line: b←2 5 (16808⌶)'Beta' 1000000000
+15:18:13.888 [DEBUG] Collecting messages after execution...
+15:18:14.134 [DEBUG] Collected 1 batches, dq length: 10
+15:18:14.134 [DEBUG] Starting loop, dq length: 10
+15:18:14.135 [DEBUG] Iter 1: msg='EchoInput', dq left: 9
+15:18:14.135 [DEBUG] Iter 2: msg='SetPromptType', dq left: 8
+15:18:14.136 [DEBUG] SetPromptType pt=0
+15:18:14.136 [DEBUG] Iter 3: msg='HadError', dq left: 7
+15:18:14.137 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 6
+15:18:14.137 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 5
+15:18:14.138 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 4
+15:18:14.139 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 3
+15:18:14.139 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 2
+15:18:14.140 [DEBUG] Iter 9: msg='FocusThread', dq left: 1
+15:18:14.140 [DEBUG] Iter 10: msg='SetPromptType', dq left: 0
+15:18:14.141 [DEBUG] SetPromptType pt=1
+15:18:14.141 [DEBUG] Prompt ready! Output len: 58
+15:18:14.142 [DEBUG] BREAKING after 10 iterations
+15:18:19.398 [DEBUG] Executing line: a←⍳1000000
+15:18:19.399 [DEBUG] Collecting messages after execution...
+15:18:19.627 [DEBUG] Collected 1 batches, dq length: 6
+15:18:19.628 [DEBUG] Starting loop, dq length: 6
+15:18:19.628 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:18:19.629 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:18:19.629 [DEBUG] SetPromptType pt=0
+15:18:19.630 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:18:19.631 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:18:19.631 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:18:19.632 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:18:19.632 [DEBUG] SetPromptType pt=1
+15:18:19.633 [DEBUG] Prompt ready! Output len: 0
+15:18:19.633 [DEBUG] BREAKING after 6 iterations
+15:18:19.634 [DEBUG] Executing line: b←2 5 (16808⌶)'Beta' 100000000
+15:18:19.634 [DEBUG] Collecting messages after execution...
+15:18:19.862 [DEBUG] Collected 1 batches, dq length: 10
+15:18:19.863 [DEBUG] Starting loop, dq length: 10
+15:18:19.864 [DEBUG] Iter 1: msg='EchoInput', dq left: 9
+15:18:19.864 [DEBUG] Iter 2: msg='SetPromptType', dq left: 8
+15:18:19.864 [DEBUG] SetPromptType pt=0
+15:18:19.865 [DEBUG] Iter 3: msg='HadError', dq left: 7
+15:18:19.865 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 6
+15:18:19.866 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 5
+15:18:19.866 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 4
+15:18:19.867 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 3
+15:18:19.868 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 2
+15:18:19.868 [DEBUG] Iter 9: msg='FocusThread', dq left: 1
+15:18:19.869 [DEBUG] Iter 10: msg='SetPromptType', dq left: 0
+15:18:19.869 [DEBUG] SetPromptType pt=1
+15:18:19.870 [DEBUG] Prompt ready! Output len: 57
+15:18:19.871 [DEBUG] BREAKING after 10 iterations
+15:18:23.790 [DEBUG] Executing line: a←⍳1000000
+15:18:23.792 [DEBUG] Collecting messages after execution...
+15:18:24.007 [DEBUG] Collected 1 batches, dq length: 6
+15:18:24.007 [DEBUG] Starting loop, dq length: 6
+15:18:24.008 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:18:24.009 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:18:24.010 [DEBUG] SetPromptType pt=0
+15:18:24.010 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:18:24.011 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:18:24.011 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:18:24.011 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:18:24.012 [DEBUG] SetPromptType pt=1
+15:18:24.012 [DEBUG] Prompt ready! Output len: 0
+15:18:24.013 [DEBUG] BREAKING after 6 iterations
+15:18:24.013 [DEBUG] Executing line: b←2 5 (16808⌶)'Beta' 10000000
+15:18:24.013 [DEBUG] Collecting messages after execution...
+15:18:24.228 [DEBUG] Collected 1 batches, dq length: 2
+15:18:24.229 [DEBUG] Starting loop, dq length: 2
+15:18:24.229 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:18:24.230 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:18:24.230 [DEBUG] SetPromptType pt=0
+15:18:24.231 [DEBUG] Iter 3: dq empty, waiting...
+15:18:24.448 [DEBUG] Wait done: 0.22s, dq: 0
+15:18:29.794 [DEBUG] Executing line: b[⍳10]
+15:18:29.795 [DEBUG] Collecting messages after execution...
+15:18:30.020 [DEBUG] Collected 1 batches, dq length: 11
+15:18:30.021 [DEBUG] Starting loop, dq length: 11
+15:18:30.022 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 10
+15:18:30.022 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 9
+15:18:30.023 [DEBUG] Iter 3: msg='FocusThread', dq left: 8
+15:18:30.024 [DEBUG] Iter 4: msg='SetPromptType', dq left: 7
+15:18:30.024 [DEBUG] SetPromptType pt=1
+15:18:30.024 [DEBUG] Prompt ready! Output len: 0
+15:18:30.025 [DEBUG] BREAKING after 4 iterations
+15:18:32.844 [DEBUG] Executing line: b[⍳10]
+15:18:32.845 [DEBUG] Collecting messages after execution...
+15:18:33.064 [DEBUG] Collected 1 batches, dq length: 7
+15:18:33.065 [DEBUG] Starting loop, dq length: 7
+15:18:33.065 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:18:33.066 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:18:33.066 [DEBUG] SetPromptType pt=0
+15:18:33.066 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:18:33.067 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:18:33.068 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:18:33.068 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:18:33.069 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:18:33.069 [DEBUG] SetPromptType pt=1
+15:18:33.070 [DEBUG] Prompt ready! Output len: 131
+15:18:33.071 [DEBUG] BREAKING after 7 iterations
+15:18:36.757 [DEBUG] Executing line: _←duck.db.append _con '' 'test' (a b) (duck.db.type.INTEGER duck.db.type.DOUBLE)
+15:18:36.758 [DEBUG] Collecting messages after execution...
+15:18:36.980 [DEBUG] Collected 1 batches, dq length: 2
+15:18:36.981 [DEBUG] Starting loop, dq length: 2
+15:18:36.982 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:18:36.983 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:18:36.983 [DEBUG] SetPromptType pt=0
+15:18:36.984 [DEBUG] Iter 3: dq empty, waiting...
+15:18:37.200 [DEBUG] Wait done: 0.21s, dq: 0
+15:18:39.849 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT count(*) FROM test LIMIT 5'
+15:18:39.850 [DEBUG] Collecting messages after execution...
+15:18:39.954 [DEBUG] Collected 0 batches, dq length: 0
+15:18:39.955 [DEBUG] Starting loop, dq length: 0
+15:18:39.956 [DEBUG] Iter 1: dq empty, waiting...
+15:18:40.176 [DEBUG] Wait done: 0.22s, dq: 0
+15:18:41.394 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT count(*) FROM test LIMIT 5'
+15:18:41.394 [DEBUG] Collecting messages after execution...
+15:18:41.608 [DEBUG] Collected 1 batches, dq length: 18
+15:18:41.608 [DEBUG] Starting loop, dq length: 18
+15:18:41.609 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 17
+15:18:41.609 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 16
+15:18:41.610 [DEBUG] Iter 3: msg='FocusThread', dq left: 15
+15:18:41.611 [DEBUG] Iter 4: msg='SetPromptType', dq left: 14
+15:18:41.611 [DEBUG] SetPromptType pt=1
+15:18:41.612 [DEBUG] Prompt ready! Output len: 0
+15:18:41.612 [DEBUG] BREAKING after 4 iterations
+15:18:42.733 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT count(*) FROM test LIMIT 5'
+15:18:42.734 [DEBUG] Collecting messages after execution...
+15:18:42.948 [DEBUG] Collected 1 batches, dq length: 7
+15:18:42.949 [DEBUG] Starting loop, dq length: 7
+15:18:42.949 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:18:42.950 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:18:42.950 [DEBUG] SetPromptType pt=0
+15:18:42.951 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:18:42.951 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:18:42.952 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:18:42.952 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:18:42.953 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:18:42.953 [DEBUG] SetPromptType pt=1
+15:18:42.953 [DEBUG] Prompt ready! Output len: 23
+15:18:42.954 [DEBUG] BREAKING after 7 iterations
+15:18:51.469 [DEBUG] Executing line: duck.db.query _con 'DROP TABLE IF EXISTS test'
+15:18:51.469 [DEBUG] Collecting messages after execution...
+15:18:51.691 [DEBUG] Collected 1 batches, dq length: 11
+15:18:51.691 [DEBUG] Starting loop, dq length: 11
+15:18:51.692 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 10
+15:18:51.692 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 9
+15:18:51.693 [DEBUG] Iter 3: msg='FocusThread', dq left: 8
+15:18:51.693 [DEBUG] Iter 4: msg='SetPromptType', dq left: 7
+15:18:51.694 [DEBUG] SetPromptType pt=1
+15:18:51.694 [DEBUG] Prompt ready! Output len: 0
+15:18:51.695 [DEBUG] BREAKING after 4 iterations
+15:18:54.110 [DEBUG] Executing line: duck.db.query _con 'CREATE TABLE test (a INT, b DOUBLE)'
+15:18:54.111 [DEBUG] Collecting messages after execution...
+15:18:54.328 [DEBUG] Collected 1 batches, dq length: 7
+15:18:54.329 [DEBUG] Starting loop, dq length: 7
+15:18:54.329 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:18:54.330 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:18:54.330 [DEBUG] SetPromptType pt=0
+15:18:54.331 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:18:54.332 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:18:54.332 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:18:54.333 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:18:54.333 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:18:54.334 [DEBUG] SetPromptType pt=1
+15:18:54.334 [DEBUG] Prompt ready! Output len: 8
+15:18:54.335 [DEBUG] BREAKING after 7 iterations
+15:19:15.388 [DEBUG] Executing line: a←⍳10000000
+15:19:15.388 [DEBUG] Collecting messages after execution...
+15:19:15.618 [DEBUG] Collected 1 batches, dq length: 6
+15:19:15.619 [DEBUG] Starting loop, dq length: 6
+15:19:15.620 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:19:15.620 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:19:15.620 [DEBUG] SetPromptType pt=0
+15:19:15.621 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:19:15.621 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:19:15.622 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:19:15.622 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:19:15.623 [DEBUG] SetPromptType pt=1
+15:19:15.623 [DEBUG] Prompt ready! Output len: 0
+15:19:15.624 [DEBUG] BREAKING after 6 iterations
+15:19:15.624 [DEBUG] Executing line: b←2 5 (16808⌶)'Beta' 10000000
+15:19:15.625 [DEBUG] Collecting messages after execution...
+15:19:15.840 [DEBUG] Collected 1 batches, dq length: 2
+15:19:15.841 [DEBUG] Starting loop, dq length: 2
+15:19:15.842 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:19:15.842 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:19:15.842 [DEBUG] SetPromptType pt=0
+15:19:15.843 [DEBUG] Iter 3: dq empty, waiting...
+15:19:16.062 [DEBUG] Wait done: 0.22s, dq: 0
+15:19:18.265 [DEBUG] Executing line: b[⍳10]
+15:19:18.266 [DEBUG] Collecting messages after execution...
+15:19:18.374 [DEBUG] Collected 0 batches, dq length: 0
+15:19:18.375 [DEBUG] Starting loop, dq length: 0
+15:19:18.376 [DEBUG] Iter 1: dq empty, waiting...
+15:19:18.596 [DEBUG] Wait done: 0.22s, dq: 0
+15:19:20.901 [DEBUG] Executing line: b[⍳10]
+15:19:20.902 [DEBUG] Collecting messages after execution...
+15:19:21.125 [DEBUG] Collected 1 batches, dq length: 18
+15:19:21.126 [DEBUG] Starting loop, dq length: 18
+15:19:21.126 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 17
+15:19:21.127 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 16
+15:19:21.127 [DEBUG] Iter 3: msg='FocusThread', dq left: 15
+15:19:21.128 [DEBUG] Iter 4: msg='SetPromptType', dq left: 14
+15:19:21.128 [DEBUG] SetPromptType pt=1
+15:19:21.129 [DEBUG] Prompt ready! Output len: 0
+15:19:21.129 [DEBUG] BREAKING after 4 iterations
+15:19:22.734 [DEBUG] Executing line: b[⍳10]
+15:19:22.735 [DEBUG] Collecting messages after execution...
+15:19:22.952 [DEBUG] Collected 1 batches, dq length: 7
+15:19:22.953 [DEBUG] Starting loop, dq length: 7
+15:19:22.954 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:19:22.955 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:19:22.955 [DEBUG] SetPromptType pt=0
+15:19:22.956 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:19:22.956 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:19:22.957 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:19:22.957 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:19:22.958 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:19:22.958 [DEBUG] SetPromptType pt=1
+15:19:22.958 [DEBUG] Prompt ready! Output len: 129
+15:19:22.959 [DEBUG] BREAKING after 7 iterations
+15:19:25.788 [DEBUG] Executing line: _←duck.db.append _con '' 'test' (a b) (duck.db.type.INTEGER duck.db.type.DOUBLE)
+15:19:25.789 [DEBUG] Collecting messages after execution...
+15:19:26.076 [DEBUG] Collected 1 batches, dq length: 19
+15:19:26.077 [DEBUG] Starting loop, dq length: 19
+15:19:26.077 [DEBUG] Iter 1: msg='EchoInput', dq left: 18
+15:19:26.078 [DEBUG] Iter 2: msg='SetPromptType', dq left: 17
+15:19:26.078 [DEBUG] SetPromptType pt=0
+15:19:26.079 [DEBUG] Iter 3: msg='HadError', dq left: 16
+15:19:26.079 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 15
+15:19:26.080 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 14
+15:19:26.080 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 13
+15:19:26.080 [DEBUG] Iter 7: msg='OpenWindow', dq left: 12
+15:19:26.081 [DEBUG] Iter 8: msg='SetHighlightLine', dq left: 11
+15:19:26.082 [DEBUG] Iter 9: msg='UpdateWindow', dq left: 10
+15:19:26.082 [DEBUG] Iter 10: msg='UpdateWindow', dq left: 9
+15:19:26.083 [DEBUG] Iter 11: msg='UpdateWindow', dq left: 8
+15:19:26.083 [DEBUG] Iter 12: msg='UpdateWindow', dq left: 7
+15:19:26.084 [DEBUG] Iter 13: msg='FocusThread', dq left: 6
+15:19:26.084 [DEBUG] Iter 14: msg='UpdateWindow', dq left: 5
+15:19:26.085 [DEBUG] Iter 15: msg='UpdateWindow', dq left: 4
+15:19:26.085 [DEBUG] Iter 16: msg='FocusThread', dq left: 3
+15:19:26.086 [DEBUG] Iter 17: msg='SetPromptType', dq left: 2
+15:19:26.086 [DEBUG] SetPromptType pt=1
+15:19:26.087 [DEBUG] Prompt ready! Output len: 116
+15:19:26.087 [DEBUG] BREAKING after 17 iterations
+15:19:31.845 [DEBUG] Executing line: _←duck.db.append _con '' 'test' (a b) (duck.db.type.INTEGER duck.db.type.DOUBLE)
+15:19:31.845 [DEBUG] Collecting messages after execution...
+15:19:32.128 [DEBUG] Collected 1 batches, dq length: 24
+15:19:32.129 [DEBUG] Starting loop, dq length: 24
+15:19:32.130 [DEBUG] Iter 1: msg='EchoInput', dq left: 23
+15:19:32.130 [DEBUG] Iter 2: msg='SetPromptType', dq left: 22
+15:19:32.131 [DEBUG] SetPromptType pt=0
+15:19:32.131 [DEBUG] Iter 3: msg='CloseWindow', dq left: 21
+15:19:32.132 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 20
+15:19:32.132 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 19
+15:19:32.133 [DEBUG] Iter 6: msg='FocusThread', dq left: 18
+15:19:32.133 [DEBUG] Iter 7: msg='SetPromptType', dq left: 17
+15:19:32.134 [DEBUG] SetPromptType pt=1
+15:19:32.134 [DEBUG] Prompt ready! Output len: 0
+15:19:32.135 [DEBUG] BREAKING after 7 iterations
+15:19:34.501 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT count(*) FROM test LIMIT 5'
+15:19:34.501 [DEBUG] Collecting messages after execution...
+15:19:34.723 [DEBUG] Collected 1 batches, dq length: 11
+15:19:34.724 [DEBUG] Starting loop, dq length: 11
+15:19:34.724 [DEBUG] Iter 1: msg='EchoInput', dq left: 10
+15:19:34.725 [DEBUG] Iter 2: msg='SetPromptType', dq left: 9
+15:19:34.725 [DEBUG] SetPromptType pt=0
+15:19:34.726 [DEBUG] Iter 3: msg='HadError', dq left: 8
+15:19:34.726 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 7
+15:19:34.727 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 6
+15:19:34.727 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 5
+15:19:34.728 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 4
+15:19:34.728 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 3
+15:19:34.729 [DEBUG] Iter 9: msg='FocusThread', dq left: 2
+15:19:34.729 [DEBUG] Iter 10: msg='SetPromptType', dq left: 1
+15:19:34.729 [DEBUG] SetPromptType pt=1
+15:19:34.730 [DEBUG] Prompt ready! Output len: 134
+15:19:34.731 [DEBUG] BREAKING after 10 iterations
+15:19:36.460 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT count(*) FROM test LIMIT 5'
+15:19:36.461 [DEBUG] Collecting messages after execution...
+15:19:36.690 [DEBUG] Collected 1 batches, dq length: 11
+15:19:36.691 [DEBUG] Starting loop, dq length: 11
+15:19:36.691 [DEBUG] Iter 1: msg='EchoInput', dq left: 10
+15:19:36.692 [DEBUG] Iter 2: msg='SetPromptType', dq left: 9
+15:19:36.692 [DEBUG] SetPromptType pt=0
+15:19:36.692 [DEBUG] Iter 3: msg='HadError', dq left: 8
+15:19:36.693 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 7
+15:19:36.693 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 6
+15:19:36.694 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 5
+15:19:36.694 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 4
+15:19:36.695 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 3
+15:19:36.695 [DEBUG] Iter 9: msg='FocusThread', dq left: 2
+15:19:36.695 [DEBUG] Iter 10: msg='SetPromptType', dq left: 1
+15:19:36.696 [DEBUG] SetPromptType pt=1
+15:19:36.696 [DEBUG] Prompt ready! Output len: 134
+15:19:36.697 [DEBUG] BREAKING after 10 iterations
+15:19:37.922 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT count(*) FROM test LIMIT 5'
+15:19:37.923 [DEBUG] Collecting messages after execution...
+15:19:38.143 [DEBUG] Collected 1 batches, dq length: 11
+15:19:38.143 [DEBUG] Starting loop, dq length: 11
+15:19:38.144 [DEBUG] Iter 1: msg='EchoInput', dq left: 10
+15:19:38.144 [DEBUG] Iter 2: msg='SetPromptType', dq left: 9
+15:19:38.145 [DEBUG] SetPromptType pt=0
+15:19:38.145 [DEBUG] Iter 3: msg='HadError', dq left: 8
+15:19:38.146 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 7
+15:19:38.146 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 6
+15:19:38.146 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 5
+15:19:38.147 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 4
+15:19:38.147 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 3
+15:19:38.148 [DEBUG] Iter 9: msg='FocusThread', dq left: 2
+15:19:38.149 [DEBUG] Iter 10: msg='SetPromptType', dq left: 1
+15:19:38.149 [DEBUG] SetPromptType pt=1
+15:19:38.149 [DEBUG] Prompt ready! Output len: 134
+15:19:38.150 [DEBUG] BREAKING after 10 iterations
+15:19:43.584 [DEBUG] Executing line: a←⍳1000000
+15:19:43.585 [DEBUG] Collecting messages after execution...
+15:19:43.813 [DEBUG] Collected 1 batches, dq length: 6
+15:19:43.814 [DEBUG] Starting loop, dq length: 6
+15:19:43.814 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:19:43.815 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:19:43.815 [DEBUG] SetPromptType pt=0
+15:19:43.816 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:19:43.816 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:19:43.817 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:19:43.818 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:19:43.818 [DEBUG] SetPromptType pt=1
+15:19:43.819 [DEBUG] Prompt ready! Output len: 0
+15:19:43.819 [DEBUG] BREAKING after 6 iterations
+15:19:43.820 [DEBUG] Executing line: b←2 5 (16808⌶)'Beta' 1000000
+15:19:43.820 [DEBUG] Collecting messages after execution...
+15:19:44.035 [DEBUG] Collected 1 batches, dq length: 2
+15:19:44.036 [DEBUG] Starting loop, dq length: 2
+15:19:44.037 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:19:44.037 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:19:44.038 [DEBUG] SetPromptType pt=0
+15:19:44.038 [DEBUG] Iter 3: dq empty, waiting...
+15:19:44.322 [DEBUG] Wait done: 0.28s, dq: 4
+15:19:44.323 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:19:44.323 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:19:44.324 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:19:44.324 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:19:44.325 [DEBUG] SetPromptType pt=1
+15:19:44.325 [DEBUG] Prompt ready! Output len: 0
+15:19:44.325 [DEBUG] BREAKING after 6 iterations
+15:19:45.434 [DEBUG] Executing line: duck.db.query _con 'DROP TABLE IF EXISTS test'
+15:19:45.435 [DEBUG] Collecting messages after execution...
+15:19:45.664 [DEBUG] Collected 1 batches, dq length: 11
+15:19:45.665 [DEBUG] Starting loop, dq length: 11
+15:19:45.666 [DEBUG] Iter 1: msg='EchoInput', dq left: 10
+15:19:45.666 [DEBUG] Iter 2: msg='SetPromptType', dq left: 9
+15:19:45.667 [DEBUG] SetPromptType pt=0
+15:19:45.667 [DEBUG] Iter 3: msg='HadError', dq left: 8
+15:19:45.668 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 7
+15:19:45.668 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 6
+15:19:45.669 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 5
+15:19:45.670 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 4
+15:19:45.670 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 3
+15:19:45.671 [DEBUG] Iter 9: msg='FocusThread', dq left: 2
+15:19:45.671 [DEBUG] Iter 10: msg='SetPromptType', dq left: 1
+15:19:45.672 [DEBUG] SetPromptType pt=1
+15:19:45.672 [DEBUG] Prompt ready! Output len: 94
+15:19:45.673 [DEBUG] BREAKING after 10 iterations
+15:19:47.558 [DEBUG] Executing line: duck.db.query _con 'DROP TABLE IF EXISTS test'
+15:19:47.559 [DEBUG] Collecting messages after execution...
+15:19:47.776 [DEBUG] Collected 1 batches, dq length: 11
+15:19:47.777 [DEBUG] Starting loop, dq length: 11
+15:19:47.777 [DEBUG] Iter 1: msg='EchoInput', dq left: 10
+15:19:47.778 [DEBUG] Iter 2: msg='SetPromptType', dq left: 9
+15:19:47.779 [DEBUG] SetPromptType pt=0
+15:19:47.779 [DEBUG] Iter 3: msg='HadError', dq left: 8
+15:19:47.780 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 7
+15:19:47.780 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 6
+15:19:47.781 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 5
+15:19:47.782 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 4
+15:19:47.782 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 3
+15:19:47.783 [DEBUG] Iter 9: msg='FocusThread', dq left: 2
+15:19:47.784 [DEBUG] Iter 10: msg='SetPromptType', dq left: 1
+15:19:47.784 [DEBUG] SetPromptType pt=1
+15:19:47.785 [DEBUG] Prompt ready! Output len: 94
+15:19:47.786 [DEBUG] BREAKING after 10 iterations
+15:19:52.209 [DEBUG] Executing line: ]link.create duck ../duckdb-dyalog
+15:19:52.210 [DEBUG] Collecting messages after execution...
+15:19:52.427 [DEBUG] Collected 1 batches, dq length: 6
+15:19:52.428 [DEBUG] Starting loop, dq length: 6
+15:19:52.428 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 5
+15:19:52.429 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 4
+15:19:52.429 [DEBUG] Iter 3: msg='FocusThread', dq left: 3
+15:19:52.430 [DEBUG] Iter 4: msg='SetPromptType', dq left: 2
+15:19:52.430 [DEBUG] SetPromptType pt=1
+15:19:52.431 [DEBUG] Prompt ready! Output len: 0
+15:19:52.431 [DEBUG] BREAKING after 4 iterations
+15:19:56.139 [DEBUG] Executing line: ⎕pw←32767
+15:19:56.140 [DEBUG] Collecting messages after execution...
+15:19:56.357 [DEBUG] Collected 1 batches, dq length: 11
+15:19:56.358 [DEBUG] Starting loop, dq length: 11
+15:19:56.358 [DEBUG] Iter 1: msg='AppendSessionOutput', dq left: 10
+15:19:56.359 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 9
+15:19:56.359 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 8
+15:19:56.360 [DEBUG] Iter 4: msg='FocusThread', dq left: 7
+15:19:56.360 [DEBUG] Iter 5: msg='SetPromptType', dq left: 6
+15:19:56.361 [DEBUG] SetPromptType pt=1
+15:19:56.361 [DEBUG] Prompt ready! Output len: 57
+15:19:56.362 [DEBUG] BREAKING after 5 iterations
+15:19:58.684 [DEBUG] Executing line: ⎕pw←32767
+15:19:58.685 [DEBUG] Collecting messages after execution...
+15:19:58.914 [DEBUG] Collected 1 batches, dq length: 6
+15:19:58.915 [DEBUG] Starting loop, dq length: 6
+15:19:58.916 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:19:58.916 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:19:58.917 [DEBUG] SetPromptType pt=0
+15:19:58.918 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:19:58.918 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:19:58.919 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:19:58.919 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:19:58.920 [DEBUG] SetPromptType pt=1
+15:19:58.921 [DEBUG] Prompt ready! Output len: 0
+15:19:58.922 [DEBUG] BREAKING after 6 iterations
+15:20:00.794 [DEBUG] Executing line: duck.db.init 'lib/'
+15:20:00.795 [DEBUG] Collecting messages after execution...
+15:20:01.020 [DEBUG] Collected 1 batches, dq length: 6
+15:20:01.021 [DEBUG] Starting loop, dq length: 6
+15:20:01.022 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:20:01.022 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:20:01.023 [DEBUG] SetPromptType pt=0
+15:20:01.023 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:20:01.024 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:20:01.024 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:20:01.025 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:20:01.025 [DEBUG] SetPromptType pt=1
+15:20:01.026 [DEBUG] Prompt ready! Output len: 0
+15:20:01.026 [DEBUG] BREAKING after 6 iterations
+15:20:02.574 [DEBUG] Executing line: _db←duck.db.open ':memory:'
+15:20:02.575 [DEBUG] Collecting messages after execution...
+15:20:02.839 [DEBUG] Collected 1 batches, dq length: 6
+15:20:02.840 [DEBUG] Starting loop, dq length: 6
+15:20:02.840 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:20:02.841 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:20:02.841 [DEBUG] SetPromptType pt=0
+15:20:02.842 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:20:02.843 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:20:02.843 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:20:02.844 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:20:02.844 [DEBUG] SetPromptType pt=1
+15:20:02.845 [DEBUG] Prompt ready! Output len: 0
+15:20:02.845 [DEBUG] BREAKING after 6 iterations
+15:20:02.846 [DEBUG] Executing line: _con←duck.db.connect _db
+15:20:02.846 [DEBUG] Collecting messages after execution...
+15:20:03.060 [DEBUG] Collected 1 batches, dq length: 6
+15:20:03.061 [DEBUG] Starting loop, dq length: 6
+15:20:03.062 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:20:03.062 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:20:03.063 [DEBUG] SetPromptType pt=0
+15:20:03.063 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:20:03.064 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:20:03.065 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:20:03.065 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:20:03.066 [DEBUG] SetPromptType pt=1
+15:20:03.067 [DEBUG] Prompt ready! Output len: 0
+15:20:03.067 [DEBUG] BREAKING after 6 iterations
+15:20:04.076 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'PRAGMA version'
+15:20:04.077 [DEBUG] Collecting messages after execution...
+15:20:04.303 [DEBUG] Collected 1 batches, dq length: 7
+15:20:04.304 [DEBUG] Starting loop, dq length: 7
+15:20:04.305 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:20:04.305 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:20:04.306 [DEBUG] SetPromptType pt=0
+15:20:04.306 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:20:04.307 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:20:04.308 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:20:04.308 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:20:04.309 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:20:04.310 [DEBUG] SetPromptType pt=1
+15:20:04.310 [DEBUG] Prompt ready! Output len: 67
+15:20:04.311 [DEBUG] BREAKING after 7 iterations
+15:20:06.990 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT concat(''2022-11-03 13:30:00'','' '',''Europe/Helsinki'')::TIMESTAMPTZ'
+15:20:06.991 [DEBUG] Collecting messages after execution...
+15:20:07.229 [DEBUG] Collected 1 batches, dq length: 7
+15:20:07.230 [DEBUG] Starting loop, dq length: 7
+15:20:07.230 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:20:07.231 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:20:07.232 [DEBUG] SetPromptType pt=0
+15:20:07.232 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:20:07.233 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:20:07.234 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:20:07.234 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:20:07.235 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:20:07.235 [DEBUG] SetPromptType pt=1
+15:20:07.236 [DEBUG] Prompt ready! Output len: 111
+15:20:07.237 [DEBUG] BREAKING after 7 iterations
+15:20:09.573 [DEBUG] Executing line: _←duck.db.query _con 'CREATE TABLE airline AS SELECT * FROM "airline_data/airline.parquet"'
+15:20:09.574 [DEBUG] Collecting messages after execution...
+15:20:09.797 [DEBUG] Collected 1 batches, dq length: 2
+15:20:09.798 [DEBUG] Starting loop, dq length: 2
+15:20:09.799 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:20:09.800 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:20:09.800 [DEBUG] SetPromptType pt=0
+15:20:09.801 [DEBUG] Iter 3: dq empty, waiting...
+15:20:10.019 [DEBUG] Wait done: 0.22s, dq: 0
+15:20:13.267 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM airline LIMIT 5'
+15:20:13.268 [DEBUG] Collecting messages after execution...
+15:20:13.514 [DEBUG] Collected 1 batches, dq length: 36
+15:20:13.515 [DEBUG] Starting loop, dq length: 36
+15:20:13.516 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 35
+15:20:13.516 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 34
+15:20:13.517 [DEBUG] Iter 3: msg='FocusThread', dq left: 33
+15:20:13.517 [DEBUG] Iter 4: msg='SetPromptType', dq left: 32
+15:20:13.518 [DEBUG] SetPromptType pt=1
+15:20:13.518 [DEBUG] Prompt ready! Output len: 0
+15:20:13.519 [DEBUG] BREAKING after 4 iterations
+15:20:15.232 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM airline LIMIT 5'
+15:20:15.232 [DEBUG] Collecting messages after execution...
+15:20:15.471 [DEBUG] Collected 1 batches, dq length: 32
+15:20:15.472 [DEBUG] Starting loop, dq length: 32
+15:20:15.473 [DEBUG] Iter 1: msg='EchoInput', dq left: 31
+15:20:15.473 [DEBUG] Iter 2: msg='SetPromptType', dq left: 30
+15:20:15.474 [DEBUG] SetPromptType pt=0
+15:20:15.475 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 29
+15:20:15.475 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 28
+15:20:15.476 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 27
+15:20:15.476 [DEBUG] Iter 6: msg='SetSessionLineGroup', dq left: 26
+15:20:15.477 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 25
+15:20:15.477 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 24
+15:20:15.478 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 23
+15:20:15.478 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 22
+15:20:15.479 [DEBUG] Iter 11: msg='AppendSessionOutput', dq left: 21
+15:20:15.479 [DEBUG] Iter 12: msg='AppendSessionOutput', dq left: 20
+15:20:15.480 [DEBUG] Iter 13: msg='AppendSessionOutput', dq left: 19
+15:20:15.480 [DEBUG] Iter 14: msg='AppendSessionOutput', dq left: 18
+15:20:15.480 [DEBUG] Iter 15: msg='AppendSessionOutput', dq left: 17
+15:20:15.481 [DEBUG] Iter 16: msg='AppendSessionOutput', dq left: 16
+15:20:15.481 [DEBUG] Iter 17: msg='AppendSessionOutput', dq left: 15
+15:20:15.482 [DEBUG] Iter 18: msg='AppendSessionOutput', dq left: 14
+15:20:15.482 [DEBUG] Iter 19: msg='AppendSessionOutput', dq left: 13
+15:20:15.483 [DEBUG] Iter 20: msg='AppendSessionOutput', dq left: 12
+15:20:15.483 [DEBUG] Iter 21: msg='AppendSessionOutput', dq left: 11
+15:20:15.484 [DEBUG] Iter 22: msg='AppendSessionOutput', dq left: 10
+15:20:15.484 [DEBUG] Iter 23: msg='AppendSessionOutput', dq left: 9
+15:20:15.485 [DEBUG] Iter 24: msg='AppendSessionOutput', dq left: 8
+15:20:15.485 [DEBUG] Iter 25: msg='AppendSessionOutput', dq left: 7
+15:20:15.486 [DEBUG] Iter 26: msg='AppendSessionOutput', dq left: 6
+15:20:15.487 [DEBUG] Iter 27: msg='AppendSessionOutput', dq left: 5
+15:20:15.487 [DEBUG] Iter 28: msg='AppendSessionOutput', dq left: 4
+15:20:15.488 [DEBUG] Iter 29: msg='UpdateWindow', dq left: 3
+15:20:15.488 [DEBUG] Iter 30: msg='UpdateWindow', dq left: 2
+15:20:15.489 [DEBUG] Iter 31: msg='FocusThread', dq left: 1
+15:20:15.489 [DEBUG] Iter 32: msg='SetPromptType', dq left: 0
+15:20:15.489 [DEBUG] SetPromptType pt=1
+15:20:15.490 [DEBUG] Prompt ready! Output len: 9678
+15:20:15.491 [DEBUG] BREAKING after 32 iterations
+15:20:18.492 [DEBUG] Executing line: duck.db.query _con 'DROP TABLE IF EXISTS test'
+15:20:18.493 [DEBUG] Collecting messages after execution...
+15:20:18.712 [DEBUG] Collected 1 batches, dq length: 7
+15:20:18.713 [DEBUG] Starting loop, dq length: 7
+15:20:18.713 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:20:18.714 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:20:18.714 [DEBUG] SetPromptType pt=0
+15:20:18.715 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:20:18.716 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:20:18.716 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:20:18.717 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:20:18.718 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:20:18.718 [DEBUG] SetPromptType pt=1
+15:20:18.719 [DEBUG] Prompt ready! Output len: 10
+15:20:18.720 [DEBUG] BREAKING after 7 iterations
+15:20:21.624 [DEBUG] Executing line: duck.db.query _con 'CREATE TABLE test (a INT, b DOUBLE)'
+15:20:21.625 [DEBUG] Collecting messages after execution...
+15:20:21.850 [DEBUG] Collected 1 batches, dq length: 7
+15:20:21.851 [DEBUG] Starting loop, dq length: 7
+15:20:21.852 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:20:21.852 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:20:21.853 [DEBUG] SetPromptType pt=0
+15:20:21.854 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:20:21.854 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:20:21.855 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:20:21.855 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:20:21.856 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:20:21.857 [DEBUG] SetPromptType pt=1
+15:20:21.858 [DEBUG] Prompt ready! Output len: 8
+15:20:21.859 [DEBUG] BREAKING after 7 iterations
+15:20:32.347 [DEBUG] Executing line: a←⍳1000000
+15:20:32.348 [DEBUG] Collecting messages after execution...
+15:20:32.602 [DEBUG] Collected 1 batches, dq length: 6
+15:20:32.603 [DEBUG] Starting loop, dq length: 6
+15:20:32.603 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:20:32.604 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:20:32.605 [DEBUG] SetPromptType pt=0
+15:20:32.605 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:20:32.606 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:20:32.606 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:20:32.607 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:20:32.607 [DEBUG] SetPromptType pt=1
+15:20:32.608 [DEBUG] Prompt ready! Output len: 0
+15:20:32.608 [DEBUG] BREAKING after 6 iterations
+15:20:32.609 [DEBUG] Executing line: b←2 5 (16808⌶)'Beta' 1000000
+15:20:32.610 [DEBUG] Collecting messages after execution...
+15:20:32.824 [DEBUG] Collected 1 batches, dq length: 2
+15:20:32.824 [DEBUG] Starting loop, dq length: 2
+15:20:32.825 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:20:32.826 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:20:32.826 [DEBUG] SetPromptType pt=0
+15:20:32.827 [DEBUG] Iter 3: dq empty, waiting...
+15:20:33.110 [DEBUG] Wait done: 0.28s, dq: 4
+15:20:33.111 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:20:33.111 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:20:33.112 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:20:33.113 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:20:33.113 [DEBUG] SetPromptType pt=1
+15:20:33.114 [DEBUG] Prompt ready! Output len: 0
+15:20:33.114 [DEBUG] BREAKING after 6 iterations
+15:20:35.317 [DEBUG] Executing line: b[⍳10]
+15:20:35.317 [DEBUG] Collecting messages after execution...
+15:20:35.542 [DEBUG] Collected 1 batches, dq length: 7
+15:20:35.543 [DEBUG] Starting loop, dq length: 7
+15:20:35.544 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:20:35.544 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:20:35.545 [DEBUG] SetPromptType pt=0
+15:20:35.545 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:20:35.546 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:20:35.547 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:20:35.547 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:20:35.548 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:20:35.548 [DEBUG] SetPromptType pt=1
+15:20:35.549 [DEBUG] Prompt ready! Output len: 195
+15:20:35.550 [DEBUG] BREAKING after 7 iterations
+15:20:37.652 [DEBUG] Executing line: _←duck.db.append _con '' 'test' (a b) (duck.db.type.INTEGER duck.db.type.DOUBLE)
+15:20:37.653 [DEBUG] Collecting messages after execution...
+15:20:37.941 [DEBUG] Collected 1 batches, dq length: 16
+15:20:37.942 [DEBUG] Starting loop, dq length: 16
+15:20:37.943 [DEBUG] Iter 1: msg='EchoInput', dq left: 15
+15:20:37.943 [DEBUG] Iter 2: msg='SetPromptType', dq left: 14
+15:20:37.944 [DEBUG] SetPromptType pt=0
+15:20:37.944 [DEBUG] Iter 3: msg='HadError', dq left: 13
+15:20:37.945 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 12
+15:20:37.946 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 11
+15:20:37.946 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 10
+15:20:37.947 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 9
+15:20:37.947 [DEBUG] Iter 8: msg='SetHighlightLine', dq left: 8
+15:20:37.948 [DEBUG] Iter 9: msg='UpdateWindow', dq left: 7
+15:20:37.948 [DEBUG] Iter 10: msg='UpdateWindow', dq left: 6
+15:20:37.949 [DEBUG] Iter 11: msg='UpdateWindow', dq left: 5
+15:20:37.949 [DEBUG] Iter 12: msg='UpdateWindow', dq left: 4
+15:20:37.950 [DEBUG] Iter 13: msg='FocusThread', dq left: 3
+15:20:37.950 [DEBUG] Iter 14: msg='SetPromptType', dq left: 2
+15:20:37.951 [DEBUG] SetPromptType pt=1
+15:20:37.951 [DEBUG] Prompt ready! Output len: 116
+15:20:37.952 [DEBUG] BREAKING after 14 iterations
+15:20:39.551 [DEBUG] Executing line: _←duck.db.append _con '' 'test' (a b) (duck.db.type.INTEGER duck.db.type.DOUBLE)
+15:20:39.552 [DEBUG] Collecting messages after execution...
+15:20:39.780 [DEBUG] Collected 1 batches, dq length: 11
+15:20:39.781 [DEBUG] Starting loop, dq length: 11
+15:20:39.782 [DEBUG] Iter 1: msg='EchoInput', dq left: 10
+15:20:39.782 [DEBUG] Iter 2: msg='SetPromptType', dq left: 9
+15:20:39.783 [DEBUG] SetPromptType pt=0
+15:20:39.783 [DEBUG] Iter 3: msg='HadError', dq left: 8
+15:20:39.784 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 7
+15:20:39.784 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 6
+15:20:39.785 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 5
+15:20:39.785 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 4
+15:20:39.786 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 3
+15:20:39.786 [DEBUG] Iter 9: msg='FocusThread', dq left: 2
+15:20:39.787 [DEBUG] Iter 10: msg='SetPromptType', dq left: 1
+15:20:39.787 [DEBUG] SetPromptType pt=1
+15:20:39.788 [DEBUG] Prompt ready! Output len: 183
+15:20:39.789 [DEBUG] BREAKING after 10 iterations
+15:20:59.876 [DEBUG] Executing line: ]link.create duck ../duckdb-dyalog
+15:20:59.877 [DEBUG] Collecting messages after execution...
+15:21:00.093 [DEBUG] Collected 1 batches, dq length: 7
+15:21:00.093 [DEBUG] Starting loop, dq length: 7
+15:21:00.094 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 6
+15:21:00.094 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 5
+15:21:00.095 [DEBUG] Iter 3: msg='FocusThread', dq left: 4
+15:21:00.095 [DEBUG] Iter 4: msg='SetPromptType', dq left: 3
+15:21:00.096 [DEBUG] SetPromptType pt=1
+15:21:00.096 [DEBUG] Prompt ready! Output len: 0
+15:21:00.097 [DEBUG] BREAKING after 4 iterations
+15:21:05.132 [DEBUG] Executing line: ⎕pw←32767
+15:21:05.133 [DEBUG] Collecting messages after execution...
+15:21:05.361 [DEBUG] Collected 1 batches, dq length: 11
+15:21:05.361 [DEBUG] Starting loop, dq length: 11
+15:21:05.362 [DEBUG] Iter 1: msg='AppendSessionOutput', dq left: 10
+15:21:05.362 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 9
+15:21:05.363 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 8
+15:21:05.363 [DEBUG] Iter 4: msg='FocusThread', dq left: 7
+15:21:05.364 [DEBUG] Iter 5: msg='SetPromptType', dq left: 6
+15:21:05.365 [DEBUG] SetPromptType pt=1
+15:21:05.365 [DEBUG] Prompt ready! Output len: 49
+15:21:05.366 [DEBUG] BREAKING after 5 iterations
+15:21:07.511 [DEBUG] Executing line: ⎕pw←32767
+15:21:07.511 [DEBUG] Collecting messages after execution...
+15:21:07.736 [DEBUG] Collected 1 batches, dq length: 6
+15:21:07.737 [DEBUG] Starting loop, dq length: 6
+15:21:07.737 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:21:07.738 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:21:07.738 [DEBUG] SetPromptType pt=0
+15:21:07.739 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:21:07.739 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:21:07.740 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:21:07.740 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:21:07.741 [DEBUG] SetPromptType pt=1
+15:21:07.741 [DEBUG] Prompt ready! Output len: 0
+15:21:07.741 [DEBUG] BREAKING after 6 iterations
+15:21:09.971 [DEBUG] Executing line: duck.db.init 'lib/'
+15:21:09.972 [DEBUG] Collecting messages after execution...
+15:21:10.199 [DEBUG] Collected 1 batches, dq length: 6
+15:21:10.200 [DEBUG] Starting loop, dq length: 6
+15:21:10.201 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:21:10.201 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:21:10.202 [DEBUG] SetPromptType pt=0
+15:21:10.203 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:21:10.203 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:21:10.204 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:21:10.205 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:21:10.205 [DEBUG] SetPromptType pt=1
+15:21:10.206 [DEBUG] Prompt ready! Output len: 0
+15:21:10.206 [DEBUG] BREAKING after 6 iterations
+15:21:12.112 [DEBUG] Executing line: _db←duck.db.open ':memory:'
+15:21:12.113 [DEBUG] Collecting messages after execution...
+15:21:12.351 [DEBUG] Collected 1 batches, dq length: 6
+15:21:12.352 [DEBUG] Starting loop, dq length: 6
+15:21:12.352 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:21:12.353 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:21:12.353 [DEBUG] SetPromptType pt=0
+15:21:12.354 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:21:12.354 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:21:12.354 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:21:12.355 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:21:12.355 [DEBUG] SetPromptType pt=1
+15:21:12.356 [DEBUG] Prompt ready! Output len: 0
+15:21:12.356 [DEBUG] BREAKING after 6 iterations
+15:21:12.357 [DEBUG] Executing line: _con←duck.db.connect _db
+15:21:12.357 [DEBUG] Collecting messages after execution...
+15:21:12.572 [DEBUG] Collected 1 batches, dq length: 6
+15:21:12.573 [DEBUG] Starting loop, dq length: 6
+15:21:12.573 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:21:12.574 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:21:12.574 [DEBUG] SetPromptType pt=0
+15:21:12.575 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:21:12.575 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:21:12.576 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:21:12.576 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:21:12.576 [DEBUG] SetPromptType pt=1
+15:21:12.577 [DEBUG] Prompt ready! Output len: 0
+15:21:12.577 [DEBUG] BREAKING after 6 iterations
+15:21:14.691 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'PRAGMA version'
+15:21:14.692 [DEBUG] Collecting messages after execution...
+15:21:14.912 [DEBUG] Collected 1 batches, dq length: 7
+15:21:14.912 [DEBUG] Starting loop, dq length: 7
+15:21:14.913 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:21:14.913 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:21:14.914 [DEBUG] SetPromptType pt=0
+15:21:14.914 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:21:14.915 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:21:14.915 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:21:14.916 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:21:14.916 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:21:14.917 [DEBUG] SetPromptType pt=1
+15:21:14.917 [DEBUG] Prompt ready! Output len: 67
+15:21:14.918 [DEBUG] BREAKING after 7 iterations
+15:21:17.109 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT concat(''2022-11-03 13:30:00'','' '',''Europe/Helsinki'')::TIMESTAMPTZ'
+15:21:17.109 [DEBUG] Collecting messages after execution...
+15:21:17.333 [DEBUG] Collected 1 batches, dq length: 7
+15:21:17.334 [DEBUG] Starting loop, dq length: 7
+15:21:17.335 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:21:17.335 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:21:17.336 [DEBUG] SetPromptType pt=0
+15:21:17.336 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:21:17.337 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:21:17.337 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:21:17.338 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:21:17.338 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:21:17.339 [DEBUG] SetPromptType pt=1
+15:21:17.339 [DEBUG] Prompt ready! Output len: 111
+15:21:17.340 [DEBUG] BREAKING after 7 iterations
+15:21:20.648 [DEBUG] Executing line: _←duck.db.query _con 'CREATE TABLE airline AS SELECT * FROM "airline_data/airline.parquet"'
+15:21:20.648 [DEBUG] Collecting messages after execution...
+15:21:20.873 [DEBUG] Collected 1 batches, dq length: 2
+15:21:20.873 [DEBUG] Starting loop, dq length: 2
+15:21:20.874 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:21:20.874 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:21:20.875 [DEBUG] SetPromptType pt=0
+15:21:20.876 [DEBUG] Iter 3: dq empty, waiting...
+15:21:21.097 [DEBUG] Wait done: 0.22s, dq: 0
+15:21:26.187 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM airline LIMIT 5'
+15:21:26.188 [DEBUG] Collecting messages after execution...
+15:21:26.424 [DEBUG] Collected 1 batches, dq length: 36
+15:21:26.425 [DEBUG] Starting loop, dq length: 36
+15:21:26.425 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 35
+15:21:26.426 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 34
+15:21:26.426 [DEBUG] Iter 3: msg='FocusThread', dq left: 33
+15:21:26.427 [DEBUG] Iter 4: msg='SetPromptType', dq left: 32
+15:21:26.427 [DEBUG] SetPromptType pt=1
+15:21:26.427 [DEBUG] Prompt ready! Output len: 0
+15:21:26.428 [DEBUG] BREAKING after 4 iterations
+15:21:29.226 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM airline LIMIT 5'
+15:21:29.227 [DEBUG] Collecting messages after execution...
+15:21:29.462 [DEBUG] Collected 1 batches, dq length: 32
+15:21:29.463 [DEBUG] Starting loop, dq length: 32
+15:21:29.464 [DEBUG] Iter 1: msg='EchoInput', dq left: 31
+15:21:29.465 [DEBUG] Iter 2: msg='SetPromptType', dq left: 30
+15:21:29.465 [DEBUG] SetPromptType pt=0
+15:21:29.466 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 29
+15:21:29.466 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 28
+15:21:29.467 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 27
+15:21:29.467 [DEBUG] Iter 6: msg='SetSessionLineGroup', dq left: 26
+15:21:29.468 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 25
+15:21:29.469 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 24
+15:21:29.470 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 23
+15:21:29.470 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 22
+15:21:29.471 [DEBUG] Iter 11: msg='AppendSessionOutput', dq left: 21
+15:21:29.471 [DEBUG] Iter 12: msg='AppendSessionOutput', dq left: 20
+15:21:29.472 [DEBUG] Iter 13: msg='AppendSessionOutput', dq left: 19
+15:21:29.472 [DEBUG] Iter 14: msg='AppendSessionOutput', dq left: 18
+15:21:29.473 [DEBUG] Iter 15: msg='AppendSessionOutput', dq left: 17
+15:21:29.474 [DEBUG] Iter 16: msg='AppendSessionOutput', dq left: 16
+15:21:29.474 [DEBUG] Iter 17: msg='AppendSessionOutput', dq left: 15
+15:21:29.475 [DEBUG] Iter 18: msg='AppendSessionOutput', dq left: 14
+15:21:29.475 [DEBUG] Iter 19: msg='AppendSessionOutput', dq left: 13
+15:21:29.476 [DEBUG] Iter 20: msg='AppendSessionOutput', dq left: 12
+15:21:29.476 [DEBUG] Iter 21: msg='AppendSessionOutput', dq left: 11
+15:21:29.477 [DEBUG] Iter 22: msg='AppendSessionOutput', dq left: 10
+15:21:29.477 [DEBUG] Iter 23: msg='AppendSessionOutput', dq left: 9
+15:21:29.478 [DEBUG] Iter 24: msg='AppendSessionOutput', dq left: 8
+15:21:29.478 [DEBUG] Iter 25: msg='AppendSessionOutput', dq left: 7
+15:21:29.479 [DEBUG] Iter 26: msg='AppendSessionOutput', dq left: 6
+15:21:29.479 [DEBUG] Iter 27: msg='AppendSessionOutput', dq left: 5
+15:21:29.480 [DEBUG] Iter 28: msg='AppendSessionOutput', dq left: 4
+15:21:29.480 [DEBUG] Iter 29: msg='UpdateWindow', dq left: 3
+15:21:29.481 [DEBUG] Iter 30: msg='UpdateWindow', dq left: 2
+15:21:29.481 [DEBUG] Iter 31: msg='FocusThread', dq left: 1
+15:21:29.482 [DEBUG] Iter 32: msg='SetPromptType', dq left: 0
+15:21:29.482 [DEBUG] SetPromptType pt=1
+15:21:29.483 [DEBUG] Prompt ready! Output len: 9678
+15:21:29.484 [DEBUG] BREAKING after 32 iterations
+15:21:48.937 [DEBUG] Executing line: duck.db.query _con 'SELECT * FROM "airline_data/airline.parquet" LIMIT 5'
+15:21:48.938 [DEBUG] Collecting messages after execution...
+15:21:49.204 [DEBUG] Collected 1 batches, dq length: 18
+15:21:49.205 [DEBUG] Starting loop, dq length: 18
+15:21:49.205 [DEBUG] Iter 1: msg='EchoInput', dq left: 17
+15:21:49.206 [DEBUG] Iter 2: msg='SetPromptType', dq left: 16
+15:21:49.206 [DEBUG] SetPromptType pt=0
+15:21:49.207 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 15
+15:21:49.208 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 14
+15:21:49.208 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 13
+15:21:49.208 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 12
+15:21:49.209 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 11
+15:21:49.210 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 10
+15:21:49.210 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 9
+15:21:49.211 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 8
+15:21:49.211 [DEBUG] Iter 11: msg='AppendSessionOutput', dq left: 7
+15:21:49.212 [DEBUG] Iter 12: msg='AppendSessionOutput', dq left: 6
+15:21:49.212 [DEBUG] Iter 13: msg='AppendSessionOutput', dq left: 5
+15:21:49.213 [DEBUG] Iter 14: msg='AppendSessionOutput', dq left: 4
+15:21:49.213 [DEBUG] Iter 15: msg='UpdateWindow', dq left: 3
+15:21:49.213 [DEBUG] Iter 16: msg='UpdateWindow', dq left: 2
+15:21:49.214 [DEBUG] Iter 17: msg='FocusThread', dq left: 1
+15:21:49.214 [DEBUG] Iter 18: msg='SetPromptType', dq left: 0
+15:21:49.215 [DEBUG] SetPromptType pt=1
+15:21:49.215 [DEBUG] Prompt ready! Output len: 5742
+15:21:49.216 [DEBUG] BREAKING after 18 iterations
+15:21:51.997 [DEBUG] Executing line: duck.db.query _con 'SELECT * FROM "airline_data/airline.parquet" LIMIT 5'
+15:21:51.998 [DEBUG] Collecting messages after execution...
+15:21:52.256 [DEBUG] Collected 1 batches, dq length: 18
+15:21:52.257 [DEBUG] Starting loop, dq length: 18
+15:21:52.257 [DEBUG] Iter 1: msg='EchoInput', dq left: 17
+15:21:52.258 [DEBUG] Iter 2: msg='SetPromptType', dq left: 16
+15:21:52.258 [DEBUG] SetPromptType pt=0
+15:21:52.259 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 15
+15:21:52.260 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 14
+15:21:52.260 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 13
+15:21:52.261 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 12
+15:21:52.261 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 11
+15:21:52.262 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 10
+15:21:52.262 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 9
+15:21:52.263 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 8
+15:21:52.263 [DEBUG] Iter 11: msg='AppendSessionOutput', dq left: 7
+15:21:52.264 [DEBUG] Iter 12: msg='AppendSessionOutput', dq left: 6
+15:21:52.264 [DEBUG] Iter 13: msg='AppendSessionOutput', dq left: 5
+15:21:52.265 [DEBUG] Iter 14: msg='AppendSessionOutput', dq left: 4
+15:21:52.265 [DEBUG] Iter 15: msg='UpdateWindow', dq left: 3
+15:21:52.266 [DEBUG] Iter 16: msg='UpdateWindow', dq left: 2
+15:21:52.266 [DEBUG] Iter 17: msg='FocusThread', dq left: 1
+15:21:52.266 [DEBUG] Iter 18: msg='SetPromptType', dq left: 0
+15:21:52.267 [DEBUG] SetPromptType pt=1
+15:21:52.267 [DEBUG] Prompt ready! Output len: 5742
+15:21:52.268 [DEBUG] BREAKING after 18 iterations
+15:22:13.526 [DEBUG] Executing line: duck.db.toTableduck.db.query _con 'SELECT * FROM "airline_data/airline.parquet" LIMIT 5'
+15:22:13.527 [DEBUG] Collecting messages after execution...
+15:22:13.743 [DEBUG] Collected 1 batches, dq length: 14
+15:22:13.744 [DEBUG] Starting loop, dq length: 14
+15:22:13.744 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 13
+15:22:13.745 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 12
+15:22:13.745 [DEBUG] Iter 3: msg='FocusThread', dq left: 11
+15:22:13.746 [DEBUG] Iter 4: msg='SetPromptType', dq left: 10
+15:22:13.746 [DEBUG] SetPromptType pt=1
+15:22:13.747 [DEBUG] Prompt ready! Output len: 0
+15:22:13.747 [DEBUG] BREAKING after 4 iterations
+15:22:15.474 [DEBUG] Executing line: duck.db.toTableduck.db.query _con 'SELECT * FROM "airline_data/airline.parquet" LIMIT 5'
+15:22:15.474 [DEBUG] Collecting messages after execution...
+15:22:15.699 [DEBUG] Collected 1 batches, dq length: 10
+15:22:15.700 [DEBUG] Starting loop, dq length: 10
+15:22:15.700 [DEBUG] Iter 1: msg='EchoInput', dq left: 9
+15:22:15.701 [DEBUG] Iter 2: msg='SetPromptType', dq left: 8
+15:22:15.702 [DEBUG] SetPromptType pt=0
+15:22:15.702 [DEBUG] Iter 3: msg='HadError', dq left: 7
+15:22:15.703 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 6
+15:22:15.704 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 5
+15:22:15.704 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 4
+15:22:15.705 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 3
+15:22:15.705 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 2
+15:22:15.705 [DEBUG] Iter 9: msg='FocusThread', dq left: 1
+15:22:15.706 [DEBUG] Iter 10: msg='SetPromptType', dq left: 0
+15:22:15.706 [DEBUG] SetPromptType pt=1
+15:22:15.707 [DEBUG] Prompt ready! Output len: 151
+15:22:15.708 [DEBUG] BREAKING after 10 iterations
+15:22:20.075 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM "airline_data/airline.parquet" LIMIT 5'
+15:22:20.076 [DEBUG] Collecting messages after execution...
+15:22:20.349 [DEBUG] Collected 1 batches, dq length: 32
+15:22:20.350 [DEBUG] Starting loop, dq length: 32
+15:22:20.351 [DEBUG] Iter 1: msg='EchoInput', dq left: 31
+15:22:20.351 [DEBUG] Iter 2: msg='SetPromptType', dq left: 30
+15:22:20.351 [DEBUG] SetPromptType pt=0
+15:22:20.352 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 29
+15:22:20.353 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 28
+15:22:20.353 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 27
+15:22:20.353 [DEBUG] Iter 6: msg='SetSessionLineGroup', dq left: 26
+15:22:20.354 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 25
+15:22:20.354 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 24
+15:22:20.355 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 23
+15:22:20.355 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 22
+15:22:20.356 [DEBUG] Iter 11: msg='AppendSessionOutput', dq left: 21
+15:22:20.356 [DEBUG] Iter 12: msg='AppendSessionOutput', dq left: 20
+15:22:20.357 [DEBUG] Iter 13: msg='AppendSessionOutput', dq left: 19
+15:22:20.357 [DEBUG] Iter 14: msg='AppendSessionOutput', dq left: 18
+15:22:20.358 [DEBUG] Iter 15: msg='AppendSessionOutput', dq left: 17
+15:22:20.358 [DEBUG] Iter 16: msg='AppendSessionOutput', dq left: 16
+15:22:20.359 [DEBUG] Iter 17: msg='AppendSessionOutput', dq left: 15
+15:22:20.359 [DEBUG] Iter 18: msg='AppendSessionOutput', dq left: 14
+15:22:20.360 [DEBUG] Iter 19: msg='AppendSessionOutput', dq left: 13
+15:22:20.360 [DEBUG] Iter 20: msg='AppendSessionOutput', dq left: 12
+15:22:20.361 [DEBUG] Iter 21: msg='AppendSessionOutput', dq left: 11
+15:22:20.361 [DEBUG] Iter 22: msg='AppendSessionOutput', dq left: 10
+15:22:20.362 [DEBUG] Iter 23: msg='AppendSessionOutput', dq left: 9
+15:22:20.362 [DEBUG] Iter 24: msg='AppendSessionOutput', dq left: 8
+15:22:20.363 [DEBUG] Iter 25: msg='AppendSessionOutput', dq left: 7
+15:22:20.363 [DEBUG] Iter 26: msg='AppendSessionOutput', dq left: 6
+15:22:20.364 [DEBUG] Iter 27: msg='AppendSessionOutput', dq left: 5
+15:22:20.364 [DEBUG] Iter 28: msg='AppendSessionOutput', dq left: 4
+15:22:20.365 [DEBUG] Iter 29: msg='UpdateWindow', dq left: 3
+15:22:20.365 [DEBUG] Iter 30: msg='UpdateWindow', dq left: 2
+15:22:20.366 [DEBUG] Iter 31: msg='FocusThread', dq left: 1
+15:22:20.366 [DEBUG] Iter 32: msg='SetPromptType', dq left: 0
+15:22:20.367 [DEBUG] SetPromptType pt=1
+15:22:20.367 [DEBUG] Prompt ready! Output len: 9678
+15:22:20.368 [DEBUG] BREAKING after 32 iterations
+15:22:30.115 [DEBUG] Executing line: duck.db.query _con 'DROP TABLE IF EXISTS test'
+15:22:30.116 [DEBUG] Collecting messages after execution...
+15:22:30.337 [DEBUG] Collected 1 batches, dq length: 7
+15:22:30.338 [DEBUG] Starting loop, dq length: 7
+15:22:30.338 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:22:30.339 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:22:30.339 [DEBUG] SetPromptType pt=0
+15:22:30.340 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:22:30.340 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:22:30.341 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:22:30.342 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:22:30.342 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:22:30.342 [DEBUG] SetPromptType pt=1
+15:22:30.343 [DEBUG] Prompt ready! Output len: 10
+15:22:30.344 [DEBUG] BREAKING after 7 iterations
+15:22:32.644 [DEBUG] Executing line: duck.db.query _con 'CREATE TABLE test (a INT, b DOUBLE)'
+15:22:32.645 [DEBUG] Collecting messages after execution...
+15:22:32.862 [DEBUG] Collected 1 batches, dq length: 7
+15:22:32.863 [DEBUG] Starting loop, dq length: 7
+15:22:32.863 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:22:32.864 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:22:32.864 [DEBUG] SetPromptType pt=0
+15:22:32.865 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:22:32.866 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:22:32.866 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:22:32.867 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:22:32.868 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:22:32.869 [DEBUG] SetPromptType pt=1
+15:22:32.869 [DEBUG] Prompt ready! Output len: 8
+15:22:32.870 [DEBUG] BREAKING after 7 iterations
+15:22:35.757 [DEBUG] Executing line: a←⍳1000000
+15:22:35.758 [DEBUG] Collecting messages after execution...
+15:22:35.981 [DEBUG] Collected 1 batches, dq length: 6
+15:22:35.981 [DEBUG] Starting loop, dq length: 6
+15:22:35.982 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:22:35.982 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:22:35.983 [DEBUG] SetPromptType pt=0
+15:22:35.983 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:22:35.984 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:22:35.984 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:22:35.984 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:22:35.985 [DEBUG] SetPromptType pt=1
+15:22:35.985 [DEBUG] Prompt ready! Output len: 0
+15:22:35.986 [DEBUG] BREAKING after 6 iterations
+15:22:35.986 [DEBUG] Executing line: b←2 5 (16808⌶)'Beta' 1000000
+15:22:35.986 [DEBUG] Collecting messages after execution...
+15:22:36.201 [DEBUG] Collected 1 batches, dq length: 2
+15:22:36.202 [DEBUG] Starting loop, dq length: 2
+15:22:36.202 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:22:36.203 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:22:36.203 [DEBUG] SetPromptType pt=0
+15:22:36.204 [DEBUG] Iter 3: dq empty, waiting...
+15:22:36.486 [DEBUG] Wait done: 0.28s, dq: 4
+15:22:36.487 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:22:36.487 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:22:36.488 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:22:36.488 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:22:36.489 [DEBUG] SetPromptType pt=1
+15:22:36.490 [DEBUG] Prompt ready! Output len: 0
+15:22:36.490 [DEBUG] BREAKING after 6 iterations
+15:22:38.855 [DEBUG] Executing line: b[⍳10]
+15:22:38.855 [DEBUG] Collecting messages after execution...
+15:22:39.078 [DEBUG] Collected 1 batches, dq length: 7
+15:22:39.079 [DEBUG] Starting loop, dq length: 7
+15:22:39.080 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:22:39.080 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:22:39.081 [DEBUG] SetPromptType pt=0
+15:22:39.081 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:22:39.082 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:22:39.082 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:22:39.082 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:22:39.083 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:22:39.083 [DEBUG] SetPromptType pt=1
+15:22:39.084 [DEBUG] Prompt ready! Output len: 129
+15:22:39.085 [DEBUG] BREAKING after 7 iterations
+15:22:41.347 [DEBUG] Executing line: _←duck.db.append _con '' 'test' (a b) (duck.db.type.INTEGER duck.db.type.DOUBLE)
+15:22:41.347 [DEBUG] Collecting messages after execution...
+15:22:41.576 [DEBUG] Collected 1 batches, dq length: 2
+15:22:41.577 [DEBUG] Starting loop, dq length: 2
+15:22:41.578 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:22:41.579 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:22:41.579 [DEBUG] SetPromptType pt=0
+15:22:41.580 [DEBUG] Iter 3: dq empty, waiting...
+15:22:41.797 [DEBUG] Wait done: 0.22s, dq: 0
+15:22:46.313 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT count(*) FROM test LIMIT 5'
+15:22:46.314 [DEBUG] Collecting messages after execution...
+15:22:46.540 [DEBUG] Collected 1 batches, dq length: 11
+15:22:46.541 [DEBUG] Starting loop, dq length: 11
+15:22:46.541 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 10
+15:22:46.542 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 9
+15:22:46.542 [DEBUG] Iter 3: msg='FocusThread', dq left: 8
+15:22:46.543 [DEBUG] Iter 4: msg='SetPromptType', dq left: 7
+15:22:46.543 [DEBUG] SetPromptType pt=1
+15:22:46.544 [DEBUG] Prompt ready! Output len: 0
+15:22:46.544 [DEBUG] BREAKING after 4 iterations
+15:22:48.712 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT count(*) FROM test LIMIT 5'
+15:22:48.713 [DEBUG] Collecting messages after execution...
+15:22:48.938 [DEBUG] Collected 1 batches, dq length: 7
+15:22:48.939 [DEBUG] Starting loop, dq length: 7
+15:22:48.939 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:22:48.940 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:22:48.940 [DEBUG] SetPromptType pt=0
+15:22:48.941 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:22:48.941 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:22:48.942 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:22:48.942 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:22:48.943 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:22:48.943 [DEBUG] SetPromptType pt=1
+15:22:48.944 [DEBUG] Prompt ready! Output len: 23
+15:22:48.945 [DEBUG] BREAKING after 7 iterations
+15:22:59.908 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM test LIMIT 5'
+15:22:59.909 [DEBUG] Collecting messages after execution...
+15:23:00.129 [DEBUG] Collected 1 batches, dq length: 18
+15:23:00.129 [DEBUG] Starting loop, dq length: 18
+15:23:00.130 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 17
+15:23:00.130 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 16
+15:23:00.131 [DEBUG] Iter 3: msg='FocusThread', dq left: 15
+15:23:00.132 [DEBUG] Iter 4: msg='SetPromptType', dq left: 14
+15:23:00.132 [DEBUG] SetPromptType pt=1
+15:23:00.133 [DEBUG] Prompt ready! Output len: 0
+15:23:00.134 [DEBUG] BREAKING after 4 iterations
+15:23:01.447 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM test LIMIT 5'
+15:23:01.448 [DEBUG] Collecting messages after execution...
+15:23:01.672 [DEBUG] Collected 1 batches, dq length: 14
+15:23:01.673 [DEBUG] Starting loop, dq length: 14
+15:23:01.673 [DEBUG] Iter 1: msg='EchoInput', dq left: 13
+15:23:01.674 [DEBUG] Iter 2: msg='SetPromptType', dq left: 12
+15:23:01.674 [DEBUG] SetPromptType pt=0
+15:23:01.675 [DEBUG] Iter 3: msg='SetSessionLineGroup', dq left: 11
+15:23:01.675 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 10
+15:23:01.676 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 9
+15:23:01.676 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 8
+15:23:01.676 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 7
+15:23:01.677 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 6
+15:23:01.677 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 5
+15:23:01.678 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 4
+15:23:01.678 [DEBUG] Iter 11: msg='UpdateWindow', dq left: 3
+15:23:01.679 [DEBUG] Iter 12: msg='UpdateWindow', dq left: 2
+15:23:01.679 [DEBUG] Iter 13: msg='FocusThread', dq left: 1
+15:23:01.679 [DEBUG] Iter 14: msg='SetPromptType', dq left: 0
+15:23:01.680 [DEBUG] SetPromptType pt=1
+15:23:01.680 [DEBUG] Prompt ready! Output len: 108
+15:23:01.681 [DEBUG] BREAKING after 14 iterations
+15:25:00.781 [DEBUG] Executing line: duck.db.query _con 'COPY test TO ''test.parquet'' (FORMAT PARQUET, CODEC ''ZSTD'')'
+15:25:00.782 [DEBUG] Collecting messages after execution...
+15:25:01.033 [DEBUG] Collected 1 batches, dq length: 15
+15:25:01.033 [DEBUG] Starting loop, dq length: 15
+15:25:01.034 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 14
+15:25:01.034 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 13
+15:25:01.035 [DEBUG] Iter 3: msg='FocusThread', dq left: 12
+15:25:01.035 [DEBUG] Iter 4: msg='SetPromptType', dq left: 11
+15:25:01.036 [DEBUG] SetPromptType pt=1
+15:25:01.036 [DEBUG] Prompt ready! Output len: 0
+15:25:01.037 [DEBUG] BREAKING after 4 iterations
+15:26:35.268 [DEBUG] Executing line: duckdb.db.query duck.db.query _con 'SELECT * FROM ''test.parquet'' LIMIT 5'
+15:26:35.269 [DEBUG] Collecting messages after execution...
+15:26:35.482 [DEBUG] Collected 1 batches, dq length: 14
+15:26:35.482 [DEBUG] Starting loop, dq length: 14
+15:26:35.483 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 13
+15:26:35.483 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 12
+15:26:35.483 [DEBUG] Iter 3: msg='FocusThread', dq left: 11
+15:26:35.484 [DEBUG] Iter 4: msg='SetPromptType', dq left: 10
+15:26:35.484 [DEBUG] SetPromptType pt=1
+15:26:35.485 [DEBUG] Prompt ready! Output len: 0
+15:26:35.485 [DEBUG] BREAKING after 4 iterations
+15:26:37.187 [DEBUG] Executing line: duckdb.db.query duck.db.query _con 'SELECT * FROM ''test.parquet'' LIMIT 5'
+15:26:37.188 [DEBUG] Collecting messages after execution...
+15:26:37.412 [DEBUG] Collected 1 batches, dq length: 10
+15:26:37.413 [DEBUG] Starting loop, dq length: 10
+15:26:37.413 [DEBUG] Iter 1: msg='EchoInput', dq left: 9
+15:26:37.414 [DEBUG] Iter 2: msg='SetPromptType', dq left: 8
+15:26:37.414 [DEBUG] SetPromptType pt=0
+15:26:37.414 [DEBUG] Iter 3: msg='HadError', dq left: 7
+15:26:37.415 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 6
+15:26:37.415 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 5
+15:26:37.416 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 4
+15:26:37.416 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 3
+15:26:37.417 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 2
+15:26:37.417 [DEBUG] Iter 9: msg='FocusThread', dq left: 1
+15:26:37.417 [DEBUG] Iter 10: msg='SetPromptType', dq left: 0
+15:26:37.418 [DEBUG] SetPromptType pt=1
+15:26:37.418 [DEBUG] Prompt ready! Output len: 125
+15:26:37.419 [DEBUG] BREAKING after 10 iterations
+15:26:43.063 [DEBUG] Executing line: duck.db.query duck.db.query _con 'SELECT * FROM ''test.parquet'' LIMIT 5'
+15:26:43.064 [DEBUG] Collecting messages after execution...
+15:26:43.280 [DEBUG] Collected 1 batches, dq length: 10
+15:26:43.281 [DEBUG] Starting loop, dq length: 10
+15:26:43.281 [DEBUG] Iter 1: msg='EchoInput', dq left: 9
+15:26:43.282 [DEBUG] Iter 2: msg='SetPromptType', dq left: 8
+15:26:43.282 [DEBUG] SetPromptType pt=0
+15:26:43.283 [DEBUG] Iter 3: msg='HadError', dq left: 7
+15:26:43.283 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 6
+15:26:43.284 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 5
+15:26:43.284 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 4
+15:26:43.284 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 3
+15:26:43.285 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 2
+15:26:43.285 [DEBUG] Iter 9: msg='FocusThread', dq left: 1
+15:26:43.286 [DEBUG] Iter 10: msg='SetPromptType', dq left: 0
+15:26:43.286 [DEBUG] SetPromptType pt=1
+15:26:43.287 [DEBUG] Prompt ready! Output len: 151
+15:26:43.288 [DEBUG] BREAKING after 10 iterations
+15:27:08.316 [DEBUG] Executing line: duck.db.query duck.db.query _con 'SELECT * FROM "test.parquet" LIMIT 5'
+15:27:08.317 [DEBUG] Collecting messages after execution...
+15:27:08.538 [DEBUG] Collected 1 batches, dq length: 14
+15:27:08.539 [DEBUG] Starting loop, dq length: 14
+15:27:08.540 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 13
+15:27:08.540 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 12
+15:27:08.541 [DEBUG] Iter 3: msg='FocusThread', dq left: 11
+15:27:08.541 [DEBUG] Iter 4: msg='SetPromptType', dq left: 10
+15:27:08.542 [DEBUG] SetPromptType pt=1
+15:27:08.543 [DEBUG] Prompt ready! Output len: 0
+15:27:08.543 [DEBUG] BREAKING after 4 iterations
+15:27:11.435 [DEBUG] Executing line: duck.db.query duck.db.query _con 'SELECT * FROM "test.parquet" LIMIT 5'
+15:27:11.436 [DEBUG] Collecting messages after execution...
+15:27:11.655 [DEBUG] Collected 1 batches, dq length: 10
+15:27:11.656 [DEBUG] Starting loop, dq length: 10
+15:27:11.656 [DEBUG] Iter 1: msg='EchoInput', dq left: 9
+15:27:11.657 [DEBUG] Iter 2: msg='SetPromptType', dq left: 8
+15:27:11.657 [DEBUG] SetPromptType pt=0
+15:27:11.658 [DEBUG] Iter 3: msg='HadError', dq left: 7
+15:27:11.658 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 6
+15:27:11.659 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 5
+15:27:11.660 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 4
+15:27:11.660 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 3
+15:27:11.661 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 2
+15:27:11.661 [DEBUG] Iter 9: msg='FocusThread', dq left: 1
+15:27:11.662 [DEBUG] Iter 10: msg='SetPromptType', dq left: 0
+15:27:11.662 [DEBUG] SetPromptType pt=1
+15:27:11.663 [DEBUG] Prompt ready! Output len: 149
+15:27:11.663 [DEBUG] BREAKING after 10 iterations
+15:28:03.915 [DEBUG] Executing line: duck.db.query _con 'COPY test TO "test.parquet" (FORMAT PARQUET, CODEC ''ZSTD'')'
+15:28:03.916 [DEBUG] Collecting messages after execution...
+15:28:04.188 [DEBUG] Collected 1 batches, dq length: 11
+15:28:04.189 [DEBUG] Starting loop, dq length: 11
+15:28:04.189 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 10
+15:28:04.190 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 9
+15:28:04.190 [DEBUG] Iter 3: msg='FocusThread', dq left: 8
+15:28:04.191 [DEBUG] Iter 4: msg='SetPromptType', dq left: 7
+15:28:04.191 [DEBUG] SetPromptType pt=1
+15:28:04.192 [DEBUG] Prompt ready! Output len: 0
+15:28:04.192 [DEBUG] BREAKING after 4 iterations
+15:28:06.706 [DEBUG] Executing line: duck.db.query duck.db.query _con 'SELECT * FROM "./test.parquet" LIMIT 5'
+15:28:06.706 [DEBUG] Collecting messages after execution...
+15:28:06.934 [DEBUG] Collected 1 batches, dq length: 10
+15:28:06.935 [DEBUG] Starting loop, dq length: 10
+15:28:06.935 [DEBUG] Iter 1: msg='EchoInput', dq left: 9
+15:28:06.935 [DEBUG] Iter 2: msg='SetPromptType', dq left: 8
+15:28:06.936 [DEBUG] SetPromptType pt=0
+15:28:06.936 [DEBUG] Iter 3: msg='HadError', dq left: 7
+15:28:06.937 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 6
+15:28:06.937 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 5
+15:28:06.938 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 4
+15:28:06.938 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 3
+15:28:06.939 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 2
+15:28:06.939 [DEBUG] Iter 9: msg='FocusThread', dq left: 1
+15:28:06.939 [DEBUG] Iter 10: msg='SetPromptType', dq left: 0
+15:28:06.940 [DEBUG] SetPromptType pt=1
+15:28:06.940 [DEBUG] Prompt ready! Output len: 151
+15:28:06.941 [DEBUG] BREAKING after 10 iterations
+15:28:15.609 [DEBUG] Executing line: duck.db.query _con 'SELECT * FROM "./test.parquet" LIMIT 5'
+15:28:15.610 [DEBUG] Collecting messages after execution...
+15:28:15.832 [DEBUG] Collected 1 batches, dq length: 7
+15:28:15.833 [DEBUG] Starting loop, dq length: 7
+15:28:15.834 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:28:15.834 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:28:15.834 [DEBUG] SetPromptType pt=0
+15:28:15.835 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:28:15.836 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:28:15.836 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:28:15.836 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:28:15.837 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:28:15.837 [DEBUG] SetPromptType pt=1
+15:28:15.838 [DEBUG] Prompt ready! Output len: 93
+15:28:15.838 [DEBUG] BREAKING after 7 iterations
+15:29:29.487 [DEBUG] Executing line: (cols (aa bb) types)←duck.db.query _con 'SELECT * FROM "./test.parquet" LIMIT 5'
+15:29:29.488 [DEBUG] Collecting messages after execution...
+15:29:29.711 [DEBUG] Collected 1 batches, dq length: 10
+15:29:29.712 [DEBUG] Starting loop, dq length: 10
+15:29:29.713 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 9
+15:29:29.714 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 8
+15:29:29.714 [DEBUG] Iter 3: msg='FocusThread', dq left: 7
+15:29:29.715 [DEBUG] Iter 4: msg='SetPromptType', dq left: 6
+15:29:29.716 [DEBUG] SetPromptType pt=1
+15:29:29.716 [DEBUG] Prompt ready! Output len: 0
+15:29:29.717 [DEBUG] BREAKING after 4 iterations
+15:29:37.238 [DEBUG] Executing line: cols
+15:29:37.238 [DEBUG] Collecting messages after execution...
+15:29:37.465 [DEBUG] Collected 1 batches, dq length: 7
+15:29:37.466 [DEBUG] Starting loop, dq length: 7
+15:29:37.467 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:29:37.467 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:29:37.468 [DEBUG] SetPromptType pt=0
+15:29:37.468 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:29:37.469 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:29:37.469 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:29:37.470 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:29:37.470 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:29:37.471 [DEBUG] SetPromptType pt=1
+15:29:37.471 [DEBUG] Prompt ready! Output len: 7
+15:29:37.472 [DEBUG] BREAKING after 7 iterations
+15:29:42.441 [DEBUG] Executing line: types
+15:29:42.441 [DEBUG] Collecting messages after execution...
+15:29:42.660 [DEBUG] Collected 1 batches, dq length: 7
+15:29:42.660 [DEBUG] Starting loop, dq length: 7
+15:29:42.661 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:29:42.662 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:29:42.662 [DEBUG] SetPromptType pt=0
+15:29:42.663 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:29:42.663 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:29:42.664 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:29:42.664 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:29:42.665 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:29:42.665 [DEBUG] SetPromptType pt=1
+15:29:42.666 [DEBUG] Prompt ready! Output len: 5
+15:29:42.667 [DEBUG] BREAKING after 7 iterations
+15:29:52.629 [DEBUG] Executing line: ⍴aa
+15:29:52.630 [DEBUG] Collecting messages after execution...
+15:29:52.842 [DEBUG] Collected 1 batches, dq length: 7
+15:29:52.843 [DEBUG] Starting loop, dq length: 7
+15:29:52.844 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:29:52.844 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:29:52.845 [DEBUG] SetPromptType pt=0
+15:29:52.845 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:29:52.846 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:29:52.846 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:29:52.847 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:29:52.847 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:29:52.848 [DEBUG] SetPromptType pt=1
+15:29:52.848 [DEBUG] Prompt ready! Output len: 2
+15:29:52.849 [DEBUG] BREAKING after 7 iterations
+15:30:02.712 [DEBUG] Executing line: (cols (aa bb) types)←duck.db.query _con 'SELECT * FROM "./test.parquet"'
+15:30:02.713 [DEBUG] Collecting messages after execution...
+15:30:02.925 [DEBUG] Collected 1 batches, dq length: 6
+15:30:02.926 [DEBUG] Starting loop, dq length: 6
+15:30:02.927 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 5
+15:30:02.927 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 4
+15:30:02.928 [DEBUG] Iter 3: msg='FocusThread', dq left: 3
+15:30:02.929 [DEBUG] Iter 4: msg='SetPromptType', dq left: 2
+15:30:02.929 [DEBUG] SetPromptType pt=1
+15:30:02.930 [DEBUG] Prompt ready! Output len: 0
+15:30:02.931 [DEBUG] BREAKING after 4 iterations
+15:30:05.061 [DEBUG] Executing line: ⍴aa
+15:30:05.062 [DEBUG] Collecting messages after execution...
+15:30:05.275 [DEBUG] Collected 1 batches, dq length: 11
+15:30:05.276 [DEBUG] Starting loop, dq length: 11
+15:30:05.276 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 10
+15:30:05.276 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 9
+15:30:05.277 [DEBUG] Iter 3: msg='FocusThread', dq left: 8
+15:30:05.277 [DEBUG] Iter 4: msg='SetPromptType', dq left: 7
+15:30:05.278 [DEBUG] SetPromptType pt=1
+15:30:05.278 [DEBUG] Prompt ready! Output len: 0
+15:30:05.279 [DEBUG] BREAKING after 4 iterations
+15:30:07.235 [DEBUG] Executing line: ⍴aa
+15:30:07.236 [DEBUG] Collecting messages after execution...
+15:30:07.455 [DEBUG] Collected 1 batches, dq length: 7
+15:30:07.456 [DEBUG] Starting loop, dq length: 7
+15:30:07.457 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:30:07.457 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:30:07.458 [DEBUG] SetPromptType pt=0
+15:30:07.458 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:30:07.459 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:30:07.459 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:30:07.460 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:30:07.460 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:30:07.461 [DEBUG] SetPromptType pt=1
+15:30:07.461 [DEBUG] Prompt ready! Output len: 8
+15:30:07.462 [DEBUG] BREAKING after 7 iterations
+15:30:31.824 [DEBUG] Executing line: a≡aa
+15:30:31.825 [DEBUG] Collecting messages after execution...
+15:30:32.050 [DEBUG] Collected 1 batches, dq length: 7
+15:30:32.051 [DEBUG] Starting loop, dq length: 7
+15:30:32.052 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:30:32.052 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:30:32.053 [DEBUG] SetPromptType pt=0
+15:30:32.053 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:30:32.053 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:30:32.054 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:30:32.055 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:30:32.055 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:30:32.056 [DEBUG] SetPromptType pt=1
+15:30:32.056 [DEBUG] Prompt ready! Output len: 2
+15:30:32.057 [DEBUG] BREAKING after 7 iterations
+15:30:51.081 [DEBUG] Executing line: b≡bb
+15:30:51.081 [DEBUG] Collecting messages after execution...
+15:30:51.299 [DEBUG] Collected 1 batches, dq length: 7
+15:30:51.300 [DEBUG] Starting loop, dq length: 7
+15:30:51.300 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:30:51.301 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:30:51.301 [DEBUG] SetPromptType pt=0
+15:30:51.301 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:30:51.302 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:30:51.302 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:30:51.303 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:30:51.303 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:30:51.304 [DEBUG] SetPromptType pt=1
+15:30:51.304 [DEBUG] Prompt ready! Output len: 2
+15:30:51.305 [DEBUG] BREAKING after 7 iterations
+15:30:54.910 [DEBUG] Executing line: _←duck.db.disconnect _con
+15:30:54.910 [DEBUG] Collecting messages after execution...
+15:30:55.132 [DEBUG] Collected 1 batches, dq length: 6
+15:30:55.133 [DEBUG] Starting loop, dq length: 6
+15:30:55.133 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:30:55.134 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:30:55.134 [DEBUG] SetPromptType pt=0
+15:30:55.135 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:30:55.135 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:30:55.136 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:30:55.136 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:30:55.137 [DEBUG] SetPromptType pt=1
+15:30:55.137 [DEBUG] Prompt ready! Output len: 0
+15:30:55.138 [DEBUG] BREAKING after 6 iterations
+15:30:55.138 [DEBUG] Executing line: _←duck.db.close _db
+15:30:55.139 [DEBUG] Collecting messages after execution...
+15:30:55.413 [DEBUG] Collected 1 batches, dq length: 6
+15:30:55.414 [DEBUG] Starting loop, dq length: 6
+15:30:55.414 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:30:55.415 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:30:55.415 [DEBUG] SetPromptType pt=0
+15:30:55.415 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:30:55.416 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:30:55.416 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:30:55.417 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:30:55.418 [DEBUG] SetPromptType pt=1
+15:30:55.418 [DEBUG] Prompt ready! Output len: 0
+15:30:55.419 [DEBUG] BREAKING after 6 iterations
+15:30:56.672 [DEBUG] Executing line: duck.db.test
+15:30:56.673 [DEBUG] Collecting messages after execution...
+15:30:56.923 [DEBUG] Collected 1 batches, dq length: 23
+15:30:56.924 [DEBUG] Starting loop, dq length: 23
+15:30:56.925 [DEBUG] Iter 1: msg='EchoInput', dq left: 22
+15:30:56.925 [DEBUG] Iter 2: msg='SetPromptType', dq left: 21
+15:30:56.926 [DEBUG] SetPromptType pt=0
+15:30:56.926 [DEBUG] Iter 3: msg='SetSessionLineGroup', dq left: 20
+15:30:56.926 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 19
+15:30:56.927 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 18
+15:30:56.927 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 17
+15:30:56.928 [DEBUG] Iter 7: msg='HadError', dq left: 16
+15:30:56.929 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 15
+15:30:56.929 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 14
+15:30:56.929 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 13
+15:30:56.930 [DEBUG] Iter 11: msg='OpenWindow', dq left: 12
+15:30:56.930 [DEBUG] Iter 12: msg='SetHighlightLine', dq left: 11
+15:30:56.931 [DEBUG] Iter 13: msg='UpdateWindow', dq left: 10
+15:30:56.932 [DEBUG] Iter 14: msg='UpdateWindow', dq left: 9
+15:30:56.932 [DEBUG] Iter 15: msg='UpdateWindow', dq left: 8
+15:30:56.932 [DEBUG] Iter 16: msg='UpdateWindow', dq left: 7
+15:30:56.933 [DEBUG] Iter 17: msg='FocusThread', dq left: 6
+15:30:56.934 [DEBUG] Iter 18: msg='UpdateWindow', dq left: 5
+15:30:56.934 [DEBUG] Iter 19: msg='UpdateWindow', dq left: 4
+15:30:56.935 [DEBUG] Iter 20: msg='FocusThread', dq left: 3
+15:30:56.935 [DEBUG] Iter 21: msg='SetPromptType', dq left: 2
+15:30:56.936 [DEBUG] SetPromptType pt=1
+15:30:56.936 [DEBUG] Prompt ready! Output len: 191
+15:30:56.937 [DEBUG] BREAKING after 21 iterations
+15:40:36.985 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'PRAGMA version'
+15:40:36.986 [DEBUG] Collecting messages after execution...
+15:40:37.210 [DEBUG] Collected 1 batches, dq length: 56
+15:40:37.210 [DEBUG] Starting loop, dq length: 56
+15:40:37.211 [DEBUG] Iter 1: msg='EchoInput', dq left: 55
+15:40:37.212 [DEBUG] Iter 2: msg='SetPromptType', dq left: 54
+15:40:37.212 [DEBUG] SetPromptType pt=0
+15:40:37.213 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 53
+15:40:37.213 [DEBUG] Iter 4: msg='SetHighlightLine', dq left: 52
+15:40:37.214 [DEBUG] Iter 5: msg='CloseWindow', dq left: 51
+15:40:37.214 [DEBUG] Iter 6: msg='UpdateWindow', dq left: 50
+15:40:37.215 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 49
+15:40:37.215 [DEBUG] Iter 8: msg='FocusThread', dq left: 48
+15:40:37.216 [DEBUG] Iter 9: msg='SetPromptType', dq left: 47
+15:40:37.216 [DEBUG] SetPromptType pt=1
+15:40:37.217 [DEBUG] Prompt ready! Output len: 0
+15:40:37.217 [DEBUG] BREAKING after 9 iterations
+15:40:38.227 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'PRAGMA version'
+15:40:38.228 [DEBUG] Collecting messages after execution...
+15:40:38.343 [DEBUG] Collected 0 batches, dq length: 0
+15:40:38.344 [DEBUG] Starting loop, dq length: 0
+15:40:38.344 [DEBUG] Iter 1: dq empty, waiting...
+15:40:38.565 [DEBUG] Wait done: 0.22s, dq: 0
+15:40:48.522 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'PRAGMA version'
+15:40:48.523 [DEBUG] Collecting messages after execution...
+15:40:48.626 [DEBUG] Collected 0 batches, dq length: 0
+15:40:48.627 [DEBUG] Starting loop, dq length: 0
+15:40:48.628 [DEBUG] Iter 1: dq empty, waiting...
+15:40:48.847 [DEBUG] Wait done: 0.22s, dq: 0
+15:40:51.326 [DEBUG] Executing line: ]link.create duck ../duckdb-dyalog
+15:40:51.327 [DEBUG] Collecting messages after execution...
+15:40:51.439 [DEBUG] Collected 0 batches, dq length: 0
+15:40:51.440 [DEBUG] Starting loop, dq length: 0
+15:40:51.441 [DEBUG] Iter 1: dq empty, waiting...
+15:40:51.656 [DEBUG] Wait done: 0.21s, dq: 0
+15:40:53.213 [DEBUG] Executing line: ⎕pw←32767
+15:40:53.214 [DEBUG] Collecting messages after execution...
+15:40:53.329 [DEBUG] Collected 0 batches, dq length: 0
+15:40:53.330 [DEBUG] Starting loop, dq length: 0
+15:40:53.330 [DEBUG] Iter 1: dq empty, waiting...
+15:40:53.551 [DEBUG] Wait done: 0.22s, dq: 0
+15:40:54.489 [DEBUG] Executing line: ⎕pw←32767
+15:40:54.490 [DEBUG] Collecting messages after execution...
+15:40:54.602 [DEBUG] Collected 0 batches, dq length: 0
+15:40:54.603 [DEBUG] Starting loop, dq length: 0
+15:40:54.604 [DEBUG] Iter 1: dq empty, waiting...
+15:40:54.823 [DEBUG] Wait done: 0.22s, dq: 0
+15:40:57.318 [DEBUG] Executing line: duck.db.init 'lib/'
+15:40:57.319 [DEBUG] Collecting messages after execution...
+15:40:57.423 [DEBUG] Collected 0 batches, dq length: 0
+15:40:57.424 [DEBUG] Starting loop, dq length: 0
+15:40:57.425 [DEBUG] Iter 1: dq empty, waiting...
+15:40:57.645 [DEBUG] Wait done: 0.22s, dq: 0
+15:41:03.802 [DEBUG] Executing line: duck.db.init 'lib/'
+15:41:03.803 [DEBUG] Collecting messages after execution...
+15:41:03.909 [DEBUG] Collected 0 batches, dq length: 0
+15:41:03.910 [DEBUG] Starting loop, dq length: 0
+15:41:03.911 [DEBUG] Iter 1: dq empty, waiting...
+15:41:04.131 [DEBUG] Wait done: 0.22s, dq: 0
+15:41:05.937 [DEBUG] Executing line: _db←duck.db.open ':memory:'
+15:41:05.938 [DEBUG] Collecting messages after execution...
+15:41:06.046 [DEBUG] Collected 0 batches, dq length: 0
+15:41:06.047 [DEBUG] Starting loop, dq length: 0
+15:41:06.047 [DEBUG] Iter 1: dq empty, waiting...
+15:41:06.268 [DEBUG] Wait done: 0.22s, dq: 0
+15:41:06.269 [DEBUG] Executing line: _con←duck.db.connect _db
+15:41:06.270 [DEBUG] Collecting messages after execution...
+15:41:06.378 [DEBUG] Collected 0 batches, dq length: 0
+15:41:06.379 [DEBUG] Starting loop, dq length: 0
+15:41:06.379 [DEBUG] Iter 1: dq empty, waiting...
+15:41:06.600 [DEBUG] Wait done: 0.22s, dq: 0
+15:41:07.568 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'PRAGMA version'
+15:41:07.568 [DEBUG] Collecting messages after execution...
+15:41:07.670 [DEBUG] Collected 0 batches, dq length: 0
+15:41:07.671 [DEBUG] Starting loop, dq length: 0
+15:41:07.671 [DEBUG] Iter 1: dq empty, waiting...
+15:41:07.892 [DEBUG] Wait done: 0.22s, dq: 0
+15:41:08.727 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'PRAGMA version'
+15:41:08.728 [DEBUG] Collecting messages after execution...
+15:41:08.840 [DEBUG] Collected 0 batches, dq length: 0
+15:41:08.840 [DEBUG] Starting loop, dq length: 0
+15:41:08.841 [DEBUG] Iter 1: dq empty, waiting...
+15:41:09.061 [DEBUG] Wait done: 0.22s, dq: 0
+15:41:10.383 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT concat(''2022-11-03 13:30:00'','' '',''Europe/Helsinki'')::TIMESTAMPTZ'
+15:41:10.384 [DEBUG] Collecting messages after execution...
+15:41:10.499 [DEBUG] Collected 0 batches, dq length: 0
+15:41:10.500 [DEBUG] Starting loop, dq length: 0
+15:41:10.500 [DEBUG] Iter 1: dq empty, waiting...
+15:41:10.719 [DEBUG] Wait done: 0.22s, dq: 0
+15:41:11.752 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT concat(''2022-11-03 13:30:00'','' '',''Europe/Helsinki'')::TIMESTAMPTZ'
+15:41:11.753 [DEBUG] Collecting messages after execution...
+15:41:11.855 [DEBUG] Collected 0 batches, dq length: 0
+15:41:11.856 [DEBUG] Starting loop, dq length: 0
+15:41:11.856 [DEBUG] Iter 1: dq empty, waiting...
+15:41:12.076 [DEBUG] Wait done: 0.22s, dq: 0
+15:42:29.453 [DEBUG] Executing line: ]link.create duck ../duckdb-dyalog
+15:42:29.454 [DEBUG] Collecting messages after execution...
+15:42:29.566 [DEBUG] Collected 0 batches, dq length: 0
+15:42:29.566 [DEBUG] Starting loop, dq length: 0
+15:42:29.567 [DEBUG] Iter 1: dq empty, waiting...
+15:42:29.786 [DEBUG] Wait done: 0.22s, dq: 0
+15:42:32.839 [DEBUG] Executing line: ⎕pw←32767
+15:42:32.840 [DEBUG] Collecting messages after execution...
+15:42:33.067 [DEBUG] Collected 1 batches, dq length: 18
+15:42:33.068 [DEBUG] Starting loop, dq length: 18
+15:42:33.069 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 17
+15:42:33.070 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 16
+15:42:33.071 [DEBUG] Iter 3: msg='FocusThread', dq left: 15
+15:42:33.072 [DEBUG] Iter 4: msg='SetPromptType', dq left: 14
+15:42:33.072 [DEBUG] SetPromptType pt=1
+15:42:33.073 [DEBUG] Prompt ready! Output len: 0
+15:42:33.074 [DEBUG] BREAKING after 4 iterations
+15:42:36.715 [DEBUG] Executing line: duck.db.init 'lib/'
+15:42:36.716 [DEBUG] Collecting messages after execution...
+15:42:36.943 [DEBUG] Collected 1 batches, dq length: 6
+15:42:36.944 [DEBUG] Starting loop, dq length: 6
+15:42:36.944 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:42:36.945 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:42:36.945 [DEBUG] SetPromptType pt=0
+15:42:36.946 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:42:36.946 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:42:36.947 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:42:36.947 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:42:36.948 [DEBUG] SetPromptType pt=1
+15:42:36.949 [DEBUG] Prompt ready! Output len: 0
+15:42:36.949 [DEBUG] BREAKING after 6 iterations
+15:42:47.273 [DEBUG] Executing line: _db←duck.db.open ':memory:'
+15:42:47.274 [DEBUG] Collecting messages after execution...
+15:42:47.504 [DEBUG] Collected 1 batches, dq length: 6
+15:42:47.505 [DEBUG] Starting loop, dq length: 6
+15:42:47.505 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:42:47.506 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:42:47.507 [DEBUG] SetPromptType pt=0
+15:42:47.507 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:42:47.508 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:42:47.508 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:42:47.509 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:42:47.510 [DEBUG] SetPromptType pt=1
+15:42:47.510 [DEBUG] Prompt ready! Output len: 0
+15:42:47.511 [DEBUG] BREAKING after 6 iterations
+15:42:47.511 [DEBUG] Executing line: _con←duck.db.connect _db
+15:42:47.512 [DEBUG] Collecting messages after execution...
+15:42:47.726 [DEBUG] Collected 1 batches, dq length: 6
+15:42:47.727 [DEBUG] Starting loop, dq length: 6
+15:42:47.727 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:42:47.728 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:42:47.728 [DEBUG] SetPromptType pt=0
+15:42:47.729 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:42:47.729 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:42:47.730 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:42:47.730 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:42:47.731 [DEBUG] SetPromptType pt=1
+15:42:47.732 [DEBUG] Prompt ready! Output len: 0
+15:42:47.732 [DEBUG] BREAKING after 6 iterations
+15:42:49.514 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'PRAGMA version'
+15:42:49.515 [DEBUG] Collecting messages after execution...
+15:42:49.740 [DEBUG] Collected 1 batches, dq length: 10
+15:42:49.741 [DEBUG] Starting loop, dq length: 10
+15:42:49.741 [DEBUG] Iter 1: msg='EchoInput', dq left: 9
+15:42:49.742 [DEBUG] Iter 2: msg='SetPromptType', dq left: 8
+15:42:49.743 [DEBUG] SetPromptType pt=0
+15:42:49.743 [DEBUG] Iter 3: msg='SetSessionLineGroup', dq left: 7
+15:42:49.744 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 6
+15:42:49.744 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 5
+15:42:49.745 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 4
+15:42:49.746 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 3
+15:42:49.746 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 2
+15:42:49.747 [DEBUG] Iter 9: msg='FocusThread', dq left: 1
+15:42:49.748 [DEBUG] Iter 10: msg='SetPromptType', dq left: 0
+15:42:49.748 [DEBUG] SetPromptType pt=1
+15:42:49.749 [DEBUG] Prompt ready! Output len: 80
+15:42:49.750 [DEBUG] BREAKING after 10 iterations
+15:43:01.176 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT concat(''2022-11-03 13:30:00'','' '',''Europe/Helsinki'')::TIMESTAMPTZ'
+15:43:01.177 [DEBUG] Collecting messages after execution...
+15:43:01.392 [DEBUG] Collected 1 batches, dq length: 10
+15:43:01.393 [DEBUG] Starting loop, dq length: 10
+15:43:01.393 [DEBUG] Iter 1: msg='EchoInput', dq left: 9
+15:43:01.394 [DEBUG] Iter 2: msg='SetPromptType', dq left: 8
+15:43:01.394 [DEBUG] SetPromptType pt=0
+15:43:01.395 [DEBUG] Iter 3: msg='SetSessionLineGroup', dq left: 7
+15:43:01.395 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 6
+15:43:01.396 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 5
+15:43:01.396 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 4
+15:43:01.396 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 3
+15:43:01.397 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 2
+15:43:01.397 [DEBUG] Iter 9: msg='FocusThread', dq left: 1
+15:43:01.398 [DEBUG] Iter 10: msg='SetPromptType', dq left: 0
+15:43:01.398 [DEBUG] SetPromptType pt=1
+15:43:01.399 [DEBUG] Prompt ready! Output len: 180
+15:43:01.400 [DEBUG] BREAKING after 10 iterations
+15:43:22.192 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT concat(''2022-11-03 13:30:00'','' '',''Europe/Helsinki'')::TIMESTAMPTZ as Time'
+15:43:22.193 [DEBUG] Collecting messages after execution...
+15:43:22.420 [DEBUG] Collected 1 batches, dq length: 10
+15:43:22.421 [DEBUG] Starting loop, dq length: 10
+15:43:22.421 [DEBUG] Iter 1: msg='EchoInput', dq left: 9
+15:43:22.422 [DEBUG] Iter 2: msg='SetPromptType', dq left: 8
+15:43:22.423 [DEBUG] SetPromptType pt=0
+15:43:22.423 [DEBUG] Iter 3: msg='SetSessionLineGroup', dq left: 7
+15:43:22.423 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 6
+15:43:22.424 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 5
+15:43:22.424 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 4
+15:43:22.425 [DEBUG] Iter 7: msg='UpdateWindow', dq left: 3
+15:43:22.425 [DEBUG] Iter 8: msg='UpdateWindow', dq left: 2
+15:43:22.426 [DEBUG] Iter 9: msg='FocusThread', dq left: 1
+15:43:22.426 [DEBUG] Iter 10: msg='SetPromptType', dq left: 0
+15:43:22.427 [DEBUG] SetPromptType pt=1
+15:43:22.427 [DEBUG] Prompt ready! Output len: 44
+15:43:22.428 [DEBUG] BREAKING after 10 iterations
+15:43:26.557 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM "airline_data/airline.parquet" LIMIT 5'
+15:43:26.558 [DEBUG] Collecting messages after execution...
+15:43:26.823 [DEBUG] Collected 1 batches, dq length: 32
+15:43:26.824 [DEBUG] Starting loop, dq length: 32
+15:43:26.825 [DEBUG] Iter 1: msg='EchoInput', dq left: 31
+15:43:26.825 [DEBUG] Iter 2: msg='SetPromptType', dq left: 30
+15:43:26.825 [DEBUG] SetPromptType pt=0
+15:43:26.826 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 29
+15:43:26.826 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 28
+15:43:26.827 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 27
+15:43:26.827 [DEBUG] Iter 6: msg='SetSessionLineGroup', dq left: 26
+15:43:26.828 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 25
+15:43:26.828 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 24
+15:43:26.829 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 23
+15:43:26.829 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 22
+15:43:26.829 [DEBUG] Iter 11: msg='AppendSessionOutput', dq left: 21
+15:43:26.830 [DEBUG] Iter 12: msg='AppendSessionOutput', dq left: 20
+15:43:26.830 [DEBUG] Iter 13: msg='AppendSessionOutput', dq left: 19
+15:43:26.831 [DEBUG] Iter 14: msg='AppendSessionOutput', dq left: 18
+15:43:26.831 [DEBUG] Iter 15: msg='AppendSessionOutput', dq left: 17
+15:43:26.832 [DEBUG] Iter 16: msg='AppendSessionOutput', dq left: 16
+15:43:26.832 [DEBUG] Iter 17: msg='AppendSessionOutput', dq left: 15
+15:43:26.833 [DEBUG] Iter 18: msg='AppendSessionOutput', dq left: 14
+15:43:26.833 [DEBUG] Iter 19: msg='AppendSessionOutput', dq left: 13
+15:43:26.834 [DEBUG] Iter 20: msg='AppendSessionOutput', dq left: 12
+15:43:26.834 [DEBUG] Iter 21: msg='AppendSessionOutput', dq left: 11
+15:43:26.835 [DEBUG] Iter 22: msg='AppendSessionOutput', dq left: 10
+15:43:26.835 [DEBUG] Iter 23: msg='AppendSessionOutput', dq left: 9
+15:43:26.836 [DEBUG] Iter 24: msg='AppendSessionOutput', dq left: 8
+15:43:26.836 [DEBUG] Iter 25: msg='AppendSessionOutput', dq left: 7
+15:43:26.837 [DEBUG] Iter 26: msg='AppendSessionOutput', dq left: 6
+15:43:26.837 [DEBUG] Iter 27: msg='AppendSessionOutput', dq left: 5
+15:43:26.837 [DEBUG] Iter 28: msg='AppendSessionOutput', dq left: 4
+15:43:26.838 [DEBUG] Iter 29: msg='UpdateWindow', dq left: 3
+15:43:26.838 [DEBUG] Iter 30: msg='UpdateWindow', dq left: 2
+15:43:26.839 [DEBUG] Iter 31: msg='FocusThread', dq left: 1
+15:43:26.839 [DEBUG] Iter 32: msg='SetPromptType', dq left: 0
+15:43:26.840 [DEBUG] SetPromptType pt=1
+15:43:26.840 [DEBUG] Prompt ready! Output len: 9678
+15:43:26.841 [DEBUG] BREAKING after 32 iterations
+15:43:33.404 [DEBUG] Executing line: duck.db.query _con 'DROP TABLE IF EXISTS test'
+15:43:33.404 [DEBUG] Collecting messages after execution...
+15:43:33.632 [DEBUG] Collected 1 batches, dq length: 11
+15:43:33.633 [DEBUG] Starting loop, dq length: 11
+15:43:33.633 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 10
+15:43:33.634 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 9
+15:43:33.635 [DEBUG] Iter 3: msg='FocusThread', dq left: 8
+15:43:33.635 [DEBUG] Iter 4: msg='SetPromptType', dq left: 7
+15:43:33.636 [DEBUG] SetPromptType pt=1
+15:43:33.636 [DEBUG] Prompt ready! Output len: 0
+15:43:33.637 [DEBUG] BREAKING after 4 iterations
+15:43:35.657 [DEBUG] Executing line: duck.db.query _con 'CREATE TABLE test (a INT, b DOUBLE)'
+15:43:35.658 [DEBUG] Collecting messages after execution...
+15:43:35.878 [DEBUG] Collected 1 batches, dq length: 7
+15:43:35.878 [DEBUG] Starting loop, dq length: 7
+15:43:35.879 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:43:35.879 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:43:35.880 [DEBUG] SetPromptType pt=0
+15:43:35.880 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:43:35.881 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:43:35.881 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:43:35.882 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:43:35.882 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:43:35.883 [DEBUG] SetPromptType pt=1
+15:43:35.883 [DEBUG] Prompt ready! Output len: 8
+15:43:35.884 [DEBUG] BREAKING after 7 iterations
+15:43:38.363 [DEBUG] Executing line: a←⍳1000000
+15:43:38.364 [DEBUG] Collecting messages after execution...
+15:43:38.584 [DEBUG] Collected 1 batches, dq length: 6
+15:43:38.585 [DEBUG] Starting loop, dq length: 6
+15:43:38.585 [DEBUG] Iter 1: msg='EchoInput', dq left: 5
+15:43:38.586 [DEBUG] Iter 2: msg='SetPromptType', dq left: 4
+15:43:38.586 [DEBUG] SetPromptType pt=0
+15:43:38.587 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:43:38.587 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:43:38.588 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:43:38.588 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:43:38.588 [DEBUG] SetPromptType pt=1
+15:43:38.589 [DEBUG] Prompt ready! Output len: 0
+15:43:38.589 [DEBUG] BREAKING after 6 iterations
+15:43:38.590 [DEBUG] Executing line: b←2 5 (16808⌶)'Beta' 1000000
+15:43:38.590 [DEBUG] Collecting messages after execution...
+15:43:38.804 [DEBUG] Collected 1 batches, dq length: 2
+15:43:38.805 [DEBUG] Starting loop, dq length: 2
+15:43:38.806 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:43:38.806 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:43:38.807 [DEBUG] SetPromptType pt=0
+15:43:38.807 [DEBUG] Iter 3: dq empty, waiting...
+15:43:39.088 [DEBUG] Wait done: 0.28s, dq: 4
+15:43:39.088 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:43:39.088 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:43:39.089 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:43:39.089 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:43:39.090 [DEBUG] SetPromptType pt=1
+15:43:39.090 [DEBUG] Prompt ready! Output len: 0
+15:43:39.091 [DEBUG] BREAKING after 6 iterations
+15:43:40.353 [DEBUG] Executing line: b[⍳10]
+15:43:40.353 [DEBUG] Collecting messages after execution...
+15:43:40.579 [DEBUG] Collected 1 batches, dq length: 7
+15:43:40.579 [DEBUG] Starting loop, dq length: 7
+15:43:40.580 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:43:40.581 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:43:40.581 [DEBUG] SetPromptType pt=0
+15:43:40.582 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:43:40.582 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:43:40.583 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:43:40.583 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:43:40.584 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:43:40.584 [DEBUG] SetPromptType pt=1
+15:43:40.585 [DEBUG] Prompt ready! Output len: 133
+15:43:40.586 [DEBUG] BREAKING after 7 iterations
+15:43:43.915 [DEBUG] Executing line: _←duck.db.append _con '' 'test' (a b) (duck.db.type.INTEGER duck.db.type.DOUBLE)
+15:43:43.915 [DEBUG] Collecting messages after execution...
+15:43:44.140 [DEBUG] Collected 1 batches, dq length: 2
+15:43:44.140 [DEBUG] Starting loop, dq length: 2
+15:43:44.141 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:43:44.142 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:43:44.142 [DEBUG] SetPromptType pt=0
+15:43:44.143 [DEBUG] Iter 3: dq empty, waiting...
+15:43:44.363 [DEBUG] Wait done: 0.22s, dq: 0
+15:43:47.650 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM test LIMIT 5'
+15:43:47.651 [DEBUG] Collecting messages after execution...
+15:43:47.872 [DEBUG] Collected 1 batches, dq length: 18
+15:43:47.873 [DEBUG] Starting loop, dq length: 18
+15:43:47.873 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 17
+15:43:47.874 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 16
+15:43:47.874 [DEBUG] Iter 3: msg='FocusThread', dq left: 15
+15:43:47.875 [DEBUG] Iter 4: msg='SetPromptType', dq left: 14
+15:43:47.875 [DEBUG] SetPromptType pt=1
+15:43:47.876 [DEBUG] Prompt ready! Output len: 0
+15:43:47.876 [DEBUG] BREAKING after 4 iterations
+15:43:51.740 [DEBUG] Executing line: duck.db.toTable duck.db.query _con 'SELECT * FROM test LIMIT 5'
+15:43:51.741 [DEBUG] Collecting messages after execution...
+15:43:51.968 [DEBUG] Collected 1 batches, dq length: 14
+15:43:51.969 [DEBUG] Starting loop, dq length: 14
+15:43:51.969 [DEBUG] Iter 1: msg='EchoInput', dq left: 13
+15:43:51.970 [DEBUG] Iter 2: msg='SetPromptType', dq left: 12
+15:43:51.970 [DEBUG] SetPromptType pt=0
+15:43:51.971 [DEBUG] Iter 3: msg='SetSessionLineGroup', dq left: 11
+15:43:51.972 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 10
+15:43:51.972 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 9
+15:43:51.973 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 8
+15:43:51.973 [DEBUG] Iter 7: msg='AppendSessionOutput', dq left: 7
+15:43:51.974 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 6
+15:43:51.974 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 5
+15:43:51.975 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 4
+15:43:51.975 [DEBUG] Iter 11: msg='UpdateWindow', dq left: 3
+15:43:51.975 [DEBUG] Iter 12: msg='UpdateWindow', dq left: 2
+15:43:51.976 [DEBUG] Iter 13: msg='FocusThread', dq left: 1
+15:43:51.976 [DEBUG] Iter 14: msg='SetPromptType', dq left: 0
+15:43:51.977 [DEBUG] SetPromptType pt=1
+15:43:51.977 [DEBUG] Prompt ready! Output len: 114
+15:43:51.978 [DEBUG] BREAKING after 14 iterations
+15:44:12.602 [DEBUG] Executing line: duck.db.query _con 'COPY test TO "test.parquet" (FORMAT PARQUET, CODEC ''ZSTD'')'
+15:44:12.603 [DEBUG] Collecting messages after execution...
+15:44:12.852 [DEBUG] Collected 1 batches, dq length: 7
+15:44:12.853 [DEBUG] Starting loop, dq length: 7
+15:44:12.853 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:44:12.854 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:44:12.854 [DEBUG] SetPromptType pt=0
+15:44:12.855 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:44:12.855 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:44:12.856 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:44:12.856 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:44:12.857 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:44:12.857 [DEBUG] SetPromptType pt=1
+15:44:12.857 [DEBUG] Prompt ready! Output len: 22
+15:44:12.858 [DEBUG] BREAKING after 7 iterations
+15:44:24.479 [DEBUG] Executing line: (cols (aa bb) types)←duck.db.query _con 'SELECT * FROM "./test.parquet"'
+15:44:24.480 [DEBUG] Collecting messages after execution...
+15:44:24.700 [DEBUG] Collected 1 batches, dq length: 2
+15:44:24.701 [DEBUG] Starting loop, dq length: 2
+15:44:24.702 [DEBUG] Iter 1: msg='EchoInput', dq left: 1
+15:44:24.703 [DEBUG] Iter 2: msg='SetPromptType', dq left: 0
+15:44:24.704 [DEBUG] SetPromptType pt=0
+15:44:24.704 [DEBUG] Iter 3: dq empty, waiting...
+15:44:25.003 [DEBUG] Wait done: 0.30s, dq: 4
+15:44:25.003 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 3
+15:44:25.004 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 2
+15:44:25.004 [DEBUG] Iter 5: msg='FocusThread', dq left: 1
+15:44:25.005 [DEBUG] Iter 6: msg='SetPromptType', dq left: 0
+15:44:25.006 [DEBUG] SetPromptType pt=1
+15:44:25.007 [DEBUG] Prompt ready! Output len: 0
+15:44:25.007 [DEBUG] BREAKING after 6 iterations
+15:44:26.813 [DEBUG] Executing line: a≡aa
+15:44:26.814 [DEBUG] Collecting messages after execution...
+15:44:27.037 [DEBUG] Collected 1 batches, dq length: 7
+15:44:27.038 [DEBUG] Starting loop, dq length: 7
+15:44:27.038 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:44:27.039 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:44:27.040 [DEBUG] SetPromptType pt=0
+15:44:27.040 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:44:27.041 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:44:27.041 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:44:27.042 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:44:27.043 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:44:27.043 [DEBUG] SetPromptType pt=1
+15:44:27.044 [DEBUG] Prompt ready! Output len: 2
+15:44:27.045 [DEBUG] BREAKING after 7 iterations
+15:44:28.998 [DEBUG] Executing line: b≡bb
+15:44:28.998 [DEBUG] Collecting messages after execution...
+15:44:29.214 [DEBUG] Collected 1 batches, dq length: 7
+15:44:29.214 [DEBUG] Starting loop, dq length: 7
+15:44:29.215 [DEBUG] Iter 1: msg='EchoInput', dq left: 6
+15:44:29.216 [DEBUG] Iter 2: msg='SetPromptType', dq left: 5
+15:44:29.216 [DEBUG] SetPromptType pt=0
+15:44:29.217 [DEBUG] Iter 3: msg='AppendSessionOutput', dq left: 4
+15:44:29.218 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 3
+15:44:29.218 [DEBUG] Iter 5: msg='UpdateWindow', dq left: 2
+15:44:29.219 [DEBUG] Iter 6: msg='FocusThread', dq left: 1
+15:44:29.219 [DEBUG] Iter 7: msg='SetPromptType', dq left: 0
+15:44:29.220 [DEBUG] SetPromptType pt=1
+15:44:29.220 [DEBUG] Prompt ready! Output len: 2
+15:44:29.221 [DEBUG] BREAKING after 7 iterations
+15:44:31.588 [DEBUG] Executing line: _←duck.db.disconnect _con
+15:44:31.589 [DEBUG] Collecting messages after execution...
+15:44:31.804 [DEBUG] Collected 1 batches, dq length: 10
+15:44:31.804 [DEBUG] Starting loop, dq length: 10
+15:44:31.805 [DEBUG] Iter 1: msg='UpdateWindow', dq left: 9
+15:44:31.805 [DEBUG] Iter 2: msg='UpdateWindow', dq left: 8
+15:44:31.806 [DEBUG] Iter 3: msg='FocusThread', dq left: 7
+15:44:31.806 [DEBUG] Iter 4: msg='SetPromptType', dq left: 6
+15:44:31.807 [DEBUG] SetPromptType pt=1
+15:44:31.807 [DEBUG] Prompt ready! Output len: 0
+15:44:31.808 [DEBUG] BREAKING after 4 iterations
+15:44:31.808 [DEBUG] Executing line: _←duck.db.close _db
+15:44:31.809 [DEBUG] Collecting messages after execution...
+15:44:32.025 [DEBUG] Collected 1 batches, dq length: 12
+15:44:32.025 [DEBUG] Starting loop, dq length: 12
+15:44:32.026 [DEBUG] Iter 1: msg='EchoInput', dq left: 11
+15:44:32.026 [DEBUG] Iter 2: msg='SetPromptType', dq left: 10
+15:44:32.027 [DEBUG] SetPromptType pt=0
+15:44:32.028 [DEBUG] Iter 3: msg='UpdateWindow', dq left: 9
+15:44:32.028 [DEBUG] Iter 4: msg='UpdateWindow', dq left: 8
+15:44:32.029 [DEBUG] Iter 5: msg='FocusThread', dq left: 7
+15:44:32.029 [DEBUG] Iter 6: msg='SetPromptType', dq left: 6
+15:44:32.030 [DEBUG] SetPromptType pt=1
+15:44:32.030 [DEBUG] Prompt ready! Output len: 0
+15:44:32.031 [DEBUG] BREAKING after 6 iterations
+15:44:33.869 [DEBUG] Executing line: duck.db.test
+15:44:33.870 [DEBUG] Collecting messages after execution...
+15:44:34.110 [DEBUG] Collected 1 batches, dq length: 23
+15:44:34.111 [DEBUG] Starting loop, dq length: 23
+15:44:34.111 [DEBUG] Iter 1: msg='EchoInput', dq left: 22
+15:44:34.112 [DEBUG] Iter 2: msg='SetPromptType', dq left: 21
+15:44:34.112 [DEBUG] SetPromptType pt=0
+15:44:34.113 [DEBUG] Iter 3: msg='SetSessionLineGroup', dq left: 20
+15:44:34.113 [DEBUG] Iter 4: msg='AppendSessionOutput', dq left: 19
+15:44:34.113 [DEBUG] Iter 5: msg='AppendSessionOutput', dq left: 18
+15:44:34.114 [DEBUG] Iter 6: msg='AppendSessionOutput', dq left: 17
+15:44:34.114 [DEBUG] Iter 7: msg='HadError', dq left: 16
+15:44:34.115 [DEBUG] Iter 8: msg='AppendSessionOutput', dq left: 15
+15:44:34.115 [DEBUG] Iter 9: msg='AppendSessionOutput', dq left: 14
+15:44:34.116 [DEBUG] Iter 10: msg='AppendSessionOutput', dq left: 13
+15:44:34.116 [DEBUG] Iter 11: msg='OpenWindow', dq left: 12
+15:44:34.117 [DEBUG] Iter 12: msg='SetHighlightLine', dq left: 11
+15:44:34.117 [DEBUG] Iter 13: msg='UpdateWindow', dq left: 10
+15:44:34.118 [DEBUG] Iter 14: msg='UpdateWindow', dq left: 9
+15:44:34.118 [DEBUG] Iter 15: msg='UpdateWindow', dq left: 8
+15:44:34.119 [DEBUG] Iter 16: msg='UpdateWindow', dq left: 7
+15:44:34.119 [DEBUG] Iter 17: msg='FocusThread', dq left: 6
+15:44:34.120 [DEBUG] Iter 18: msg='UpdateWindow', dq left: 5
+15:44:34.120 [DEBUG] Iter 19: msg='UpdateWindow', dq left: 4
+15:44:34.121 [DEBUG] Iter 20: msg='FocusThread', dq left: 3
+15:44:34.121 [DEBUG] Iter 21: msg='SetPromptType', dq left: 2
+15:44:34.122 [DEBUG] SetPromptType pt=1
+15:44:34.122 [DEBUG] Prompt ready! Output len: 191
+15:44:34.123 [DEBUG] BREAKING after 21 iterations

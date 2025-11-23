@@ -1,0 +1,34 @@
+ col←readEnumColumn(column_type data row_count);internal_type;internal_type_id;dict_size;dict_values;i
+⍝ Read an ENUM column from a DuckDB vector
+⍝ column_type: the logical type of the column
+⍝ data: pointer to the enum index data
+⍝ row_count: number of rows
+⍝ Returns: vector of enum string values
+
+⎕io←0
+
+⍝ Get the internal type (usually UINT or similar for the enum indices)
+internal_type←api.duckdb_enum_internal_type column_type
+internal_type_id←api.duckdb_get_type_id internal_type
+
+⍝ Get the enum dictionary
+dict_size←api.duckdb_enum_dictionary_size column_type
+dict_values←{256 read.utf8 api.duckdb_enum_dictionary_value column_type ⍵}¨⍳dict_size
+
+⍝ Read the enum indices based on internal type
+:Select internal_type_id
+:Case 6  ⍝ UTINYINT
+    indices←row_count read.u8 data
+:Case 7  ⍝ USMALLINT
+    indices←row_count read.u16 data
+:Case 8  ⍝ UINTEGER
+    indices←row_count read.u32 data
+:Else
+    ⎕←'Unsupported enum internal type: ',⍕internal_type_id
+    col←row_count⍴⊂'' ⋄ →0
+:EndSelect
+
+⍝ Map indices to dictionary values
+col←dict_values[indices]
+
+⍝ KSL 2.0.0

@@ -1,0 +1,22 @@
+ col←readStringElements(data count);a;b;l
+⍝ Read VARCHAR/string elements from memory
+⍝ data: pointer to string data
+⍝ count: number of strings
+⍝ Returns: vector of strings
+
+⎕io←0
+
+a←count read.string data
+col←⎕UCS¨1⊃¨a
+
+⍝ Handle short strings (inline, ≤12 bytes)
+b←13>l←,⊃¨a
+(b/col)←(b/l){⍺↑⍵}¨b/col
+
+⍝ Handle long strings (pointer-based, >12 bytes)
+b←~b
+:If 1∊b
+    (b/col)←(b/l){⍺ read.utf8_l 256⊥⌽4↓1⊃⍵}¨b/a
+:EndIf
+
+⍝ KSL 2.0.0

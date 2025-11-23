@@ -6,6 +6,27 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a DuckDB interface for Dyalog APL, providing native bindings to the DuckDB C API. The project enables APL users to interact with DuckDB databases through FFI (Foreign Function Interface) using Dyalog's `⎕NA` system.
 
+## CRITICAL: APL Function Syntax Rules
+
+**NEVER use control structures (`:If`, `:For`, `:Select`, etc.) inside dfns (dynamic functions using `{...}`)!**
+
+- **Dfns (Dynamic Functions)**: Use `{...}` syntax
+  - Can ONLY use guards (`:` operator) for conditional logic
+  - Can ONLY use recursion for iteration
+  - Example: `{0=⍵:⍬ ⋄ ⍵,∇ ⍵-1}`  ✓ Correct
+  - Example: `{:If 0=⍵ ⋄ ⍬ ⋄ :Else ⋄ ⍵ ⋄ :EndIf}`  ✗ WRONG - will cause SYNTAX ERROR
+
+- **Tradfns (Traditional Functions)**: Use `∇` or function header
+  - CAN use control structures (`:If`, `:For`, `:Select`, etc.)
+  - Header format: `result←FunctionName args;local1;local2`
+  - Example: `∇r←Add(a b) ⋄ r←a+b ∇`  ✓ Correct
+  - **CANNOT be nested** - each function must be in its own `.aplf` file or namespace
+  - Example: Defining a function inside another function with `∇...∇`  ✗ WRONG - not supported
+
+**When in doubt, use tradfns for any logic requiring control structures!**
+
+**Each function must be in its own file - no nested function definitions!**
+
 ## Architecture
 
 ### Core Components

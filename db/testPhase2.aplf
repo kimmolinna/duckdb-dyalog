@@ -1,0 +1,128 @@
+ testPhase2;r;req;db;con;result
+⍝ Test Phase 2: Advanced Data Types
+:If 0=⎕NC'null'
+    init 'C:\Users\kimmo\duckdb-dyalog\lib\'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+
+⍝ ===== LIST TYPE TEST =====
+r←⊂'Test LIST Type'
+db←open':memory:'
+con←connect db
+
+⍝ Create table with LIST column
+{}query con'CREATE TABLE list_test(id INT, numbers INT[])'
+{}query con'INSERT INTO list_test VALUES (1, [1, 2, 3])'
+{}query con'INSERT INTO list_test VALUES (2, [10, 20])'
+{}query con'INSERT INTO list_test VALUES (3, [])'
+
+result←query con'SELECT * FROM list_test ORDER BY id'
+r,←⊂'LIST query executed'req 3=≢result
+
+⍝ Check if lists were read correctly
+:If 3=≢result
+    ids←⊃1⊃result
+    lists←1⊃1⊃result
+    r,←⊂'First list correct'req(1 2 3)≡⊃lists
+    r,←⊂'Second list correct'req(10 20)≡1⊃lists
+    r,←⊂'Third list (empty) correct'req 0=≢2⊃lists
+:EndIf
+
+{}disconnect con
+{}close db
+⎕←↑r
+
+⍝ ===== STRUCT TYPE TEST =====
+r←⊂'Test STRUCT Type'
+db←open':memory:'
+con←connect db
+
+⍝ Create table with STRUCT column
+{}query con'CREATE TABLE struct_test(id INT, person STRUCT(name VARCHAR, age INT))'
+{}query con'INSERT INTO struct_test VALUES (1, {''name'': ''Alice'', ''age'': 30})'
+{}query con'INSERT INTO struct_test VALUES (2, {''name'': ''Bob'', ''age'': 25})'
+
+result←query con'SELECT * FROM struct_test ORDER BY id'
+r,←⊂'STRUCT query executed'req 3=≢result
+
+⍝ Check if structs were read correctly
+:If 3=≢result
+    structs←1⊃1⊃result
+    r,←⊂'First struct name correct'req'Alice'≡(0⊃structs).name
+    r,←⊂'First struct age correct'req 30=(0⊃structs).age
+    r,←⊂'Second struct name correct'req'Bob'≡(1⊃structs).name
+:EndIf
+
+{}disconnect con
+{}close db
+⎕←↑r
+
+⍝ ===== MAP TYPE TEST =====
+r←⊂'Test MAP Type'
+db←open':memory:'
+con←connect db
+
+{}query con'CREATE TABLE map_test(id INT, attrs MAP(VARCHAR, INT))'
+{}query con'INSERT INTO map_test VALUES (1, MAP {''a'': 1, ''b'': 2})'
+{}query con'INSERT INTO map_test VALUES (2, MAP {''x'': 10})'
+
+result←query con'SELECT * FROM map_test ORDER BY id'
+r,←⊂'MAP query executed'req 3=≢result
+
+⍝ Check if maps were read correctly
+:If 3=≢result
+    maps←2⊃result
+    r,←⊂'First map has keys'req 2=≢(1⊃maps).keys
+    r,←⊂'Second map has one key'req 1=≢(2⊃maps).keys
+:EndIf
+
+{}disconnect con
+{}close db
+⎕←↑r
+
+⍝ ===== ENUM TYPE TEST =====
+r←⊂'Test ENUM Type'
+db←open':memory:'
+con←connect db
+
+{}query con'CREATE TYPE mood AS ENUM (''happy'', ''sad'', ''neutral'')'
+{}query con'CREATE TABLE enum_test(id INT, feeling mood)'
+{}query con'INSERT INTO enum_test VALUES (1, ''happy''::mood)'
+{}query con'INSERT INTO enum_test VALUES (2, ''sad''::mood)'
+
+result←query con'SELECT * FROM enum_test ORDER BY id'
+r,←⊂'ENUM query executed'req 3=≢result
+
+⍝ Check if enums were read correctly
+:If 3=≢result
+    feelings←2⊃result
+    r,←⊂'First enum correct'req'happy'≡1⊃feelings
+    r,←⊂'Second enum correct'req'sad'≡2⊃feelings
+:EndIf
+
+{}disconnect con
+{}close db
+⎕←↑r
+
+⍝ ===== NESTED LIST TEST =====
+r←⊂'Test Nested LIST'
+db←open':memory:'
+con←connect db
+
+{}query con'CREATE TABLE nested_test(id INT, matrix INT[][])'
+{}query con'INSERT INTO nested_test VALUES (1, [[1, 2], [3, 4]])'
+
+result←query con'SELECT * FROM nested_test'
+r,←⊂'Nested LIST query executed'req 3=≢result
+
+{}disconnect con
+{}close db
+⎕←↑r
+
+⍝ ===== SUMMARY =====
+⎕←''
+⎕←'Phase 2 testing complete!'
+⎕←'Advanced data types (LIST, STRUCT, MAP, ENUM) have been implemented.'
+
+⍝ KSL 2.0.0

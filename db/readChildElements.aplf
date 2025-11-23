@@ -1,0 +1,55 @@
+ col←readChildElements(vector type_id data count);_validity;nullmask
+⍝ Read elements from a child vector based on type
+⍝ vector: the DuckDB vector pointer
+⍝ type_id: the type ID of the elements
+⍝ data: pointer to the element data
+⍝ count: number of elements
+⍝ Returns: vector of elements
+
+⎕io←0
+
+_validity←api.duckdb_vector_get_validity vector
+
+:Select type_id
+:Case 1  ⍝ BOOLEAN
+    col←count read.i8 data
+:Case 2  ⍝ TINYINT
+    col←count read.i8 data
+:Case 3  ⍝ SMALLINT
+    col←count read.i16 data
+:Case 4  ⍝ INTEGER
+    col←count read.i32 data
+:Case 5  ⍝ BIGINT
+    col←count read.i64 data
+:Case 6  ⍝ UTINYINT
+    col←count read.u8 data
+:Case 7  ⍝ USMALLINT
+    col←count read.u16 data
+:Case 8  ⍝ UINTEGER
+    col←count read.u32 data
+:Case 9  ⍝ UBIGINT
+    col←count read.u64 data
+:Case 10  ⍝ FLOAT
+    col←count read.float data
+:Case 11  ⍝ DOUBLE
+    col←count read.double data
+:CaseList 17 28  ⍝ VARCHAR/JSON
+    col←readStringElements data count
+:case 25 ⍝ STRUCT
+    col←readStructColumn vector data count
+:Else
+    ⎕←'Unsupported child type: ',⍕type_id
+    col←count⍴⊂''
+:EndSelect
+
+⍝ Handle NULL values if validity mask exists
+:If (_validity≢0)∧(count>0)
+    nullmask←count↑{,⌽⍵ 8⍴11 ⎕DR ⍵ read.i8 _validity}⌈count÷8
+    :Trap 0
+        ((~nullmask)/col)←null
+    :Else
+        col←count⍴null
+    :EndTrap
+:EndIf
+
+⍝ KSL 2.0.0

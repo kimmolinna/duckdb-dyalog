@@ -1,4 +1,4 @@
-out←getResultsOld (st result);column_names;count;chunks
+out←getResultsOld (st result);column_names;chunks;_data_chunk;o
 :if st
     _error_message←api.duckdb_result_error ⊂result
     out←1024 read.utf8 _error_message ⋄ →0
@@ -9,19 +9,14 @@ column_names←{1=≡⍵:,¨⍵ ⋄ ⍵}{
     }¨⍳api.duckdb_column_count ⊂result
 
 
-count←api.duckdb_result_chunk_count ⊂result
-
-:if count=0
-    out←column_names
-    →0
-:endif
-
-chunks←{
-    _data_chunk←api.duckdb_result_get_chunk result ⍵
+chunks←⍬
+_data_chunk←api.duckdb_fetch_chunk ⊂result
+:while 0≠_data_chunk
     o←↑{readChunk _data_chunk ⍵}¨⍳api.duckdb_data_chunk_get_column_count _data_chunk
+    chunks,←⊂o
     r←api.duckdb_destroy_data_chunk _data_chunk
-    o
-}¨⍳count
+    _data_chunk←api.duckdb_fetch_chunk ⊂result
+:endwhile
 {}api.duckdb_destroy_result ⊂result
 
 

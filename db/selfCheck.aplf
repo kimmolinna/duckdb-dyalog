@@ -1,0 +1,23 @@
+selfCheck folder;aplv;linux;mac;sel;v
+⍝ Validate runtime setup and report selected DuckDB library for current platform.
+⍝ folder:
+⍝   - ''     : report current state (initializes with 'lib/' if needed)
+⍝   - 'lib/' : initialize first, then report
+
+:If 0<≢folder
+    init folder
+:ElseIf 0=⎕NC'ducklibpath'
+    init 'lib/'
+:EndIf
+
+aplv←⊃('.'⎕WG'APLVersion')
+linux←∨/'Linux'⍷aplv
+mac←(∨/'Darwin'⍷aplv)∨/'Mac'⍷aplv
+sel←('windows' 'linux' 'mac')⊃⍨1+linux+2×mac
+v←version ⍬
+
+⎕←'DuckDB self-check'
+⎕←'OS: ',sel
+⎕←'Library: ',ducklibpath
+⎕←'Version: ',v
+⎕←'Vector size: ',⍕STANDARD_VECTOR_SIZE

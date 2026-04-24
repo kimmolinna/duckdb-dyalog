@@ -1,4 +1,4 @@
- col←readMapColumn(vector column_type row_count);key_type;value_type
+col←readMapColumn(vector column_type row_count);data;list_col;ns;kvpairs;i
 ⍝ Read a MAP column from a DuckDB vector
 ⍝ vector: the DuckDB vector pointer
 ⍝ column_type: the logical type of the column
@@ -7,10 +7,6 @@
 
 ⎕io←0
 
-⍝ Get key and value types
-key_type←api.duckdb_map_type_key_type column_type
-value_type←api.duckdb_map_type_value_type column_type
-
 ⍝ Maps in DuckDB are stored as LISTs of STRUCTs with 'key' and 'value' fields
 ⍝ So we can use readListColumn to get the list of key-value pairs
 ⍝ Then extract keys and values from each struct
@@ -18,13 +14,22 @@ value_type←api.duckdb_map_type_value_type column_type
 data←api.duckdb_vector_get_data vector
 list_col←readListColumn vector data row_count
 
-⍝ Extract keys and values from the structs
-col←{
-    kvpairs←⍵  ⍝ List of key-value pair structs
+⍝ Extract keys and values from key-value structs (one namespace per row)
+col←row_count⍴⊂⎕NS''
+:For i :In ⍳row_count
+    kvpairs←i⊃list_col
     ns←⎕NS''
-    0=≢kvpairs:(ns.keys ns.values)←⍬ ⍬ ⋄ ns
-    (ns.keys ns.values)←kvpairs.(key value)
-    ns
-}¨list_col
+    :If 0=≢kvpairs
+        ns.keys←⍬
+        ns.values←⍬
+    :Else
+        :If 9=⎕NC'kvpairs.key'
+            kvpairs←,⊂kvpairs
+        :EndIf
+        ns.keys←{⍵.key}¨kvpairs
+        ns.values←{⍵.value}¨kvpairs
+    :EndIf
+    col[i]←⊂ns
+:EndFor
 
 ⍝ KSL 2.0.0

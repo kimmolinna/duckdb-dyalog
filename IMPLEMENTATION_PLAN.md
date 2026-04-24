@@ -26,8 +26,7 @@
 - `duckdb_row_count`
 - `duckdb_rows_changed`
 - `duckdb_result_error`
-- `duckdb_result_get_chunk`
-- `duckdb_result_chunk_count`
+- `duckdb_fetch_chunk`
 
 #### Prepared Statements (3 functions)
 - `duckdb_prepare`

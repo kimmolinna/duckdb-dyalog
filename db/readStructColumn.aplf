@@ -25,7 +25,7 @@ child_cols←{
 col←⎕NS¨row_count⍴⊂⍬
 :For i :In ⍳row_count
     :For j :In ⍳child_count
-        ⍎'col.',(j⊃child_names),'←j⊃child_cols'
+        ⍎'col[i].',(j⊃child_names),'←⊃(j⊃child_cols)[i]'
     :EndFor
 :EndFor
 

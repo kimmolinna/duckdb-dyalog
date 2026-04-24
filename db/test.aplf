@@ -1,6 +1,6 @@
  test;r;req
  :If 0=⎕NC'null'
-     init 'C:\users\kimmo\duckdb-dyalog\lib\'
+     init'/users/linna/duckdb-dyalog/lib/'
  :EndIf
  req←{0::⍺,' - failed' ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - failed'}
  {r←⊂⍵
@@ -69,22 +69,22 @@
 
      col1_validity←api.duckdb_vector_get_validity api.duckdb_data_chunk_get_vector data_chunk 0
 
-     r,←⊂'Validity of col1'req 256+api.duckdb_validity_row_is_valid col1_validity 0
+     r,←⊂'Validity of col1'req 1=api.duckdb_validity_row_is_valid col1_validity 0
      _←api.duckdb_validity_set_row_validity col1_validity 0 0
-     r,←⊂'Invalidity of col1'req~256+api.duckdb_validity_row_is_valid col1_validity 0
+     r,←⊂'Invalidity of col1'req 0=api.duckdb_validity_row_is_valid col1_validity 0
 
      col2_validity←api.duckdb_vector_get_validity api.duckdb_data_chunk_get_vector data_chunk 1
 
-     r,←⊂'Validity of col2'req 256+api.duckdb_validity_row_is_valid col2_validity 0
+     r,←⊂'Validity of col2'req 1=api.duckdb_validity_row_is_valid col2_validity 0
      _←api.duckdb_validity_set_row_validity col2_validity 0 0
-     r,←⊂'Invalidity of col1'req~256+api.duckdb_validity_row_is_valid col2_validity 0
+     r,←⊂'Invalidity of col2'req 0=api.duckdb_validity_row_is_valid col2_validity 0
 
      _←api.duckdb_data_chunk_set_size data_chunk 1
      r,←⊂'Succesfull append of chunk'req DuckDBSuccess≡api.duckdb_append_data_chunk appender data_chunk
      r,←⊂'Validity of null pointer'req 0≡api.duckdb_vector_get_validity 0
 
      _←api.duckdb_appender_destroy appender
-     r,←⊂'Correct data in table'req(,¨'i' 'j')((42 ⎕NULL)(84 ⎕NULL))(5 3)≡query con'SELECT * FROM test'
+     r,←⊂'Correct data in table'req(,¨'i' 'j')((42 ⎕NULL)(84 ⎕NULL))(⊂5 3)≡query con'SELECT * FROM test'
 
      _←api.duckdb_data_chunk_reset data_chunk
      _←api.duckdb_data_chunk_reset 0

@@ -1,7 +1,7 @@
- testPhase2;r;req;db;con;result
+ testPhase2;r;req;db;con;result;st;stmt;pending;state;iter;out;msg;stream_result;chunk;rows
 ⍝ Test Phase 2: Advanced Data Types
 :If 0=⎕NC'null'
-    init 'C:\Users\kimmo\duckdb-dyalog\lib\'
+    init 'lib/'
 :EndIf
 
 req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
@@ -72,9 +72,9 @@ r,←⊂'MAP query executed'req 3=≢result
 
 ⍝ Check if maps were read correctly
 :If 3=≢result
-    maps←2⊃result
-    r,←⊂'First map has keys'req 2=≢(1⊃maps).keys
-    r,←⊂'Second map has one key'req 1=≢(2⊃maps).keys
+    maps←1⊃1⊃result
+    r,←⊂'First map has keys'req 2=≢(0⊃maps).keys
+    r,←⊂'Second map has one key'req 1=≢(1⊃maps).keys
 :EndIf
 
 {}disconnect con
@@ -96,9 +96,9 @@ r,←⊂'ENUM query executed'req 3=≢result
 
 ⍝ Check if enums were read correctly
 :If 3=≢result
-    feelings←2⊃result
-    r,←⊂'First enum correct'req'happy'≡1⊃feelings
-    r,←⊂'Second enum correct'req'sad'≡2⊃feelings
+    feelings←1⊃1⊃result
+    r,←⊂'First enum correct'req'happy'≡0⊃feelings
+    r,←⊂'Second enum correct'req'sad'≡1⊃feelings
 :EndIf
 
 {}disconnect con
@@ -115,6 +115,59 @@ con←connect db
 
 result←query con'SELECT * FROM nested_test'
 r,←⊂'Nested LIST query executed'req 3=≢result
+
+{}disconnect con
+{}close db
+⎕←↑r
+
+⍝ ===== PENDING/STREAMING API TEST =====
+r←⊂'Test Pending/Streaming API'
+db←open':memory:'
+con←connect db
+
+stmt←prepareQuery con'SELECT i FROM range(10000) t(i)'
+r,←⊂'Prepare statement'req stmt≠0
+
+:If stmt≠0
+    (st pending)←api.duckdb_pending_prepared stmt 0
+    r,←⊂'Create pending result'req(DuckDBSuccess=st)∧pending≠0
+
+    :If (DuckDBSuccess=st)∧pending≠0
+        state←api.duckdb_pending_execute_task pending
+        iter←0
+        :While (~api.duckdb_pending_execution_is_finished state)∧iter<100000
+            state←api.duckdb_pending_execute_task pending
+            iter+←1
+        :EndWhile
+        r,←⊂'Pending reached finished state'req api.duckdb_pending_execution_is_finished state
+        (st out)←api.duckdb_execute_pending pending 6
+        r,←⊂'Execute pending to result'req DuckDBSuccess=st
+        :If DuckDBSuccess=st
+            {}api.duckdb_destroy_result⊂out
+        :EndIf
+        {}api.duckdb_destroy_pending pending
+    :Else
+        msg←1024 read.utf8 api.duckdb_pending_error pending
+        r,←⊂'Pending error message available'req 0<≢msg
+        {}api.duckdb_destroy_pending pending
+    :EndIf
+
+    (st stream_result)←api.duckdb_execute_prepared_streaming stmt 6
+    r,←⊂'Execute prepared streaming'req DuckDBSuccess=st
+    :If DuckDBSuccess=st
+        rows←0
+        chunk←api.duckdb_stream_fetch_chunk⊂stream_result
+        :While 0≠chunk
+            rows+←api.duckdb_data_chunk_get_size chunk
+            {}api.duckdb_destroy_data_chunk chunk
+            chunk←api.duckdb_stream_fetch_chunk⊂stream_result
+        :EndWhile
+        r,←⊂'Streaming rows read'req 10000=rows
+        {}api.duckdb_destroy_result⊂stream_result
+    :EndIf
+
+    {}destroyPrepared stmt
+:EndIf
 
 {}disconnect con
 {}close db

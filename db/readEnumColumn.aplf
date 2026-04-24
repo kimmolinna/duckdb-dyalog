@@ -1,4 +1,4 @@
- col←readEnumColumn(column_type data row_count);internal_type;internal_type_id;dict_size;dict_values;i
+col←readEnumColumn(column_type data row_count);internal_type_id;dict_size;dict_values;indices
 ⍝ Read an ENUM column from a DuckDB vector
 ⍝ column_type: the logical type of the column
 ⍝ data: pointer to the enum index data
@@ -7,9 +7,8 @@
 
 ⎕io←0
 
-⍝ Get the internal type (usually UINT or similar for the enum indices)
-internal_type←api.duckdb_enum_internal_type column_type
-internal_type_id←api.duckdb_get_type_id internal_type
+⍝ Get the internal enum index type (duckdb_type)
+internal_type_id←api.duckdb_enum_internal_type column_type
 
 ⍝ Get the enum dictionary
 dict_size←api.duckdb_enum_dictionary_size column_type

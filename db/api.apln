@@ -28,10 +28,9 @@
     ⎕NA'U8 ',lib,'|duckdb_rows_changed <P[]'
     ⍝ const char *duckdb_result_error(duckdb_result *result);
     ⎕NA'U8 ',lib,'|duckdb_result_error <P[]'
-    ⍝ duckdb_data_chunk duckdb_result_get_chunk(duckdb_result result, idx_t chunk_index);
-    ⎕NA'P ',lib,'|duckdb_result_get_chunk {U8 U8 U8 P P P} U8'
-    ⍝ idx_t duckdb_result_chunk_count(duckdb_result result);
-    ⎕NA'U8 ',lib,'|duckdb_result_chunk_count {U8 U8 U8 P P P}'
+    ⍝ duckdb_data_chunk duckdb_fetch_chunk(duckdb_result result);
+    ⍝ NOTE: on macOS ARM in this project, <P[] is the stable calling convention.
+    ⎕NA'P ',lib,'|duckdb_fetch_chunk <P[]'
     ⍝ duckdb_free(void *ptr)
     ⎕NA lib,'|duckdb_free P'
     ⍝ idx_t duckdb_vector_size()
@@ -42,8 +41,26 @@
     ⎕NA lib,'|duckdb_destroy_prepare <P'
     ⍝ duckdb_state duckdb_execute_prepared(duckdb_prepared_statement prepared_statement, duckdb_result *out_result);
     ⎕NA'I4 ',lib,'|duckdb_execute_prepared P >P[]'
+    ⍝ duckdb_state duckdb_execute_prepared_streaming(duckdb_prepared_statement prepared_statement, duckdb_result *out_result);
+    ⎕NA'I4 ',lib,'|duckdb_execute_prepared_streaming P >P[]'
     ⍝ duckdb_state duckdb_execute_prepared_arrow(duckdb_prepared_statement prepared_statement, duckdb_arrow *out_result);
     ⎕NA'I4 ',lib,'|duckdb_execute_prepared_arrow P P'
+    ⍝ duckdb_state duckdb_pending_prepared(duckdb_prepared_statement prepared_statement, duckdb_pending_result *out_result);
+    ⎕NA'I4 ',lib,'|duckdb_pending_prepared P >P'
+    ⍝ duckdb_state duckdb_pending_prepared_streaming(duckdb_prepared_statement prepared_statement, duckdb_pending_result *out_result);
+    ⎕NA'I4 ',lib,'|duckdb_pending_prepared_streaming P >P'
+    ⍝ void duckdb_destroy_pending(duckdb_pending_result *pending_result);
+    ⎕NA lib,'|duckdb_destroy_pending <P'
+    ⍝ const char *duckdb_pending_error(duckdb_pending_result pending_result);
+    ⎕NA'U8 ',lib,'|duckdb_pending_error P'
+    ⍝ duckdb_pending_state duckdb_pending_execute_task(duckdb_pending_result pending_result);
+    ⎕NA'I4 ',lib,'|duckdb_pending_execute_task P'
+    ⍝ bool duckdb_pending_execution_is_finished(duckdb_pending_state pending_state);
+    ⎕NA'I1 ',lib,'|duckdb_pending_execution_is_finished I4'
+    ⍝ duckdb_state duckdb_execute_pending(duckdb_pending_result pending_result, duckdb_result *out_result);
+    ⎕NA'I4 ',lib,'|duckdb_execute_pending P >P[]'
+    ⍝ duckdb_data_chunk duckdb_stream_fetch_chunk(duckdb_result result);
+    ⎕NA'P ',lib,'|duckdb_stream_fetch_chunk <P[]'
     ⍝ duckdb_logical_type duckdb_create_logical_type(duckdb_type type);
     ⎕NA'P ',lib,'|duckdb_create_logical_type I4'
     ⍝ duckdb_type duckdb_get_type_id(duckdb_logical_type type);
@@ -299,8 +316,8 @@
     ⎕NA'U4 ',lib,'|duckdb_enum_dictionary_size P'
     ⍝ char *duckdb_enum_dictionary_value(duckdb_logical_type type, idx_t index);
     ⎕NA'U8 ',lib,'|duckdb_enum_dictionary_value P U8'
-    ⍝ duckdb_logical_type duckdb_enum_internal_type(duckdb_logical_type type);
-    ⎕NA'P ',lib,'|duckdb_enum_internal_type P'
+    ⍝ duckdb_type duckdb_enum_internal_type(duckdb_logical_type type);
+    ⎕NA'I4 ',lib,'|duckdb_enum_internal_type P'
 
     ⍝ duckdb_logical_type duckdb_create_union_type(duckdb_logical_type *member_types, const char **member_names, idx_t member_count);
     ⎕NA'P ',lib,'|duckdb_create_union_type <P[] <P[] U8'

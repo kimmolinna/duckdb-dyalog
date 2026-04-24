@@ -35,8 +35,10 @@ _validity←api.duckdb_vector_get_validity vector
     col←count read.double data
 :CaseList 17 28  ⍝ VARCHAR/JSON
     col←readStringElements data count
-:case 25 ⍝ STRUCT
-    col←readStructColumn vector data count
+:Case 24  ⍝ LIST (nested lists inside STRUCT/MAP/etc.)
+    col←readListColumn vector data count
+:Case 25  ⍝ STRUCT
+    col←readStructColumn vector (api.duckdb_vector_get_column_type vector) count
 :Else
     ⎕←'Unsupported child type: ',⍕type_id
     col←count⍴⊂''

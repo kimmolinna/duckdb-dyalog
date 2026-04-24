@@ -1,16 +1,19 @@
- chunks←readChunks(result count);row_count;_vector;_column_type;_data;_validity;type_id;nullmask;a;b;l;fr;frac;exp;sign;toReal;split;chunk;column;_data_chunk;r;column_count;column_types;col;data;columns
+ chunks←readChunks result;row_count;_vector;_column_type;_data;_validity;type_id;nullmask;a;b;l;fr;frac;exp;sign;toReal;split;chunk;column;_data_chunk;r;column_count;column_types;col;data;chunk_data
  ⍝ (col type_id)←readChunks(result data_chunk_ind);row_count;_vector;_column_type;_data;_validity;type_id;nullmask;a;b;l;fr;frac;exp;sign;toReal;split
 
- _data_chunk←api.duckdb_result_get_chunk result 0
+ _data_chunk←api.duckdb_fetch_chunk ⊂result
+ :If 0=_data_chunk
+     chunks←(0 0⍴⊂⍬) (0⍴⍬)
+     →0
+ :EndIf
  column_count←api.duckdb_data_chunk_get_column_count _data_chunk
  column_types←column_count⍴⍬
- data←(count column_count)⍴⍬
+ data←⍬
+ chunk←0
 
- :For chunk :In ⍳count
-     :If chunk≠0
-         _data_chunk←api.duckdb_result_get_chunk result chunk
-     :EndIf
+ :While 0≠_data_chunk
      row_count←api.duckdb_data_chunk_get_size _data_chunk
+     chunk_data←column_count⍴⊂⍬
      :For column :In ⍳column_count
          _vector←api.duckdb_data_chunk_get_vector _data_chunk column
          :If chunk=0
@@ -115,9 +118,13 @@
                  col←row_count⍴null
              :End
          :EndIf
-         data[chunk;column]←⊂col
+         chunk_data[column]←⊂col
      :EndFor
+     data,←⊂chunk_data
      r←api.duckdb_destroy_data_chunk _data_chunk
- :EndFor
+     chunk+←1
+     _data_chunk←api.duckdb_fetch_chunk ⊂result
+ :EndWhile
+ data←↑data
  chunks←(data column_types)
 ⍝ KSL 1.0.4

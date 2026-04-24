@@ -1,4 +1,4 @@
- out←getResults(st result);column_names;count;chunks
+ out←getResults(st result);column_names;chunks
  :If st
      _error_message←api.duckdb_result_error⊂result
      out←1024 read.utf8 _error_message ⋄ →0
@@ -9,16 +9,13 @@
  }¨⍳api.duckdb_column_count⊂result
 
 
- count←api.duckdb_result_chunk_count⊂result
+ chunks←readChunks result
+ {}api.duckdb_destroy_result⊂result
 
- :If count=0
+ :If 0=≢⊃chunks
      out←column_names
      →0
  :EndIf
-
- chunks←readChunks(result count)
- {}api.duckdb_destroy_result⊂result
-
 
  out←(⊂column_names),(,/[0]¨chunks)
 

@@ -1,7 +1,7 @@
  testPhase1;r;req;db;con;cfg;stmt;result;version_str;nparams;param_name;col_count;col_name;col_type;st;stmt_type;values;result_type;is_streaming;error_type;error_msg;idx
  ⍝ Test all Phase 1 functionality
  :If 0=⎕NC'null'
-     init 'C:\Users\kimmo\duckdb-dyalog\lib\'
+    init 'lib/'
  :EndIf
 
  req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}

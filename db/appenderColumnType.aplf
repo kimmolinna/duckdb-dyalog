@@ -1,0 +1,8 @@
+appenderColumnType←{
+⍝ Return logical type handle for appender column index.
+⍝ Usage: appender appenderColumnType col_idx
+⍝ Caller must destroy returned logical type via api.duckdb_destroy_logical_type.
+    api.duckdb_appender_column_type ⍺ ⍵
+}
+
+⍝ KSL 1.0.0

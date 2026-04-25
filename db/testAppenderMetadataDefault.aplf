@@ -1,0 +1,67 @@
+testAppenderMetadataDefault;req;r;db;con;st;appender;cc;lt0;lt1;lt2;result
+⍝ Isolated test for appender metadata APIs and append_default.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Appender Metadata/Default API'
+
+db←open ':memory:'
+con←connect db
+
+{}query con 'CREATE TABLE app_meta_test(id INT, name VARCHAR DEFAULT ''n/a'', score DOUBLE DEFAULT 1.5)'
+(st appender)←api.duckdb_appender_create con '' 'app_meta_test' 0
+r,←⊂'Create appender for metadata/default test' req (DuckDBSuccess=st)∧appender≠0
+
+:If (DuckDBSuccess=st)∧appender≠0
+    cc←appenderColumnCount appender
+    r,←⊂'appender_column_count is 3' req 3=cc
+
+    lt0←appender appenderColumnType 0
+    r,←⊂'appender_column_type(0) returned handle' req lt0≠0
+    :If lt0≠0
+        r,←⊂'column 0 type is INTEGER' req type.INTEGER=api.duckdb_get_type_id lt0
+        {}api.duckdb_destroy_logical_type ⊂lt0
+    :EndIf
+
+    lt1←appender appenderColumnType 1
+    r,←⊂'appender_column_type(1) returned handle' req lt1≠0
+    :If lt1≠0
+        r,←⊂'column 1 type is VARCHAR' req type.VARCHAR=api.duckdb_get_type_id lt1
+        {}api.duckdb_destroy_logical_type ⊂lt1
+    :EndIf
+
+    lt2←appender appenderColumnType 2
+    r,←⊂'appender_column_type(2) returned handle' req lt2≠0
+    :If lt2≠0
+        r,←⊂'column 2 type is DOUBLE' req type.DOUBLE=api.duckdb_get_type_id lt2
+        {}api.duckdb_destroy_logical_type ⊂lt2
+    :EndIf
+
+    r,←⊂'Begin row' req DuckDBSuccess=appenderBeginRow appender
+    r,←⊂'Append id value' req DuckDBSuccess=api.duckdb_append_int32 appender 7
+    r,←⊂'Append DEFAULT for name' req DuckDBSuccess=appendDefault appender
+    r,←⊂'Append DEFAULT for score' req DuckDBSuccess=appendDefault appender
+    r,←⊂'End row' req DuckDBSuccess=appenderEndRow appender
+    r,←⊂'Close appender' req DuckDBSuccess=appenderClose appender
+    r,←⊂'Destroy appender' req DuckDBSuccess=api.duckdb_appender_destroy appender
+
+    result←query con 'SELECT COUNT(*) AS n FROM app_meta_test WHERE id=7 AND name=''n/a'' AND score=1.5'
+    r,←⊂'Inserted row has expected DEFAULT values' req 1=⊃⊃1⊃result
+:EndIf
+
+⍝ Null pointer paths
+r,←⊂'appender_column_count null returns 0' req 0=appenderColumnCount 0
+r,←⊂'appender_column_type null returns 0' req 0=0 appenderColumnType 0
+r,←⊂'append_default null returns error' req DuckDBError=appendDefault 0
+
+{}disconnect con
+{}close db
+
+⎕←↑r
+⎕←''
+⎕←'Appender metadata/default testing complete!'
+
+⍝ KSL 1.0.0

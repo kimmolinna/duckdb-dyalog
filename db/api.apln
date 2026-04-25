@@ -125,6 +125,10 @@
     ⎕NA lib,'|duckdb_vector_assign_string_element_len P U8 <0U1[] U8'
     ⍝ duckdb_state duckdb_appender_create(duckdb_connection connection, const char *schema, const char *table,duckdb_appender *out_appender);
     ⎕NA'I4 ',lib,'|duckdb_appender_create P <0UTF8[] <0UTF8[] >P'
+    ⍝ idx_t duckdb_appender_column_count(duckdb_appender appender);
+    ⎕NA'U8 ',lib,'|duckdb_appender_column_count P'
+    ⍝ duckdb_logical_type duckdb_appender_column_type(duckdb_appender appender, idx_t col_idx);
+    ⎕NA'P ',lib,'|duckdb_appender_column_type P U8'
     ⍝ duckdb_state duckdb_append_data_chunk(duckdb_appender appender, duckdb_data_chunk chunk)
     ⎕NA'I4 ',lib,'|duckdb_append_data_chunk P P'
     ⍝ duckdb_state duckdb_appender_destroy(duckdb_appender *appender)
@@ -151,6 +155,8 @@
     ⎕NA'I4 ',lib,'|duckdb_append_varchar P <0UTF8[]'
     ⍝ duckdb_state duckdb_append_null(duckdb_appender appender)
     ⎕NA'I4 ',lib,'|duckdb_append_null P'
+    ⍝ duckdb_state duckdb_append_default(duckdb_appender appender)
+    ⎕NA'I4 ',lib,'|duckdb_append_default P'
     ⍝ void duckdb_destroy_arrow_options(duckdb_arrow_options *arrow_options);
     ⎕NA lib,'|duckdb_destroy_arrow_options <P'
     ⍝ double duckdb_hugeint_to_double(duckdb_hugeint val)

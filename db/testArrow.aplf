@@ -1,4 +1,4 @@
- testArrow;r;req;db;con;st;out;arrow_opts
+ testArrow;r;req;db;con;st;out;arrow_opts;con_opts
 ⍝ Test non-deprecated Arrow APIs separately from Phase 2 core tests
 :If 0=⎕NC'null'
     init 'lib/'
@@ -9,6 +9,12 @@ req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILE
 r←⊂'Test Arrow Result APIs'
 db←open':memory:'
 con←connect db
+
+(con_opts)←connectionArrowOptions con
+r,←⊂'connection_get_arrow_options returned handle'req con_opts≠0
+:If con_opts≠0
+    {}destroyArrowOptions con_opts
+:EndIf
 
 (st out)←api.duckdb_query con'SELECT 42 AS n' 6
 r,←⊂'Query for result arrow options'req DuckDBSuccess=st

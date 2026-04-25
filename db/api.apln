@@ -31,6 +31,8 @@
     ⎕NA'P ',lib,'|duckdb_fetch_chunk <P[]'
     ⍝ duckdb_arrow_options duckdb_result_get_arrow_options(duckdb_result *result);
     ⎕NA'P ',lib,'|duckdb_result_get_arrow_options <P[]'
+    ⍝ void duckdb_connection_get_arrow_options(duckdb_connection connection, duckdb_arrow_options *out_arrow_options);
+    ⎕NA lib,'|duckdb_connection_get_arrow_options P >P'
     ⍝ duckdb_free(void *ptr)
     ⎕NA lib,'|duckdb_free P'
     ⍝ idx_t duckdb_vector_size()

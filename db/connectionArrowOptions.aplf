@@ -1,0 +1,17 @@
+opts←connectionArrowOptions con;r;vals
+⍝ Fetch Arrow options from connection handle
+⍝ con: duckdb_connection pointer
+⍝ opts: duckdb_arrow_options pointer (destroy with destroyArrowOptions)
+
+r←api.duckdb_connection_get_arrow_options con 0
+vals←,r
+opts←⊃vals
+:If 1<≢vals
+    ⍝ Some ⎕NA call patterns return duplicated handle tuples for void+out signatures.
+    ⍝ If values differ, prefer the trailing out-argument slot.
+    :If ~∧/vals=opts
+        opts←¯1↑vals
+    :EndIf
+:EndIf
+
+⍝ KSL 1.0.0

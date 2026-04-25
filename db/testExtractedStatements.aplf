@@ -17,7 +17,7 @@ r,←⊂'extract_statements count is 2' req 2=count
 r,←⊂'extract_statements returned handle' req extracted≠0
 
 :If extracted≠0
-    (st stmt)←prepareExtractedStatement(con extracted 0)
+    (st stmt)←prepareExtractedStatementChecked(con extracted 0 count)
     r,←⊂'prepare extracted statement[0] success' req (DuckDBSuccess=st)∧stmt≠0
     :If (DuckDBSuccess=st)∧stmt≠0
         res←executePrepared stmt
@@ -25,13 +25,16 @@ r,←⊂'extract_statements returned handle' req extracted≠0
         {}destroyPrepared stmt
     :EndIf
 
-    (st stmt)←prepareExtractedStatement(con extracted 1)
+    (st stmt)←prepareExtractedStatementChecked(con extracted 1 count)
     r,←⊂'prepare extracted statement[1] success' req (DuckDBSuccess=st)∧stmt≠0
     :If (DuckDBSuccess=st)∧stmt≠0
         res←executePrepared stmt
         r,←⊂'execute extracted statement[1] result' req 2=⊃⊃1⊃res
         {}destroyPrepared stmt
     :EndIf
+
+    (st stmt)←prepareExtractedStatementChecked(con extracted count count)
+    r,←⊂'prepare extracted statement(out-of-range) guarded error' req (DuckDBError=st)∧stmt=0
     {}destroyExtracted extracted
 :EndIf
 

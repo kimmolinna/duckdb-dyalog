@@ -1,0 +1,31 @@
+(st name desc)←getConfigFlag index;name_ptr;desc_ptr;count
+⍝ Read one configuration flag metadata tuple by index.
+⍝ returns: (duckdb_state flag_name flag_description)
+
+count←configCount
+:If index<0
+    st←DuckDBError
+    name←''
+    desc←''
+    →0
+:EndIf
+:If index≥count
+    st←DuckDBError
+    name←''
+    desc←''
+    →0
+:EndIf
+
+(st name_ptr desc_ptr)←api.duckdb_get_config_flag index 0 0
+:If name_ptr=0
+    name←''
+:Else
+    name←256 read.utf8 name_ptr
+:EndIf
+:If desc_ptr=0
+    desc←''
+:Else
+    desc←512 read.utf8 desc_ptr
+:EndIf
+
+⍝ KSL 1.0.0

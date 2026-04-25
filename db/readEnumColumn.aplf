@@ -28,6 +28,14 @@ dict_values←{256 read.utf8 api.duckdb_enum_dictionary_value column_type ⍵}¨
 :EndSelect
 
 ⍝ Map indices to dictionary values
-col←dict_values[indices]
+⍝ Guard out-of-range enum indices to avoid unsafe indexing.
+:If ∨/indices≥dict_size
+    col←(≢indices)⍴⊂''
+    :If ∨/indices<dict_size
+        (indices<dict_size)/col←dict_values[(indices<dict_size)/indices]
+    :EndIf
+:Else
+    col←dict_values[indices]
+:EndIf
 
 ⍝ KSL 2.0.0

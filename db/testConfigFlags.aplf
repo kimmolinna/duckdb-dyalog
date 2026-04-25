@@ -1,0 +1,38 @@
+testConfigFlags;req;r;count;st;name;desc;i;limit
+⍝ Isolated runtime test for config flag metadata APIs.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Config Flag Metadata API'
+
+count←configCount
+r,←⊂'config_count is positive' req 0<count
+r,←⊂'getConfigFlag wrapper exists' req 3=⎕NC'getConfigFlag'
+r,←⊂'duckdb_get_config_flag binding exists' req 3=api.⎕NC'duckdb_get_config_flag'
+
+:If 0<count
+    (st name desc)←getConfigFlag 0
+    r,←⊂'get_config_flag(0) status success' req DuckDBSuccess=st
+    r,←⊂'get_config_flag(0) name non-empty' req 0<≢name
+    r,←⊂'get_config_flag(0) description non-empty' req 0<≢desc
+
+    limit←3⌊count
+    :For i :In ⍳limit
+        (st name desc)←getConfigFlag i
+        r,←⊂('get_config_flag(',⍕i,') status success') req DuckDBSuccess=st
+        r,←⊂('get_config_flag(',⍕i,') name non-empty') req 0<≢name
+    :EndFor
+:EndIf
+
+⍝ Out-of-range is blocked by wrapper guard (no C call).
+(st name desc)←getConfigFlag count
+r,←⊂'get_config_flag(out-of-range) guarded error' req (DuckDBError=st)∧(0=≢name)∧0=≢desc
+
+⎕←↑r
+⎕←''
+⎕←'Config flag metadata testing complete!'
+
+⍝ KSL 1.0.0

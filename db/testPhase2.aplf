@@ -1,4 +1,4 @@
- testPhase2;r;req;db;con;result;st;stmt;pending;state;iter;out;msg;stream_result;chunk;rows;appender;app_msg;err_data;err_type
+ testPhase2;r;req;db;con;result;st;stmt;pending;state;iter;out;msg;appender;app_msg
 ⍝ Test Phase 2: Advanced Data Types
 :If 0=⎕NC'null'
     init 'lib/'
@@ -152,20 +152,6 @@ r,←⊂'Prepare statement'req stmt≠0
         {}api.duckdb_destroy_pending pending
     :EndIf
 
-    (st stream_result)←api.duckdb_execute_prepared_streaming stmt 6
-    r,←⊂'Execute prepared streaming'req DuckDBSuccess=st
-    :If DuckDBSuccess=st
-        rows←0
-        chunk←api.duckdb_stream_fetch_chunk⊂stream_result
-        :While 0≠chunk
-            rows+←api.duckdb_data_chunk_get_size chunk
-            {}api.duckdb_destroy_data_chunk chunk
-            chunk←api.duckdb_stream_fetch_chunk⊂stream_result
-        :EndWhile
-        r,←⊂'Streaming rows read'req 10000=rows
-        {}api.duckdb_destroy_result⊂stream_result
-    :EndIf
-
     {}destroyPrepared stmt
 :EndIf
 
@@ -258,14 +244,14 @@ r,←⊂'Clear columns null pointer returns error'req DuckDBError=appenderClearC
 {}close db
 ⎕←↑r
 
-⍝ ===== APPENDER ERROR DATA API TEST =====
-r←⊂'Test Appender ErrorData API'
+⍝ ===== APPENDER ERROR API TEST =====
+r←⊂'Test Appender Error API'
 db←open':memory:'
 con←connect db
 
 {}query con'CREATE TABLE app_err_test(id INT PRIMARY KEY, name VARCHAR)'
 (st appender)←api.duckdb_appender_create con '' 'app_err_test' 0
-r,←⊂'Create appender for errordata API'req(DuckDBSuccess=st)∧appender≠0
+r,←⊂'Create appender for error API'req(DuckDBSuccess=st)∧appender≠0
 
 :If (DuckDBSuccess=st)∧appender≠0
     r,←⊂'Begin first duplicate row'req DuckDBSuccess=appenderBeginRow appender
@@ -279,25 +265,9 @@ r,←⊂'Create appender for errordata API'req(DuckDBSuccess=st)∧appender≠0
     r,←⊂'End second duplicate row'req DuckDBSuccess=appenderEndRow appender
 
     r,←⊂'Close appender reports constraint error'req DuckDBError=appenderClose appender
-    err_data←appenderErrorData appender
-    r,←⊂'Appender error_data returned'req err_data≠0
-    :If err_data≠0
-        r,←⊂'error_data has error flag'req 1=errorDataHasError err_data
-        err_type←errorDataType err_data
-        r,←⊂'error_data type is non-zero'req err_type≠0
-        app_msg←errorDataMessage err_data
-        r,←⊂'error_data message available'req 0<≢app_msg
-        {}destroyErrorData err_data
-    :EndIf
+    app_msg←appenderError appender
+    r,←⊂'appender_error message available'req 0<≢app_msg
     r,←⊂'Destroy errored appender pointer is safe'req(DuckDBSuccess DuckDBError)∊⍨api.duckdb_appender_destroy appender
-:EndIf
-
-⍝ Null pointer check
-err_data←appenderErrorData 0
-r,←⊂'ErrorData null pointer call is safe'req 1
-:If err_data≠0
-    r,←⊂'ErrorData(null) can be inspected'req(0 1)∊⍨errorDataHasError err_data
-    {}destroyErrorData err_data
 :EndIf
 
 {}disconnect con

@@ -1,0 +1,8 @@
+opts←resultArrowOptions result
+⍝ Fetch Arrow options from query result object
+⍝ result: duckdb_result value (boxed, same as other result APIs)
+⍝ opts: duckdb_arrow_options pointer (destroy with destroyArrowOptions)
+
+opts←api.duckdb_result_get_arrow_options result
+
+⍝ KSL 1.0.0

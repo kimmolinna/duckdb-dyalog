@@ -1,0 +1,31 @@
+ testArrow;r;req;db;con;st;out;arrow_opts
+⍝ Test non-deprecated Arrow APIs separately from Phase 2 core tests
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+
+r←⊂'Test Arrow Result APIs'
+db←open':memory:'
+con←connect db
+
+(st out)←api.duckdb_query con'SELECT 42 AS n' 6
+r,←⊂'Query for result arrow options'req DuckDBSuccess=st
+:If DuckDBSuccess=st
+    arrow_opts←resultArrowOptions ⊂out
+    r,←⊂'result_get_arrow_options returned handle'req arrow_opts≠0
+    :If arrow_opts≠0
+        {}destroyArrowOptions arrow_opts
+    :EndIf
+    {}api.duckdb_destroy_result ⊂out
+:EndIf
+
+{}disconnect con
+{}close db
+⎕←↑r
+
+⎕←''
+⎕←'Arrow API testing complete!'
+
+⍝ KSL 1.0.0

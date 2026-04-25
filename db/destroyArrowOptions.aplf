@@ -1,0 +1,7 @@
+destroyArrowOptions←{
+⍝ Destroy duckdb_arrow_options pointer
+⍝ ⍵: duckdb_arrow_options pointer
+    api.duckdb_destroy_arrow_options ⍵
+}
+
+⍝ KSL 1.0.0

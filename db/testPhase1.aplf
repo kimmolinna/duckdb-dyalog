@@ -1,4 +1,4 @@
- testPhase1;r;req;db;con;cfg;stmt;result;version_str;nparams;param_name;col_count;col_name;col_type;st;stmt_type;values;result_type;is_streaming;error_type;error_msg;idx
+ testPhase1;r;req;db;con;cfg;stmt;result;version_str;nparams;param_name;col_count;col_name;col_type;st;stmt_type;values;result_type;error_type;error_msg;idx
  ⍝ Test all Phase 1 functionality
  :If 0=⎕NC'null'
     init 'lib/'
@@ -197,9 +197,6 @@
          ⍝ Test result type (materialized vs streaming)
          result_type←api.duckdb_result_return_type ⊂result
          r,←⊂'Result return type is materialized'req result_type=3
-
-         is_streaming←api.duckdb_result_is_streaming ⊂result
-         r,←⊂'Result is not streaming'req is_streaming=0
 
          {}api.duckdb_destroy_result ⊂result
      :Else

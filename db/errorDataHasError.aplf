@@ -1,8 +1,0 @@
-has_error←errorDataHasError err
-⍝ Check whether duckdb_error_data contains an error
-⍝ err: duckdb_error_data pointer
-⍝ has_error: 1 if error exists, else 0
-
-has_error←api.duckdb_error_data_has_error err
-
-⍝ KSL 1.0.0

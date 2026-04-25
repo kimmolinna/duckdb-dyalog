@@ -1,0 +1,44 @@
+testArrowFromRuntime;req;r;db;con;err;msg;out_conv;out_chunk
+⍝ Runtime null-smoke tests for inbound Arrow conversion APIs.
+⍝ Avoids Arrow struct marshalling by using null pointers.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Arrow From APIs (runtime null-smoke)'
+
+db←open ':memory:'
+con←connect db
+
+⍝ schema_from_arrow(null-schema)
+out_conv←0
+err←schemaFromArrow con 0 out_conv
+r,←⊂'schemaFromArrow(null) returned error_data handle' req err≠0
+:If err≠0
+    r,←⊂'schemaFromArrow(null) has error flag' req 1=api.duckdb_error_data_has_error err
+    msg←512 read.utf8 api.duckdb_error_data_message err
+    r,←⊂'schemaFromArrow(null) error message available' req 0<≢msg
+    {}api.duckdb_destroy_error_data ⊂err
+:EndIf
+
+⍝ data_chunk_from_arrow(null-array/null-schema)
+out_chunk←0
+err←dataChunkFromArrow con 0 0 out_chunk
+r,←⊂'dataChunkFromArrow(null) returned error_data handle' req err≠0
+:If err≠0
+    r,←⊂'dataChunkFromArrow(null) has error flag' req 1=api.duckdb_error_data_has_error err
+    msg←512 read.utf8 api.duckdb_error_data_message err
+    r,←⊂'dataChunkFromArrow(null) error message available' req 0<≢msg
+    {}api.duckdb_destroy_error_data ⊂err
+:EndIf
+
+{}disconnect con
+{}close db
+
+⎕←↑r
+⎕←''
+⎕←'Arrow from runtime null-smoke complete!'
+
+⍝ KSL 1.0.0

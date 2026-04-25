@@ -1,0 +1,10 @@
+err←dataChunkFromArrow args;con;arrow_array;converted_schema;out_chunk;res
+⍝ Low-level wrapper for duckdb_data_chunk_from_arrow
+⍝ args: (connection arrow_array_ptr converted_schema out_chunk_ptr)
+⍝ err: duckdb_error_data pointer (destroy with duckdb_destroy_error_data)
+
+(con arrow_array converted_schema out_chunk)←args
+res←,api.duckdb_data_chunk_from_arrow con arrow_array converted_schema out_chunk
+err←⊃res
+
+⍝ KSL 1.0.0

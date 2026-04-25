@@ -35,6 +35,12 @@
     ⎕NA'P ',lib,'|duckdb_to_arrow_schema P <P[] <P[] U8 P'
     ⍝ duckdb_error_data duckdb_data_chunk_to_arrow(duckdb_arrow_options arrow_options, duckdb_data_chunk chunk, struct ArrowArray *out_arrow_array);
     ⎕NA'P ',lib,'|duckdb_data_chunk_to_arrow P P P'
+    ⍝ duckdb_error_data duckdb_schema_from_arrow(duckdb_connection connection, struct ArrowSchema *schema, duckdb_arrow_converted_schema *out_types);
+    ⎕NA'P ',lib,'|duckdb_schema_from_arrow P P >P'
+    ⍝ duckdb_error_data duckdb_data_chunk_from_arrow(duckdb_connection connection, struct ArrowArray *arrow_array, duckdb_arrow_converted_schema converted_schema, duckdb_data_chunk *out_chunk);
+    ⎕NA'P ',lib,'|duckdb_data_chunk_from_arrow P P P >P'
+    ⍝ void duckdb_destroy_arrow_converted_schema(duckdb_arrow_converted_schema *arrow_converted_schema);
+    ⎕NA lib,'|duckdb_destroy_arrow_converted_schema <P'
     ⍝ void duckdb_connection_get_client_context(duckdb_connection connection, duckdb_client_context *out_context);
     ⎕NA lib,'|duckdb_connection_get_client_context P >P'
     ⍝ void duckdb_connection_get_arrow_options(duckdb_connection connection, duckdb_arrow_options *out_arrow_options);

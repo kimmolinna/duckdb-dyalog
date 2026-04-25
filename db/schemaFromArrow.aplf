@@ -1,0 +1,10 @@
+err←schemaFromArrow args;con;schema;out_types;res
+⍝ Low-level wrapper for duckdb_schema_from_arrow
+⍝ args: (connection arrow_schema_ptr out_converted_schema_ptr)
+⍝ err: duckdb_error_data pointer (destroy with duckdb_destroy_error_data)
+
+(con schema out_types)←args
+res←,api.duckdb_schema_from_arrow con schema out_types
+err←⊃res
+
+⍝ KSL 1.0.0

@@ -1,0 +1,12 @@
+msg←pendingError pending;ptr
+⍝ Read pending result error message
+⍝ pending: duckdb_pending_result pointer
+⍝ msg: error text or empty string
+
+ptr←api.duckdb_pending_error pending
+msg←''
+:If ptr≠0
+    msg←1024 read.utf8 ptr
+:EndIf
+
+⍝ KSL 1.0.0

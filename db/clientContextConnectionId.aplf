@@ -1,0 +1,8 @@
+id←clientContextConnectionId ctx
+⍝ Read connection id from duckdb_client_context
+⍝ ctx: duckdb_client_context pointer
+⍝ id: connection identifier (idx_t)
+
+id←api.duckdb_client_context_get_connection_id ctx
+
+⍝ KSL 1.0.0

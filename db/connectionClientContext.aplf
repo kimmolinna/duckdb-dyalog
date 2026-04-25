@@ -1,0 +1,15 @@
+ctx←connectionClientContext con;r;vals
+⍝ Fetch client context from connection handle
+⍝ con: duckdb_connection pointer
+⍝ ctx: duckdb_client_context pointer (destroy with destroyClientContext)
+
+r←api.duckdb_connection_get_client_context con 0
+vals←,r
+ctx←⊃vals
+:If 1<≢vals
+    :If ~∧/vals=ctx
+        ctx←¯1↑vals
+    :EndIf
+:EndIf
+
+⍝ KSL 1.0.0

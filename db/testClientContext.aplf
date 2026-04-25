@@ -1,0 +1,40 @@
+ testClientContext;r;req;db;con;ctx;id1;id2
+⍝ Test client context APIs in isolation
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Client Context API'
+
+db←open':memory:'
+con←connect db
+r,←⊂'Connection created'req con≠0
+
+:If con≠0
+    ctx←connectionClientContext con
+    r,←⊂'connection_get_client_context returned handle'req ctx≠0
+    :If ctx≠0
+        id1←clientContextConnectionId ctx
+        r,←⊂'client_context_get_connection_id non-negative'req 0≤id1
+        {}destroyClientContext ctx
+    :EndIf
+
+    ⍝ Re-fetch to ensure context can be acquired repeatedly
+    ctx←connectionClientContext con
+    r,←⊂'connection_get_client_context second fetch handle'req ctx≠0
+    :If ctx≠0
+        id2←clientContextConnectionId ctx
+        r,←⊂'connection id stable across fetches'req id1=id2
+        {}destroyClientContext ctx
+    :EndIf
+:EndIf
+
+{}disconnect con
+{}close db
+⎕←↑r
+⎕←''
+⎕←'Client context testing complete!'
+
+⍝ KSL 1.0.0

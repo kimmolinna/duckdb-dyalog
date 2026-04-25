@@ -1,0 +1,7 @@
+destroyClientContext←{
+⍝ Destroy duckdb_client_context pointer
+⍝ ⍵: duckdb_client_context pointer
+    api.duckdb_destroy_client_context ⍵
+}
+
+⍝ KSL 1.0.0

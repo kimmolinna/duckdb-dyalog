@@ -1,0 +1,8 @@
+state←pendingCheckState pending
+⍝ Check current state of a pending query without executing a task
+⍝ pending: duckdb_pending_result pointer
+⍝ state: duckdb_pending_state enum (0 ready, 1 not ready, 2 error)
+
+state←api.duckdb_pending_execute_check_state pending
+
+⍝ KSL 1.0.0

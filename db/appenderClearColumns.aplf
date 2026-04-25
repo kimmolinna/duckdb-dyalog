@@ -1,0 +1,8 @@
+status←appenderClearColumns appender
+⍝ Reset appender active column list to all columns
+⍝ appender: appender pointer
+⍝ status: DuckDBSuccess(0) or DuckDBError(1)
+
+status←api.duckdb_appender_clear_columns appender
+
+⍝ KSL 1.0.0

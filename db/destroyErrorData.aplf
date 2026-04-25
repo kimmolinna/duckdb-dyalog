@@ -1,0 +1,7 @@
+destroyErrorData←{
+⍝ Destroy duckdb_error_data object
+⍝ ⍵: duckdb_error_data pointer
+    api.duckdb_destroy_error_data ⍵
+}
+
+⍝ KSL 1.0.0

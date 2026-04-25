@@ -1,0 +1,8 @@
+status←appenderBeginRow appender
+⍝ Begin a row-wise appender row (no-op in DuckDB, kept for API symmetry)
+⍝ appender: appender pointer
+⍝ status: DuckDBSuccess(0) or DuckDBError(1)
+
+status←api.duckdb_appender_begin_row appender
+
+⍝ KSL 1.0.0

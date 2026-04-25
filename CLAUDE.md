@@ -81,12 +81,18 @@ This is a DuckDB interface for Dyalog APL, providing native bindings to the Duck
 *Data Operations:*
 - `readChunk.aplf`: Internal function to read data chunks with type-specific deserialization
 - `append.aplf`: Bulk insert data using DuckDB's appender API with data chunk batching
+- `appenderBeginRow.aplf` / `appenderEndRow.aplf`: Row-wise appender row lifecycle
+- `appenderFlush.aplf` / `appenderClose.aplf` / `appenderClear.aplf`: Row-wise appender buffer control
+- `appenderAddColumn.aplf` / `appenderClearColumns.aplf`: Active column-list control for appenders
+- `appenderError.aplf` / `appenderErrorData.aplf`: String and structured appender error retrieval
+- `errorDataHasError.aplf` / `errorDataType.aplf` / `errorDataMessage.aplf` / `destroyErrorData.aplf`: Structured error-data helpers
 - `toTable.aplf`: Formats query results as a table (transpose with column headers)
 - `toJson.aplf`: Converts results to JSON format
 
 *Testing:*
 - `test.aplf`: Comprehensive test suite for C API functionality
 - `testPhase1.aplf`: Tests for prepared statements, configuration, error handling, and parameter binding
+- `testPhase2.aplf`: Tests advanced types, pending/streaming execution, row-wise appender APIs, and structured appender errors
 
 ### Data Flow
 
@@ -132,6 +138,12 @@ This is a DuckDB interface for Dyalog APL, providing native bindings to the Duck
 - `duckdb_result_error_type` provides structured error information
 - Prepare errors caught with proper messages
 - Query errors include table names and context
+
+**Appender & ErrorData Extensions (Phase 2)**
+- Row-wise appender flow supported (`begin_row`, typed append calls, `end_row`, `flush`, `close`, `clear`)
+- Active appender column selection supported (`add_column`, `clear_columns`)
+- Structured appender error retrieval supported via `duckdb_appender_error_data`
+- Error-data helpers exposed (`duckdb_error_data_has_error`, `duckdb_error_data_error_type`, `duckdb_error_data_message`, `duckdb_destroy_error_data`)
 
 **Session Settings**
 - `⎕FR←1287`: Decimal floating point (128-bit)
@@ -211,11 +223,12 @@ result ← db.query _con 'SELECT * FROM users WHERE name IS NULL'
 
 - Windows: Uses `duckdb.dll` and `dyalog64.dll` (requires libcrypto-3-x64.dll, libssl-3-x64.dll)
 - Linux: Uses `libduckdb.so` and `dyalog64.so`
+- macOS: Uses `libduckdb.dylib` and `dyalog64.dylib/so` depending on Dyalog runtime packaging
 - Platform detection via `⎕WG'APLVersion'` check for 'Linux' in init.aplf:8
 
 ## Dependencies
 
-- **DuckDB C library** (lib/duckdb.dll or lib/libduckdb.so): Core database engine
+- **DuckDB C library** (lib/duckdb.dll, lib/libduckdb.so, or lib/libduckdb.dylib): Core database engine
 - **Dyalog APL runtime**: dyalog64.dll/so for MEMCPY operations
 - **OpenSSL libraries** (Windows): libcrypto-3-x64.dll, libssl-3-x64.dll for HTTPS extensions
 

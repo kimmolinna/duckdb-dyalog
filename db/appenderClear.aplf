@@ -1,0 +1,8 @@
+status←appenderClear appender
+⍝ Clear buffered appender rows without flushing them to table
+⍝ appender: appender pointer
+⍝ status: DuckDBSuccess(0) or DuckDBError(1)
+
+status←api.duckdb_appender_clear appender
+
+⍝ KSL 1.0.0

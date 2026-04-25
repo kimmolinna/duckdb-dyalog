@@ -1,0 +1,8 @@
+err_type←errorDataType err
+⍝ Get duckdb_error_type enum from duckdb_error_data
+⍝ err: duckdb_error_data pointer
+⍝ err_type: duckdb_error_type value
+
+err_type←api.duckdb_error_data_error_type err
+
+⍝ KSL 1.0.0

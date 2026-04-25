@@ -1,4 +1,4 @@
- testPhase2;r;req;db;con;result;st;stmt;pending;state;iter;out;msg;stream_result;chunk;rows
+ testPhase2;r;req;db;con;result;st;stmt;pending;state;iter;out;msg;stream_result;chunk;rows;appender;app_msg;err_data;err_type
 ⍝ Test Phase 2: Advanced Data Types
 :If 0=⎕NC'null'
     init 'lib/'
@@ -173,9 +173,140 @@ r,←⊂'Prepare statement'req stmt≠0
 {}close db
 ⎕←↑r
 
+⍝ ===== APPENDER ROW-WISE API TEST =====
+r←⊂'Test Appender Row-wise API'
+db←open':memory:'
+con←connect db
+
+{}query con'CREATE TABLE app_row_test(id INT, name VARCHAR)'
+(st appender)←api.duckdb_appender_create con '' 'app_row_test' 0
+r,←⊂'Create appender for row-wise API'req(DuckDBSuccess=st)∧appender≠0
+
+:If (DuckDBSuccess=st)∧appender≠0
+    r,←⊂'Begin row wrapper status'req DuckDBSuccess=appenderBeginRow appender
+    r,←⊂'Append INT32 value'req DuckDBSuccess=api.duckdb_append_int32 appender 1
+    r,←⊂'Append VARCHAR value'req DuckDBSuccess=api.duckdb_append_varchar appender 'alpha'
+    r,←⊂'End row wrapper status'req DuckDBSuccess=appenderEndRow appender
+
+    r,←⊂'Begin second row'req DuckDBSuccess=appenderBeginRow appender
+    r,←⊂'Append second row INT32'req DuckDBSuccess=api.duckdb_append_int32 appender 2
+    r,←⊂'Append second row NULL string'req DuckDBSuccess=api.duckdb_append_null appender
+    r,←⊂'End second row'req DuckDBSuccess=appenderEndRow appender
+
+    r,←⊂'Flush wrapper status'req DuckDBSuccess=appenderFlush appender
+    r,←⊂'Close wrapper status'req DuckDBSuccess=appenderClose appender
+    r,←⊂'Destroy appender pointer'req DuckDBSuccess=api.duckdb_appender_destroy appender
+
+    result←query con'SELECT * FROM app_row_test ORDER BY id'
+    r,←⊂'Row-wise appender inserted two rows'req 2=≢⊃1⊃result
+:Else
+    app_msg←appenderError appender
+    r,←⊂'Appender error message available'req 0<≢app_msg
+:EndIf
+
+⍝ Invalid pointer checks (error paths)
+⍝ begin_row is a backwards-compat no-op in newer DuckDB builds
+r,←⊂'Begin row null pointer is tolerated (no-op)'req DuckDBSuccess=appenderBeginRow 0
+r,←⊂'End row null pointer returns error'req DuckDBError=appenderEndRow 0
+r,←⊂'Flush null pointer returns error'req DuckDBError=appenderFlush 0
+r,←⊂'Close null pointer returns error'req DuckDBError=appenderClose 0
+
+{}disconnect con
+{}close db
+⎕←↑r
+
+⍝ ===== APPENDER CLEAR/COLUMN API TEST =====
+r←⊂'Test Appender Clear/Columns API'
+db←open':memory:'
+con←connect db
+
+{}query con'CREATE TABLE app_clear_test(id INT, name VARCHAR)'
+(st appender)←api.duckdb_appender_create con '' 'app_clear_test' 0
+r,←⊂'Create appender for clear API'req(DuckDBSuccess=st)∧appender≠0
+
+:If (DuckDBSuccess=st)∧appender≠0
+    r,←⊂'Begin row for clear test'req DuckDBSuccess=appenderBeginRow appender
+    r,←⊂'Append clear-test INT32 value'req DuckDBSuccess=api.duckdb_append_int32 appender 99
+    r,←⊂'Append clear-test VARCHAR value'req DuckDBSuccess=api.duckdb_append_varchar appender 'discard'
+    r,←⊂'End row for clear test'req DuckDBSuccess=appenderEndRow appender
+    r,←⊂'Clear buffered rows status'req DuckDBSuccess=appenderClear appender
+    r,←⊂'Close appender after clear'req DuckDBSuccess=appenderClose appender
+    r,←⊂'Destroy appender after clear'req DuckDBSuccess=api.duckdb_appender_destroy appender
+
+    result←query con'SELECT COUNT(*) AS n FROM app_clear_test'
+    r,←⊂'Clear discarded buffered rows'req 0=⊃⊃1⊃result
+:EndIf
+
+{}query con'CREATE TABLE app_cols_test(id INT, name VARCHAR, note VARCHAR DEFAULT ''n/a'')'
+(st appender)←api.duckdb_appender_create con '' 'app_cols_test' 0
+r,←⊂'Create appender for column API'req(DuckDBSuccess=st)∧appender≠0
+
+:If (DuckDBSuccess=st)∧appender≠0
+    r,←⊂'Add active column id'req DuckDBSuccess=appenderAddColumn appender 'id'
+    r,←⊂'Add active column name'req DuckDBSuccess=appenderAddColumn appender 'name'
+    r,←⊂'Clear active columns list'req DuckDBSuccess=appenderClearColumns appender
+    r,←⊂'Close column API appender'req DuckDBSuccess=appenderClose appender
+    r,←⊂'Destroy column API appender'req DuckDBSuccess=api.duckdb_appender_destroy appender
+:EndIf
+
+⍝ Null pointer checks (error paths)
+r,←⊂'Clear null pointer returns error'req DuckDBError=appenderClear 0
+r,←⊂'Add column null pointer returns error'req DuckDBError=appenderAddColumn 0 'id'
+r,←⊂'Clear columns null pointer returns error'req DuckDBError=appenderClearColumns 0
+
+{}disconnect con
+{}close db
+⎕←↑r
+
+⍝ ===== APPENDER ERROR DATA API TEST =====
+r←⊂'Test Appender ErrorData API'
+db←open':memory:'
+con←connect db
+
+{}query con'CREATE TABLE app_err_test(id INT PRIMARY KEY, name VARCHAR)'
+(st appender)←api.duckdb_appender_create con '' 'app_err_test' 0
+r,←⊂'Create appender for errordata API'req(DuckDBSuccess=st)∧appender≠0
+
+:If (DuckDBSuccess=st)∧appender≠0
+    r,←⊂'Begin first duplicate row'req DuckDBSuccess=appenderBeginRow appender
+    r,←⊂'Append first duplicate id'req DuckDBSuccess=api.duckdb_append_int32 appender 1
+    r,←⊂'Append first duplicate name'req DuckDBSuccess=api.duckdb_append_varchar appender 'first'
+    r,←⊂'End first duplicate row'req DuckDBSuccess=appenderEndRow appender
+
+    r,←⊂'Begin second duplicate row'req DuckDBSuccess=appenderBeginRow appender
+    r,←⊂'Append second duplicate id'req DuckDBSuccess=api.duckdb_append_int32 appender 1
+    r,←⊂'Append second duplicate name'req DuckDBSuccess=api.duckdb_append_varchar appender 'second'
+    r,←⊂'End second duplicate row'req DuckDBSuccess=appenderEndRow appender
+
+    r,←⊂'Close appender reports constraint error'req DuckDBError=appenderClose appender
+    err_data←appenderErrorData appender
+    r,←⊂'Appender error_data returned'req err_data≠0
+    :If err_data≠0
+        r,←⊂'error_data has error flag'req 1=errorDataHasError err_data
+        err_type←errorDataType err_data
+        r,←⊂'error_data type is non-zero'req err_type≠0
+        app_msg←errorDataMessage err_data
+        r,←⊂'error_data message available'req 0<≢app_msg
+        {}destroyErrorData err_data
+    :EndIf
+    r,←⊂'Destroy errored appender pointer is safe'req(DuckDBSuccess DuckDBError)∊⍨api.duckdb_appender_destroy appender
+:EndIf
+
+⍝ Null pointer check
+err_data←appenderErrorData 0
+r,←⊂'ErrorData null pointer call is safe'req 1
+:If err_data≠0
+    r,←⊂'ErrorData(null) can be inspected'req(0 1)∊⍨errorDataHasError err_data
+    {}destroyErrorData err_data
+:EndIf
+
+{}disconnect con
+{}close db
+⎕←↑r
+
 ⍝ ===== SUMMARY =====
 ⎕←''
 ⎕←'Phase 2 testing complete!'
-⎕←'Advanced data types (LIST, STRUCT, MAP, ENUM) have been implemented.'
+⎕←'Advanced data types plus pending/streaming and extended appender/error APIs have been implemented.'
 
 ⍝ KSL 2.0.0

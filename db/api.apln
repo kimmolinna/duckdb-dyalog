@@ -107,6 +107,30 @@
     ⎕NA'I4 ',lib,'|duckdb_append_data_chunk P P'
     ⍝ duckdb_state duckdb_appender_destroy(duckdb_appender *appender)
     ⎕NA'I4 ',lib,'|duckdb_appender_destroy <P'
+    ⍝ const char *duckdb_appender_error(duckdb_appender appender)
+    ⎕NA'U8 ',lib,'|duckdb_appender_error P'
+    ⍝ duckdb_error_data duckdb_appender_error_data(duckdb_appender appender)
+    ⎕NA'P ',lib,'|duckdb_appender_error_data P'
+    ⍝ duckdb_state duckdb_appender_flush(duckdb_appender appender)
+    ⎕NA'I4 ',lib,'|duckdb_appender_flush P'
+    ⍝ duckdb_state duckdb_appender_clear(duckdb_appender appender)
+    ⎕NA'I4 ',lib,'|duckdb_appender_clear P'
+    ⍝ duckdb_state duckdb_appender_close(duckdb_appender appender)
+    ⎕NA'I4 ',lib,'|duckdb_appender_close P'
+    ⍝ duckdb_state duckdb_appender_add_column(duckdb_appender appender, const char *name)
+    ⎕NA'I4 ',lib,'|duckdb_appender_add_column P <0UTF8[]'
+    ⍝ duckdb_state duckdb_appender_clear_columns(duckdb_appender appender)
+    ⎕NA'I4 ',lib,'|duckdb_appender_clear_columns P'
+    ⍝ duckdb_state duckdb_appender_begin_row(duckdb_appender appender)
+    ⎕NA'I4 ',lib,'|duckdb_appender_begin_row P'
+    ⍝ duckdb_state duckdb_appender_end_row(duckdb_appender appender)
+    ⎕NA'I4 ',lib,'|duckdb_appender_end_row P'
+    ⍝ duckdb_state duckdb_append_int32(duckdb_appender appender, int32_t value)
+    ⎕NA'I4 ',lib,'|duckdb_append_int32 P I4'
+    ⍝ duckdb_state duckdb_append_varchar(duckdb_appender appender, const char *val)
+    ⎕NA'I4 ',lib,'|duckdb_append_varchar P <0UTF8[]'
+    ⍝ duckdb_state duckdb_append_null(duckdb_appender appender)
+    ⎕NA'I4 ',lib,'|duckdb_append_null P'
     ⍝ duckdb_state duckdb_query_arrow(duckdb_connection connection, const char *query, duckdb_arrow *out_result);
     ⎕NA'I4 ',lib,'|duckdb_query_arrow P <0UTF8[] P'
     ⍝ duckdb_state duckdb_query_arrow_schema(duckdb_arrow result, duckdb_arrow_schema *out_schema);
@@ -127,6 +151,16 @@
     ⎕NA'F8 ',lib,'|duckdb_hugeint_to_double P'
 
     ⍝ ===== ERROR HANDLING =====
+    ⍝ duckdb_error_data duckdb_create_error_data(duckdb_error_type type, const char *message);
+    ⎕NA'P ',lib,'|duckdb_create_error_data I4 <0UTF8[]'
+    ⍝ void duckdb_destroy_error_data(duckdb_error_data *error_data);
+    ⎕NA lib,'|duckdb_destroy_error_data <P'
+    ⍝ duckdb_error_type duckdb_error_data_error_type(duckdb_error_data error_data);
+    ⎕NA'I4 ',lib,'|duckdb_error_data_error_type P'
+    ⍝ const char *duckdb_error_data_message(duckdb_error_data error_data);
+    ⎕NA'U8 ',lib,'|duckdb_error_data_message P'
+    ⍝ bool duckdb_error_data_has_error(duckdb_error_data error_data);
+    ⎕NA'I1 ',lib,'|duckdb_error_data_has_error P'
     ⍝ duckdb_error_type duckdb_result_error_type(duckdb_result *result);
     ⎕NA'I4 ',lib,'|duckdb_result_error_type <P[]'
 

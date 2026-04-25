@@ -1,0 +1,12 @@
+msg←appenderError appender;ptr
+⍝ Get appender error message text
+⍝ appender: appender pointer
+⍝ msg: error message or empty string
+
+ptr←api.duckdb_appender_error appender
+msg←''
+:If ptr≠0
+    msg←1024 read.utf8 ptr
+:EndIf
+
+⍝ KSL 1.0.0

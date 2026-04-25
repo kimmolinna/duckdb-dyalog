@@ -1,0 +1,12 @@
+msg←errorDataMessage err;ptr
+⍝ Read message text from duckdb_error_data
+⍝ err: duckdb_error_data pointer
+⍝ msg: UTF-8 message (or empty string)
+
+ptr←api.duckdb_error_data_message err
+msg←''
+:If ptr≠0
+    msg←1024 read.utf8 ptr
+:EndIf
+
+⍝ KSL 1.0.0

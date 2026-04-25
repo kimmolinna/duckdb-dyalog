@@ -1,0 +1,8 @@
+err←appenderErrorData appender
+⍝ Get structured error-data object from appender
+⍝ appender: appender pointer
+⍝ err: duckdb_error_data pointer (destroy with destroyErrorData)
+
+err←api.duckdb_appender_error_data appender
+
+⍝ KSL 1.0.0

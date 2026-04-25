@@ -1,0 +1,58 @@
+testPreparedParameterMetadata;req;r;db;con;stmt;cnt;nm1;nm2;nm3;lt
+⍝ Isolated test for prepared-parameter metadata wrappers with bounds guards.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Prepared Parameter Metadata Wrappers'
+
+db←open ':memory:'
+con←connect db
+stmt←prepareQuery con 'SELECT $1, $2, $3'
+r,←⊂'Prepare statement for parameter metadata wrappers' req stmt≠0
+
+:If stmt≠0
+    cnt←parameterCount stmt
+    r,←⊂'parameterCount returns 3' req 3=cnt
+
+    nm1←stmt parameterName 1
+    nm2←stmt parameterName 2
+    nm3←stmt parameterName 3
+    r,←⊂'parameterName(1) call returned' req 2=⎕NC'nm1'
+    r,←⊂'parameterName(2) call returned' req 2=⎕NC'nm2'
+    r,←⊂'parameterName(3) call returned' req 2=⎕NC'nm3'
+
+    r,←⊂'parameterType(1) call returned' req (stmt parameterType 1)∊⍳32
+    r,←⊂'parameterType(2) call returned' req (stmt parameterType 2)∊⍳32
+    r,←⊂'parameterType(3) call returned' req (stmt parameterType 3)∊⍳32
+
+    lt←stmt parameterLogicalType 1
+    r,←⊂'parameterLogicalType(1) call returned (nullable pre-bind)' req (lt=0)∨lt≠0
+    :If lt≠0
+        {}api.duckdb_destroy_logical_type ⊂lt
+    :EndIf
+
+    ⍝ Guarded out-of-range
+    r,←⊂'parameterName(out-of-range) guarded empty' req 0=≢stmt parameterName cnt+1
+    r,←⊂'parameterType(out-of-range) guarded INVALID' req type.INVALID=stmt parameterType cnt+1
+    r,←⊂'parameterLogicalType(out-of-range) guarded null' req 0=stmt parameterLogicalType cnt+1
+
+    {}destroyPrepared stmt
+:EndIf
+
+⍝ Null guards
+r,←⊂'parameterCount(null) guarded zero' req 0=parameterCount 0
+r,←⊂'parameterName(null) guarded empty' req 0=≢0 parameterName 1
+r,←⊂'parameterType(null) guarded INVALID' req type.INVALID=0 parameterType 1
+r,←⊂'parameterLogicalType(null) guarded null' req 0=0 parameterLogicalType 1
+
+{}disconnect con
+{}close db
+
+⎕←↑r
+⎕←''
+⎕←'Prepared parameter metadata wrapper testing complete!'
+
+⍝ KSL 1.0.0

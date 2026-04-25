@@ -1,0 +1,10 @@
+preparedColumnType←{
+⍝ Return prepared statement column type at index, with bounds guard.
+⍝ Usage: stmt preparedColumnType idx
+    (⍺=0)∨(⍵<0):type.INVALID
+    cnt←preparedColumnCount ⍺
+    ⍵≥cnt:type.INVALID
+    api.duckdb_prepared_statement_column_type ⍺ ⍵
+}
+
+⍝ KSL 1.0.0

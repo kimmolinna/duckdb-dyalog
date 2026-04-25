@@ -1,0 +1,13 @@
+resultColumnName←{
+⍝ Return result column name at 0-based index, with bounds guard.
+⍝ Usage: result resultColumnName col_idx
+    vals←,⍺
+    ((1=≢vals)∧0=⊃vals)∨(⍵<0):''
+    cnt←resultColumnCount ⍺
+    ⍵≥cnt:''
+    ptr←api.duckdb_column_name ⍺ ⍵
+    ptr=0:''
+    256 read.utf8 ptr
+}
+
+⍝ KSL 1.0.0

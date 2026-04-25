@@ -1,0 +1,10 @@
+preparedColumnName←{
+⍝ Return prepared statement column name at index, with bounds guard.
+⍝ Usage: stmt preparedColumnName idx
+    (⍺=0)∨(⍵<0):''
+    cnt←preparedColumnCount ⍺
+    ⍵≥cnt:''
+    256 read.utf8 api.duckdb_prepared_statement_column_name ⍺ ⍵
+}
+
+⍝ KSL 1.0.0

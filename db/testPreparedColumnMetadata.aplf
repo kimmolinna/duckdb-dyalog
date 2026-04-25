@@ -1,0 +1,57 @@
+testPreparedColumnMetadata;req;r;db;con;stmt;cnt;lt
+⍝ Isolated test for prepared-column metadata wrappers with bounds guards.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Prepared Column Metadata Wrappers'
+
+db←open ':memory:'
+con←connect db
+{}query con 'CREATE TABLE pcm(id INT, name VARCHAR, score DOUBLE)'
+
+stmt←prepareQuery con 'SELECT id,name,score FROM pcm'
+r,←⊂'Prepare statement for metadata wrappers' req stmt≠0
+
+:If stmt≠0
+    cnt←preparedColumnCount stmt
+    r,←⊂'preparedColumnCount returns 3' req 3=cnt
+
+    r,←⊂'preparedColumnName(0) is id' req 'id'≡stmt preparedColumnName 0
+    r,←⊂'preparedColumnName(1) is name' req 'name'≡stmt preparedColumnName 1
+    r,←⊂'preparedColumnName(2) is score' req 'score'≡stmt preparedColumnName 2
+
+    r,←⊂'preparedColumnType(0) is INTEGER' req type.INTEGER=stmt preparedColumnType 0
+    r,←⊂'preparedColumnType(1) is VARCHAR' req type.VARCHAR=stmt preparedColumnType 1
+    r,←⊂'preparedColumnType(2) is DOUBLE' req type.DOUBLE=stmt preparedColumnType 2
+
+    lt←stmt preparedColumnLogicalType 0
+    r,←⊂'preparedColumnLogicalType(0) returned handle' req lt≠0
+    :If lt≠0
+        {}api.duckdb_destroy_logical_type ⊂lt
+    :EndIf
+
+    ⍝ Guarded out-of-range
+    r,←⊂'preparedColumnName(out-of-range) guarded empty' req 0=≢stmt preparedColumnName cnt
+    r,←⊂'preparedColumnType(out-of-range) guarded INVALID' req type.INVALID=stmt preparedColumnType cnt
+    r,←⊂'preparedColumnLogicalType(out-of-range) guarded null' req 0=stmt preparedColumnLogicalType cnt
+
+    {}destroyPrepared stmt
+:EndIf
+
+⍝ Null guards
+r,←⊂'preparedColumnCount(null) guarded zero' req 0=preparedColumnCount 0
+r,←⊂'preparedColumnName(null) guarded empty' req 0=≢0 preparedColumnName 0
+r,←⊂'preparedColumnType(null) guarded INVALID' req type.INVALID=0 preparedColumnType 0
+r,←⊂'preparedColumnLogicalType(null) guarded null' req 0=0 preparedColumnLogicalType 0
+
+{}disconnect con
+{}close db
+
+⎕←↑r
+⎕←''
+⎕←'Prepared column metadata wrapper testing complete!'
+
+⍝ KSL 1.0.0

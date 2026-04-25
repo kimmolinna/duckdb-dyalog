@@ -1,0 +1,12 @@
+parameterName←{
+⍝ Return prepared parameter name at 1-based index, with bounds guard.
+⍝ Usage: stmt parameterName idx
+    (⍺=0)∨(⍵<1):''
+    cnt←parameterCount ⍺
+    ⍵>cnt:''
+    ptr←api.duckdb_parameter_name ⍺ ⍵
+    ptr=0:''
+    256 read.utf8 ptr
+}
+
+⍝ KSL 1.0.0

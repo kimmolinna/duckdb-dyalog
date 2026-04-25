@@ -1,0 +1,11 @@
+count←parameterCount stmt
+⍝ Return number of parameters in prepared statement.
+
+:If stmt=0
+    count←0
+    →0
+:EndIf
+
+count←api.duckdb_nparams stmt
+
+⍝ KSL 1.0.0

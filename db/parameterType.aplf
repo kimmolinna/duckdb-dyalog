@@ -1,0 +1,10 @@
+parameterType←{
+⍝ Return prepared parameter type at 1-based index, with bounds guard.
+⍝ Usage: stmt parameterType idx
+    (⍺=0)∨(⍵<1):type.INVALID
+    cnt←parameterCount ⍺
+    ⍵>cnt:type.INVALID
+    api.duckdb_param_type ⍺ ⍵
+}
+
+⍝ KSL 1.0.0

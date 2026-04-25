@@ -284,6 +284,8 @@ r,←⊂'testArrowFromRuntime exists' req 3=⎕NC'testArrowFromRuntime'
 r,←⊂'testExtractedStatements exists' req 3=⎕NC'testExtractedStatements'
 r,←⊂'testAppenderMetadataDefault exists' req 3=⎕NC'testAppenderMetadataDefault'
 r,←⊂'testAppenderDefaultToChunk exists' req 3=⎕NC'testAppenderDefaultToChunk'
+r,←⊂'testPreparedColumnMetadata exists' req 3=⎕NC'testPreparedColumnMetadata'
+r,←⊂'testPreparedParameterMetadata exists' req 3=⎕NC'testPreparedParameterMetadata'
 
 :If 3=⎕NC'testArrowConversion'
     testArrowConversion
@@ -316,6 +318,14 @@ r,←⊂'testAppenderDefaultToChunk exists' req 3=⎕NC'testAppenderDefaultToChu
 :If 3=⎕NC'testAppenderDefaultToChunk'
     testAppenderDefaultToChunk
     r,←⊂'Executed testAppenderDefaultToChunk' req 1
+:EndIf
+:If 3=⎕NC'testPreparedColumnMetadata'
+    testPreparedColumnMetadata
+    r,←⊂'Executed testPreparedColumnMetadata' req 1
+:EndIf
+:If 3=⎕NC'testPreparedParameterMetadata'
+    testPreparedParameterMetadata
+    r,←⊂'Executed testPreparedParameterMetadata' req 1
 :EndIf
 ⎕←↑r
 

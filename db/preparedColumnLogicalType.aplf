@@ -1,0 +1,11 @@
+preparedColumnLogicalType←{
+⍝ Return prepared statement logical type handle at index, with bounds guard.
+⍝ Usage: stmt preparedColumnLogicalType idx
+⍝ Caller must destroy returned logical type handle when non-zero.
+    (⍺=0)∨(⍵<0):0
+    cnt←preparedColumnCount ⍺
+    ⍵≥cnt:0
+    api.duckdb_prepared_statement_column_logical_type ⍺ ⍵
+}
+
+⍝ KSL 1.0.0

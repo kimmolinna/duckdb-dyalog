@@ -1,0 +1,11 @@
+parameterLogicalType←{
+⍝ Return prepared parameter logical type handle at 1-based index, with bounds guard.
+⍝ Usage: stmt parameterLogicalType idx
+⍝ Caller must destroy returned logical type handle when non-zero.
+    (⍺=0)∨(⍵<1):0
+    cnt←parameterCount ⍺
+    ⍵>cnt:0
+    api.duckdb_param_logical_type ⍺ ⍵
+}
+
+⍝ KSL 1.0.0

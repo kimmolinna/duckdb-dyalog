@@ -1,0 +1,53 @@
+testResultColumnMetadata;req;r;db;con;st;result;cnt;lt
+⍝ Isolated test for result-column metadata wrappers with bounds guards.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Result Column Metadata Wrappers'
+
+db←open ':memory:'
+con←connect db
+(st result)←api.duckdb_query con 'SELECT 1 AS id, ''x'' AS name' 6
+r,←⊂'Query for result metadata wrappers' req DuckDBSuccess=st
+
+:If DuckDBSuccess=st
+    cnt←resultColumnCount result
+    r,←⊂'resultColumnCount returns 2' req 2=cnt
+
+    r,←⊂'resultColumnName(0) is id' req 'id'≡result resultColumnName 0
+    r,←⊂'resultColumnName(1) is name' req 'name'≡result resultColumnName 1
+
+    r,←⊂'resultColumnType(0) is INTEGER' req type.INTEGER=result resultColumnType 0
+    r,←⊂'resultColumnType(1) is VARCHAR' req type.VARCHAR=result resultColumnType 1
+
+    lt←result resultColumnLogicalType 0
+    r,←⊂'resultColumnLogicalType(0) returned handle' req lt≠0
+    :If lt≠0
+        {}api.duckdb_destroy_logical_type ⊂lt
+    :EndIf
+
+    ⍝ Guarded out-of-range
+    r,←⊂'resultColumnName(out-of-range) guarded empty' req 0=≢result resultColumnName cnt
+    r,←⊂'resultColumnType(out-of-range) guarded INVALID' req type.INVALID=result resultColumnType cnt
+    r,←⊂'resultColumnLogicalType(out-of-range) guarded null' req 0=result resultColumnLogicalType cnt
+
+    {}api.duckdb_destroy_result ⊂result
+:EndIf
+
+⍝ Null guards
+r,←⊂'resultColumnCount(null) guarded zero' req 0=resultColumnCount 0
+r,←⊂'resultColumnName(null) guarded empty' req 0=≢0 resultColumnName 0
+r,←⊂'resultColumnType(null) guarded INVALID' req type.INVALID=0 resultColumnType 0
+r,←⊂'resultColumnLogicalType(null) guarded null' req 0=0 resultColumnLogicalType 0
+
+{}disconnect con
+{}close db
+
+⎕←↑r
+⎕←''
+⎕←'Result column metadata wrapper testing complete!'
+
+⍝ KSL 1.0.0

@@ -1,0 +1,11 @@
+count←preparedColumnCount stmt
+⍝ Return prepared statement result-column count.
+
+:If stmt=0
+    count←0
+    →0
+:EndIf
+
+count←api.duckdb_prepared_statement_column_count stmt
+
+⍝ KSL 1.0.0

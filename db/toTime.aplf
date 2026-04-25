@@ -1,0 +1,13 @@
+micros←toTime hmsu;v
+⍝ Convert (hour min sec micros) -> duckdb_time micros.
+⍝ Enforces padded struct layout: hour, min, sec, pad, micros.
+
+v←,hmsu
+:If 4≠≢v
+    micros←0
+    →0
+:EndIf
+
+micros←api.duckdb_to_time ⊂(0⊃v)(1⊃v)(2⊃v) 0 (3⊃v)
+
+⍝ KSL 1.0.0

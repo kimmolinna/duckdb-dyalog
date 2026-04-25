@@ -1,0 +1,37 @@
+testResultMetadataWrappers;req;r;db;con;st;result;stmt_type;ret_type
+⍝ Isolated test for result metadata wrappers.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Result Metadata Wrappers'
+
+db←open ':memory:'
+con←connect db
+(st result)←api.duckdb_query con 'SELECT 42 AS answer' 6
+r,←⊂'Query for result metadata wrappers' req DuckDBSuccess=st
+
+:If DuckDBSuccess=st
+    stmt_type←resultStatementType result
+    r,←⊂'resultStatementType is SELECT' req 1=stmt_type
+
+    ret_type←resultReturnType result
+    r,←⊂'resultReturnType is non-zero' req ret_type≠0
+
+    {}api.duckdb_destroy_result ⊂result
+:EndIf
+
+⍝ Null guards
+r,←⊂'resultStatementType(null) guarded zero' req 0=resultStatementType 0
+r,←⊂'resultReturnType(null) guarded zero' req 0=resultReturnType 0
+
+{}disconnect con
+{}close db
+
+⎕←↑r
+⎕←''
+⎕←'Result metadata wrapper testing complete!'
+
+⍝ KSL 1.0.0

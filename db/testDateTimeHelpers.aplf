@@ -1,0 +1,27 @@
+testDateTimeHelpers;req;r;days;ymd;micros;hmsu
+⍝ Isolated test for date/time helper wrappers.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Date/Time Helper Wrappers'
+
+days←toDate 2026 1 1
+r,←⊂'toDate(2026 1 1) returned non-zero days' req days≠0
+ymd←fromDate days
+r,←⊂'fromDate(toDate(...)) roundtrip' req (2026 1 1)≡ymd
+r,←⊂'isFiniteDate(days) true' req 1=isFiniteDate days
+
+micros←toTime 1 2 3 4005
+r,←⊂'toTime(1 2 3 4005) returned micros' req micros>0
+hmsu←fromTime micros
+r,←⊂'fromTime(toTime(...)) roundtrip' req (1 2 3 4005)≡hmsu
+r,←⊂'isFiniteTimestamp(micros) true' req 1=isFiniteTimestamp micros
+
+⎕←↑r
+⎕←''
+⎕←'Date/time helper wrapper testing complete!'
+
+⍝ KSL 1.0.0

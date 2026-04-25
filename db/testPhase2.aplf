@@ -286,6 +286,8 @@ r,←⊂'testAppenderMetadataDefault exists' req 3=⎕NC'testAppenderMetadataDef
 r,←⊂'testAppenderDefaultToChunk exists' req 3=⎕NC'testAppenderDefaultToChunk'
 r,←⊂'testPreparedColumnMetadata exists' req 3=⎕NC'testPreparedColumnMetadata'
 r,←⊂'testPreparedParameterMetadata exists' req 3=⎕NC'testPreparedParameterMetadata'
+r,←⊂'testResultMetadataWrappers exists' req 3=⎕NC'testResultMetadataWrappers'
+r,←⊂'testDateTimeHelpers exists' req 3=⎕NC'testDateTimeHelpers'
 
 :If 3=⎕NC'testArrowConversion'
     testArrowConversion
@@ -326,6 +328,14 @@ r,←⊂'testPreparedParameterMetadata exists' req 3=⎕NC'testPreparedParameter
 :If 3=⎕NC'testPreparedParameterMetadata'
     testPreparedParameterMetadata
     r,←⊂'Executed testPreparedParameterMetadata' req 1
+:EndIf
+:If 3=⎕NC'testResultMetadataWrappers'
+    testResultMetadataWrappers
+    r,←⊂'Executed testResultMetadataWrappers' req 1
+:EndIf
+:If 3=⎕NC'testDateTimeHelpers'
+    testDateTimeHelpers
+    r,←⊂'Executed testDateTimeHelpers' req 1
 :EndIf
 ⎕←↑r
 

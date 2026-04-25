@@ -1,0 +1,12 @@
+ymd←fromDate days;raw;year;month;day
+⍝ Convert duckdb_date days -> (year month day)
+⍝ Uses raw packed u64 return from duckdb_from_date.
+
+raw←api.duckdb_from_date days
+year←(2*32)|raw
+year←year-(year>((2*31)-1))×(2*32)
+month←(2*8)|⌊raw÷(2*32)
+day←(2*8)|⌊raw÷(2*40)
+ymd←year month day
+
+⍝ KSL 1.0.0

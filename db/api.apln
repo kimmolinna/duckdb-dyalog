@@ -65,6 +65,18 @@
     ⎕NA'U8 ',lib,'|duckdb_extract_statements_error P'
     ⍝ void duckdb_destroy_extracted(duckdb_extracted_statements *extracted_statements);
     ⎕NA lib,'|duckdb_destroy_extracted <P'
+    ⍝ duckdb_date_struct duckdb_from_date(duckdb_date date); raw packed return (u64)
+    ⎕NA'U8 ',lib,'|duckdb_from_date I4'
+    ⍝ duckdb_date duckdb_to_date(duckdb_date_struct date); padded struct arg
+    ⎕NA'I4 ',lib,'|duckdb_to_date {I4 I1 I1 I1 I1}'
+    ⍝ bool duckdb_is_finite_date(duckdb_date date);
+    ⎕NA'I1 ',lib,'|duckdb_is_finite_date I4'
+    ⍝ duckdb_time_struct duckdb_from_time(duckdb_time time); raw packed return (u64)
+    ⎕NA'U8 ',lib,'|duckdb_from_time I8'
+    ⍝ duckdb_time duckdb_to_time(duckdb_time_struct time); padded struct arg
+    ⎕NA'I8 ',lib,'|duckdb_to_time {I1 I1 I1 I1 I4}'
+    ⍝ bool duckdb_is_finite_timestamp(duckdb_timestamp ts);
+    ⎕NA'I1 ',lib,'|duckdb_is_finite_timestamp I8'
     ⍝ void duckdb_destroy_prepare(duckdb_prepared_statement *prepared_statement);
     ⎕NA lib,'|duckdb_destroy_prepare <P'
     ⍝ duckdb_state duckdb_execute_prepared(duckdb_prepared_statement prepared_statement, duckdb_result *out_result);

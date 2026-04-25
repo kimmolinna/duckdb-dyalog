@@ -1,0 +1,55 @@
+testExtractedStatements;req;r;db;con;count;extracted;st;stmt;res;msg
+⍝ Isolated tests for extracted statements API.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Extracted Statements API'
+
+db←open ':memory:'
+con←connect db
+
+⍝ Success path: two statements in one SQL string.
+(count extracted)←extractStatements(con 'SELECT 1 AS a; SELECT 2 AS b')
+r,←⊂'extract_statements count is 2' req 2=count
+r,←⊂'extract_statements returned handle' req extracted≠0
+
+:If extracted≠0
+    (st stmt)←prepareExtractedStatement(con extracted 0)
+    r,←⊂'prepare extracted statement[0] success' req (DuckDBSuccess=st)∧stmt≠0
+    :If (DuckDBSuccess=st)∧stmt≠0
+        res←executePrepared stmt
+        r,←⊂'execute extracted statement[0] result' req 1=⊃⊃1⊃res
+        {}destroyPrepared stmt
+    :EndIf
+
+    (st stmt)←prepareExtractedStatement(con extracted 1)
+    r,←⊂'prepare extracted statement[1] success' req (DuckDBSuccess=st)∧stmt≠0
+    :If (DuckDBSuccess=st)∧stmt≠0
+        res←executePrepared stmt
+        r,←⊂'execute extracted statement[1] result' req 2=⊃⊃1⊃res
+        {}destroyPrepared stmt
+    :EndIf
+    {}destroyExtracted extracted
+:EndIf
+
+⍝ Error path: invalid SQL should produce extract error text.
+(count extracted)←extractStatements(con 'SELECT FROM')
+r,←⊂'extract invalid SQL has zero statements' req 0=count
+r,←⊂'extract invalid SQL returned handle' req extracted≠0
+:If extracted≠0
+    msg←extractStatementsError extracted
+    r,←⊂'extract invalid SQL error message available' req 0<≢msg
+    {}destroyExtracted extracted
+:EndIf
+
+{}disconnect con
+{}close db
+
+⎕←↑r
+⎕←''
+⎕←'Extracted statements testing complete!'
+
+⍝ KSL 1.0.0

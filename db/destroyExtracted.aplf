@@ -1,0 +1,6 @@
+destroyExtracted←{
+⍝ Destroy extracted-statements handle.
+    api.duckdb_destroy_extracted ⍵
+}
+
+⍝ KSL 1.0.0

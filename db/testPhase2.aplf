@@ -281,6 +281,7 @@ r,←⊂'testArrowConversionRuntime exists' req 3=⎕NC'testArrowConversionRunti
 r,←⊂'testArrowConversionSchemaRuntime exists' req 3=⎕NC'testArrowConversionSchemaRuntime'
 r,←⊂'testArrowConversionChunkRuntime exists' req 3=⎕NC'testArrowConversionChunkRuntime'
 r,←⊂'testArrowFromRuntime exists' req 3=⎕NC'testArrowFromRuntime'
+r,←⊂'testExtractedStatements exists' req 3=⎕NC'testExtractedStatements'
 
 :If 3=⎕NC'testArrowConversion'
     testArrowConversion
@@ -301,6 +302,10 @@ r,←⊂'testArrowFromRuntime exists' req 3=⎕NC'testArrowFromRuntime'
 :If 3=⎕NC'testArrowFromRuntime'
     testArrowFromRuntime
     r,←⊂'Executed testArrowFromRuntime' req 1
+:EndIf
+:If 3=⎕NC'testExtractedStatements'
+    testExtractedStatements
+    r,←⊂'Executed testExtractedStatements' req 1
 :EndIf
 ⎕←↑r
 

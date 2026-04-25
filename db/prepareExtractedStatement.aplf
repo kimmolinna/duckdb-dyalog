@@ -1,0 +1,7 @@
+(st stmt)←prepareExtractedStatement(_con extracted index)
+⍝ Prepare one statement from an extracted-statements handle.
+⍝ returns: (duckdb_state prepared_statement_ptr)
+
+(st stmt)←api.duckdb_prepare_extracted_statement _con extracted index 0
+
+⍝ KSL 1.0.0

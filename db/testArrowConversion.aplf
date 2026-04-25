@@ -1,0 +1,23 @@
+testArrowConversion;req;r
+⍝ Isolated test for non-deprecated Arrow conversion wrappers.
+⍝ This test intentionally avoids runtime ArrowSchema/ArrowArray marshalling until
+⍝ explicit APL-side struct scaffolding is in place.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Arrow Conversion API (safe mode)'
+
+r,←⊂'toArrowSchema wrapper exists' req 3=⎕NC'toArrowSchema'
+r,←⊂'dataChunkToArrow wrapper exists' req 3=⎕NC'dataChunkToArrow'
+r,←⊂'duckdb_to_arrow_schema binding exists' req 3=api.⎕NC'duckdb_to_arrow_schema'
+r,←⊂'duckdb_data_chunk_to_arrow binding exists' req 3=api.⎕NC'duckdb_data_chunk_to_arrow'
+r,←⊂'Runtime conversion skipped pending Arrow struct interop' req 1
+
+⎕←↑r
+⎕←''
+⎕←'Arrow conversion API testing complete!'
+
+⍝ KSL 1.0.0

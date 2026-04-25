@@ -1,0 +1,14 @@
+ err←toArrowSchema args;arrow_opts;types;names;col_count;out_schema
+⍝ Low-level wrapper for duckdb_to_arrow_schema
+⍝ args: (arrow_opts types names col_count out_schema_ptr)
+⍝   arrow_opts: duckdb_arrow_options pointer
+⍝   types: vector of duckdb_logical_type pointers
+⍝   names: vector of C-string pointers (char **)
+⍝   col_count: number of columns
+⍝   out_schema_ptr: pointer to ArrowSchema struct memory
+⍝ err: duckdb_error_data pointer (destroy with destroyErrorData)
+
+ (arrow_opts types names col_count out_schema)←args
+ err←api.duckdb_to_arrow_schema arrow_opts types names col_count out_schema
+
+⍝ KSL 1.0.0

@@ -1,0 +1,40 @@
+testArrowConversionRuntime;req;err;msg;args;types;names;r
+⍝ Runtime smoke tests for Arrow conversion APIs without Arrow struct marshalling.
+⍝ We intentionally pass null pointers and verify structured error_data lifecycle.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Arrow Conversion API (runtime null-smoke)'
+
+⍝ to_arrow_schema(null-input) should return error_data handle and error flag.
+types←⍬
+names←⍬
+args←0 types names 0 0
+err←toArrowSchema args
+r,←⊂'toArrowSchema(null) returned error_data handle' req err≠0
+:If err≠0
+    r,←⊂'toArrowSchema(null) has error flag' req 1=api.duckdb_error_data_has_error err
+    msg←512 read.utf8 api.duckdb_error_data_message err
+    r,←⊂'toArrowSchema(null) error message available' req 0<≢msg
+    {}api.duckdb_destroy_error_data ⊂err
+:EndIf
+
+⍝ data_chunk_to_arrow(null-input) should return error_data handle and error flag.
+args←0 0 0
+err←dataChunkToArrow args
+r,←⊂'dataChunkToArrow(null) returned error_data handle' req err≠0
+:If err≠0
+    r,←⊂'dataChunkToArrow(null) has error flag' req 1=api.duckdb_error_data_has_error err
+    msg←512 read.utf8 api.duckdb_error_data_message err
+    r,←⊂'dataChunkToArrow(null) error message available' req 0<≢msg
+    {}api.duckdb_destroy_error_data ⊂err
+:EndIf
+
+⎕←↑r
+⎕←''
+⎕←'Arrow conversion runtime null-smoke complete!'
+
+⍝ KSL 1.0.0

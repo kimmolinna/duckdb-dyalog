@@ -1,0 +1,94 @@
+testArrowConversionChunkRuntime;req;r;db;con;arrow_opts;lt;chunk;vec;data_ptr;array_ptr;err;has_err;msg;ok
+⍝ Isolated runtime smoke for a minimally valid dataChunkToArrow call.
+⍝ Uses one INTEGER column and one row in a DuckDB data chunk.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Arrow Chunk Conversion API (runtime one-row)'
+
+db←open ':memory:'
+con←connect db
+ok←1
+
+arrow_opts←connectionArrowOptions con
+r,←⊂'connectionArrowOptions returned handle' req arrow_opts≠0
+ok∧←arrow_opts≠0
+
+lt←api.duckdb_create_logical_type type.INTEGER
+r,←⊂'create_logical_type(INTEGER) returned handle' req lt≠0
+ok∧←lt≠0
+
+chunk←0
+:If lt≠0
+    chunk←api.duckdb_create_data_chunk (,lt) 1
+    r,←⊂'create_data_chunk returned handle' req chunk≠0
+    ok∧←chunk≠0
+:Else
+    r,←⊂'create_data_chunk skipped due logical type failure' req 1
+:EndIf
+
+:If ok
+    vec←api.duckdb_data_chunk_get_vector chunk 0
+    r,←⊂'data_chunk_get_vector returned handle' req vec≠0
+    ok∧←vec≠0
+:EndIf
+
+:If ok
+    data_ptr←api.duckdb_vector_get_data vec
+    r,←⊂'vector_get_data returned pointer' req data_ptr≠0
+    ok∧←data_ptr≠0
+:EndIf
+
+:If ok
+    {}data_ptr write.i32 ,42
+    {}api.duckdb_data_chunk_set_size chunk 1
+:EndIf
+
+array_ptr←api.duckdb_malloc 256
+r,←⊂'malloc ArrowArray buffer succeeded' req array_ptr≠0
+ok∧←array_ptr≠0
+:If array_ptr≠0
+    {}array_ptr write.u8 256⍴0
+:EndIf
+
+:If ok
+    err←dataChunkToArrow arrow_opts chunk array_ptr
+    r,←⊂'dataChunkToArrow(one-row) call returned' req 1
+    :If err=0
+        r,←⊂'dataChunkToArrow(one-row) success via null error_data' req 1
+    :Else
+        has_err←api.duckdb_error_data_has_error err
+        r,←⊂'dataChunkToArrow(one-row) has no error' req 0=has_err
+        :If has_err
+            msg←512 read.utf8 api.duckdb_error_data_message err
+            r,←⊂'dataChunkToArrow(one-row) error message available' req 0<≢msg
+        :EndIf
+        {}api.duckdb_destroy_error_data ⊂err
+    :EndIf
+:Else
+    r,←⊂'dataChunkToArrow(one-row) call skipped due setup failure' req 1
+:EndIf
+
+:If array_ptr≠0
+    {}api.duckdb_free array_ptr
+:EndIf
+:If chunk≠0
+    {}api.duckdb_destroy_data_chunk chunk
+:EndIf
+:If lt≠0
+    {}api.duckdb_destroy_logical_type ⊂lt
+:EndIf
+:If arrow_opts≠0
+    {}destroyArrowOptions arrow_opts
+:EndIf
+{}disconnect con
+{}close db
+
+⎕←↑r
+⎕←''
+⎕←'Arrow chunk conversion runtime one-row complete!'
+
+⍝ KSL 1.0.0

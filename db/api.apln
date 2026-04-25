@@ -31,6 +31,10 @@
     ⎕NA'P ',lib,'|duckdb_fetch_chunk <P[]'
     ⍝ duckdb_arrow_options duckdb_result_get_arrow_options(duckdb_result *result);
     ⎕NA'P ',lib,'|duckdb_result_get_arrow_options <P[]'
+    ⍝ duckdb_error_data duckdb_to_arrow_schema(duckdb_arrow_options arrow_options, duckdb_logical_type *types, const char **names, idx_t column_count, struct ArrowSchema *out_schema);
+    ⎕NA'P ',lib,'|duckdb_to_arrow_schema P <P[] <P[] U8 P'
+    ⍝ duckdb_error_data duckdb_data_chunk_to_arrow(duckdb_arrow_options arrow_options, duckdb_data_chunk chunk, struct ArrowArray *out_arrow_array);
+    ⎕NA'P ',lib,'|duckdb_data_chunk_to_arrow P P P'
     ⍝ void duckdb_connection_get_client_context(duckdb_connection connection, duckdb_client_context *out_context);
     ⎕NA lib,'|duckdb_connection_get_client_context P >P'
     ⍝ void duckdb_connection_get_arrow_options(duckdb_connection connection, duckdb_arrow_options *out_arrow_options);
@@ -39,6 +43,8 @@
     ⎕NA'U8 ',lib,'|duckdb_client_context_get_connection_id P'
     ⍝ void duckdb_destroy_client_context(duckdb_client_context *context);
     ⎕NA lib,'|duckdb_destroy_client_context <P'
+    ⍝ void *duckdb_malloc(size_t size)
+    ⎕NA'P ',lib,'|duckdb_malloc U8'
     ⍝ duckdb_free(void *ptr)
     ⎕NA lib,'|duckdb_free P'
     ⍝ idx_t duckdb_vector_size()

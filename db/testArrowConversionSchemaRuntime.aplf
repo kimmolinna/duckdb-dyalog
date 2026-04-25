@@ -1,0 +1,76 @@
+testArrowConversionSchemaRuntime;req;db;con;arrow_opts;lt;name_ptr;name_bytes;schema_ptr;err;msg;has_err;ok;r
+⍝ Isolated runtime smoke for a minimally valid toArrowSchema call.
+⍝ Uses one INTEGER column and one column name.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Arrow Schema Conversion API (runtime one-column)'
+
+db←open ':memory:'
+con←connect db
+ok←1
+
+arrow_opts←connectionArrowOptions con
+r,←⊂'connectionArrowOptions returned handle' req arrow_opts≠0
+ok∧←arrow_opts≠0
+
+lt←api.duckdb_create_logical_type type.INTEGER
+r,←⊂'create_logical_type(INTEGER) returned handle' req lt≠0
+ok∧←lt≠0
+
+name_bytes←('UTF-8'⎕UCS 'n'),0
+name_ptr←api.duckdb_malloc ≢name_bytes
+r,←⊂'malloc column name buffer succeeded' req name_ptr≠0
+ok∧←name_ptr≠0
+:If name_ptr≠0
+    {}name_ptr write.u8 name_bytes
+:EndIf
+
+schema_ptr←api.duckdb_malloc 256
+r,←⊂'malloc ArrowSchema buffer succeeded' req schema_ptr≠0
+ok∧←schema_ptr≠0
+:If schema_ptr≠0
+    {}schema_ptr write.u8 256⍴0
+:EndIf
+
+:If ok
+    err←toArrowSchema arrow_opts (⊂lt) (⊂name_ptr) 1 schema_ptr
+    r,←⊂'toArrowSchema(one-column) call returned' req 1
+    :If err=0
+        r,←⊂'toArrowSchema(one-column) success via null error_data' req 1
+    :Else
+        has_err←api.duckdb_error_data_has_error err
+        r,←⊂'toArrowSchema(one-column) has no error' req 0=has_err
+        :If has_err
+            msg←512 read.utf8 api.duckdb_error_data_message err
+            r,←⊂'toArrowSchema(one-column) error message available' req 0<≢msg
+        :EndIf
+        {}api.duckdb_destroy_error_data ⊂err
+    :EndIf
+:Else
+    r,←⊂'toArrowSchema(one-column) call skipped due setup failure' req 1
+:EndIf
+
+:If schema_ptr≠0
+    {}api.duckdb_free schema_ptr
+:EndIf
+:If name_ptr≠0
+    {}api.duckdb_free name_ptr
+:EndIf
+:If lt≠0
+    {}api.duckdb_destroy_logical_type ⊂lt
+:EndIf
+:If arrow_opts≠0
+    {}destroyArrowOptions arrow_opts
+:EndIf
+{}disconnect con
+{}close db
+
+⎕←↑r
+⎕←''
+⎕←'Arrow schema conversion runtime one-column complete!'
+
+⍝ KSL 1.0.0

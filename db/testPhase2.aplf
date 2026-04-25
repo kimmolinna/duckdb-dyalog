@@ -274,9 +274,34 @@ r,←⊂'Create appender for error API'req(DuckDBSuccess=st)∧appender≠0
 {}close db
 ⎕←↑r
 
+⍝ ===== ARROW CONVERSION SMOKE (ISOLATED TESTS) =====
+r←⊂'Test Arrow Conversion Smoke (isolated)'
+r,←⊂'testArrowConversion exists' req 3=⎕NC'testArrowConversion'
+r,←⊂'testArrowConversionRuntime exists' req 3=⎕NC'testArrowConversionRuntime'
+r,←⊂'testArrowConversionSchemaRuntime exists' req 3=⎕NC'testArrowConversionSchemaRuntime'
+r,←⊂'testArrowConversionChunkRuntime exists' req 3=⎕NC'testArrowConversionChunkRuntime'
+
+:If 3=⎕NC'testArrowConversion'
+    testArrowConversion
+    r,←⊂'Executed testArrowConversion' req 1
+:EndIf
+:If 3=⎕NC'testArrowConversionRuntime'
+    testArrowConversionRuntime
+    r,←⊂'Executed testArrowConversionRuntime' req 1
+:EndIf
+:If 3=⎕NC'testArrowConversionSchemaRuntime'
+    testArrowConversionSchemaRuntime
+    r,←⊂'Executed testArrowConversionSchemaRuntime' req 1
+:EndIf
+:If 3=⎕NC'testArrowConversionChunkRuntime'
+    testArrowConversionChunkRuntime
+    r,←⊂'Executed testArrowConversionChunkRuntime' req 1
+:EndIf
+⎕←↑r
+
 ⍝ ===== SUMMARY =====
 ⎕←''
 ⎕←'Phase 2 testing complete!'
-⎕←'Advanced data types plus pending/streaming and extended appender/error APIs have been implemented.'
+⎕←'Advanced data types plus pending/streaming, extended appender/error APIs, and Arrow conversion smoke coverage have been implemented.'
 
 ⍝ KSL 2.0.0

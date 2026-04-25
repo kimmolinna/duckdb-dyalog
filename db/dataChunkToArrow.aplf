@@ -1,0 +1,12 @@
+err←dataChunkToArrow args;arrow_opts;chunk;out_array
+⍝ Low-level wrapper for duckdb_data_chunk_to_arrow
+⍝ args: (arrow_opts chunk out_arrow_array_ptr)
+⍝   arrow_opts: duckdb_arrow_options pointer
+⍝   chunk: duckdb_data_chunk pointer
+⍝   out_arrow_array_ptr: pointer to ArrowArray struct memory
+⍝ err: duckdb_error_data pointer (destroy with destroyErrorData)
+
+(arrow_opts chunk out_array)←args
+err←api.duckdb_data_chunk_to_arrow arrow_opts chunk out_array
+
+⍝ KSL 1.0.0

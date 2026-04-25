@@ -283,6 +283,7 @@ r,←⊂'testArrowConversionChunkRuntime exists' req 3=⎕NC'testArrowConversion
 r,←⊂'testArrowFromRuntime exists' req 3=⎕NC'testArrowFromRuntime'
 r,←⊂'testExtractedStatements exists' req 3=⎕NC'testExtractedStatements'
 r,←⊂'testAppenderMetadataDefault exists' req 3=⎕NC'testAppenderMetadataDefault'
+r,←⊂'testAppenderDefaultToChunk exists' req 3=⎕NC'testAppenderDefaultToChunk'
 
 :If 3=⎕NC'testArrowConversion'
     testArrowConversion
@@ -311,6 +312,10 @@ r,←⊂'testAppenderMetadataDefault exists' req 3=⎕NC'testAppenderMetadataDef
 :If 3=⎕NC'testAppenderMetadataDefault'
     testAppenderMetadataDefault
     r,←⊂'Executed testAppenderMetadataDefault' req 1
+:EndIf
+:If 3=⎕NC'testAppenderDefaultToChunk'
+    testAppenderDefaultToChunk
+    r,←⊂'Executed testAppenderDefaultToChunk' req 1
 :EndIf
 ⎕←↑r
 

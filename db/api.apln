@@ -157,6 +157,8 @@
     ⎕NA'I4 ',lib,'|duckdb_append_null P'
     ⍝ duckdb_state duckdb_append_default(duckdb_appender appender)
     ⎕NA'I4 ',lib,'|duckdb_append_default P'
+    ⍝ duckdb_state duckdb_append_default_to_chunk(duckdb_appender appender, duckdb_data_chunk chunk, idx_t col, idx_t row)
+    ⎕NA'I4 ',lib,'|duckdb_append_default_to_chunk P P U8 U8'
     ⍝ void duckdb_destroy_arrow_options(duckdb_arrow_options *arrow_options);
     ⎕NA lib,'|duckdb_destroy_arrow_options <P'
     ⍝ double duckdb_hugeint_to_double(duckdb_hugeint val)

@@ -1,0 +1,7 @@
+st←appendDefaultToChunk args;appender;chunk;col;row
+⍝ Append DEFAULT value to a specific chunk cell (col,row) using appender defaults.
+
+(appender chunk col row)←args
+st←api.duckdb_append_default_to_chunk appender chunk col row
+
+⍝ KSL 1.0.0

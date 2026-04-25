@@ -1,0 +1,68 @@
+testAppenderDefaultToChunk;req;r;db;con;st;appender;lt0;lt1;lt2;chunk;vec;data_ptr;result
+⍝ Isolated test for duckdb_append_default_to_chunk.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Appender Default-To-Chunk API'
+
+db←open ':memory:'
+con←connect db
+{}query con 'CREATE TABLE app_def_chunk_test(id INT, name VARCHAR DEFAULT ''n/a'', score DOUBLE DEFAULT 1.5)'
+(st appender)←api.duckdb_appender_create con '' 'app_def_chunk_test' 0
+r,←⊂'Create appender for default-to-chunk test' req (DuckDBSuccess=st)∧appender≠0
+
+chunk←0
+:If (DuckDBSuccess=st)∧appender≠0
+    lt0←appender appenderColumnType 0
+    lt1←appender appenderColumnType 1
+    lt2←appender appenderColumnType 2
+    r,←⊂'appender column logical types available' req (lt0≠0)∧(lt1≠0)∧lt2≠0
+
+    :If (lt0≠0)∧(lt1≠0)∧lt2≠0
+        chunk←api.duckdb_create_data_chunk (lt0 lt1 lt2) 3
+        r,←⊂'create_data_chunk for appender defaults' req chunk≠0
+    :EndIf
+
+    :If chunk≠0
+        vec←api.duckdb_data_chunk_get_vector chunk 0
+        data_ptr←api.duckdb_vector_get_data vec
+        r,←⊂'chunk vector0 data pointer available' req data_ptr≠0
+        :If data_ptr≠0
+            {}data_ptr write.i32 ,9
+        :EndIf
+
+        r,←⊂'append_default_to_chunk for name' req DuckDBSuccess=appendDefaultToChunk (appender chunk 1 0)
+        r,←⊂'append_default_to_chunk for score' req DuckDBSuccess=appendDefaultToChunk (appender chunk 2 0)
+        {}api.duckdb_data_chunk_set_size chunk 1
+        r,←⊂'append_data_chunk with defaults' req DuckDBSuccess=api.duckdb_append_data_chunk appender chunk
+    :EndIf
+
+    ⍝ Null pointer paths while appender handle is still valid.
+    r,←⊂'append_default_to_chunk null appender returns error' req DuckDBError=appendDefaultToChunk (0 chunk 1 0)
+    r,←⊂'append_default_to_chunk null chunk returns error' req DuckDBError=appendDefaultToChunk (appender 0 1 0)
+
+    :If lt0≠0 ⋄ {}api.duckdb_destroy_logical_type ⊂lt0 ⋄ :EndIf
+    :If lt1≠0 ⋄ {}api.duckdb_destroy_logical_type ⊂lt1 ⋄ :EndIf
+    :If lt2≠0 ⋄ {}api.duckdb_destroy_logical_type ⊂lt2 ⋄ :EndIf
+
+    r,←⊂'close appender after chunk append' req DuckDBSuccess=appenderClose appender
+    r,←⊂'destroy appender after chunk append' req DuckDBSuccess=api.duckdb_appender_destroy appender
+
+    result←query con 'SELECT COUNT(*) AS n FROM app_def_chunk_test WHERE id=9 AND name=''n/a'' AND score=1.5'
+    r,←⊂'Inserted row has expected defaults via chunk API' req 1=⊃⊃1⊃result
+:EndIf
+
+:If chunk≠0
+    {}api.duckdb_destroy_data_chunk ⊂chunk
+:EndIf
+{}disconnect con
+{}close db
+
+⎕←↑r
+⎕←''
+⎕←'Appender default-to-chunk testing complete!'
+
+⍝ KSL 1.0.0

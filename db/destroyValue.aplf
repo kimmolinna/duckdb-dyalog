@@ -1,0 +1,6 @@
+destroyValue←{
+⍝ Destroy duckdb_value handle.
+    api.duckdb_destroy_value ⊂⍵
+}
+
+⍝ KSL 1.0.0

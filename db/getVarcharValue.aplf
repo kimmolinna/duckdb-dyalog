@@ -1,0 +1,15 @@
+s←getVarcharValue val;ptr
+⍝ Read varchar from duckdb_value; frees returned C string.
+:If val=0
+    s←''
+    →0
+:EndIf
+ptr←api.duckdb_get_varchar val
+:If ptr=0
+    s←''
+    →0
+:EndIf
+s←1024 read.utf8 ptr
+{}api.duckdb_free ptr
+
+⍝ KSL 1.0.0

@@ -1,0 +1,5 @@
+val←createBoolValue b
+⍝ Create boolean duckdb_value.
+val←api.duckdb_create_bool b
+
+⍝ KSL 1.0.0

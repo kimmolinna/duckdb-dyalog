@@ -1,0 +1,5 @@
+val←createNullValue
+⍝ Create SQL NULL duckdb_value.
+val←api.duckdb_create_null_value
+
+⍝ KSL 1.0.0

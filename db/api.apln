@@ -302,6 +302,42 @@
     ⍝ duckdb_state duckdb_bind_null(duckdb_prepared_statement prepared_statement, idx_t param_idx);
     ⎕NA'I4 ',lib,'|duckdb_bind_null P U8'
 
+    ⍝ ===== VALUE API (BATCH 1) =====
+    ⍝ void duckdb_destroy_value(duckdb_value *value);
+    ⎕NA lib,'|duckdb_destroy_value <P[]'
+    ⍝ duckdb_value duckdb_create_null_value();
+    ⎕NA'P ',lib,'|duckdb_create_null_value'
+    ⍝ duckdb_value duckdb_create_bool(bool input);
+    ⎕NA'P ',lib,'|duckdb_create_bool I1'
+    ⍝ duckdb_value duckdb_create_int64(int64_t val);
+    ⎕NA'P ',lib,'|duckdb_create_int64 I8'
+    ⍝ duckdb_value duckdb_create_int32(int32_t input);
+    ⎕NA'P ',lib,'|duckdb_create_int32 I4'
+    ⍝ duckdb_value duckdb_create_double(double input);
+    ⎕NA'P ',lib,'|duckdb_create_double F8'
+    ⍝ duckdb_value duckdb_create_float(float input);
+    ⎕NA'P ',lib,'|duckdb_create_float F4'
+    ⍝ duckdb_value duckdb_create_varchar(const char *text);
+    ⎕NA'P ',lib,'|duckdb_create_varchar <0UTF8[]'
+    ⍝ duckdb_logical_type duckdb_get_value_type(duckdb_value val);
+    ⎕NA'P ',lib,'|duckdb_get_value_type P'
+    ⍝ bool duckdb_is_null_value(duckdb_value value);
+    ⎕NA'I1 ',lib,'|duckdb_is_null_value P'
+    ⍝ char *duckdb_value_to_string(duckdb_value value);
+    ⎕NA'U8 ',lib,'|duckdb_value_to_string P'
+    ⍝ bool duckdb_get_bool(duckdb_value val);
+    ⎕NA'I1 ',lib,'|duckdb_get_bool P'
+    ⍝ int64_t duckdb_get_int64(duckdb_value val);
+    ⎕NA'I8 ',lib,'|duckdb_get_int64 P'
+    ⍝ int32_t duckdb_get_int32(duckdb_value val);
+    ⎕NA'I4 ',lib,'|duckdb_get_int32 P'
+    ⍝ double duckdb_get_double(duckdb_value val);
+    ⎕NA'F8 ',lib,'|duckdb_get_double P'
+    ⍝ float duckdb_get_float(duckdb_value val);
+    ⎕NA'F4 ',lib,'|duckdb_get_float P'
+    ⍝ char *duckdb_get_varchar(duckdb_value value);
+    ⎕NA'U8 ',lib,'|duckdb_get_varchar P'
+
     ⍝ ===== LOGICAL TYPE FUNCTIONS =====
     ⍝ duckdb_logical_type duckdb_create_list_type(duckdb_logical_type child_type);
     ⎕NA'P ',lib,'|duckdb_create_list_type P'

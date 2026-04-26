@@ -1,0 +1,5 @@
+val←createInt64Value n
+⍝ Create int64 duckdb_value.
+val←api.duckdb_create_int64 n
+
+⍝ KSL 1.0.0

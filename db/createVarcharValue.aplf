@@ -1,0 +1,5 @@
+val←createVarcharValue s
+⍝ Create varchar duckdb_value.
+val←api.duckdb_create_varchar ⊂s
+
+⍝ KSL 1.0.0

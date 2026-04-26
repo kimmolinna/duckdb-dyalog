@@ -1,0 +1,35 @@
+testValueApiBatch2;req;r;vbool;vint;vdbl;vstr
+⍝ Isolated runtime test for Value API batch 2 getters.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Value API Batch 2'
+
+vbool←createBoolValue 1
+r,←⊂'createBoolValue handle' req vbool≠0
+r,←⊂'getBoolValue returns 1' req 1=getBoolValue vbool
+{}destroyValue vbool
+
+vint←createInt64Value 42
+r,←⊂'createInt64Value handle' req vint≠0
+r,←⊂'getInt64Value returns 42' req 42=getInt64Value vint
+{}destroyValue vint
+
+vdbl←createDoubleValue 3.5
+r,←⊂'createDoubleValue handle' req vdbl≠0
+r,←⊂'getDoubleValue returns 3.5' req 3.5=getDoubleValue vdbl
+{}destroyValue vdbl
+
+vstr←createVarcharValue 'hello'
+r,←⊂'createVarcharValue handle' req vstr≠0
+r,←⊂'getVarcharValue contains hello' req ∨/'hello'⍷getVarcharValue vstr
+{}destroyValue vstr
+
+⎕←↑r
+⎕←''
+⎕←'Value API batch 2 runtime testing complete!'
+
+⍝ KSL 1.0.0

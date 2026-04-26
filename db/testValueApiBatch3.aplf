@@ -1,0 +1,60 @@
+testValueApiBatch3;req;r;vi32;vf32;vdbl;x;tol;s;parsed;floatVals;doubleVals
+⍝ Isolated runtime test for Value API batch 3 scalar getters.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Value API Batch 3'
+
+vi32←createInt32Value 123
+r,←⊂'createInt32Value handle' req vi32≠0
+r,←⊂'valueType(int32)=INTEGER' req type.INTEGER=valueType vi32
+r,←⊂'getInt32Value returns 123' req 123=getInt32Value vi32
+{}destroyValue vi32
+
+floatVals←0 1.25 ¯2.5 12345.125
+:For x :In floatVals
+    vf32←createFloatValue x
+    r,←⊂'createFloatValue handle' req vf32≠0
+    :If vf32≠0
+        tol←1E¯5⌈1E¯6×|x
+        r,←⊂'valueType(float)=FLOAT' req type.FLOAT=valueType vf32
+        r,←⊂'getFloatValue close to source' req tol>|x-getFloatValue vf32
+        r,←⊂'getDoubleValue(float) close to source' req tol>|x-getDoubleValue vf32
+        s←getVarcharValue vf32
+        :Trap 0
+            parsed←⍎s
+            r,←⊂'getVarcharValue(float) parses to number' req tol>|x-parsed
+        :Else
+            r,←⊂'getVarcharValue(float) parses to number' req 0
+        :EndTrap
+        {}destroyValue vf32
+    :EndIf
+:EndFor
+
+doubleVals←0 1.25 ¯2.5 3.141592653589793
+:For x :In doubleVals
+    vdbl←createDoubleValue x
+    r,←⊂'createDoubleValue handle' req vdbl≠0
+    :If vdbl≠0
+        tol←1E¯12⌈1E¯12×|x
+        r,←⊂'valueType(double)=DOUBLE' req type.DOUBLE=valueType vdbl
+        r,←⊂'getDoubleValue close to source' req tol>|x-getDoubleValue vdbl
+        s←getVarcharValue vdbl
+        :Trap 0
+            parsed←⍎s
+            r,←⊂'getVarcharValue(double) parses to number' req tol>|x-parsed
+        :Else
+            r,←⊂'getVarcharValue(double) parses to number' req 0
+        :EndTrap
+        {}destroyValue vdbl
+    :EndIf
+:EndFor
+
+⎕←↑r
+⎕←''
+⎕←'Value API batch 3 runtime testing complete!'
+
+⍝ KSL 1.0.0

@@ -1,0 +1,16 @@
+x←getDoubleValue val;s
+⍝ Read double from duckdb_value via varchar path.
+⍝ This avoids platform-sensitive F8 return marshalling in ⎕NA.
+:If val=0
+    x←0
+    →0
+:EndIf
+s←getVarcharValue val
+:Trap 0
+    x←⍎s
+:Else
+    ⍝ Fallback to direct getter if parsing fails.
+    x←api.duckdb_get_double val
+:EndTrap
+
+⍝ KSL 1.0.0

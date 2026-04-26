@@ -1,0 +1,143 @@
+testApiCoverageBatchC;req;r;st;db;con;result;cfg;count;name;desc;etype;emsg;ed;cc;ptr;ctx;opts;cid;vs;days;ymd;ticks;hmsu;d;tm;ret;stmtType;vals;ok
+⍝ Batch C runtime coverage for config/error/connection/date/value-extraction helpers.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test API Coverage Batch C'
+
+⍝ config_count + create/set/destroy/open_ext
+count←api.duckdb_config_count
+r,←⊂'duckdb_config_count callable' req count≥0
+(st cfg)←api.duckdb_create_config 0
+r,←⊂'duckdb_create_config callable' req (0 1)∊⍨st
+ok←0≠⊃,cfg
+:If ok
+    st←api.duckdb_set_config cfg 'threads' '1'
+    r,←⊂'duckdb_set_config callable' req (0 1)∊⍨st
+    :If count>0
+        (st ptr desc)←api.duckdb_get_config_flag 0 0 0
+        r,←⊂'duckdb_get_config_flag callable' req (0 1)∊⍨st
+    :EndIf
+    (st db emsg)←api.duckdb_open_ext ':memory:' 0 cfg 0
+    r,←⊂'duckdb_open_ext callable' req (0 1)∊⍨st
+    ok←0≠⊃,db
+    :If ok ⋄ {}api.duckdb_close db ⋄ :EndIf
+    {}api.duckdb_destroy_config cfg
+:EndIf
+
+⍝ create_error_data + readers + destroy_error_data
+ed←api.duckdb_create_error_data 1 'coverage-error'
+ok←0≠⊃,ed
+r,←⊂'duckdb_create_error_data returns handle' req ok
+:If ok
+    etype←api.duckdb_error_data_error_type ed
+    r,←⊂'duckdb_error_data_error_type callable' req etype≥0
+    emsg←1024 read.utf8 api.duckdb_error_data_message ed
+    r,←⊂'duckdb_error_data_message non-empty' req 0<≢emsg
+    ret←api.duckdb_error_data_has_error ed
+    r,←⊂'duckdb_error_data_has_error callable' req (0 1)∊⍨ret
+    {}api.duckdb_destroy_error_data ⊂ed
+:EndIf
+
+⍝ library/version/malloc/free/vector_size/date-time helpers
+ptr←api.duckdb_malloc 64
+ok←0≠⊃,ptr
+r,←⊂'duckdb_malloc returns pointer' req ok
+:If ok ⋄ {}api.duckdb_free ptr ⋄ :EndIf
+vs←api.duckdb_vector_size
+r,←⊂'duckdb_vector_size > 0' req vs>0
+emsg←256 read.utf8 api.duckdb_library_version
+r,←⊂'duckdb_library_version non-empty' req 0<≢emsg
+
+days←api.duckdb_to_date ⊂2026 1 1 0 0
+ymd←api.duckdb_from_date days
+r,←⊂'duckdb_to_date/duckdb_from_date callable' req ymd≥0
+ret←api.duckdb_is_finite_date days
+r,←⊂'duckdb_is_finite_date callable' req (0 1)∊⍨ret
+
+ticks←api.duckdb_to_time ⊂1 2 3 0 400
+hmsu←api.duckdb_from_time ticks
+r,←⊂'duckdb_to_time/duckdb_from_time callable' req hmsu≥0
+ret←api.duckdb_is_finite_timestamp 0
+r,←⊂'duckdb_is_finite_timestamp callable' req (0 1)∊⍨ret
+
+⍝ connection/client context + interrupt
+(st db)←api.duckdb_open ':memory:' 0
+r,←⊂'duckdb_open for connection helpers' req (0=st)∧db≠0
+:If (0=st)∧db≠0
+    (st con)←api.duckdb_connect db 0
+    r,←⊂'duckdb_connect for connection helpers' req (0=st)∧con≠0
+    ok←0≠⊃,con
+    :If ok
+        vals←,api.duckdb_connection_get_client_context con 0
+        ctx←⊃vals
+        :If 1<≢vals
+            :If ~∧/vals=ctx
+                ctx←¯1↑vals
+            :EndIf
+        :EndIf
+        r,←⊂'duckdb_connection_get_client_context callable' req 1
+        vals←,api.duckdb_connection_get_arrow_options con 0
+        opts←⊃vals
+        :If 1<≢vals
+            :If ~∧/vals=opts
+                opts←¯1↑vals
+            :EndIf
+        :EndIf
+        r,←⊂'duckdb_connection_get_arrow_options callable' req 1
+        ok←0≠⊃,ctx
+        :If ok
+            cid←api.duckdb_client_context_get_connection_id ctx
+            r,←⊂'duckdb_client_context_get_connection_id callable' req cid≥0
+            {}api.duckdb_destroy_client_context ⊂ctx
+        :Else
+            r,←⊂'duckdb_client_context_get_connection_id callable' req 0
+        :EndIf
+        ok←0≠⊃,opts
+        :If ok
+            {}api.duckdb_destroy_arrow_options ⊂opts
+        :EndIf
+        {}api.duckdb_interrupt con
+        r,←⊂'duckdb_interrupt callable' req 1
+        {}api.duckdb_disconnect con
+    :EndIf
+    {}api.duckdb_close db
+:EndIf
+
+⍝ result metadata/value extraction + result_error_type
+(st db)←api.duckdb_open ':memory:' 0
+:If (0=st)∧db≠0
+    (st con)←api.duckdb_connect db 0
+    :If (0=st)∧con≠0
+        {}api.duckdb_query con 'CREATE TABLE tv(i INTEGER, s VARCHAR)' 6
+        {}api.duckdb_query con 'INSERT INTO tv VALUES (7,''abc'')' 6
+        (st result)←api.duckdb_query con 'SELECT i,s FROM tv' 6
+        ok←0≠⊃,result
+        r,←⊂'result query for metadata callable' req (0=st)∧ok
+        :If ok
+            stmtType←api.duckdb_result_statement_type ⊂result
+            ret←api.duckdb_result_return_type ⊂result
+            r,←⊂'duckdb_result_statement_type callable' req stmtType≥0
+            r,←⊂'duckdb_result_return_type callable' req ret≥0
+            ptr←api.duckdb_value_varchar (⊂result),1,0
+            r,←⊂'duckdb_value_varchar returns ptr' req ptr≠0
+            :If ptr≠0 ⋄ {}api.duckdb_free ptr ⋄ :EndIf
+            ptr←api.duckdb_value_varchar_internal (⊂result),1,0
+            r,←⊂'duckdb_value_varchar_internal callable' req 1
+            etype←api.duckdb_result_error_type ⊂result
+            r,←⊂'duckdb_result_error_type callable' req etype≥0
+            {}api.duckdb_destroy_result ⊂result
+        :EndIf
+        {}api.duckdb_disconnect con
+    :EndIf
+    {}api.duckdb_close db
+:EndIf
+
+⎕←↑r
+⎕←''
+⎕←'API coverage batch C complete!'
+
+⍝ KSL 1.0.0

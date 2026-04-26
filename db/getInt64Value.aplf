@@ -1,0 +1,9 @@
+n←getInt64Value val
+⍝ Read int64 from duckdb_value.
+:If val=0
+    n←0
+    →0
+:EndIf
+n←api.duckdb_get_int64 val
+
+⍝ KSL 1.0.0

@@ -1,0 +1,102 @@
+testApiCoverageBatchA;req;r;st;db;con;result;name;err;cc;ct;lt;ltid;chunk;opts;ok;errptr
+⍝ Batch A runtime coverage for core lifecycle + result basics.
+⍝ Every listed api.apln binding in this batch is called at least once.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test API Coverage Batch A'
+
+(st db)←api.duckdb_open ':memory:' 0
+r,←⊂'duckdb_open status success' req 0=st
+r,←⊂'duckdb_open returns database handle' req db≠0
+
+:If (0=st)∧db≠0
+    (st con)←api.duckdb_connect db 0
+    r,←⊂'duckdb_connect status success' req 0=st
+    r,←⊂'duckdb_connect returns connection handle' req con≠0
+
+    :If (0=st)∧con≠0
+        (st result)←api.duckdb_query con 'CREATE TABLE t(i INTEGER, s VARCHAR)' 6
+        r,←⊂'duckdb_query(create table) success' req 0=st
+        {}api.duckdb_destroy_result ⊂result
+
+        (st result)←api.duckdb_query con 'INSERT INTO t VALUES (1,''x''),(2,''y'')' 6
+        r,←⊂'duckdb_query(insert) success' req 0=st
+        ok←0≠⊃,result
+        :If ok
+            r,←⊂'duckdb_rows_changed reports two rows' req 2=api.duckdb_rows_changed ⊂result
+            {}api.duckdb_destroy_result ⊂result
+        :EndIf
+
+        (st result)←api.duckdb_query con 'SELECT i,s FROM t ORDER BY i' 6
+        r,←⊂'duckdb_query(select) success' req 0=st
+        ok←0≠⊃,result
+        r,←⊂'duckdb_query(select) returns result handle' req ok
+
+        :If ok
+            cc←api.duckdb_column_count ⊂result
+            r,←⊂'duckdb_column_count(select)=2' req 2=cc
+
+            name←256 read.utf8 api.duckdb_column_name (⊂result),0
+            r,←⊂'duckdb_column_name(0)=i' req 'i'≡name
+
+            ct←api.duckdb_column_type (⊂result),0
+            r,←⊂'duckdb_column_type(0)=INTEGER' req type.INTEGER=ct
+
+            lt←api.duckdb_column_logical_type (⊂result),0
+            r,←⊂'duckdb_column_logical_type(0) returns handle' req lt≠0
+            :If lt≠0
+                ltid←api.duckdb_get_type_id lt
+                r,←⊂'duckdb_get_type_id(logical_type)=INTEGER' req type.INTEGER=ltid
+                {}api.duckdb_destroy_logical_type ⊂lt
+            :EndIf
+
+            errptr←api.duckdb_result_error ⊂result
+            err←''
+            :If errptr≠0
+                err←1024 read.utf8 errptr
+            :EndIf
+            r,←⊂'duckdb_result_error(select) empty' req 0=≢err
+
+            chunk←api.duckdb_fetch_chunk ⊂result
+            r,←⊂'duckdb_fetch_chunk returns handle' req chunk≠0
+            :If chunk≠0
+                {}api.duckdb_destroy_data_chunk ⊂chunk
+            :EndIf
+
+            opts←api.duckdb_result_get_arrow_options ⊂result
+            r,←⊂'duckdb_result_get_arrow_options called' req 1
+            :If opts≠0
+                {}api.duckdb_destroy_arrow_options ⊂opts
+            :EndIf
+
+            {}api.duckdb_destroy_result ⊂result
+        :EndIf
+
+        (st result)←api.duckdb_query con 'SELECT * FROM no_such_table' 6
+        r,←⊂'duckdb_query(error path) returns error status' req st≠0
+        ok←0≠⊃,result
+        :If ok
+            errptr←api.duckdb_result_error ⊂result
+            err←''
+            :If errptr≠0
+                err←1024 read.utf8 errptr
+            :EndIf
+            r,←⊂'duckdb_result_error(error path) non-empty' req 0<≢err
+            {}api.duckdb_destroy_result ⊂result
+        :EndIf
+
+        {}api.duckdb_disconnect con
+    :EndIf
+
+    {}api.duckdb_close db
+:EndIf
+
+⎕←↑r
+⎕←''
+⎕←'API coverage batch A complete!'
+
+⍝ KSL 1.0.0

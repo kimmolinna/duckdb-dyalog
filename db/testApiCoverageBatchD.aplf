@@ -1,0 +1,79 @@
+testApiCoverageBatchD;req;r;lt0;lt1;chunk;cc;sz;vec0;vec1;vtype;data;valid;st;x
+⍝ Batch D runtime coverage for logical type + data chunk + vector/validity APIs.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test API Coverage Batch D'
+
+lt0←api.duckdb_create_logical_type type.INTEGER
+lt1←api.duckdb_create_logical_type type.VARCHAR
+r,←⊂'duckdb_create_logical_type INTEGER handle' req lt0≠0
+r,←⊂'duckdb_create_logical_type VARCHAR handle' req lt1≠0
+
+:If (lt0≠0)∧(lt1≠0)
+    chunk←api.duckdb_create_data_chunk (lt0 lt1) 2
+    r,←⊂'duckdb_create_data_chunk returns handle' req chunk≠0
+
+    :If chunk≠0
+        cc←api.duckdb_data_chunk_get_column_count chunk
+        r,←⊂'duckdb_data_chunk_get_column_count=2' req 2=cc
+
+        sz←api.duckdb_data_chunk_get_size chunk
+        r,←⊂'duckdb_data_chunk_get_size callable' req sz≥0
+
+        {}api.duckdb_data_chunk_set_size chunk 2
+        sz←api.duckdb_data_chunk_get_size chunk
+        r,←⊂'duckdb_data_chunk_set_size applied' req 2=sz
+
+        vec0←api.duckdb_data_chunk_get_vector chunk 0
+        vec1←api.duckdb_data_chunk_get_vector chunk 1
+        r,←⊂'duckdb_data_chunk_get_vector(0) handle' req vec0≠0
+        r,←⊂'duckdb_data_chunk_get_vector(1) handle' req vec1≠0
+
+        :If vec0≠0
+            vtype←api.duckdb_vector_get_column_type vec0
+            r,←⊂'duckdb_vector_get_column_type handle' req vtype≠0
+            :If vtype≠0
+                r,←⊂'duckdb_get_type_id(vector type)=INTEGER' req type.INTEGER=api.duckdb_get_type_id vtype
+                {}api.duckdb_destroy_logical_type ⊂vtype
+            :EndIf
+            data←api.duckdb_vector_get_data vec0
+            r,←⊂'duckdb_vector_get_data pointer' req data≠0
+            {}api.duckdb_vector_ensure_validity_writable vec0
+            valid←api.duckdb_vector_get_validity vec0
+            r,←⊂'duckdb_vector_get_validity callable' req valid≠0
+            :If valid≠0
+                {}api.duckdb_validity_set_row_invalid valid 0
+                {}api.duckdb_validity_set_row_valid valid 1
+                {}api.duckdb_validity_set_row_validity valid 0 1
+                x←api.duckdb_validity_row_is_valid valid 0
+                r,←⊂'duckdb_validity_row_is_valid callable' req (0 1)∊⍨x
+            :EndIf
+        :EndIf
+
+        :If vec1≠0
+            {}api.duckdb_vector_assign_string_element vec1 0 (⊂'alpha')
+            {}api.duckdb_vector_assign_string_element_len vec1 1 (⊂'bravo-charlie') 5
+            r,←⊂'duckdb_vector_assign_string_element(_len) callable' req 1
+        :EndIf
+
+        {}api.duckdb_data_chunk_reset chunk
+        r,←⊂'duckdb_data_chunk_reset callable' req 1
+        {}api.duckdb_destroy_data_chunk ⊂chunk
+    :EndIf
+:EndIf
+
+:If lt0≠0 ⋄ {}api.duckdb_destroy_logical_type ⊂lt0 ⋄ :EndIf
+:If lt1≠0 ⋄ {}api.duckdb_destroy_logical_type ⊂lt1 ⋄ :EndIf
+
+x←api.duckdb_hugeint_to_double 0
+r,←⊂'duckdb_hugeint_to_double callable' req 1
+
+⎕←↑r
+⎕←''
+⎕←'API coverage batch D complete!'
+
+⍝ KSL 1.0.0

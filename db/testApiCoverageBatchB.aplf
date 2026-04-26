@@ -1,0 +1,143 @@
+testApiCoverageBatchB;req;r;st;db;con;stmt;result;pending;state;iter;out;msg;n;ptype;plogic;pname;sidx;ct;cn;clt;sid;ok;ptr
+⍝ Batch B runtime coverage for prepared/pending and statement metadata APIs.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test API Coverage Batch B'
+
+(st db)←api.duckdb_open ':memory:' 0
+r,←⊂'open for batch B' req (0=st)∧db≠0
+:If (0=st)∧db≠0
+    (st con)←api.duckdb_connect db 0
+    r,←⊂'connect for batch B' req (0=st)∧con≠0
+
+    :If (0=st)∧con≠0
+        {}api.duckdb_query con 'CREATE TABLE t(i INTEGER, s VARCHAR)' 6
+        {}api.duckdb_query con 'INSERT INTO t VALUES (1,''a''),(2,''b'')' 6
+
+        (st stmt)←api.duckdb_prepare con 'SELECT $x::INTEGER AS i, ''z'' AS s' 0
+        ok←0≠⊃,stmt
+        r,←⊂'duckdb_prepare success' req (0=st)∧ok
+
+        :If ok
+            ptr←api.duckdb_prepare_error stmt
+            msg←''
+            :If ptr≠0
+                msg←1024 read.utf8 ptr
+            :EndIf
+            r,←⊂'duckdb_prepare_error callable' req 1
+
+            n←api.duckdb_nparams stmt
+            r,←⊂'duckdb_nparams >= 1' req n≥1
+
+            ptr←api.duckdb_parameter_name stmt 1
+            pname←''
+            :If ptr≠0
+                pname←256 read.utf8 ptr
+            :EndIf
+            r,←⊂'duckdb_parameter_name callable' req 1
+
+            ptype←api.duckdb_param_type stmt 1
+            r,←⊂'duckdb_param_type callable' req ptype≠type.INVALID
+
+            plogic←api.duckdb_param_logical_type stmt 1
+            r,←⊂'duckdb_param_logical_type returns handle' req plogic≠0
+            :If plogic≠0
+                {}api.duckdb_destroy_logical_type ⊂plogic
+            :EndIf
+
+            (st sidx)←api.duckdb_bind_parameter_index stmt 0 'x'
+            r,←⊂'duckdb_bind_parameter_index callable' req (0 1)∊⍨st
+
+            st←api.duckdb_clear_bindings stmt
+            r,←⊂'duckdb_clear_bindings callable' req (0 1)∊⍨st
+
+            st←api.duckdb_bind_int32 stmt 1 7
+            r,←⊂'duckdb_bind_int32 success' req 0=st
+
+            (st result)←api.duckdb_execute_prepared stmt 6
+            r,←⊂'duckdb_execute_prepared callable' req (0 1)∊⍨st
+            ok←0≠⊃,result
+            :If (0=st)∧ok
+                ct←api.duckdb_prepared_statement_type stmt
+                r,←⊂'duckdb_prepared_statement_type callable' req 1
+                cn←api.duckdb_prepared_statement_column_count stmt
+                r,←⊂'duckdb_prepared_statement_column_count callable' req cn≥0
+                :If cn>0
+                    ptr←api.duckdb_prepared_statement_column_name stmt 0
+                    msg←''
+                    :If ptr≠0
+                        msg←256 read.utf8 ptr
+                    :EndIf
+                    r,←⊂'duckdb_prepared_statement_column_name callable' req 0<≢msg
+                    clt←api.duckdb_prepared_statement_column_logical_type stmt 0
+                    r,←⊂'duckdb_prepared_statement_column_logical_type returns handle' req clt≠0
+                    :If clt≠0 ⋄ {}api.duckdb_destroy_logical_type ⊂clt ⋄ :EndIf
+                    sid←api.duckdb_prepared_statement_column_type stmt 0
+                    r,←⊂'duckdb_prepared_statement_column_type callable' req sid≠type.INVALID
+                :EndIf
+                {}api.duckdb_destroy_result ⊂result
+            :EndIf
+
+            (st pending)←api.duckdb_pending_prepared stmt 0
+            r,←⊂'duckdb_pending_prepared callable' req (0 1)∊⍨st
+            ok←0≠⊃,pending
+            :If (0=st)∧ok
+                state←api.duckdb_pending_execute_check_state pending
+                r,←⊂'duckdb_pending_execute_check_state callable' req 1
+                iter←0
+                :While (~api.duckdb_pending_execution_is_finished state)∧iter<1000
+                    state←api.duckdb_pending_execute_task pending
+                    iter+←1
+                :EndWhile
+                r,←⊂'duckdb_pending_execution_is_finished callable' req 1
+                (st out)←api.duckdb_execute_pending pending 6
+                r,←⊂'duckdb_execute_pending callable' req (0 1)∊⍨st
+                ok←0≠⊃,out
+                :If (0=st)∧ok ⋄ {}api.duckdb_destroy_result ⊂out ⋄ :EndIf
+                {}api.duckdb_destroy_pending pending
+            :Else
+                :If ok
+                    ptr←api.duckdb_pending_error pending
+                    msg←''
+                    :If ptr≠0
+                        msg←1024 read.utf8 ptr
+                    :EndIf
+                    r,←⊂'duckdb_pending_error callable' req 1
+                    {}api.duckdb_destroy_pending pending
+                :EndIf
+            :EndIf
+
+            {}api.duckdb_destroy_prepare stmt
+        :EndIf
+
+        (n sid)←api.duckdb_extract_statements con 'SELECT 1; SELECT 2;' 0
+        r,←⊂'duckdb_extract_statements callable' req n≥0
+        ok←0≠⊃,sid
+        :If ok
+            ptr←api.duckdb_extract_statements_error sid
+            msg←''
+            :If ptr≠0
+                msg←1024 read.utf8 ptr
+            :EndIf
+            r,←⊂'duckdb_extract_statements_error callable' req 1
+            (st stmt)←api.duckdb_prepare_extracted_statement con sid 0 0
+            r,←⊂'duckdb_prepare_extracted_statement callable' req (0 1)∊⍨st
+            ok←0≠⊃,stmt
+            :If ok ⋄ {}api.duckdb_destroy_prepare stmt ⋄ :EndIf
+            {}api.duckdb_destroy_extracted sid
+        :EndIf
+
+        {}api.duckdb_disconnect con
+    :EndIf
+    {}api.duckdb_close db
+:EndIf
+
+⎕←↑r
+⎕←''
+⎕←'API coverage batch B complete!'
+
+⍝ KSL 1.0.0

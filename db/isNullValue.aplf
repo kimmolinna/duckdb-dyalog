@@ -1,0 +1,9 @@
+b←isNullValue val
+⍝ Return 1 if duckdb_value is NULL else 0.
+:If val=0
+    b←1
+    →0
+:EndIf
+b←api.duckdb_is_null_value val
+
+⍝ KSL 1.0.0

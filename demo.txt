@@ -1,5 +1,5 @@
-folder←'c:/users/ay29782/duckdb-dyalog/'
-']link.create duck ',¯1↓folder
+folder←'/users/linna/duckdb-dyalog/'
+]link.create duck /users/linna/duckdb-dyalog
 duck.db.init folder,'lib/'
 _db←duck.db.open ':memory:'
 _con←duck.db.connect _db

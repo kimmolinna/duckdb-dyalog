@@ -1,0 +1,88 @@
+testValueApiCoverage;req;r;v;t;s;x;ptr
+⍝ Explicit runtime coverage for every current Value API function.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Value API Coverage'
+
+⍝ create_null_value + is_null_value + value_to_string + get_value_type + destroy_value
+v←api.duckdb_create_null_value
+r,←⊂'duckdb_create_null_value returns handle' req v≠0
+:If v≠0
+    r,←⊂'duckdb_is_null_value(null)=1' req 1=api.duckdb_is_null_value v
+    s←valueToString v
+    r,←⊂'duckdb_value_to_string(null) non-empty' req 0<≢s
+    t←api.duckdb_get_value_type v
+    r,←⊂'duckdb_get_value_type(null) returns handle' req t≠0
+    :If t≠0
+        r,←⊂'duckdb_get_type_id(get_value_type(null)) valid' req type.INVALID≠api.duckdb_get_type_id t
+    :EndIf
+    {}api.duckdb_destroy_value ⊂v
+:EndIf
+
+⍝ create_bool + get_bool + destroy_value
+v←api.duckdb_create_bool 1
+r,←⊂'duckdb_create_bool returns handle' req v≠0
+:If v≠0
+    r,←⊂'duckdb_get_bool(bool)=1' req 1=api.duckdb_get_bool v
+    {}api.duckdb_destroy_value ⊂v
+:EndIf
+
+⍝ create_int32 + get_int32 + destroy_value
+v←api.duckdb_create_int32 123
+r,←⊂'duckdb_create_int32 returns handle' req v≠0
+:If v≠0
+    r,←⊂'duckdb_get_int32(int32)=123' req 123=api.duckdb_get_int32 v
+    {}api.duckdb_destroy_value ⊂v
+:EndIf
+
+⍝ create_int64 + get_int64 + destroy_value
+v←api.duckdb_create_int64 42
+r,←⊂'duckdb_create_int64 returns handle' req v≠0
+:If v≠0
+    r,←⊂'duckdb_get_int64(int64)=42' req 42=api.duckdb_get_int64 v
+    {}api.duckdb_destroy_value ⊂v
+:EndIf
+
+⍝ create_float + get_float + destroy_value
+v←api.duckdb_create_float 1.25
+r,←⊂'duckdb_create_float returns handle' req v≠0
+:If v≠0
+    x←api.duckdb_get_float v
+    r,←⊂'duckdb_get_float(float) close to 1.25' req 1E¯5>|1.25-x
+    {}api.duckdb_destroy_value ⊂v
+:EndIf
+
+⍝ create_double + get_double + destroy_value
+v←api.duckdb_create_double 3.5
+r,←⊂'duckdb_create_double returns handle' req v≠0
+:If v≠0
+    x←api.duckdb_get_double v
+    r,←⊂'duckdb_get_double(double) close to 3.5' req 1E¯12>|3.5-x
+    {}api.duckdb_destroy_value ⊂v
+:EndIf
+
+⍝ create_varchar + get_varchar + value_to_string + destroy_value
+v←api.duckdb_create_varchar ⊂'hello'
+r,←⊂'duckdb_create_varchar returns handle' req v≠0
+:If v≠0
+    ptr←api.duckdb_get_varchar v
+    r,←⊂'duckdb_get_varchar returns ptr' req ptr≠0
+    :If ptr≠0
+        s←1024 read.utf8 ptr
+        r,←⊂'duckdb_get_varchar contains hello' req ∨/'hello'⍷s
+        {}api.duckdb_free ptr
+    :EndIf
+    s←valueToString v
+    r,←⊂'duckdb_value_to_string(varchar) contains hello' req ∨/'hello'⍷s
+    {}api.duckdb_destroy_value ⊂v
+:EndIf
+
+⎕←↑r
+⎕←''
+⎕←'Value API coverage testing complete!'
+
+⍝ KSL 1.0.0

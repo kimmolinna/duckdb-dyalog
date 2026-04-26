@@ -1,0 +1,55 @@
+testValueApiBatch1;req;r;vnull;vbool;vint;vdbl;vstr;t
+⍝ Isolated runtime test for Value API batch 1 wrappers.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Value API Batch 1'
+vnull←createNullValue
+r,←⊂'createNullValue returned handle' req vnull≠0
+r,←⊂'isNullValue(null) true' req 1=isNullValue vnull
+r,←⊂'valueToString(null) non-empty' req 0<≢valueToString vnull
+t←valueType vnull
+r,←⊂'valueType(null) returns a valid type id' req t≠type.INVALID
+{}destroyValue vnull
+
+vbool←createBoolValue 1
+r,←⊂'createBoolValue returned handle' req vbool≠0
+r,←⊂'isNullValue(bool) false' req 0=isNullValue vbool
+r,←⊂'valueType(bool)=BOOLEAN' req type.BOOLEAN=valueType vbool
+r,←⊂'valueToString(bool) non-empty' req 0<≢valueToString vbool
+{}destroyValue vbool
+
+vint←createInt64Value 42
+r,←⊂'createInt64Value returned handle' req vint≠0
+r,←⊂'isNullValue(int64) false' req 0=isNullValue vint
+r,←⊂'valueType(int64)=BIGINT' req type.BIGINT=valueType vint
+r,←⊂'valueToString(int64) contains 42' req '42'≡valueToString vint
+{}destroyValue vint
+
+vdbl←createDoubleValue 3.5
+r,←⊂'createDoubleValue returned handle' req vdbl≠0
+r,←⊂'isNullValue(double) false' req 0=isNullValue vdbl
+r,←⊂'valueType(double)=DOUBLE' req type.DOUBLE=valueType vdbl
+r,←⊂'valueToString(double) non-empty' req 0<≢valueToString vdbl
+{}destroyValue vdbl
+
+vstr←createVarcharValue 'hello'
+r,←⊂'createVarcharValue returned handle' req vstr≠0
+r,←⊂'isNullValue(varchar) false' req 0=isNullValue vstr
+r,←⊂'valueType(varchar)=VARCHAR' req type.VARCHAR=valueType vstr
+r,←⊂'valueToString(varchar) contains hello' req ∨/'hello'⍷valueToString vstr
+{}destroyValue vstr
+
+⍝ Wrapper guard behavior for null handle input.
+r,←⊂'isNullValue(0)=1 guard' req 1=isNullValue 0
+r,←⊂'valueType(0)=INVALID guard' req type.INVALID=valueType 0
+r,←⊂'valueToString(0) empty guard' req ''≡valueToString 0
+
+⎕←↑r
+⎕←''
+⎕←'Value API batch 1 runtime testing complete!'
+
+⍝ KSL 1.0.0

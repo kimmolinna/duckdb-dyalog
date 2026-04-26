@@ -1,0 +1,9 @@
+b←getBoolValue val
+⍝ Read bool from duckdb_value.
+:If val=0
+    b←0
+    →0
+:EndIf
+b←api.duckdb_get_bool val
+
+⍝ KSL 1.0.0

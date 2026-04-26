@@ -1,0 +1,91 @@
+testApiCoverageBatchE;req;r;st;db;con;app;cnt;lt;chunk;msg;result
+⍝ Batch E runtime coverage for appender APIs.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test API Coverage Batch E'
+
+(st db)←api.duckdb_open ':memory:' 0
+r,←⊂'open for batch E' req (0=st)∧db≠0
+:If (0=st)∧db≠0
+    (st con)←api.duckdb_connect db 0
+    r,←⊂'connect for batch E' req (0=st)∧con≠0
+    :If con≠0
+        {}api.duckdb_query con 'CREATE TABLE app_cov(i INTEGER, s VARCHAR, d INTEGER DEFAULT 7)' 6
+
+        (st app)←api.duckdb_appender_create con '' 'app_cov' 0
+        r,←⊂'duckdb_appender_create callable' req (0=st)∧app≠0
+        :If app≠0
+            cnt←api.duckdb_appender_column_count app
+            r,←⊂'duckdb_appender_column_count=3' req 3=cnt
+
+            lt←api.duckdb_appender_column_type app 0
+            r,←⊂'duckdb_appender_column_type handle' req lt≠0
+            :If lt≠0 ⋄ {}api.duckdb_destroy_logical_type ⊂lt ⋄ :EndIf
+
+            st←api.duckdb_appender_begin_row app
+            r,←⊂'duckdb_appender_begin_row callable' req (0 1)∊⍨st
+            st←api.duckdb_append_int32 app 1
+            r,←⊂'duckdb_append_int32 callable' req (0 1)∊⍨st
+            st←api.duckdb_append_varchar app 'x'
+            r,←⊂'duckdb_append_varchar callable' req (0 1)∊⍨st
+            st←api.duckdb_append_default app
+            r,←⊂'duckdb_append_default callable' req (0 1)∊⍨st
+            st←api.duckdb_appender_end_row app
+            r,←⊂'duckdb_appender_end_row callable' req (0 1)∊⍨st
+
+            st←api.duckdb_appender_begin_row app
+            st←api.duckdb_append_int32 app 2
+            st←api.duckdb_append_null app
+            st←api.duckdb_append_default app
+            st←api.duckdb_appender_end_row app
+            r,←⊂'duckdb_append_null callable' req (0 1)∊⍨st
+
+            st←api.duckdb_appender_add_column app 'i'
+            r,←⊂'duckdb_appender_add_column callable' req (0 1)∊⍨st
+            st←api.duckdb_appender_clear_columns app
+            r,←⊂'duckdb_appender_clear_columns callable' req (0 1)∊⍨st
+
+            st←api.duckdb_appender_flush app
+            r,←⊂'duckdb_appender_flush callable' req (0 1)∊⍨st
+            st←api.duckdb_appender_clear app
+            r,←⊂'duckdb_appender_clear callable' req (0 1)∊⍨st
+
+            lt←api.duckdb_create_logical_type type.INTEGER
+            :If lt≠0
+                chunk←api.duckdb_create_data_chunk (lt) 1
+                :If chunk≠0
+                    {}api.duckdb_data_chunk_set_size chunk 1
+                    st←api.duckdb_append_default_to_chunk app chunk 0 0
+                    r,←⊂'duckdb_append_default_to_chunk callable' req (0 1)∊⍨st
+                    st←api.duckdb_append_data_chunk app chunk
+                    r,←⊂'duckdb_append_data_chunk callable' req (0 1)∊⍨st
+                    {}api.duckdb_destroy_data_chunk ⊂chunk
+                :EndIf
+                {}api.duckdb_destroy_logical_type ⊂lt
+            :EndIf
+
+            msg←1024 read.utf8 api.duckdb_appender_error app
+            r,←⊂'duckdb_appender_error callable' req 1
+            st←api.duckdb_appender_close app
+            r,←⊂'duckdb_appender_close callable' req (0 1)∊⍨st
+            st←api.duckdb_appender_destroy app
+            r,←⊂'duckdb_appender_destroy callable' req (0 1)∊⍨st
+        :EndIf
+
+        (st result)←api.duckdb_query con 'SELECT COUNT(*) FROM app_cov' 6
+        :If result≠0 ⋄ {}api.duckdb_destroy_result ⊂result ⋄ :EndIf
+
+        {}api.duckdb_disconnect con
+    :EndIf
+    {}api.duckdb_close db
+:EndIf
+
+⎕←↑r
+⎕←''
+⎕←'API coverage batch E complete!'
+
+⍝ KSL 1.0.0

@@ -1,0 +1,16 @@
+t←valueType val
+⍝ Return logical duckdb_type id for duckdb_value.
+:If val=0
+    t←type.INVALID
+    →0
+:EndIf
+lt←api.duckdb_get_value_type val
+:If lt=0
+    t←type.INVALID
+    →0
+:EndIf
+t←api.duckdb_get_type_id lt
+⍝ duckdb_get_value_type returns a borrowed logical type:
+⍝ valid only while value lives, and must not be destroyed.
+
+⍝ KSL 1.0.0

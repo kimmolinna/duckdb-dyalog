@@ -1,12 +1,9 @@
-ymd←fromDate days;raw;year;month;day
+ymd←fromDate days;baseNs;dt
 ⍝ Convert duckdb_date days -> (year month day)
-⍝ Uses raw packed u64 return from duckdb_from_date.
+⍝ Use Dyalog date conversion (platform-safe, no struct ABI calls).
 
-raw←api.duckdb_from_date days
-year←(2*32)|raw
-year←year-(year>((2*31)-1))×(2*32)
-month←(2*8)|⌊raw÷(2*32)
-day←(2*8)|⌊raw÷(2*40)
-ymd←year month day
+baseNs←10 ⎕DT⊂1970 1 1 0 0 0 0
+dt←10 ¯2 ⎕DT baseNs+8.64E13×⌊days
+ymd←3↑⊃dt
 
 ⍝ KSL 1.0.0

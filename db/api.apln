@@ -65,16 +65,12 @@
     ⎕NA'U8 ',lib,'|duckdb_extract_statements_error P'
     ⍝ void duckdb_destroy_extracted(duckdb_extracted_statements *extracted_statements);
     ⎕NA lib,'|duckdb_destroy_extracted <P'
-    ⍝ duckdb_date_struct duckdb_from_date(duckdb_date date); raw packed return (u64)
-    ⎕NA'U8 ',lib,'|duckdb_from_date I4'
-    ⍝ duckdb_date duckdb_to_date(duckdb_date_struct date); padded struct arg
-    ⎕NA'I4 ',lib,'|duckdb_to_date {I4 I1 I1 I1 I1}'
+    ⍝ Date conversion helpers are implemented in APL for portability:
+    ⍝ fromDate.aplf and toDate.aplf (avoid ABI-sensitive struct marshaling).
     ⍝ bool duckdb_is_finite_date(duckdb_date date);
     ⎕NA'I1 ',lib,'|duckdb_is_finite_date I4'
-    ⍝ duckdb_time_struct duckdb_from_time(duckdb_time time); raw packed return (u64)
-    ⎕NA'U8 ',lib,'|duckdb_from_time I8'
-    ⍝ duckdb_time duckdb_to_time(duckdb_time_struct time); padded struct arg
-    ⎕NA'I8 ',lib,'|duckdb_to_time {I1 I1 I1 I1 I4}'
+    ⍝ Time conversion helpers are implemented in APL for portability:
+    ⍝ fromTime.aplf and toTime.aplf (avoid ABI-sensitive struct marshaling).
     ⍝ bool duckdb_is_finite_timestamp(duckdb_timestamp ts);
     ⎕NA'I1 ',lib,'|duckdb_is_finite_timestamp I8'
     ⍝ void duckdb_destroy_prepare(duckdb_prepared_statement *prepared_statement);
@@ -132,9 +128,9 @@
     ⍝ void duckdb_vector_ensure_validity_writable(duckdb_vector vector);
     ⎕NA lib,'|duckdb_vector_ensure_validity_writable P'
     ⍝ void duckdb_vector_assign_string_element(duckdb_vector vector, idx_t index, const char *str);
-    ⎕NA lib,'|duckdb_vector_assign_string_element P U8 <0U1[]'
+    ⎕NA lib,'|duckdb_vector_assign_string_element P U8 <0UTF8[]'
     ⍝ void duckdb_vector_assign_string_element_len(duckdb_vector vector, idx_t index, const char *str,idx_t str_len);
-    ⎕NA lib,'|duckdb_vector_assign_string_element_len P U8 <0U1[] U8'
+    ⎕NA lib,'|duckdb_vector_assign_string_element_len P U8 <0UTF8[] U8'
     ⍝ duckdb_state duckdb_appender_create(duckdb_connection connection, const char *schema, const char *table,duckdb_appender *out_appender);
     ⎕NA'I4 ',lib,'|duckdb_appender_create P <0UTF8[] <0UTF8[] >P'
     ⍝ idx_t duckdb_appender_column_count(duckdb_appender appender);
@@ -174,7 +170,7 @@
     ⍝ void duckdb_destroy_arrow_options(duckdb_arrow_options *arrow_options);
     ⎕NA lib,'|duckdb_destroy_arrow_options <P'
     ⍝ double duckdb_hugeint_to_double(duckdb_hugeint val)
-    ⎕NA'F8 ',lib,'|duckdb_hugeint_to_double P'
+    ⎕NA'F8 ',lib,'|duckdb_hugeint_to_double {U8 I8}'
 
     ⍝ ===== ERROR HANDLING =====
     ⍝ duckdb_error_data duckdb_create_error_data(duckdb_error_type type, const char *message);
@@ -209,8 +205,7 @@
     ⎕NA lib,'|duckdb_interrupt P'
     ⍝ duckdb_query_progress_type duckdb_query_progress(duckdb_connection connection);
     ⍝ Returns struct: {double percentage; uint64_t rows_processed; uint64_t total_rows_to_process;}
-    ⍝ TODO: Cannot return struct directly in ⎕NA, need to implement differently
-    ⍝ ⎕NA'{F8 U8 U8} ',lib,'|duckdb_query_progress P'
+    ⍝ NOTE: Struct return is currently not supported by this ⎕NA setup.
     ⍝ const char *duckdb_library_version();
     ⎕NA'U8 ',lib,'|duckdb_library_version'
 
@@ -270,7 +265,8 @@
     ⍝ duckdb_state duckdb_bind_uhugeint(duckdb_prepared_statement prepared_statement, idx_t param_idx, duckdb_uhugeint val);
     ⎕NA'I4 ',lib,'|duckdb_bind_uhugeint P U8 P'
     ⍝ duckdb_state duckdb_bind_decimal(duckdb_prepared_statement prepared_statement, idx_t param_idx, duckdb_decimal val);
-    ⎕NA'I4 ',lib,'|duckdb_bind_decimal P U8 P'
+    ⍝ duckdb_decimal layout: width(U1), scale(U1), pad(U2,U4), value.lower(U8), value.upper(I8)
+    ⎕NA'I4 ',lib,'|duckdb_bind_decimal P U8 {U1 U1 U2 U4 U8 I8}'
     ⍝ duckdb_state duckdb_bind_uint8(duckdb_prepared_statement prepared_statement, idx_t param_idx, uint8_t val);
     ⎕NA'I4 ',lib,'|duckdb_bind_uint8 P U8 U1'
     ⍝ duckdb_state duckdb_bind_uint16(duckdb_prepared_statement prepared_statement, idx_t param_idx, uint16_t val);
@@ -296,7 +292,7 @@
     ⍝ duckdb_state duckdb_bind_varchar(duckdb_prepared_statement prepared_statement, idx_t param_idx, const char *val);
     ⎕NA'I4 ',lib,'|duckdb_bind_varchar P U8 <0UTF8[]'
     ⍝ duckdb_state duckdb_bind_varchar_length(duckdb_prepared_statement prepared_statement, idx_t param_idx, const char *val, idx_t length);
-    ⎕NA'I4 ',lib,'|duckdb_bind_varchar_length P U8 <0U1[] U8'
+    ⎕NA'I4 ',lib,'|duckdb_bind_varchar_length P U8 <0UTF8[] U8'
     ⍝ duckdb_state duckdb_bind_blob(duckdb_prepared_statement prepared_statement, idx_t param_idx, const void *data, idx_t length);
     ⎕NA'I4 ',lib,'|duckdb_bind_blob P U8 <U1[] U8'
     ⍝ duckdb_state duckdb_bind_null(duckdb_prepared_statement prepared_statement, idx_t param_idx);

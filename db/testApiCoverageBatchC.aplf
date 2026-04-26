@@ -52,15 +52,15 @@ r,←⊂'duckdb_vector_size > 0' req vs>0
 emsg←256 read.utf8 api.duckdb_library_version
 r,←⊂'duckdb_library_version non-empty' req 0<≢emsg
 
-days←api.duckdb_to_date ⊂2026 1 1 0 0
-ymd←api.duckdb_from_date days
-r,←⊂'duckdb_to_date/duckdb_from_date callable' req ymd≥0
+days←toDate 2026 1 1
+ymd←fromDate days
+r,←⊂'toDate/fromDate callable' req (2026 1 1)≡ymd
 ret←api.duckdb_is_finite_date days
 r,←⊂'duckdb_is_finite_date callable' req (0 1)∊⍨ret
 
-ticks←api.duckdb_to_time ⊂1 2 3 0 400
-hmsu←api.duckdb_from_time ticks
-r,←⊂'duckdb_to_time/duckdb_from_time callable' req hmsu≥0
+ticks←toTime 1 2 3 400
+hmsu←fromTime ticks
+r,←⊂'toTime/fromTime callable' req (1 2 3 400)≡hmsu
 ret←api.duckdb_is_finite_timestamp 0
 r,←⊂'duckdb_is_finite_timestamp callable' req (0 1)∊⍨ret
 

@@ -1,4 +1,4 @@
-testApiCoverageBatchD;req;r;lt0;lt1;chunk;cc;sz;vec0;vec1;vtype;data;valid;st;x
+testApiCoverageBatchD;req;r;lt0;lt1;chunk;cc;sz;vec0;vec1;vtype;data;valid;st;x;ok
 ⍝ Batch D runtime coverage for logical type + data chunk + vector/validity APIs.
 
 :If 0=⎕NC'null'
@@ -55,9 +55,13 @@ r,←⊂'duckdb_create_logical_type VARCHAR handle' req lt1≠0
         :EndIf
 
         :If vec1≠0
-            {}api.duckdb_vector_assign_string_element vec1 0 (⊂'alpha')
-            {}api.duckdb_vector_assign_string_element_len vec1 1 (⊂'bravo-charlie') 5
-            r,←⊂'duckdb_vector_assign_string_element(_len) callable' req 1
+            ok←0
+            :Trap 0
+                {}api.duckdb_vector_assign_string_element vec1 0 'alpha'
+                {}api.duckdb_vector_assign_string_element_len vec1 1 'bravo-charlie' 5
+                ok←1
+            :EndTrap
+            r,←⊂'duckdb_vector_assign_string_element(_len) callable' req ok
         :EndIf
 
         {}api.duckdb_data_chunk_reset chunk
@@ -69,8 +73,12 @@ r,←⊂'duckdb_create_logical_type VARCHAR handle' req lt1≠0
 :If lt0≠0 ⋄ {}api.duckdb_destroy_logical_type ⊂lt0 ⋄ :EndIf
 :If lt1≠0 ⋄ {}api.duckdb_destroy_logical_type ⊂lt1 ⋄ :EndIf
 
-x←api.duckdb_hugeint_to_double 0
-r,←⊂'duckdb_hugeint_to_double callable' req 1
+ok←0
+:Trap 0
+    x←api.duckdb_hugeint_to_double ⊂0 0
+    ok←1
+:EndTrap
+r,←⊂'duckdb_hugeint_to_double callable' req ok
 
 ⎕←↑r
 ⎕←''

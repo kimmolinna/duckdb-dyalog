@@ -1,13 +1,18 @@
-hmsu←fromTime micros;raw;hour;min;sec;u
+hmsu←fromTime micros;total;hour;min;sec;u;rem
 ⍝ Convert duckdb_time micros -> (hour min sec micros)
-⍝ Uses raw packed u64 return from duckdb_from_time.
+⍝ Avoid ABI-sensitive struct return handling.
 
-raw←api.duckdb_from_time micros
-hour←(2*8)|raw
-min←(2*8)|⌊raw÷(2*8)
-sec←(2*8)|⌊raw÷(2*16)
-u←(2*32)|⌊raw÷(2*32)
-u←u-(u>((2*31)-1))×(2*32)
+total←⌊micros
+:If total<0
+    hmsu←0 0 0 0
+    →0
+:EndIf
+hour←⌊total÷3600000000
+rem←total-hour×3600000000
+min←⌊rem÷60000000
+rem-←min×60000000
+sec←⌊rem÷1000000
+u←rem-sec×1000000
 hmsu←hour min sec u
 
 ⍝ KSL 1.0.0

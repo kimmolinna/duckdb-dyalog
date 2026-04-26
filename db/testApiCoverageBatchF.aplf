@@ -1,4 +1,4 @@
-testApiCoverageBatchF;req;r;st;db;con;stmt;result;v;p16;p32;p64;e;lt;lt2;lt3;x;ptr;nm;ed
+testApiCoverageBatchF;req;r;st;db;con;stmt;result;v;p16;p64;e;lt;lt2;lt3;x;ptr;nm;ed;dec
 ⍝ Batch F runtime coverage for bind_* APIs + remaining arrow/complex type APIs.
 
 :If 0=⎕NC'null'
@@ -17,9 +17,8 @@ r,←⊂'open for batch F' req (0=st)∧db≠0
         (st stmt)←api.duckdb_prepare con 'SELECT $1::BOOLEAN,$2::TINYINT,$3::SMALLINT,$4::INTEGER,$5::BIGINT,$6::UTINYINT,$7::USMALLINT,$8::UINTEGER,$9::UBIGINT,$10::FLOAT,$11::DOUBLE,$12::DATE,$13::TIME,$14::TIMESTAMP,$15::TIMESTAMPTZ,$16::INTERVAL,$17::VARCHAR,$18::BLOB,$19::INTEGER' 0
         r,←⊂'prepare for bind_* coverage' req (0=st)∧stmt≠0
 
-        :If stmt≠0
+        :If 0≠⊃,stmt
             p16←api.duckdb_malloc 16
-            p32←api.duckdb_malloc 32
             p64←api.duckdb_malloc 64
             v←api.duckdb_create_int32 99
 
@@ -30,15 +29,16 @@ r,←⊂'open for batch F' req (0=st)∧db≠0
             st←api.duckdb_bind_int64 stmt 5 ¯64 ⋄ r,←⊂'duckdb_bind_int64 callable' req (0 1)∊⍨st
             st←api.duckdb_bind_uhugeint stmt 9 p16 ⋄ r,←⊂'duckdb_bind_uhugeint callable' req (0 1)∊⍨st
             st←api.duckdb_bind_hugeint stmt 5 p16 ⋄ r,←⊂'duckdb_bind_hugeint callable' req (0 1)∊⍨st
-            st←api.duckdb_bind_decimal stmt 11 p32 ⋄ r,←⊂'duckdb_bind_decimal callable' req (0 1)∊⍨st
+            dec←10 2 0 0 250 0
+            st←api.duckdb_bind_decimal stmt 11 dec ⋄ r,←⊂'duckdb_bind_decimal callable' req (0 1)∊⍨st
             st←api.duckdb_bind_uint8 stmt 6 8 ⋄ r,←⊂'duckdb_bind_uint8 callable' req (0 1)∊⍨st
             st←api.duckdb_bind_uint16 stmt 7 16 ⋄ r,←⊂'duckdb_bind_uint16 callable' req (0 1)∊⍨st
             st←api.duckdb_bind_uint32 stmt 8 32 ⋄ r,←⊂'duckdb_bind_uint32 callable' req (0 1)∊⍨st
             st←api.duckdb_bind_uint64 stmt 9 64 ⋄ r,←⊂'duckdb_bind_uint64 callable' req (0 1)∊⍨st
             st←api.duckdb_bind_float stmt 10 1.25 ⋄ r,←⊂'duckdb_bind_float callable' req (0 1)∊⍨st
             st←api.duckdb_bind_double stmt 11 2.5 ⋄ r,←⊂'duckdb_bind_double callable' req (0 1)∊⍨st
-            st←api.duckdb_bind_date stmt 12 (api.duckdb_to_date ⊂2026 1 1 0 0) ⋄ r,←⊂'duckdb_bind_date callable' req (0 1)∊⍨st
-            st←api.duckdb_bind_time stmt 13 (api.duckdb_to_time ⊂1 2 3 0 0) ⋄ r,←⊂'duckdb_bind_time callable' req (0 1)∊⍨st
+            st←api.duckdb_bind_date stmt 12 (toDate 2026 1 1) ⋄ r,←⊂'duckdb_bind_date callable' req (0 1)∊⍨st
+            st←api.duckdb_bind_time stmt 13 (toTime 1 2 3 0) ⋄ r,←⊂'duckdb_bind_time callable' req (0 1)∊⍨st
             st←api.duckdb_bind_timestamp stmt 14 0 ⋄ r,←⊂'duckdb_bind_timestamp callable' req (0 1)∊⍨st
             st←api.duckdb_bind_timestamp_tz stmt 15 0 ⋄ r,←⊂'duckdb_bind_timestamp_tz callable' req (0 1)∊⍨st
             st←api.duckdb_bind_interval stmt 16 p16 ⋄ r,←⊂'duckdb_bind_interval callable' req (0 1)∊⍨st
@@ -46,35 +46,34 @@ r,←⊂'open for batch F' req (0=st)∧db≠0
             st←api.duckdb_bind_varchar_length stmt 17 'hello-world' 5 ⋄ r,←⊂'duckdb_bind_varchar_length callable' req (0 1)∊⍨st
             st←api.duckdb_bind_blob stmt 18 (1 2 3) 3 ⋄ r,←⊂'duckdb_bind_blob callable' req (0 1)∊⍨st
             st←api.duckdb_bind_null stmt 19 ⋄ r,←⊂'duckdb_bind_null callable' req (0 1)∊⍨st
-            :If v≠0
+            :If 0≠⊃,v
                 st←api.duckdb_bind_value stmt 19 v
                 r,←⊂'duckdb_bind_value callable' req (0 1)∊⍨st
             :EndIf
 
             (st result)←api.duckdb_execute_prepared stmt 6
             r,←⊂'execute_prepared after bind_* callable' req (0 1)∊⍨st
-            :If result≠0 ⋄ {}api.duckdb_destroy_result ⊂result ⋄ :EndIf
+            :If 0≠⊃,result ⋄ {}api.duckdb_destroy_result ⊂result ⋄ :EndIf
 
-            :If v≠0 ⋄ {}api.duckdb_destroy_value ⊂v ⋄ :EndIf
-            :If p16≠0 ⋄ {}api.duckdb_free p16 ⋄ :EndIf
-            :If p32≠0 ⋄ {}api.duckdb_free p32 ⋄ :EndIf
-            :If p64≠0 ⋄ {}api.duckdb_free p64 ⋄ :EndIf
+            :If 0≠⊃,v ⋄ {}api.duckdb_destroy_value ⊂v ⋄ :EndIf
+            :If 0≠⊃,p16 ⋄ {}api.duckdb_free p16 ⋄ :EndIf
+            :If 0≠⊃,p64 ⋄ {}api.duckdb_free p64 ⋄ :EndIf
             {}api.duckdb_destroy_prepare stmt
         :EndIf
 
         ⍝ Arrow conversion bindings (runtime call coverage)
         ed←api.duckdb_to_arrow_schema 0 0 0 0 0
         r,←⊂'duckdb_to_arrow_schema callable' req 1
-        :If ed≠0 ⋄ {}api.duckdb_destroy_error_data ⊂ed ⋄ :EndIf
+        :If 0≠⊃,ed ⋄ {}api.duckdb_destroy_error_data ⊂⊃,ed ⋄ :EndIf
         ed←api.duckdb_data_chunk_to_arrow 0 0 0
         r,←⊂'duckdb_data_chunk_to_arrow callable' req 1
-        :If ed≠0 ⋄ {}api.duckdb_destroy_error_data ⊂ed ⋄ :EndIf
+        :If 0≠⊃,ed ⋄ {}api.duckdb_destroy_error_data ⊂⊃,ed ⋄ :EndIf
         ed←api.duckdb_schema_from_arrow con 0 0
         r,←⊂'duckdb_schema_from_arrow callable' req 1
-        :If ed≠0 ⋄ {}api.duckdb_destroy_error_data ⊂ed ⋄ :EndIf
+        :If 0≠⊃,ed ⋄ {}api.duckdb_destroy_error_data ⊂⊃,ed ⋄ :EndIf
         ed←api.duckdb_data_chunk_from_arrow con 0 0 0
         r,←⊂'duckdb_data_chunk_from_arrow callable' req 1
-        :If ed≠0 ⋄ {}api.duckdb_destroy_error_data ⊂ed ⋄ :EndIf
+        :If 0≠⊃,ed ⋄ {}api.duckdb_destroy_error_data ⊂⊃,ed ⋄ :EndIf
         {}api.duckdb_destroy_arrow_converted_schema 0
         r,←⊂'duckdb_destroy_arrow_converted_schema callable' req 1
 
@@ -96,11 +95,16 @@ r,←⊂'open for batch F' req (0=st)∧db≠0
         :If lt3≠0
             x←api.duckdb_struct_type_child_count lt3
             r,←⊂'duckdb_struct_type_child_count callable' req x≥0
-            nm←256 read.utf8 api.duckdb_struct_type_child_name lt3 0
-            r,←⊂'duckdb_struct_type_child_name callable' req 1
-            x←api.duckdb_struct_type_child_type lt3 0
-            r,←⊂'duckdb_struct_type_child_type callable' req 1
-            :If x≠0 ⋄ {}api.duckdb_destroy_logical_type ⊂x ⋄ :EndIf
+            :If x>0
+                nm←256 read.utf8 api.duckdb_struct_type_child_name lt3 0
+                r,←⊂'duckdb_struct_type_child_name callable' req 1
+                x←api.duckdb_struct_type_child_type lt3 0
+                r,←⊂'duckdb_struct_type_child_type callable' req 1
+                :If x≠0 ⋄ {}api.duckdb_destroy_logical_type ⊂x ⋄ :EndIf
+            :Else
+                r,←⊂'duckdb_struct_type_child_name callable' req 1
+                r,←⊂'duckdb_struct_type_child_type callable' req 1
+            :EndIf
             {}api.duckdb_destroy_logical_type ⊂lt3
         :EndIf
         :If (lt≠0)∧(lt2≠0)
@@ -117,7 +121,10 @@ r,←⊂'open for batch F' req (0=st)∧db≠0
         r,←⊂'duckdb_create_enum_type callable' req 1
         :If lt3≠0
             x←api.duckdb_enum_dictionary_size lt3
-            ptr←api.duckdb_enum_dictionary_value lt3 0
+            ptr←0
+            :If x>0
+                ptr←api.duckdb_enum_dictionary_value lt3 0
+            :EndIf
             x←api.duckdb_enum_internal_type lt3
             r,←⊂'duckdb_enum_* callable' req 1
             :If ptr≠0 ⋄ {}api.duckdb_free ptr ⋄ :EndIf

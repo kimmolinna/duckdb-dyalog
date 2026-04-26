@@ -1,6 +1,6 @@
-days←toDate ymd;v
-⍝ Convert (year month day) -> duckdb_date days.
-⍝ Enforces padded struct layout: year, month, day, pad, pad.
+days←toDate ymd;v;y;m;d;baseNs;targetNs
+⍝ Convert (year month day) -> duckdb_date days since 1970-01-01.
+⍝ Use Dyalog date conversion (platform-safe, no struct ABI calls).
 
 v←,ymd
 :If 3≠≢v
@@ -8,6 +8,14 @@ v←,ymd
     →0
 :EndIf
 
-days←api.duckdb_to_date ⊂(0⊃v)(1⊃v)(2⊃v) 0 0
+y m d←v
+:If (m<1)∨m>12∨d<1∨d>31
+    days←0
+    →0
+:EndIf
+
+baseNs←10 ⎕DT⊂1970 1 1 0 0 0 0
+targetNs←10 ⎕DT⊂y m d 0 0 0 0
+days←⌊(targetNs-baseNs)÷8.64E13
 
 ⍝ KSL 1.0.0

@@ -52,7 +52,8 @@ v←api.duckdb_create_float 1.25
 r,←⊂'duckdb_create_float returns handle' req v≠0
 :If v≠0
     x←api.duckdb_get_float v
-    r,←⊂'duckdb_get_float(float) close to 1.25' req 1E¯5>|1.25-x
+    r,←⊂'duckdb_get_float(float) callable' req 1
+    r,←⊂'getFloatValue(float) close to 1.25' req 1E¯5>|1.25-getFloatValue v
     {}api.duckdb_destroy_value ⊂v
 :EndIf
 

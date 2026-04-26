@@ -1,6 +1,6 @@
 micros←toTime hmsu;v
 ⍝ Convert (hour min sec micros) -> duckdb_time micros.
-⍝ Enforces padded struct layout: hour, min, sec, pad, micros.
+⍝ Avoid ABI-sensitive struct-by-value FFI on Windows.
 
 v←,hmsu
 :If 4≠≢v
@@ -8,6 +8,16 @@ v←,hmsu
     →0
 :EndIf
 
-micros←api.duckdb_to_time ⊂(0⊃v)(1⊃v)(2⊃v) 0 (3⊃v)
+h m s u←v
+:If (h<0)∨h>23∨m<0∨m>59∨s<0∨s>59∨u<0
+    micros←0
+    →0
+:EndIf
+
+micros←h×3600
+micros+←m×60
+micros+←s
+micros×←1000000
+micros+←u
 
 ⍝ KSL 1.0.0

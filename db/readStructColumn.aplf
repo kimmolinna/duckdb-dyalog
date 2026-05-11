@@ -1,4 +1,4 @@
- col←readStructColumn(vector column_type row_count);child_count;child_names;child_vectors;child_cols;i;j
+ col←readStructColumn(vector column_type row_count);child_count;child_names;child_vectors;child_cols;i;j;ct
 ⍝ Read a STRUCT column from a DuckDB vector
 ⍝ vector: the DuckDB vector pointer
 ⍝ column_type: the logical type of the column
@@ -7,21 +7,17 @@
 
 ⎕io←0
 
-⍝ Get struct metadata
 child_count←api.duckdb_struct_type_child_count column_type
 child_names←{256 read.utf8 api.duckdb_struct_type_child_name column_type ⍵}¨⍳child_count
 
-⍝ Get child vectors and read their data
 child_vectors←{api.duckdb_struct_vector_get_child vector ⍵}¨⍳child_count
-child_cols←{
-    child_vec←⍵
-    child_type←api.duckdb_vector_get_column_type child_vec
-    child_type_id←api.duckdb_get_type_id child_type
-    child_data←api.duckdb_vector_get_data child_vec
-    readChildElements child_vec child_type_id child_data row_count
-}¨child_vectors
+child_cols←⍬
+:For i :In ⍳child_count
+    ct←api.duckdb_vector_get_column_type(i⊃child_vectors)
+    child_cols,←⊂readVector(i⊃child_vectors)ct row_count
+    {}api.duckdb_destroy_logical_type ct
+:EndFor
 
-⍝ Build result: each row is a namespace with field names mapped to values
 col←⎕NS¨row_count⍴⊂⍬
 :For i :In ⍳row_count
     :For j :In ⍳child_count
@@ -29,4 +25,4 @@ col←⎕NS¨row_count⍴⊂⍬
     :EndFor
 :EndFor
 
-⍝ KSL 2.0.0
+⍝ KSL 2.1.0

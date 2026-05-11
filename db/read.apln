@@ -16,6 +16,8 @@
       utf8_l_←⍎⎕NA lib,'|MEMCPY >U1[] P U4' ⋄ utf8_l←{'UTF-8'⎕UCS utf8_l_ ⍺ ⍵ ⍺}
       hint_←⍎⎕NA lib,'|MEMCPY >{U8 I8}[] P U4' ⋄ hint←{hint_ ⍺ ⍵(⍺×16)}
       string_←⍎⎕NA lib,'|MEMCPY >{U4 U1[12]}[] P U4' ⋄ string←{string_ ⍺ ⍵(⍺×16)}
+      stringi_←⍎⎕NA lib,'|MEMCPY >{U4 I1[12]}[] P U4' ⋄ stringi←{stringi_ ⍺ ⍵(⍺×16)}
+      decimal_←⍎⎕NA lib,'|MEMCPY >{U1[16]}[] P U4' ⋄ decimal←{decimal_ ⍺ ⍵(⍺×16)}
     ∇
 :EndNamespace
 

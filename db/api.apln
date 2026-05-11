@@ -128,9 +128,9 @@
     ⍝ void duckdb_vector_ensure_validity_writable(duckdb_vector vector);
     ⎕NA lib,'|duckdb_vector_ensure_validity_writable P'
     ⍝ void duckdb_vector_assign_string_element(duckdb_vector vector, idx_t index, const char *str);
-    ⎕NA lib,'|duckdb_vector_assign_string_element P U8 <0UTF8[]'
+    ⎕NA lib,'|duckdb_vector_assign_string_element P U8 <0U1[]'
     ⍝ void duckdb_vector_assign_string_element_len(duckdb_vector vector, idx_t index, const char *str,idx_t str_len);
-    ⎕NA lib,'|duckdb_vector_assign_string_element_len P U8 <0UTF8[] U8'
+    ⎕NA lib,'|duckdb_vector_assign_string_element_len P U8 <0U1[] U8'
     ⍝ duckdb_state duckdb_appender_create(duckdb_connection connection, const char *schema, const char *table,duckdb_appender *out_appender);
     ⎕NA'I4 ',lib,'|duckdb_appender_create P <0UTF8[] <0UTF8[] >P'
     ⍝ idx_t duckdb_appender_column_count(duckdb_appender appender);
@@ -380,5 +380,19 @@
 
     ⍝ duckdb_vector duckdb_struct_vector_get_child(duckdb_vector vector, idx_t index);
     ⎕NA'P ',lib,'|duckdb_struct_vector_get_child P U8'
+
+    ⍝ ===== DECIMAL API =====
+    ⍝ uint8_t duckdb_decimal_width(duckdb_logical_type type);
+    ⎕NA'U1 ',lib,'|duckdb_decimal_width P'
+    ⍝ uint8_t duckdb_decimal_scale(duckdb_logical_type type);
+    ⎕NA'U1 ',lib,'|duckdb_decimal_scale P'
+    ⍝ duckdb_type duckdb_decimal_internal_type(duckdb_logical_type type);
+    ⎕NA'I4 ',lib,'|duckdb_decimal_internal_type P'
+
+    ⍝ ===== ARRAY API =====
+    ⍝ duckdb_logical_type duckdb_array_type_child_type(duckdb_logical_type type);
+    ⎕NA'P ',lib,'|duckdb_array_type_child_type P'
+    ⍝ idx_t duckdb_array_type_array_size(duckdb_logical_type type);
+    ⎕NA'U8 ',lib,'|duckdb_array_type_array_size P'
   ∇
 :EndNamespace

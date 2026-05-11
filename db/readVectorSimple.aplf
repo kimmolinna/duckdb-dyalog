@@ -1,0 +1,26 @@
+ col←row_count readVectorSimple(type_id _data)
+⍝ Read simple integer/unsigned types from a DuckDB vector data pointer
+⍝ type_id: DuckDB type ID (0-9)
+⍝ _data: pointer to vector data
+⍝ row_count (left arg): number of rows to read
+ :Select type_id
+ :CaseList 0
+ :CaseList 1 2       ⍝ boolean and tinyint
+     col←row_count read.i8 _data
+ :Case 3             ⍝ smallint
+     col←row_count read.i16 _data
+ :Case 4             ⍝ integer
+     col←row_count read.i32 _data
+ :Case 5             ⍝ bigint
+     col←row_count read.i64 _data
+ :Case 6             ⍝ utinyint
+     col←row_count read.u8 _data
+ :Case 7             ⍝ usmallint
+     col←row_count read.u16 _data
+ :Case 8             ⍝ uinteger
+     col←row_count read.u32 _data
+ :Case 9             ⍝ ubigint
+     col←row_count read.u64 _data
+ :Else
+     ∘∘∘
+ :EndSelect

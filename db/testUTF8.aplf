@@ -1,0 +1,86 @@
+ testUTF8;r;req;db;con;result;data;out
+⍝ Regression tests for UTF-8 bugs found during merge analysis
+⍝ Bug #1: Short VARCHAR UTF-8 decoding (was monadic ⎕UCS, now 'UTF-8'⎕UCS)
+⍝ Bug #2: Append string double-encoding (was <0UTF8[], now <0U1[])
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test UTF-8 Handling'
+
+db←open':memory:'
+con←connect db
+
+⍝ ===== Bug #1: Short VARCHAR read (≤12 bytes inline) =====
+⍝ 'café' is 5 UTF-8 bytes but 4 characters — monadic ⎕UCS would give 5 chars
+result←query con'SELECT ''café'' AS s'
+:If 3=≢result
+    data←⊃⊃1⊃result
+    r,←⊂'Short UTF-8 café length'req 4=≢data
+    r,←⊂'Short UTF-8 café value'req'café'≡data
+:Else
+    r,←⊂'Short UTF-8 query'req 0
+:EndIf
+
+⍝ 2-byte sequence: ü (U+00FC)
+result←query con'SELECT ''über'' AS s'
+:If 3=≢result
+    data←⊃⊃1⊃result
+    r,←⊂'Short UTF-8 über'req'über'≡data
+:Else
+    r,←⊂'Short UTF-8 über query'req 0
+:EndIf
+
+⍝ 3-byte sequence: 日 (U+65E5)
+result←query con'SELECT ''日本'' AS s'
+:If 3=≢result
+    data←⊃⊃1⊃result
+    r,←⊂'Short UTF-8 日本'req'日本'≡data
+:Else
+    r,←⊂'Short UTF-8 日本 query'req 0
+:EndIf
+
+⍝ Long VARCHAR (>12 bytes, pointer-based)
+result←query con'SELECT ''This is a longer café string'' AS s'
+:If 3=≢result
+    data←⊃⊃1⊃result
+    r,←⊂'Long UTF-8 café'req'This is a longer café string'≡data
+:Else
+    r,←⊂'Long UTF-8 query'req 0
+:EndIf
+
+⍝ ===== Bug #2: Append string double-encoding =====
+{}query con'CREATE TABLE utf8_test(s VARCHAR)'
+out←append con '' 'utf8_test' (⊂'über' 'café' '日本語') (,type.VARCHAR)
+r,←⊂'UTF-8 append succeeded'req'Success!'≡out
+
+result←query con'SELECT * FROM utf8_test ORDER BY s'
+:If 3=≢result
+    data←⊃1⊃result
+    r,←⊂'Append über roundtrip'req(∨/'über'∘{(≢⍺)≤≢⍵:⍺≡(≢⍺)↑⍵ ⋄ 0}¨data)
+    r,←⊂'Append café roundtrip'req(∨/'café'∘{(≢⍺)≤≢⍵:⍺≡(≢⍺)↑⍵ ⋄ 0}¨data)
+    r,←⊂'Append 日本語 roundtrip'req(∨/'日本語'∘{(≢⍺)≤≢⍵:⍺≡(≢⍺)↑⍵ ⋄ 0}¨data)
+:Else
+    r,←⊂'UTF-8 append readback'req 0
+:EndIf
+
+⍝ ===== Mixed NULL + non-ASCII =====
+{}query con'CREATE TABLE utf8_null(s VARCHAR)'
+out←append con '' 'utf8_null' (⊂'hello' null 'café' null '日本') (,type.VARCHAR)
+r,←⊂'UTF-8 null append succeeded'req'Success!'≡out
+
+result←query con'SELECT * FROM utf8_null'
+:If 3=≢result
+    data←⊃1⊃result
+    r,←⊂'Mixed null+UTF-8 count'req 5=≢data
+    r,←⊂'Mixed null value 1'req null≡1⊃data
+    r,←⊂'Mixed null value 3'req null≡3⊃data
+:Else
+    r,←⊂'UTF-8 null readback'req 0
+:EndIf
+
+disconnect con
+close db
+↑r
+
+⍝ KSL 2.0.0

@@ -1,0 +1,75 @@
+⍝ Run all tests — pre-existing and merge
+⎕IO←0 ⋄ ⎕ML←1
+
+⍝ Build the db namespace by ⎕FIX-ing each file
+'db'⎕NS ''
+base←'d:/devel/duckdb-dyalog/db/'
+
+⍝ Fix namespace files first
+2 db.⎕FIX 'file://',base,'type.apln'
+2 db.⎕FIX 'file://',base,'api.apln'
+2 db.⎕FIX 'file://',base,'read.apln'
+2 db.⎕FIX 'file://',base,'write.apln'
+
+⍝ Fix ALL function files
+files←⊃⎕NINFO⍠('Wildcard' 1)⊢base,'*.aplf'
+{2 db.⎕FIX 'file://',⍵}¨files
+
+⍝ Initialize with lib folder
+db.init 'd:\devel\duckdb-dyalog\lib\'
+
+⍝ Pre-existing tests
+⎕←'========================================'
+⎕←'Running test (pre-existing)...'
+⎕←'========================================'
+db.test
+
+⎕←''
+⎕←'========================================'
+⎕←'Running testPhase1 (pre-existing)...'
+⎕←'========================================'
+db.testPhase1
+
+⎕←''
+⎕←'========================================'
+⎕←'Running testPhase2 (pre-existing)...'
+⎕←'========================================'
+db.testPhase2
+
+⍝ Merge tests
+⎕←''
+⎕←'========================================'
+⎕←'Running testMergedTypes...'
+⎕←'========================================'
+db.testMergedTypes
+
+⎕←''
+⎕←'========================================'
+⎕←'Running testTimestamps...'
+⎕←'========================================'
+db.testTimestamps
+
+⎕←''
+⎕←'========================================'
+⎕←'Running testUTF8...'
+⎕←'========================================'
+db.testUTF8
+
+⎕←''
+⎕←'========================================'
+⎕←'Running testAppendTypes...'
+⎕←'========================================'
+db.testAppendTypes
+
+⎕←''
+⎕←'========================================'
+⎕←'Running testUtilities...'
+⎕←'========================================'
+db.testUtilities
+
+⎕←''
+⎕←'========================================'
+⎕←'ALL TESTS COMPLETE'
+⎕←'========================================'
+
+⎕OFF 0

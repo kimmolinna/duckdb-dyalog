@@ -40,7 +40,7 @@ result←query con'SELECT * FROM float_test ORDER BY f'
 
 ⍝ ===== VARCHAR with NULLs =====
 {}query con'CREATE TABLE str_test(s VARCHAR)'
-out←append con '' 'str_test' (⊂'hello' null 'world') (,type.VARCHAR)
+out←append con '' 'str_test' (,⊂'hello' null 'world') (,type.VARCHAR)
 r,←⊂'String null append'req'Success!'≡out
 
 result←query con'SELECT * FROM str_test'
@@ -55,7 +55,7 @@ result←query con'SELECT * FROM str_test'
 
 ⍝ ===== TIMESTAMP =====
 {}query con'CREATE TABLE ts_test(ts TIMESTAMP)'
-out←append con '' 'ts_test' (⊂(⊂2024 1 15 10 30 0 0)) (,type.TIMESTAMP)
+out←append con '' 'ts_test' (,⊂(⊂2024 1 15 10 30 0 0)) (,type.TIMESTAMP)
 r,←⊂'Timestamp append'req'Success!'≡out
 
 result←query con'SELECT * FROM ts_test'
@@ -81,6 +81,6 @@ result←query con'SELECT COUNT(*) AS c FROM big_test'
 
 disconnect con
 close db
-↑r
+⎕←↑r
 
-⍝ KSL 2.0.0
+⍝ KSL 2.0.1

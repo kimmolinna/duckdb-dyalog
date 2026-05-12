@@ -4,12 +4,12 @@
 ⍝ rows: row indices to select
 ⍝ columns: column names (character) or column indices (numeric)
  cols vecs types←table
- :If ' '=0↑⊃⊆columns
-     x←cols⍳⊆columns
+ :If ' '≡⊃0⍴∊columns
+     x←cols⍳(⊂⍣(1≥≡columns)),columns
  :Else
      x←columns
  :EndIf
- r←(⊂⊂rows)⌷¨vecs[x]
+ r←{⍵[rows]}¨vecs[x]
  r←⊃⍣(⍬≡⍴x)⊢r
 
-⍝ KSL 2.0.0
+⍝ KSL 2.0.3

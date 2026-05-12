@@ -51,7 +51,7 @@ result←query con'SELECT ''This is a longer café string'' AS s'
 
 ⍝ ===== Bug #2: Append string double-encoding =====
 {}query con'CREATE TABLE utf8_test(s VARCHAR)'
-out←append con '' 'utf8_test' (⊂'über' 'café' '日本語') (,type.VARCHAR)
+out←append con '' 'utf8_test' (,⊂'über' 'café' '日本語') (,type.VARCHAR)
 r,←⊂'UTF-8 append succeeded'req'Success!'≡out
 
 result←query con'SELECT * FROM utf8_test ORDER BY s'
@@ -66,7 +66,7 @@ result←query con'SELECT * FROM utf8_test ORDER BY s'
 
 ⍝ ===== Mixed NULL + non-ASCII =====
 {}query con'CREATE TABLE utf8_null(s VARCHAR)'
-out←append con '' 'utf8_null' (⊂'hello' null 'café' null '日本') (,type.VARCHAR)
+out←append con '' 'utf8_null' (,⊂'hello' null 'café' null '日本') (,type.VARCHAR)
 r,←⊂'UTF-8 null append succeeded'req'Success!'≡out
 
 result←query con'SELECT * FROM utf8_null'
@@ -81,6 +81,6 @@ result←query con'SELECT * FROM utf8_null'
 
 disconnect con
 close db
-↑r
+⎕←↑r
 
-⍝ KSL 2.0.0
+⍝ KSL 2.0.1

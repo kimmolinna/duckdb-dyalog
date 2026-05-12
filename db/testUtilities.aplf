@@ -38,11 +38,11 @@ sel←result index(0)(1)
 r,←⊂'Index by number'req 2≡sel
 
 ⍝ ===== index multiple columns =====
-sel←result index(0)('a' 'c')
+sel←result index(0)(,¨'ac')
 r,←⊂'Index multiple cols'req 2=≢sel
 
 disconnect con
 close db
-↑r
+⎕←↑r
 
-⍝ KSL 2.0.0
+⍝ KSL 2.0.1

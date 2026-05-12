@@ -41,7 +41,7 @@ r←query _con ('DESCRIBE ',table)
                             (nm/i⊃data_chunk)←0
                             _←_data(write.⍎t⊃types_out)i⊃data_chunk
                         :elseif 17≡t
-                            d←i⊃data_chunk ⋄ (nm/d)←''
+                            d←i⊃data_chunk ⋄ (nm/d)←⊂''
                             us←('UTF-8'⎕UCS⊢)¨d
                             s←≢¨us ⋄ l←≢us
                             :if ∧/13>s
@@ -53,7 +53,7 @@ r←query _con ('DESCRIBE ',table)
                         :if ∨/nm
                             _←api.duckdb_vector_ensure_validity_writable _vector
                             _validity←api.duckdb_vector_get_validity _vector
-                            _←api.duckdb_validity_set_row_invalid _validity, ⊢¨⍸nm
+                            {_←api.duckdb_validity_set_row_invalid _validity ⍵}¨⍸nm
                         :endif
                     :endfor
 

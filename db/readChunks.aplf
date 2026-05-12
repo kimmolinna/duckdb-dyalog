@@ -24,7 +24,7 @@
              _column_type←column⊃column_ltypes
          :EndIf
          col←readVector _vector _column_type row_count
-         chunk_data[column]←⊂col
+         chunk_data[column]←⊂,col
      :EndFor
      data,←⊂chunk_data
      r←api.duckdb_destroy_data_chunk _data_chunk

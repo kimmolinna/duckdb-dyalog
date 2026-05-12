@@ -87,6 +87,6 @@ result←query con'SELECT NULL::TIMESTAMP AS ts, NULL::DATE AS d'
 
 disconnect con
 close db
-↑r
+⎕←↑r
 
-⍝ KSL 2.0.0
+⍝ KSL 2.0.1

@@ -82,6 +82,6 @@ result←query con'SELECT NULL::DECIMAL(5,2) AS d, NULL::BLOB AS b'
 
 disconnect con
 close db
-↑r
+⎕←↑r
 
-⍝ KSL 2.0.0
+⍝ KSL 2.0.1

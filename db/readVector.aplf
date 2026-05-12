@@ -54,7 +54,7 @@
          col←{⍵[0 1],0 60 60 1000000⊤2⊃⍵}¨col
 
      :Case 16  ⍝ hugeint
-         col←api.duckdb_hugeint_to_double¨_data+16×⍳row_count
+         col←(2*64)⊥⊖↑[¯0.1]row_count read.hint _data
 
      :CaseList 17  ⍝ varchar
          a←row_count read.string _data

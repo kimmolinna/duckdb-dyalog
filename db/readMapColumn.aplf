@@ -20,14 +20,12 @@ col←row_count⍴⊂⎕NS''
     kvpairs←i⊃list_col
     ns←⎕NS''
     :If 0=≢kvpairs
-        ns.keys←⍬
-        ns.values←⍬
+        ns ⎕VSET('keys' ⍬)('values' ⍬)
     :Else
         :If 9=⎕NC'kvpairs.key'
             kvpairs←,⊂kvpairs
         :EndIf
-        ns.keys←{⍵.key}¨kvpairs
-        ns.values←{⍵.value}¨kvpairs
+        ns ⎕VSET('keys'(kvpairs ⎕VGET'key'))('values'(kvpairs ⎕VGET'value'))
     :EndIf
     col[i]←⊂ns
 :EndFor

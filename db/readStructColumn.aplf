@@ -1,4 +1,4 @@
- col←readStructColumn(vector column_type row_count);child_count;child_names;child_vectors;child_cols;i;j;ct
+ col←readStructColumn(vector column_type row_count);child_count;child_names;child_vectors;child_cols;i;ct;names;vals
 ⍝ Read a STRUCT column from a DuckDB vector
 ⍝ vector: the DuckDB vector pointer
 ⍝ column_type: the logical type of the column
@@ -19,10 +19,10 @@ child_cols←⍬
 :EndFor
 
 col←⎕NS¨row_count⍴⊂⍬
+names←↑child_names
 :For i :In ⍳row_count
-    :For j :In ⍳child_count
-        ⍎'col[i].',(j⊃child_names),'←⊃(j⊃child_cols)[i]'
-    :EndFor
+    vals←{⊃(⍵⊃child_cols)[i]}¨⍳child_count
+    col[i]⎕VSET names vals
 :EndFor
 
 ⍝ KSL 2.1.0

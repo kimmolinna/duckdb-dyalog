@@ -1,4 +1,4 @@
- col←readVector(_vector _vector_type row_count);_data;_validity;type_id;nullmask;a;b;l;child_type;_child;child_count;child_col;entries;width;scale;internal_type;size;child_names;child_vectors;child_cols;ct;list_col;i;j;split;frac;exp;sign
+ col←readVector(_vector _vector_type row_count);_data;_validity;type_id;nullmask;a;b;l;child_type;_child;child_count;child_col;entries;width;scale;internal_type;size;child_names;child_vectors;child_cols;ct;list_col;i;split;frac;exp;sign;names;vals
 ⍝ Read a DuckDB vector, handling all types recursively
 ⍝ _vector: DuckDB vector pointer
 ⍝ _vector_type: logical type of the vector (caller owns lifecycle)
@@ -146,10 +146,10 @@
              {}api.duckdb_destroy_logical_type ct
          :EndFor
          col←⎕NS¨row_count⍴⊂⍬
+         names←↑child_names
          :For i :In ⍳row_count
-             :For j :In ⍳child_count
-                 ⍎'col[i].',(j⊃child_names),'←⊃(j⊃child_cols)[i]'
-             :EndFor
+             vals←{⊃(⍵⊃child_cols)[i]}¨⍳child_count
+             col[i]⎕VSET names vals
          :EndFor
 
      :Case 26  ⍝ map (LIST(STRUCT(key, value)))
@@ -165,10 +165,8 @@
          {}api.duckdb_destroy_logical_type child_type
          col←{
              ns←⎕NS''
-             0=≢⍵:ns⊣ns.(keys values)←⍬ ⍬
-             ns.keys←{⍵.key}¨⍵
-             ns.values←{⍵.value}¨⍵
-             ns
+             0=≢⍵:ns ⎕VSET('keys' ⍬)('values' ⍬)
+             ns ⎕VSET('keys'(⍵ ⎕VGET'key'))('values'(⍵ ⎕VGET'value'))
          }¨list_col
 
      :Case 33  ⍝ array

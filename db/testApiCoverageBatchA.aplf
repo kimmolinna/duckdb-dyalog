@@ -41,7 +41,7 @@ r,←⊂'duckdb_open returns database handle' req db≠0
             r,←⊂'duckdb_column_count(select)=2' req 2=cc
 
             name←256 read.utf8 api.duckdb_column_name (⊂result),0
-            r,←⊂'duckdb_column_name(0)=i' req 'i'≡name
+            r,←⊂'duckdb_column_name(0)=i' req (,'i')≡name
 
             ct←api.duckdb_column_type (⊂result),0
             r,←⊂'duckdb_column_type(0)=INTEGER' req type.INTEGER=ct

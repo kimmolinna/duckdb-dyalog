@@ -57,8 +57,8 @@ r,←⊂'duckdb_create_logical_type VARCHAR handle' req lt1≠0
         :If vec1≠0
             ok←0
             :Trap 0
-                {}api.duckdb_vector_assign_string_element vec1 0 'alpha'
-                {}api.duckdb_vector_assign_string_element_len vec1 1 'bravo-charlie' 5
+                {}api.duckdb_vector_assign_string_element vec1 0 ('UTF-8'⎕UCS'alpha')
+                {}api.duckdb_vector_assign_string_element_len vec1 1 ('UTF-8'⎕UCS'bravo-charlie') 5
                 ok←1
             :EndTrap
             r,←⊂'duckdb_vector_assign_string_element(_len) callable' req ok

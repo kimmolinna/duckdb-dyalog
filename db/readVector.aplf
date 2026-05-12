@@ -148,7 +148,7 @@
          col←⎕NS¨row_count⍴⊂⍬
          names←↑child_names
          :For i :In ⍳row_count
-             vals←{⊃(⍵⊃child_cols)[i]}¨⍳child_count
+             vals←{i⊃⍵⊃child_cols}¨⍳child_count
              col[i]⎕VSET names vals
          :EndFor
 

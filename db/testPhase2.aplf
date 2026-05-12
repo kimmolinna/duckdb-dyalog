@@ -397,6 +397,29 @@ r←⊂'Test Arrow Conversion Smoke (isolated)'
     testApiCoverageBatchF
     r,←⊂'Executed testApiCoverageBatchF' req 1
 :EndIf
+
+⍝ ===== MERGE TESTS =====
+:If 3=⎕NC'testMergedTypes'
+    testMergedTypes
+    r,←⊂'Executed testMergedTypes' req 1
+:EndIf
+:If 3=⎕NC'testTimestamps'
+    testTimestamps
+    r,←⊂'Executed testTimestamps' req 1
+:EndIf
+:If 3=⎕NC'testUTF8'
+    testUTF8
+    r,←⊂'Executed testUTF8' req 1
+:EndIf
+:If 3=⎕NC'testAppendTypes'
+    testAppendTypes
+    r,←⊂'Executed testAppendTypes' req 1
+:EndIf
+:If 3=⎕NC'testUtilities'
+    testUtilities
+    r,←⊂'Executed testUtilities' req 1
+:EndIf
+
 ⎕←↑r
 
 ⍝ ===== SUMMARY =====

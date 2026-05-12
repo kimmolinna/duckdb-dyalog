@@ -10,11 +10,11 @@ db←open':memory:'
 con←connect db
 
 ⍝ ===== DECIMAL =====
-result←query con'SELECT 1.23::DECIMAL(5,2) AS d1, 123456789.0123456789::DECIMAL(18,10) AS d2'
+result←query con'SELECT 1.23::DECIMAL(5,2) AS d1, 12345678.0123456789::DECIMAL(18,10) AS d2'
 :If 3=≢result
     data←1⊃result
     r,←⊂'DECIMAL(5,2) value'req 1.23=⊃⊃data
-    r,←⊂'DECIMAL(18,10) value'req 1E¯8>|123456789.0123456789-⊃1⊃data
+    r,←⊂'DECIMAL(18,10) value'req 1E¯8>|12345678.0123456789-⊃1⊃data
 :Else
     r,←⊂'DECIMAL query'req 0
 :EndIf
@@ -25,7 +25,7 @@ result←query con'SELECT ''\x00\x01\xFF''::BLOB AS b'
     data←1⊃result
     r,←⊂'BLOB returns byte vector'req 3=≢⊃⊃data
     r,←⊂'BLOB first byte'req 0=⊃⊃⊃data
-    r,←⊂'BLOB last byte'req ¯1≡¯1↑⊃⊃data  ⍝ 0xFF as signed I1 = ¯1
+    r,←⊂'BLOB last byte'req(,¯1)≡¯1↑⊃⊃data  ⍝ 0xFF as signed I1 = ¯1, ¯1↑ returns 1-elem vector
 :Else
     r,←⊂'BLOB query'req 0
 :EndIf

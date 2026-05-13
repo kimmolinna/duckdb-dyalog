@@ -1,0 +1,5 @@
+result←getFloat a1
+⍝ Wrapper for api.duckdb_get_float
+result←api.duckdb_get_float a1
+
+⍝ KSL 1.0.0

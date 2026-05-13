@@ -1,0 +1,5 @@
+result←destroyResult a1
+⍝ Wrapper for api.duckdb_destroy_result
+result←api.duckdb_destroy_result a1
+
+⍝ KSL 1.0.0

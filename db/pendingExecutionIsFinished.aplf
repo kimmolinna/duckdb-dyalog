@@ -1,0 +1,5 @@
+result←pendingExecutionIsFinished a1
+⍝ Wrapper for api.duckdb_pending_execution_is_finished
+result←api.duckdb_pending_execution_is_finished a1
+
+⍝ KSL 1.0.0

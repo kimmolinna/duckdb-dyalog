@@ -1,0 +1,11 @@
+status←stmt bindTime (idx val)
+⍝ Bind TIME parameter (duckdb_time micros) to prepared statement.
+
+:If stmt=0
+    status←1
+    →0
+:EndIf
+
+status←api.duckdb_bind_time stmt idx val
+
+⍝ KSL 1.0.0

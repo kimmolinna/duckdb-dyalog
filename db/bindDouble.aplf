@@ -1,0 +1,11 @@
+status←stmt bindDouble (idx val)
+⍝ Bind DOUBLE parameter to prepared statement.
+
+:If stmt=0
+    status←1
+    →0
+:EndIf
+
+status←api.duckdb_bind_double stmt idx val
+
+⍝ KSL 1.0.0

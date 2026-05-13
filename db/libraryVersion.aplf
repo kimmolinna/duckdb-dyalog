@@ -1,0 +1,5 @@
+result←libraryVersion
+⍝ Wrapper for api.duckdb_library_version
+result←api.duckdb_library_version
+
+⍝ KSL 1.0.0

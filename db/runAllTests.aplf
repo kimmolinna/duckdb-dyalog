@@ -1,0 +1,32 @@
+runAllTests;req;r;tests;t;fq
+⍝ Unified runner for all test*.aplf functions in db/tests/.
+⍝ Uses one consistent execution/reporting pattern.
+
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Run All Tests'
+
+tests←' ' (≠⊆⊢) 'test testPhase1 testPhase2 testApiCoverageBatchA testApiCoverageBatchB testApiCoverageBatchC testApiCoverageBatchD testApiCoverageBatchE testApiCoverageBatchF testArrow testArrowConversion testArrowConversionRuntime testArrowConversionSchemaRuntime testArrowConversionChunkRuntime testArrowFromRuntime testAppenderMetadataDefault testAppenderDefaultToChunk testPreparedColumnMetadata testPreparedParameterMetadata testResultMetadataWrappers testResultColumnMetadata testExtractedStatements testDateTimeHelpers testClientContext testConfigFlags testPendingHelpers testPendingCheckState testValueApiBatch1 testValueApiBatch2 testValueApiBatch3 testValueApiCoverage'
+
+:For t :In tests
+    fq←'tests.',t
+    :If 3=⎕NC fq
+        :Trap 0
+            ⍎fq
+            r,←⊂'Executed ',fq,' - OK'
+        :Else
+            r,←⊂'Executed ',fq,' - FAILED: ',⎕DMX.Message
+        :EndTrap
+    :Else
+        r,←⊂'Missing ',fq,' - FAILED'
+    :EndIf
+:EndFor
+
+⎕←↑r
+⎕←''
+⎕←'Unified test run complete.'
+
+⍝ KSL 1.0.0

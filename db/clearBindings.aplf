@@ -1,0 +1,11 @@
+status←clearBindings stmt
+⍝ Clear all bound parameters from prepared statement.
+
+:If stmt=0
+    status←1
+    →0
+:EndIf
+
+status←api.duckdb_clear_bindings stmt
+
+⍝ KSL 1.0.0

@@ -1,0 +1,5 @@
+result←listVectorSetSize(a1 a2)
+⍝ Wrapper for api.duckdb_list_vector_set_size
+result←api.duckdb_list_vector_set_size a1 a2
+
+⍝ KSL 1.0.0

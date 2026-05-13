@@ -1,0 +1,5 @@
+result←preparedStatementColumnLogicalType(a1 a2)
+⍝ Wrapper for api.duckdb_prepared_statement_column_logical_type
+result←api.duckdb_prepared_statement_column_logical_type a1 a2
+
+⍝ KSL 1.0.0

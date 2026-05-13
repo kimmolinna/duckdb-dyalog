@@ -1,0 +1,5 @@
+result←valueVarcharInternal(a1 a2 a3)
+⍝ Wrapper for api.duckdb_value_varchar_internal
+result←api.duckdb_value_varchar_internal a1 a2 a3
+
+⍝ KSL 1.0.0

@@ -1,0 +1,5 @@
+result←createMapType(a1 a2)
+⍝ Wrapper for api.duckdb_create_map_type
+result←api.duckdb_create_map_type a1 a2
+
+⍝ KSL 1.0.0

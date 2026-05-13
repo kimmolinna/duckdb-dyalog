@@ -1,0 +1,5 @@
+result←columnCount a1
+⍝ Wrapper for api.duckdb_column_count
+result←api.duckdb_column_count a1
+
+⍝ KSL 1.0.0

@@ -1,0 +1,5 @@
+result←vectorAssignStringElement(a1 a2 a3)
+⍝ Wrapper for api.duckdb_vector_assign_string_element
+result←api.duckdb_vector_assign_string_element a1 a2 a3
+
+⍝ KSL 1.0.0

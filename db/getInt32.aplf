@@ -1,0 +1,5 @@
+result←getInt32 a1
+⍝ Wrapper for api.duckdb_get_int32
+result←api.duckdb_get_int32 a1
+
+⍝ KSL 1.0.0

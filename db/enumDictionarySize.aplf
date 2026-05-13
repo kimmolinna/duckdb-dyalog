@@ -1,0 +1,5 @@
+result←enumDictionarySize a1
+⍝ Wrapper for api.duckdb_enum_dictionary_size
+result←api.duckdb_enum_dictionary_size a1
+
+⍝ KSL 1.0.0

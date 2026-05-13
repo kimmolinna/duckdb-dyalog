@@ -1,0 +1,11 @@
+status←stmt bindBlob (idx data len)
+⍝ Bind BLOB parameter to prepared statement.
+
+:If stmt=0
+    status←1
+    →0
+:EndIf
+
+status←api.duckdb_bind_blob stmt idx data len
+
+⍝ KSL 1.0.0

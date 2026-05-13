@@ -1,0 +1,5 @@
+result←prepare(a1 a2 a3)
+⍝ Wrapper for api.duckdb_prepare
+result←api.duckdb_prepare a1 a2 a3
+
+⍝ KSL 1.0.0

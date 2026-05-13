@@ -1,0 +1,11 @@
+status←stmt bindTimestamp (idx val)
+⍝ Bind TIMESTAMP parameter (duckdb_timestamp micros) to prepared statement.
+
+:If stmt=0
+    status←1
+    →0
+:EndIf
+
+status←api.duckdb_bind_timestamp stmt idx val
+
+⍝ KSL 1.0.0

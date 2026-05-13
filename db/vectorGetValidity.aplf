@@ -1,0 +1,5 @@
+result←vectorGetValidity a1
+⍝ Wrapper for api.duckdb_vector_get_validity
+result←api.duckdb_vector_get_validity a1
+
+⍝ KSL 1.0.0

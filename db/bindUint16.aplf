@@ -1,0 +1,11 @@
+status←stmt bindUint16 (idx val)
+⍝ Bind UINT16 parameter to prepared statement.
+
+:If stmt=0
+    status←1
+    →0
+:EndIf
+
+status←api.duckdb_bind_uint16 stmt idx val
+
+⍝ KSL 1.0.0

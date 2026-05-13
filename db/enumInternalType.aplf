@@ -1,0 +1,5 @@
+result←enumInternalType a1
+⍝ Wrapper for api.duckdb_enum_internal_type
+result←api.duckdb_enum_internal_type a1
+
+⍝ KSL 1.0.0

@@ -1,0 +1,11 @@
+status←stmt bindVarcharLength (idx val len)
+⍝ Bind VARCHAR parameter with explicit byte length.
+
+:If stmt=0
+    status←1
+    →0
+:EndIf
+
+status←api.duckdb_bind_varchar_length stmt idx val len
+
+⍝ KSL 1.0.0

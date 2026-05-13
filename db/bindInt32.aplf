@@ -1,0 +1,11 @@
+status←stmt bindInt32 (idx val)
+⍝ Bind INT32 parameter to prepared statement.
+
+:If stmt=0
+    status←1
+    →0
+:EndIf
+
+status←api.duckdb_bind_int32 stmt idx val
+
+⍝ KSL 1.0.0

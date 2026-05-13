@@ -1,0 +1,12 @@
+status←stmt bindDecimal (idx dec)
+⍝ Bind DECIMAL parameter to prepared statement.
+⍝ dec layout: width scale pad2 pad4 lower_u64 upper_i64
+
+:If stmt=0
+    status←1
+    →0
+:EndIf
+
+status←api.duckdb_bind_decimal stmt idx dec
+
+⍝ KSL 1.0.0

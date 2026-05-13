@@ -1,0 +1,5 @@
+result←getBool a1
+⍝ Wrapper for api.duckdb_get_bool
+result←api.duckdb_get_bool a1
+
+⍝ KSL 1.0.0

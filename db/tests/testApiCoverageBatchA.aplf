@@ -1,4 +1,4 @@
-testApiCoverageBatchA;req;r;st;db;con;result;name;err;cc;ct;lt;ltid;chunk;opts;ok;errptr
+testApiCoverageBatchA;req;r;st;db;con;result;name;err;cc;ct;lt;ltid;chunk;opts;ok;errptr;nameptr
 ⍝ Batch A runtime coverage for core lifecycle + result basics.
 ⍝ Every listed api.apln binding in this batch is called at least once.
 
@@ -40,8 +40,10 @@ r,←⊂'duckdb_open returns database handle' req db≠0
             cc←api.duckdb_column_count ⊂result
             r,←⊂'duckdb_column_count(select)=2' req 2=cc
 
-            name←256 read.utf8 api.duckdb_column_name (⊂result),0
-            r,←⊂'duckdb_column_name(0)=i' req 'i'≡name
+            nameptr←api.duckdb_column_name (⊂result),0
+            r,←⊂'duckdb_column_name(0) returns pointer' req nameptr≠0
+            name←256 read.utf8 nameptr
+            r,←⊂'duckdb_column_name(0)=i' req 105=⎕UCS name
 
             ct←api.duckdb_column_type (⊂result),0
             r,←⊂'duckdb_column_type(0)=INTEGER' req type.INTEGER=ct

@@ -1,0 +1,5 @@
+result←rowsChanged a1
+⍝ Wrapper for api.duckdb_rows_changed
+result←api.duckdb_rows_changed a1
+
+⍝ KSL 1.0.0

@@ -1,0 +1,11 @@
+status←stmt bindValue (idx val)
+⍝ Bind a duckdb_value handle to prepared statement parameter.
+
+:If stmt=0
+    status←1
+    →0
+:EndIf
+
+status←api.duckdb_bind_value stmt idx val
+
+⍝ KSL 1.0.0

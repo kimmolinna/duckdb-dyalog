@@ -1,0 +1,5 @@
+result←executePending(a1 a2)
+⍝ Wrapper for api.duckdb_execute_pending
+result←api.duckdb_execute_pending a1 a2
+
+⍝ KSL 1.0.0

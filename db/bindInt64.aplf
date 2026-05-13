@@ -1,0 +1,11 @@
+status←stmt bindInt64 (idx val)
+⍝ Bind INT64 parameter to prepared statement.
+
+:If stmt=0
+    status←1
+    →0
+:EndIf
+
+status←api.duckdb_bind_int64 stmt idx val
+
+⍝ KSL 1.0.0

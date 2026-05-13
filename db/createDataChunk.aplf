@@ -1,0 +1,5 @@
+result←createDataChunk(a1 a2)
+⍝ Wrapper for api.duckdb_create_data_chunk
+result←api.duckdb_create_data_chunk a1 a2
+
+⍝ KSL 1.0.0

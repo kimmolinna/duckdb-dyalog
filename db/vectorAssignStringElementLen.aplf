@@ -1,0 +1,5 @@
+result←vectorAssignStringElementLen(a1 a2 a3 a4)
+⍝ Wrapper for api.duckdb_vector_assign_string_element_len
+result←api.duckdb_vector_assign_string_element_len a1 a2 a3 a4
+
+⍝ KSL 1.0.0

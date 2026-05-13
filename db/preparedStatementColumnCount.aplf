@@ -1,0 +1,5 @@
+result←preparedStatementColumnCount a1
+⍝ Wrapper for api.duckdb_prepared_statement_column_count
+result←api.duckdb_prepared_statement_column_count a1
+
+⍝ KSL 1.0.0

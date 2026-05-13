@@ -1,0 +1,11 @@
+status←stmt bindVarchar (idx val)
+⍝ Bind VARCHAR parameter to prepared statement.
+
+:If stmt=0
+    status←1
+    →0
+:EndIf
+
+status←api.duckdb_bind_varchar stmt idx val
+
+⍝ KSL 1.0.0

@@ -1,0 +1,5 @@
+result←enumDictionaryValue(a1 a2)
+⍝ Wrapper for api.duckdb_enum_dictionary_value
+result←api.duckdb_enum_dictionary_value a1 a2
+
+⍝ KSL 1.0.0

@@ -1,0 +1,11 @@
+status←stmt bindDate (idx val)
+⍝ Bind DATE parameter (duckdb_date days) to prepared statement.
+
+:If stmt=0
+    status←1
+    →0
+:EndIf
+
+status←api.duckdb_bind_date stmt idx val
+
+⍝ KSL 1.0.0

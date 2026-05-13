@@ -1,0 +1,5 @@
+result←structTypeChildName(a1 a2)
+⍝ Wrapper for api.duckdb_struct_type_child_name
+result←api.duckdb_struct_type_child_name a1 a2
+
+⍝ KSL 1.0.0

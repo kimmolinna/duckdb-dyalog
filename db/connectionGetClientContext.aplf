@@ -1,0 +1,5 @@
+result←connectionGetClientContext(a1 a2)
+⍝ Wrapper for api.duckdb_connection_get_client_context
+result←api.duckdb_connection_get_client_context a1 a2
+
+⍝ KSL 1.0.0

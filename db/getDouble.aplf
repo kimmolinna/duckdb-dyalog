@@ -1,0 +1,5 @@
+result←getDouble a1
+⍝ Wrapper for api.duckdb_get_double
+result←api.duckdb_get_double a1
+
+⍝ KSL 1.0.0

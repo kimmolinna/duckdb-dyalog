@@ -1,0 +1,5 @@
+result←fetchChunk a1
+⍝ Wrapper for api.duckdb_fetch_chunk
+result←api.duckdb_fetch_chunk a1
+
+⍝ KSL 1.0.0

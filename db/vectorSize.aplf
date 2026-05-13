@@ -1,0 +1,5 @@
+result←vectorSize
+⍝ Wrapper for api.duckdb_vector_size
+result←api.duckdb_vector_size
+
+⍝ KSL 1.0.0

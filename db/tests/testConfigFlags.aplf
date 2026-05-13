@@ -36,4 +36,3 @@ r,←⊂''
 r,←⊂'Config flag metadata testing complete!'
 ⎕←↑r
 
-⍝ KSL 1.0.0

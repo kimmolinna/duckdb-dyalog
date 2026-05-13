@@ -7,4 +7,3 @@ parameterType←{
     api.duckdb_param_type ⍺ ⍵
 }
 
-⍝ KSL 1.0.0

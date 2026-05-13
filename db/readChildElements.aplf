@@ -54,4 +54,3 @@ _validity←api.duckdb_vector_get_validity vector
     :EndTrap
 :EndIf
 
-⍝ KSL 2.0.0

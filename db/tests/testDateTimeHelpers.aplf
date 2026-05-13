@@ -25,4 +25,3 @@ r,←⊂''
 r,←⊂'Date/time helper wrapper testing complete!'
 ⎕←↑r
 
-⍝ KSL 1.0.0

@@ -84,4 +84,3 @@ disconnect con
 close db
 ⎕←↑r
 
-⍝ KSL 2.0.1

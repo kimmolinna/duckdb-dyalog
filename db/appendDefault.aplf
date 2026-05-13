@@ -3,4 +3,3 @@ st←appendDefault appender
 
 st←api.duckdb_append_default appender
 
-⍝ KSL 1.0.0

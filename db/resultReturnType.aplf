@@ -9,4 +9,3 @@ vals←,result
 
 result_type←api.duckdb_result_return_type ⊂result
 
-⍝ KSL 1.0.0

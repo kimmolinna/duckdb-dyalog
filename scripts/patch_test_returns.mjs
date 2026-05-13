@@ -67,19 +67,6 @@ function fixPhase2(text) {
   return t;
 }
 
-function tackTrailingQuad(text) {
-  const lines = text.split(/(?<=\n)/);
-  for (let i = lines.length - 1; i >= 0; i--) {
-    if (lines[i].replace(/\n$/, "").trim() !== "⎕←↑r") continue;
-    const ahead = lines.slice(i + 1, i + 12).join("");
-    if (ahead.includes("⍝ KSL")) {
-      lines[i] = "⎕←↑r\n";
-      break;
-    }
-  }
-  return lines.join("");
-}
-
 function listTestFiles() {
   const testsDir = join(ROOT, "tests");
   return readdirSync(testsDir)
@@ -96,7 +83,6 @@ function processFile(path, raw) {
   if (base === "testPhase2.aplf") text = fixPhase2(text);
   else {
     text = fixThreeLineBanner(text);
-    text = tackTrailingQuad(text);
   }
   return text;
 }
@@ -129,8 +115,8 @@ function main() {
   t = tl.join("");
   if (!t.includes("\n⎕←↑r\n")) {
     t = t.replace(
-      " r,←⊂'All critical functionality for prepared statements, configuration, and error handling has been implemented.'\n\n⍝ KSL",
-      " r,←⊂'All critical functionality for prepared statements, configuration, and error handling has been implemented.'\n⎕←↑r\n\n⍝ KSL"
+      " r,←⊂'All critical functionality for prepared statements, configuration, and error handling has been implemented.'\n\n",
+      " r,←⊂'All critical functionality for prepared statements, configuration, and error handling has been implemented.'\n⎕←↑r\n\n"
     );
   }
   writeFileSync(p1, t.replace(/\r\n/g, "\n"), "utf8");

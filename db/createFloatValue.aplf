@@ -2,4 +2,3 @@ val←createFloatValue x
 ⍝ Create float duckdb_value.
 val←api.duckdb_create_float x
 
-⍝ KSL 1.0.0

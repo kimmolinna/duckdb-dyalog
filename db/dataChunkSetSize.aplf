@@ -2,4 +2,3 @@ result←dataChunkSetSize(a1 a2)
 ⍝ Wrapper for api.duckdb_data_chunk_set_size
 result←api.duckdb_data_chunk_set_size a1 a2
 
-⍝ KSL 1.0.0

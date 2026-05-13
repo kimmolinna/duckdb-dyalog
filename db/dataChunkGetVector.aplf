@@ -2,4 +2,3 @@ result←dataChunkGetVector(a1 a2)
 ⍝ Wrapper for api.duckdb_data_chunk_get_vector
 result←api.duckdb_data_chunk_get_vector a1 a2
 
-⍝ KSL 1.0.0

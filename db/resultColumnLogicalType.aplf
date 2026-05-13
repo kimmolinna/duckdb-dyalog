@@ -9,4 +9,3 @@ resultColumnLogicalType←{
     api.duckdb_column_logical_type ⍺ ⍵
 }
 
-⍝ KSL 1.0.0

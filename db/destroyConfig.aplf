@@ -4,4 +4,3 @@ destroyConfig←{
     api.duckdb_destroy_config ⍵
 }
 
-⍝ KSL 1.0.0

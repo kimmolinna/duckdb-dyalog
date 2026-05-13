@@ -65,4 +65,3 @@ r,←⊂''
 r,←⊂'Appender metadata/default testing complete!'
 ⎕←↑r
 
-⍝ KSL 1.0.0

@@ -2,4 +2,3 @@ result←getValueType a1
 ⍝ Wrapper for api.duckdb_get_value_type
 result←api.duckdb_get_value_type a1
 
-⍝ KSL 1.0.0

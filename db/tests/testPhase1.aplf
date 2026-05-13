@@ -311,4 +311,3 @@
  r,←⊂'All critical functionality for prepared statements, configuration, and error handling has been implemented.'
 ⎕←↑r
 
-⍝ KSL 1.0.2

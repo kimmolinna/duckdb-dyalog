@@ -35,4 +35,3 @@
  {}api.duckdb_destroy_logical_type¨column_ltypes
  data←↑data
  chunks←(data column_types)
-⍝ KSL 2.0.0

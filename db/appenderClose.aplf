@@ -5,4 +5,3 @@ status←appenderClose appender
 
 status←api.duckdb_appender_close appender
 
-⍝ KSL 1.0.0

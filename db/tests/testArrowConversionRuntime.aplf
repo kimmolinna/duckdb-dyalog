@@ -38,4 +38,3 @@ r,←⊂''
 r,←⊂'Arrow conversion runtime null-smoke complete!'
 ⎕←↑r
 
-⍝ KSL 1.0.0

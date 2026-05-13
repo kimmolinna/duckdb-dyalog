@@ -9,4 +9,3 @@ msg←''
     msg←1024 read.utf8 ptr
 :EndIf
 
-⍝ KSL 1.0.0

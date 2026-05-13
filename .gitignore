@@ -3,3 +3,10 @@ lib/libduckdb.dylib
 
 # Generated audit artifacts (optional local tooling)
 audit_duckdb_bindings.json
+
+# Local / session noise (repo root)
+kernel_debug.log
+test.parquet
+
+# Dyalog / Cursor local overrides (keep secrets out of git)
+.claude/settings.local.json

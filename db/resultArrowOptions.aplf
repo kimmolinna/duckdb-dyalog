@@ -5,4 +5,3 @@ opts←resultArrowOptions result
 
 opts←api.duckdb_result_get_arrow_options result
 
-⍝ KSL 1.0.0

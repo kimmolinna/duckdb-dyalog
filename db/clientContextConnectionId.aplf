@@ -5,4 +5,3 @@ id←clientContextConnectionId ctx
 
 id←api.duckdb_client_context_get_connection_id ctx
 
-⍝ KSL 1.0.0

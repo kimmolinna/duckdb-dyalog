@@ -8,4 +8,3 @@ status←stmt bindTimestamp (idx val)
 
 status←api.duckdb_bind_timestamp stmt idx val
 
-⍝ KSL 1.0.0

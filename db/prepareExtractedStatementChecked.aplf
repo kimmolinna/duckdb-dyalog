@@ -12,4 +12,3 @@
 
  (st stmt)←api.duckdb_prepare_extracted_statement _con extracted index 0
 
-⍝ KSL 1.0.0

@@ -17,4 +17,3 @@ cfg←config pairs;st;pair;name;value
     :EndIf
 :EndFor
 
-⍝ KSL 1.0.0

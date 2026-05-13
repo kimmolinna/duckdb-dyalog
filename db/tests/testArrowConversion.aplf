@@ -21,4 +21,3 @@ r,←⊂''
 r,←⊂'Arrow conversion API testing complete!'
 ⎕←↑r
 
-⍝ KSL 1.0.0

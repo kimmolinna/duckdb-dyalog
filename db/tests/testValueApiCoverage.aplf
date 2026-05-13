@@ -87,4 +87,3 @@ r,←⊂''
 r,←⊂'Value API coverage testing complete!'
 ⎕←↑r
 
-⍝ KSL 1.0.0

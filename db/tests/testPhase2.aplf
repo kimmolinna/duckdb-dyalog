@@ -272,4 +272,3 @@ r,←⊂'Phase 2 testing complete!'
 r,←⊂'Advanced data types plus pending/streaming, extended appender/error APIs, and Arrow conversion smoke coverage have been implemented.'
 ⎕←↑r
 
-⍝ KSL 2.0.0

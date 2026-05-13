@@ -13,4 +13,3 @@ s←getVarcharValue val
     x←api.duckdb_get_double val
 :EndTrap
 
-⍝ KSL 1.0.0

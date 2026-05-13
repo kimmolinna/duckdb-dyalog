@@ -25,4 +25,3 @@ b←~b
 :Else
 :EndTrap
 
-⍝ KSL 2.1.0

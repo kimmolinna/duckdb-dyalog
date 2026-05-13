@@ -30,4 +30,3 @@ col←row_count⍴⊂⎕NS''
     col[i]←⊂ns
 :EndFor
 
-⍝ KSL 2.0.0

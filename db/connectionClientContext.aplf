@@ -12,4 +12,3 @@ ctx←⊃vals
     :EndIf
 :EndIf
 
-⍝ KSL 1.0.0

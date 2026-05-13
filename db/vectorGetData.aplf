@@ -2,4 +2,3 @@ result←vectorGetData a1
 ⍝ Wrapper for api.duckdb_vector_get_data
 result←api.duckdb_vector_get_data a1
 
-⍝ KSL 1.0.0

@@ -6,4 +6,3 @@ n←getInt32Value val
 :EndIf
 n←api.duckdb_get_int32 val
 
-⍝ KSL 1.0.0

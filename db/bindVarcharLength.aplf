@@ -8,4 +8,3 @@ status←stmt bindVarcharLength (idx val len)
 
 status←api.duckdb_bind_varchar_length stmt idx val len
 
-⍝ KSL 1.0.0

@@ -28,4 +28,3 @@ count←configCount
     desc←512 read.utf8 desc_ptr
 :EndIf
 
-⍝ KSL 1.0.0

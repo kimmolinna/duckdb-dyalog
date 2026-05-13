@@ -3,4 +3,3 @@ destroyValue←{
     api.duckdb_destroy_value ⊂⍵
 }
 
-⍝ KSL 1.0.0

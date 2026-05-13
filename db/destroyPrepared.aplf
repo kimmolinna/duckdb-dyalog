@@ -4,4 +4,3 @@ destroyPrepared←{
     api.duckdb_destroy_prepare ⍵
 }
 
-⍝ KSL 1.0.0

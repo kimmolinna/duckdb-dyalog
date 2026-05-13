@@ -2,4 +2,3 @@ result←hugeintToDouble(a1 a2)
 ⍝ Wrapper for api.duckdb_hugeint_to_double
 result←api.duckdb_hugeint_to_double a1 a2
 
-⍝ KSL 1.0.0

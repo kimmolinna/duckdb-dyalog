@@ -2,4 +2,3 @@ result←destroyLogicalType a1
 ⍝ Wrapper for api.duckdb_destroy_logical_type
 result←api.duckdb_destroy_logical_type a1
 
-⍝ KSL 1.0.0

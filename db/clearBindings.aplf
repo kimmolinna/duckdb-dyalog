@@ -8,4 +8,3 @@ status←clearBindings stmt
 
 status←api.duckdb_clear_bindings stmt
 
-⍝ KSL 1.0.0

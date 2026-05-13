@@ -3,4 +3,3 @@ destroyExtracted←{
     api.duckdb_destroy_extracted ⍵
 }
 
-⍝ KSL 1.0.0

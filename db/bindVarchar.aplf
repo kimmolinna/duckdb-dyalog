@@ -8,4 +8,3 @@ status←stmt bindVarchar (idx val)
 
 status←api.duckdb_bind_varchar stmt idx val
 
-⍝ KSL 1.0.0

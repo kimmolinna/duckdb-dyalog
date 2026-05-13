@@ -4,4 +4,3 @@ destroyClientContext←{
     api.duckdb_destroy_client_context ⍵
 }
 
-⍝ KSL 1.0.0

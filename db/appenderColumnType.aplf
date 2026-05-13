@@ -7,4 +7,3 @@ appenderColumnType←{
     api.duckdb_appender_column_type ⍺ ⍵
 }
 
-⍝ KSL 1.0.0

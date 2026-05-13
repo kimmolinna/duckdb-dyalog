@@ -2,4 +2,3 @@ result←pendingExecuteTask a1
 ⍝ Wrapper for api.duckdb_pending_execute_task
 result←api.duckdb_pending_execute_task a1
 
-⍝ KSL 1.0.0

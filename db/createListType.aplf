@@ -2,4 +2,3 @@ result←createListType a1
 ⍝ Wrapper for api.duckdb_create_list_type
 result←api.duckdb_create_list_type a1
 
-⍝ KSL 1.0.0

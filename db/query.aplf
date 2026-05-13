@@ -10,4 +10,3 @@ out←query(_con sql);st;result;_error_message;cc;chunks;cd;datachunk_ind;column
 
 
 out←getResults (st result)
-⍝ KSL 1.0.1

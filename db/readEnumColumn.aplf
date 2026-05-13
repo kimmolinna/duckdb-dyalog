@@ -38,4 +38,3 @@ dict_values←{256 read.utf8 api.duckdb_enum_dictionary_value column_type ⍵}¨
     col←dict_values[indices]
 :EndIf
 
-⍝ KSL 2.0.0

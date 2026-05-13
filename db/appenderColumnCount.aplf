@@ -3,4 +3,3 @@ count←appenderColumnCount appender
 
 count←api.duckdb_appender_column_count appender
 
-⍝ KSL 1.0.0

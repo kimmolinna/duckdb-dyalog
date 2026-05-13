@@ -6,4 +6,3 @@ b←getBoolValue val
 :EndIf
 b←api.duckdb_get_bool val
 
-⍝ KSL 1.0.0

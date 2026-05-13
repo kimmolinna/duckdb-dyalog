@@ -2,4 +2,3 @@ result←errorDataErrorType a1
 ⍝ Wrapper for api.duckdb_error_data_error_type
 result←api.duckdb_error_data_error_type a1
 
-⍝ KSL 1.0.0

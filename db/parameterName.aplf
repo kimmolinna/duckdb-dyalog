@@ -9,4 +9,3 @@ parameterName←{
     256 read.utf8 ptr
 }
 
-⍝ KSL 1.0.0

@@ -4,4 +4,3 @@
 
 (count extracted)←api.duckdb_extract_statements _con sql 0
 
-⍝ KSL 1.0.0

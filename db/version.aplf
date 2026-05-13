@@ -5,4 +5,3 @@ version←{
     256 read.utf8 api.duckdb_library_version
 }
 
-⍝ KSL 1.0.0

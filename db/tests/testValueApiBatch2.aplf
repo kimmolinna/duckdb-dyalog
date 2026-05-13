@@ -33,4 +33,3 @@ r,←⊂''
 r,←⊂'Value API batch 2 runtime testing complete!'
 ⎕←↑r
 
-⍝ KSL 1.0.0

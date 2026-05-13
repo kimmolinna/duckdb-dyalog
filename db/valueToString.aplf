@@ -12,4 +12,3 @@ ptr←api.duckdb_value_to_string val
 s←1024 read.utf8 ptr
 {}api.duckdb_free ptr
 
-⍝ KSL 1.0.0

@@ -20,4 +20,3 @@ micros+←s
 micros×←1000000
 micros+←u
 
-⍝ KSL 1.0.0

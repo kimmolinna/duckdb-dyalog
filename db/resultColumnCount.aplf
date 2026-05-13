@@ -10,4 +10,3 @@ vals←,result
 
 count←api.duckdb_column_count ⊂result
 
-⍝ KSL 1.0.0

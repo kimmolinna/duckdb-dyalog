@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is a DuckDB interface for Dyalog APL, providing native bindings to the DuckDB C API. The project enables APL users to interact with DuckDB databases through FFI (Foreign Function Interface) using Dyalog's `⎕NA` system.
 
+**User-facing documentation:** [Readme.md](Readme.md) (overview, test commands), [docs/getting-started.md](docs/getting-started.md) (examples), [demo.txt](demo.txt), [duckdb-dyalog.ipynb](duckdb-dyalog.ipynb). Maintainer plans: [docs/dev/](docs/dev/).
+
 ## CRITICAL: APL Function Syntax Rules
 
 **NEVER use control structures (`:If`, `:For`, `:Select`, etc.) inside dfns (dynamic functions using `{...}`)!**
@@ -200,11 +202,15 @@ The `readVector` function is the core type dispatcher, handling ALL DuckDB types
 
 ### Testing
 
-Run the test suite:
+Run the full suite (non-interactive from repo root: `dyascript.exe run_tests.apls` or `.\scripts\run-tests.ps1`). In a session after linking:
+
 ```apl
 ]link.create duck /path/to/duckdb-dyalog
-duck.db.test
+duck.db.init '/path/to/duckdb-dyalog/lib/'
+duck.db.runAllTests
 ```
+
+Individual tradfns live under `duck.db.tests` (files in `db/tests/`), e.g. `duck.db.tests.testPhase1`.
 
 The test suite validates:
 - Logical type creation and destruction
@@ -281,5 +287,5 @@ result ← db.query _con 'SELECT * FROM users WHERE name IS NULL'
 
 - `.aplf`: APL function (dfn or tradfn)
 - `.apln`: APL namespace
-- `.dyalog`: Legacy format (old/DuckDB.dyalog is previous implementation)
+- `.dyalog`: Legacy single-file / workspace bundle format (older Dyalog workflows)
 - `.ipynb`: Jupyter notebook with APL kernel for interactive examples

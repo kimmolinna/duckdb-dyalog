@@ -8,4 +8,3 @@ parameterLogicalType←{
     api.duckdb_param_logical_type ⍺ ⍵
 }
 
-⍝ KSL 1.0.0

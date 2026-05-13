@@ -8,4 +8,3 @@ count←preparedColumnCount stmt
 
 count←api.duckdb_prepared_statement_column_count stmt
 
-⍝ KSL 1.0.0

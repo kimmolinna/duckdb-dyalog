@@ -2,4 +2,3 @@ result←getTypeId a1
 ⍝ Wrapper for api.duckdb_get_type_id
 result←api.duckdb_get_type_id a1
 
-⍝ KSL 1.0.0

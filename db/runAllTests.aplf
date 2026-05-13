@@ -34,4 +34,3 @@
  ⎕←''
  ⎕←'Unified test run complete.'
 
-⍝ KSL 1.0.0

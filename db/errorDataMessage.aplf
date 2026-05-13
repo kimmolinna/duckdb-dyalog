@@ -2,4 +2,3 @@ result←errorDataMessage a1
 ⍝ Wrapper for api.duckdb_error_data_message
 result←api.duckdb_error_data_message a1
 
-⍝ KSL 1.0.0

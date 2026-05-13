@@ -2,4 +2,3 @@ result←listVectorReserve(a1 a2)
 ⍝ Wrapper for api.duckdb_list_vector_reserve
 result←api.duckdb_list_vector_reserve a1 a2
 
-⍝ KSL 1.0.0

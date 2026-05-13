@@ -4,4 +4,3 @@ destroyArrowOptions←{
     api.duckdb_destroy_arrow_options ⍵
 }
 
-⍝ KSL 1.0.0

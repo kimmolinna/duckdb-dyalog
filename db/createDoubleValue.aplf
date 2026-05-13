@@ -2,4 +2,3 @@ val←createDoubleValue x
 ⍝ Create double duckdb_value.
 val←api.duckdb_create_double x
 
-⍝ KSL 1.0.0

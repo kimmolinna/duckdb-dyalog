@@ -1,4 +1,2 @@
 r←disconnect _con
 r←api.duckdb_disconnect _con
-
-⍝ KSL 1.0.2

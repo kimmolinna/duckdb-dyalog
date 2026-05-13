@@ -217,9 +217,9 @@ If you want to continue with Phase 2-6, here's what each brings:
 - `db/executePrepared.aplf`
 - `db/destroyPrepared.aplf`
 - `db/queryParams.aplf`
-- `db/testPhase1.aplf`
-- `IMPLEMENTATION_PLAN.md` (roadmap for all phases)
-- `PHASE1_COMPLETE.md` (this file)
+- `db/tests/testPhase1.aplf`
+- `docs/dev/IMPLEMENTATION_PLAN.md` (roadmap for all phases)
+- `docs/dev/PHASE1_COMPLETE.md` (this file)
 
 ## Time Spent
 

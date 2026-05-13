@@ -19,4 +19,3 @@
 
  out←(⊂column_names),(,/[0]¨chunks)
 
-⍝ KSL 1.00

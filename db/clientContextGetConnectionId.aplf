@@ -2,4 +2,3 @@ result←clientContextGetConnectionId a1
 ⍝ Wrapper for api.duckdb_client_context_get_connection_id
 result←api.duckdb_client_context_get_connection_id a1
 
-⍝ KSL 1.0.0

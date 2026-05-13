@@ -58,4 +58,3 @@ r,←⊂''
 r,←⊂'Pending check_state testing complete!'
 ⎕←↑r
 
-⍝ KSL 1.0.0

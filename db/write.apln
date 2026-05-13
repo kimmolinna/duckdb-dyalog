@@ -15,5 +15,3 @@
     string_←⍎⎕NA lib,'|MEMCPY P <{U4 U1[12]}[] U4' ⋄ string←{string_ ⍺ ⍵ (16×≢⍵)}
   ∇
 :EndNamespace
-
-⍝ KSL 1.0.3

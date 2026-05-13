@@ -5,4 +5,3 @@ status←appenderClearColumns appender
 
 status←api.duckdb_appender_clear_columns appender
 
-⍝ KSL 1.0.0

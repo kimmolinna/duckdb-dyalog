@@ -3,4 +3,3 @@ msg←extractStatementsError extracted
 
 msg←1024 read.utf8 api.duckdb_extract_statements_error extracted
 
-⍝ KSL 1.0.0

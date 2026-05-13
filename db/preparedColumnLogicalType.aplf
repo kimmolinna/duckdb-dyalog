@@ -8,4 +8,3 @@ preparedColumnLogicalType←{
     api.duckdb_prepared_statement_column_logical_type ⍺ ⍵
 }
 
-⍝ KSL 1.0.0

@@ -7,4 +7,3 @@ preparedColumnType←{
     api.duckdb_prepared_statement_column_type ⍺ ⍵
 }
 
-⍝ KSL 1.0.0

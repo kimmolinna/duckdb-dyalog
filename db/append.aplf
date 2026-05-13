@@ -76,4 +76,3 @@ r←query _con ('DESCRIBE ',table)
     out←r
 :endif
 
-⍝ KSL 2.0.0

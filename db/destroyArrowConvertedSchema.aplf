@@ -2,4 +2,3 @@ destroyArrowConvertedSchema ptr
 ⍝ Destroy duckdb_arrow_converted_schema pointer.
 {}api.duckdb_destroy_arrow_converted_schema ⊂ptr
 
-⍝ KSL 1.0.0

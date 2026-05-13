@@ -7,4 +7,3 @@ err←dataChunkFromArrow args;con;arrow_array;converted_schema;out_chunk;res
 res←,api.duckdb_data_chunk_from_arrow con arrow_array converted_schema out_chunk
 err←⊃res
 
-⍝ KSL 1.0.0

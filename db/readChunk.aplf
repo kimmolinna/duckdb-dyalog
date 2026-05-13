@@ -7,4 +7,3 @@
  col←readVector _vector _column_type row_count
  {}api.duckdb_destroy_logical_type _column_type
 
-⍝ KSL 2.0.0

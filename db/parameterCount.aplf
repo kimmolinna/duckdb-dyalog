@@ -8,4 +8,3 @@ count←parameterCount stmt
 
 count←api.duckdb_nparams stmt
 
-⍝ KSL 1.0.0

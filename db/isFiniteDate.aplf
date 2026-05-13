@@ -2,4 +2,3 @@ out←isFiniteDate days
 ⍝ Return 1 if duckdb_date is finite else 0.
 out←api.duckdb_is_finite_date days
 
-⍝ KSL 1.0.0

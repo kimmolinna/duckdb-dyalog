@@ -55,4 +55,3 @@ r,←⊂''
 r,←⊂'Prepared column metadata wrapper testing complete!'
 ⎕←↑r
 
-⍝ KSL 1.0.0

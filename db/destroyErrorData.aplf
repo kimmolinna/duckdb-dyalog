@@ -2,4 +2,3 @@ result←destroyErrorData a1
 ⍝ Wrapper for api.duckdb_destroy_error_data
 result←api.duckdb_destroy_error_data a1
 
-⍝ KSL 1.0.0

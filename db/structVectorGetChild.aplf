@@ -2,4 +2,3 @@ result←structVectorGetChild(a1 a2)
 ⍝ Wrapper for api.duckdb_struct_vector_get_child
 result←api.duckdb_struct_vector_get_child a1 a2
 
-⍝ KSL 1.0.0

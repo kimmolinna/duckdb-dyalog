@@ -25,4 +25,3 @@ names←↑child_names
     col[i]⎕VSET names vals
 :EndFor
 
-⍝ KSL 2.1.0

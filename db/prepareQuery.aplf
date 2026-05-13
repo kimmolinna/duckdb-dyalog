@@ -16,4 +16,3 @@ stmt←prepareQuery(_con sql);st;result
 :endif
 
 
-⍝ KSL 1.0.1

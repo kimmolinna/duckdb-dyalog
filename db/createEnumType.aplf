@@ -2,4 +2,3 @@ result←createEnumType(a1 a2)
 ⍝ Wrapper for api.duckdb_create_enum_type
 result←api.duckdb_create_enum_type a1 a2
 
-⍝ KSL 1.0.0

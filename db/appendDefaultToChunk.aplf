@@ -4,4 +4,3 @@ st←appendDefaultToChunk args;appender;chunk;col;row
 (appender chunk col row)←args
 st←api.duckdb_append_default_to_chunk appender chunk col row
 
-⍝ KSL 1.0.0

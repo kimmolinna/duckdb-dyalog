@@ -6,5 +6,3 @@ _con←connect _db;st
 :if st
     _con←0
 :endif
-
-⍝ KSL 1.0.2

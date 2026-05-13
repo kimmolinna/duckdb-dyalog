@@ -15,4 +15,3 @@ sec←⌊rem÷1000000
 u←rem-sec×1000000
 hmsu←hour min sec u
 
-⍝ KSL 1.0.0

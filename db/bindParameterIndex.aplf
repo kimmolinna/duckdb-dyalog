@@ -10,4 +10,3 @@ result←stmt bindParameterIndex name;st;idx
 (st idx)←api.duckdb_bind_parameter_index stmt 0 name
 result←st idx
 
-⍝ KSL 1.0.0

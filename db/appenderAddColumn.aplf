@@ -6,4 +6,3 @@ status←appenderAddColumn(appender col_name)
 
 status←api.duckdb_appender_add_column appender col_name
 
-⍝ KSL 1.0.0

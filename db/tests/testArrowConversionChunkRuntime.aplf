@@ -92,4 +92,3 @@ r,←⊂''
 r,←⊂'Arrow chunk conversion runtime one-row complete!'
 ⎕←↑r
 
-⍝ KSL 1.0.0

@@ -66,4 +66,3 @@ r,←⊂''
 r,←⊂'Appender default-to-chunk testing complete!'
 ⎕←↑r
 
-⍝ KSL 1.0.0

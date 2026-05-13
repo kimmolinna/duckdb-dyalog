@@ -6,4 +6,3 @@ b←isNullValue val
 :EndIf
 b←api.duckdb_is_null_value val
 
-⍝ KSL 1.0.0

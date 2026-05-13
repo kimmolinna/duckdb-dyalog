@@ -1,4 +1,3 @@
 r←close _db
 r←api.duckdb_close _db
 
-⍝ KSL 1.03

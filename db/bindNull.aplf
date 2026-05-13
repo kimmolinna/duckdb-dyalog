@@ -8,4 +8,3 @@ status←stmt bindNull idx
 
 status←api.duckdb_bind_null stmt idx
 
-⍝ KSL 1.0.0

@@ -89,4 +89,3 @@ r,←⊂''
 r,←⊂'API coverage batch E complete!'
 ⎕←↑r
 
-⍝ KSL 1.0.0

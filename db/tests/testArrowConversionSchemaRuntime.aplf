@@ -74,4 +74,3 @@ r,←⊂''
 r,←⊂'Arrow schema conversion runtime one-column complete!'
 ⎕←↑r
 
-⍝ KSL 1.0.0

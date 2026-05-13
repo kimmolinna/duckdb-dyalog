@@ -18,4 +18,3 @@ stmt←prepareQuery _con sql
 out←executePrepared stmt
 {}destroyPrepared stmt
 
-⍝ KSL 1.0.0

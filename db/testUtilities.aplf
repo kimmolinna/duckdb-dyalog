@@ -1,0 +1,48 @@
+ testUtilities;r;req;db;con;result;tbl;sel
+⍝ Test utility functions: toTable, toShortTable, index
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Utilities'
+
+db←open':memory:'
+con←connect db
+
+⍝ ===== toTable =====
+result←query con'SELECT 1 AS a, ''hello'' AS b'
+r,←⊂'toTable returns text'req 0<≢toTable result
+
+⍝ ===== toShortTable with small data =====
+result←query con'SELECT * FROM range(5) t(i)'
+tbl←toShortTable result
+r,←⊂'toShortTable small data'req 0<≢tbl
+
+⍝ ===== toShortTable with large data (>40 rows) =====
+result←query con'SELECT * FROM range(100) t(i)'
+tbl←toShortTable result
+r,←⊂'toShortTable large has ellipsis'req(∨/'...'∘{(≢⍺)≤≢⍵:∨/⍺⍷⍵ ⋄ 0}¨tbl)
+
+⍝ ===== toShortTable empty =====
+result←query con'SELECT * FROM range(0) t(i)'
+tbl←toShortTable result
+r,←⊂'toShortTable empty'req 0<≢tbl
+
+⍝ ===== index by column name =====
+result←query con'SELECT 1 AS a, 2 AS b, 3 AS c'
+sel←result index(0)('b')
+r,←⊂'Index by name'req 2≡sel
+
+⍝ ===== index by column index =====
+sel←result index(0)(1)
+r,←⊂'Index by number'req 2≡sel
+
+⍝ ===== index multiple columns =====
+sel←result index(0)(,¨'ac')
+r,←⊂'Index multiple cols'req 2=≢sel
+
+disconnect con
+close db
+⎕←↑r
+
+⍝ KSL 2.0.1

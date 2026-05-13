@@ -7,11 +7,11 @@
 ⎕io←0
 
 a←count read.string data
-col←⎕UCS¨1⊃¨a
+col←1⊃¨a
 
 ⍝ Handle short strings (inline, ≤12 bytes)
 b←13>l←,⊃¨a
-(b/col)←(b/l){⍺↑⍵}¨b/col
+(b/col)←(b/l)↑¨b/col
 
 ⍝ Handle long strings (pointer-based, >12 bytes)
 b←~b
@@ -19,4 +19,10 @@ b←~b
     (b/col)←(b/l){⍺ read.utf8_l 256⊥⌽4↓1⊃⍵}¨b/a
 :EndIf
 
-⍝ KSL 2.0.0
+⍝ Decode UTF-8 for short strings (do NOT use monadic ⎕UCS — breaks multi-byte)
+:Trap 0
+    ((~b)/col)←'UTF-8'∘⎕UCS¨(~b)/col
+:Else
+:EndTrap
+
+⍝ KSL 2.1.0

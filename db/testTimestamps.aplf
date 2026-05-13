@@ -1,0 +1,92 @@
+ testTimestamps;r;req;db;con;result;data
+⍝ Test timestamp variants: TIMESTAMP, TIMESTAMP_S, TIMESTAMP_MS, TIMESTAMP_NS, TIMESTAMP_TZ, DATE, TIME
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Timestamps'
+
+db←open':memory:'
+con←connect db
+
+⍝ ===== TIMESTAMP =====
+result←query con'SELECT TIMESTAMP ''2024-01-15 10:30:45.123456'' AS ts'
+:If 3=≢result
+    data←⊃⊃1⊃result
+    r,←⊂'TIMESTAMP year'req 2024=⊃data
+    r,←⊂'TIMESTAMP month'req 1=1⊃data
+    r,←⊂'TIMESTAMP day'req 15=2⊃data
+:Else
+    r,←⊂'TIMESTAMP query'req 0
+:EndIf
+
+⍝ ===== TIMESTAMP_S =====
+result←query con'SELECT ''2024-01-15 10:30:45''::TIMESTAMP_S AS ts_s'
+:If 3=≢result
+    data←⊃⊃1⊃result
+    r,←⊂'TIMESTAMP_S year'req 2024=⊃data
+:Else
+    r,←⊂'TIMESTAMP_S query'req 0
+:EndIf
+
+⍝ ===== TIMESTAMP_MS =====
+result←query con'SELECT ''2024-01-15 10:30:45.123''::TIMESTAMP_MS AS ts_ms'
+:If 3=≢result
+    data←⊃⊃1⊃result
+    r,←⊂'TIMESTAMP_MS year'req 2024=⊃data
+:Else
+    r,←⊂'TIMESTAMP_MS query'req 0
+:EndIf
+
+⍝ ===== TIMESTAMP_NS =====
+result←query con'SELECT ''2024-01-15 10:30:45.123456789''::TIMESTAMP_NS AS ts_ns'
+:If 3=≢result
+    data←⊃⊃1⊃result
+    r,←⊂'TIMESTAMP_NS year'req 2024=⊃data
+:Else
+    r,←⊂'TIMESTAMP_NS query'req 0
+:EndIf
+
+⍝ ===== TIMESTAMP_TZ =====
+result←query con'SELECT ''2024-01-15 10:30:45+00''::TIMESTAMPTZ AS ts_tz'
+:If 3=≢result
+    data←⊃⊃1⊃result
+    r,←⊂'TIMESTAMP_TZ year'req 2024=⊃data
+:Else
+    r,←⊂'TIMESTAMP_TZ query'req 0
+:EndIf
+
+⍝ ===== DATE =====
+result←query con'SELECT DATE ''2024-01-15'' AS d'
+:If 3=≢result
+    data←⊃⊃1⊃result
+    r,←⊂'DATE value'req(2024 1 15)≡data
+:Else
+    r,←⊂'DATE query'req 0
+:EndIf
+
+⍝ ===== TIME =====
+result←query con'SELECT TIME ''10:30:45.123456'' AS t'
+:If 3=≢result
+    data←⊃⊃1⊃result
+    r,←⊂'TIME hours'req 10=⊃data
+    r,←⊂'TIME minutes'req 30=1⊃data
+:Else
+    r,←⊂'TIME query'req 0
+:EndIf
+
+⍝ ===== NULL timestamps =====
+result←query con'SELECT NULL::TIMESTAMP AS ts, NULL::DATE AS d'
+:If 3=≢result
+    data←1⊃result
+    r,←⊂'NULL TIMESTAMP'req null≡⊃⊃data
+    r,←⊂'NULL DATE'req null≡⊃1⊃data
+:Else
+    r,←⊂'NULL timestamp query'req 0
+:EndIf
+
+disconnect con
+close db
+⎕←↑r
+
+⍝ KSL 2.0.1

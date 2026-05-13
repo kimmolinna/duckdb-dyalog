@@ -43,7 +43,7 @@ r,←⊂'duckdb_open returns database handle' req db≠0
             nameptr←api.duckdb_column_name (⊂result),0
             r,←⊂'duckdb_column_name(0) returns pointer' req nameptr≠0
             name←256 read.utf8 nameptr
-            r,←⊂'duckdb_column_name(0)=i' req 105=⎕UCS name
+            r,←⊂'duckdb_column_name(0)=i' req (,'i')≡name
 
             ct←api.duckdb_column_type (⊂result),0
             r,←⊂'duckdb_column_type(0)=INTEGER' req type.INTEGER=ct

@@ -1,0 +1,86 @@
+ testAppendTypes;r;req;db;con;result;data;out
+⍝ Test append + readback for various types including timestamp variants
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Append Types'
+
+db←open':memory:'
+con←connect db
+
+⍝ ===== Integer types =====
+{}query con'CREATE TABLE int_test(a INTEGER, b BIGINT, c SMALLINT)'
+out←append con '' 'int_test' ((1 2 3)(100 200 300)(10 20 30)) (type.INTEGER type.BIGINT type.SMALLINT)
+r,←⊂'Int append'req'Success!'≡out
+
+result←query con'SELECT * FROM int_test ORDER BY a'
+:If 3=≢result
+    data←1⊃result
+    r,←⊂'Int col a'req(1 2 3)≡⊃data
+    r,←⊂'Int col b'req(100 200 300)≡1⊃data
+    r,←⊂'Int col c'req(10 20 30)≡2⊃data
+:Else
+    r,←⊂'Int readback'req 0
+:EndIf
+
+⍝ ===== Float/Double =====
+{}query con'CREATE TABLE float_test(f FLOAT, d DOUBLE)'
+out←append con '' 'float_test' ((1.5 2.5)(3.14 6.28)) (type.FLOAT type.DOUBLE)
+r,←⊂'Float append'req'Success!'≡out
+
+result←query con'SELECT * FROM float_test ORDER BY f'
+:If 3=≢result
+    data←1⊃result
+    r,←⊂'Float values'req 2=≢⊃data
+    r,←⊂'Double values'req 2=≢1⊃data
+:Else
+    r,←⊂'Float readback'req 0
+:EndIf
+
+⍝ ===== VARCHAR with NULLs =====
+{}query con'CREATE TABLE str_test(s VARCHAR)'
+out←append con '' 'str_test' (,⊂'hello' null 'world') (,type.VARCHAR)
+r,←⊂'String null append'req'Success!'≡out
+
+result←query con'SELECT * FROM str_test'
+:If 3=≢result
+    data←⊃1⊃result
+    r,←⊂'String null value'req null≡1⊃data
+    r,←⊂'String non-null first'req'hello'≡⊃data
+    r,←⊂'String non-null last'req'world'≡2⊃data
+:Else
+    r,←⊂'String null readback'req 0
+:EndIf
+
+⍝ ===== TIMESTAMP =====
+{}query con'CREATE TABLE ts_test(ts TIMESTAMP)'
+out←append con '' 'ts_test' (,⊂(⊂2024 1 15 10 30 0 0)) (,type.TIMESTAMP)
+r,←⊂'Timestamp append'req'Success!'≡out
+
+result←query con'SELECT * FROM ts_test'
+:If 3=≢result
+    data←⊃⊃1⊃result
+    r,←⊂'Timestamp year'req 2024=⊃data
+    r,←⊂'Timestamp month'req 1=1⊃data
+:Else
+    r,←⊂'Timestamp readback'req 0
+:EndIf
+
+⍝ ===== Large dataset (multi-chunk) =====
+{}query con'CREATE TABLE big_test(i INTEGER, s VARCHAR)'
+out←append con '' 'big_test' ((⍳3000)(⍕¨⍳3000)) (type.INTEGER type.VARCHAR)
+r,←⊂'Large append (3000 rows)'req'Success!'≡out
+
+result←query con'SELECT COUNT(*) AS c FROM big_test'
+:If 3=≢result
+    r,←⊂'Large append count'req 3000=⊃⊃1⊃result
+:Else
+    r,←⊂'Large append count query'req 0
+:EndIf
+
+disconnect con
+close db
+⎕←↑r
+
+⍝ KSL 2.0.1

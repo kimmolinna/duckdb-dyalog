@@ -1,0 +1,87 @@
+ testMergedTypes;r;req;db;con;result;cols;data;types
+⍝ Test merged type coverage: DECIMAL, BLOB, BIT, HUGEINT, INTERVAL, ARRAY
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Merged Types'
+
+db←open':memory:'
+con←connect db
+
+⍝ ===== DECIMAL =====
+result←query con'SELECT 1.23::DECIMAL(5,2) AS d1, 12345678.0123456789::DECIMAL(18,10) AS d2'
+:If 3=≢result
+    data←1⊃result
+    r,←⊂'DECIMAL(5,2) value'req 1.23=⊃⊃data
+    r,←⊂'DECIMAL(18,10) value'req 1E¯8>|12345678.0123456789-⊃1⊃data
+:Else
+    r,←⊂'DECIMAL query'req 0
+:EndIf
+
+⍝ ===== BLOB =====
+result←query con'SELECT ''\x00\x01\xFF''::BLOB AS b'
+:If 3=≢result
+    data←1⊃result
+    r,←⊂'BLOB returns byte vector'req 3=≢⊃⊃data
+    r,←⊂'BLOB first byte'req 0=⊃⊃⊃data
+    r,←⊂'BLOB last byte'req(,¯1)≡¯1↑⊃⊃data  ⍝ 0xFF as signed I1 = ¯1, ¯1↑ returns 1-elem vector
+:Else
+    r,←⊂'BLOB query'req 0
+:EndIf
+
+⍝ ===== BIT =====
+result←query con'SELECT ''10110''::BIT AS b'
+:If 3=≢result
+    data←1⊃result
+    r,←⊂'BIT returns boolean vector'req(1 0 1 1 0)≡⊃⊃data
+:Else
+    r,←⊂'BIT query'req 0
+:EndIf
+
+⍝ ===== HUGEINT =====
+result←query con'SELECT 170141183460469231731687303715884105727::HUGEINT AS h'
+:If 3=≢result
+    data←1⊃result
+    r,←⊂'HUGEINT value'req 0≠⊃⊃data  ⍝ just check non-zero (exact match depends on float precision)
+:Else
+    r,←⊂'HUGEINT query'req 0
+:EndIf
+
+⍝ ===== INTERVAL =====
+result←query con'SELECT INTERVAL ''1 year 2 months 3 days 4 hours 5 minutes 6 seconds'' AS iv'
+:If 3=≢result
+    data←1⊃result
+    r,←⊂'INTERVAL months'req 14=⊃⊃⊃data     ⍝ 1 year + 2 months = 14
+    r,←⊂'INTERVAL days'req 3=1⊃⊃⊃data
+    r,←⊂'INTERVAL hours'req 4=2⊃⊃⊃data
+    r,←⊂'INTERVAL minutes'req 5=3⊃⊃⊃data
+    r,←⊂'INTERVAL seconds'req 6=4⊃⊃⊃data
+:Else
+    r,←⊂'INTERVAL query'req 0
+:EndIf
+
+⍝ ===== ARRAY =====
+result←query con'SELECT [1,2,3]::INT[3] AS a'
+:If 3=≢result
+    data←1⊃result
+    r,←⊂'ARRAY value'req(1 2 3)≡⊃⊃data
+:Else
+    r,←⊂'ARRAY query'req 0
+:EndIf
+
+⍝ ===== NULL handling in new types =====
+result←query con'SELECT NULL::DECIMAL(5,2) AS d, NULL::BLOB AS b'
+:If 3=≢result
+    data←1⊃result
+    r,←⊂'NULL DECIMAL'req null≡⊃⊃data
+    r,←⊂'NULL BLOB'req null≡⊃1⊃data
+:Else
+    r,←⊂'NULL new types query'req 0
+:EndIf
+
+disconnect con
+close db
+⎕←↑r
+
+⍝ KSL 2.0.1

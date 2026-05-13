@@ -1,0 +1,191 @@
+ col←readVector(_vector _vector_type row_count);_data;_validity;type_id;nullmask;a;b;l;child_type;_child;child_count;child_col;entries;width;scale;internal_type;size;child_names;child_vectors;child_cols;ct;list_col;i;split;frac;exp;sign;names;vals
+⍝ Read a DuckDB vector, handling all types recursively
+⍝ _vector: DuckDB vector pointer
+⍝ _vector_type: logical type of the vector (caller owns lifecycle)
+⍝ row_count: number of rows to read
+
+ _data←api.duckdb_vector_get_data _vector
+ _validity←api.duckdb_vector_get_validity _vector
+ type_id←api.duckdb_get_type_id _vector_type
+
+⍝ IEEE float parsing helpers
+ split←{((≢⍵)⍴⍺↑1)⊂⍵}
+ frac←{⎕IO←1 ⋄ 1++/2*-(9↓⍵)/⍳23}
+ exp←{2*127-⍨+/2*(⌽8↑1↓⍵)/⍳8}
+ sign←{¯1*1↑⍵}
+
+ :If _validity≡0
+ :OrIf ∨/nullmask←row_count↑{,⌽⍵ 8⍴11 ⎕DR ⍵ read.i8 _validity}⌈row_count÷8
+     :Select type_id
+     :CaseList ⍳10  ⍝ types 0-9: integer/unsigned
+         col←row_count readVectorSimple type_id _data
+
+     :Case 10  ⍝ float
+         :If 0≡_validity
+             col←row_count read.float _data
+         :Else
+             col←{
+                 ⎕FR←645
+                 nullmask\{(sign×exp×frac),⊖[0]4 8⍴11 ⎕DR ⍵}¨4 split(4/nullmask)/(4×row_count)read.i8 _data
+             }''
+         :EndIf
+
+     :Case 11  ⍝ double
+         :If 0≡_validity
+             col←row_count read.double _data
+         :Else
+             col←{
+                 ⎕FR←645
+                 nullmask\645 ⎕DR⊃0 83 ⎕DR(8/nullmask)/(8×row_count)read.i8 _data
+             }''
+         :EndIf
+
+     :CaseList 12 31  ⍝ timestamp, timestamp_tz
+         col←10 ¯2 ⎕DT ts_corr+1000×row_count read.i64 _data
+
+     :Case 13  ⍝ date
+         col←3↑¨13 ¯1 ⎕DT row_count read.i32 _data
+
+     :Case 14  ⍝ time
+         col←3↓¨10 ¯2 ⎕DT 1000×row_count read.i64 _data
+
+     :Case 15  ⍝ interval
+         col←row_count read.interval _data
+         col←{⍵[0 1],0 60 60 1000000⊤2⊃⍵}¨col
+
+     :Case 16  ⍝ hugeint
+         col←(2*64)⊥⊖↑[¯0.1]row_count read.hint _data
+
+     :CaseList 17  ⍝ varchar
+         a←row_count read.string _data
+         col←1⊃¨a
+         :If 0≡_validity
+             b←13>l←,⊃¨a
+             (b/col)←(b/l)↑¨b/col
+             b←~b
+             nullmask←row_count⍴1
+         :Else
+             b←nullmask∧13>l←,⊃¨a
+             (b/col)←(b/l)↑¨b/col
+             b←nullmask∧12<l←,⊃¨a
+         :EndIf
+         :If 1∊b
+             (b/col)←(b/l){⍺ read.utf8_l 256⊥⌽4↓1⊃⍵}¨b/a
+         :EndIf
+         b←nullmask∧~b
+         :If 1∊b
+             (b/col)←'UTF-8'∘⎕UCS¨b/col
+         :EndIf
+
+     :CaseList 18 29  ⍝ blob, bit
+         a←row_count read.stringi _data
+         col←1⊃¨a
+         :If 0≡_validity
+             b←13>l←,⊃¨a
+             (b/col)←(b/l)↑¨b/col
+             b←~b
+             nullmask←row_count⍴1
+         :Else
+             b←nullmask∧13>l←,⊃¨a
+             (b/col)←(b/l)↑¨b/col
+             b←nullmask∧12<l←,⊃¨a
+         :EndIf
+         :If 1∊b
+             (b/col)←(b/l){⍺ read.i8 256⊥⌽4↓1⊃⍵}¨b/a
+         :EndIf
+         :If type_id=29 ⍝ BIT: first byte = padding count
+             col←({(8+⊃⍵)↓11 ⎕DR ⍵}¨@{nullmask}){(⍴⍵)⍴⍺⍺,⍵}col
+         :EndIf
+
+     :Case 19  ⍝ decimal
+         width←api.duckdb_decimal_width _vector_type
+         scale←api.duckdb_decimal_scale _vector_type
+         internal_type←api.duckdb_decimal_internal_type _vector_type
+         :Select internal_type
+         :CaseList ⍳10  ⍝ integer internal types
+             col←row_count readVectorSimple internal_type _data
+         :Case 16  ⍝ hugeint
+             col←(2*64)⊥⊖↑[¯0.1]row_count read.hint _data
+         :Else
+             ∘∘∘
+         :EndSelect
+         col×←10*-scale
+
+     :Case 20  ⍝ timestamp_s
+         col←20 ¯2 ⎕DT row_count read.i64 _data
+
+     :Case 21  ⍝ timestamp_ms
+         col←12 ¯2 ⎕DT row_count read.i64 _data
+
+     :Case 22  ⍝ timestamp_ns
+         col←10 ¯2 ⎕DT ts_corr+row_count read.i64 _data
+
+     :Case 23  ⍝ enum
+         col←readEnumColumn _vector_type _data row_count
+
+     :Case 24  ⍝ list
+         child_type←api.duckdb_list_type_child_type _vector_type
+         _child←api.duckdb_list_vector_get_child _vector
+         child_count←api.duckdb_list_vector_get_size _vector
+         child_col←readVector _child child_type child_count
+         entries←(row_count,2)⍴(row_count×2)read.u64 _data
+         :If 0≢_validity
+             entries[⍸~nullmask;]←0
+         :EndIf
+         col←(,child_col)∘{⍺[⍵]}¨{⍺+⍳⍵}/entries
+         {}api.duckdb_destroy_logical_type child_type
+
+     :Case 25  ⍝ struct
+         child_count←api.duckdb_struct_type_child_count _vector_type
+         child_names←{256 read.utf8 api.duckdb_struct_type_child_name _vector_type ⍵}¨⍳child_count
+         child_vectors←{api.duckdb_struct_vector_get_child _vector ⍵}¨⍳child_count
+         child_cols←⍬
+         :For i :In ⍳child_count
+             ct←api.duckdb_vector_get_column_type(i⊃child_vectors)
+             child_cols,←⊂readVector(i⊃child_vectors)ct row_count
+             {}api.duckdb_destroy_logical_type ct
+         :EndFor
+         col←⎕NS¨row_count⍴⊂⍬
+         names←↑child_names
+         :For i :In ⍳row_count
+             vals←{i⊃⍵⊃child_cols}¨⍳child_count
+             col[i]⎕VSET names vals
+         :EndFor
+
+     :Case 26  ⍝ map (LIST(STRUCT(key, value)))
+         child_type←api.duckdb_list_type_child_type _vector_type
+         _child←api.duckdb_list_vector_get_child _vector
+         child_count←api.duckdb_list_vector_get_size _vector
+         child_col←readVector _child child_type child_count
+         entries←(row_count,2)⍴(row_count×2)read.u64 _data
+         :If 0≢_validity
+             entries[⍸~nullmask;]←0
+         :EndIf
+         list_col←(,child_col)∘{⍺[⍵]}¨{⍺+⍳⍵}/entries
+         {}api.duckdb_destroy_logical_type child_type
+         col←{
+             ns←⎕NS''
+             0=≢⍵:ns ⎕VSET('keys' ⍬)('values' ⍬)
+             ns ⎕VSET('keys'(⍵ ⎕VGET'key'))('values'(⍵ ⎕VGET'value'))
+         }¨list_col
+
+     :Case 33  ⍝ array
+         child_type←api.duckdb_array_type_child_type _vector_type
+         size←api.duckdb_array_type_array_size _vector_type
+         _child←api.duckdb_list_vector_get_child _vector
+         child_col←readVector _child child_type(row_count×size)
+         col←((row_count×size)⍴(size↑1))⊂child_col
+         {}api.duckdb_destroy_logical_type child_type
+
+     :Else
+         ∘∘∘
+     :EndSelect
+ :EndIf
+
+ :If 0≢_validity
+     :Trap 0
+         ((~nullmask)/col)←null
+     :Else
+         col←row_count⍴null
+     :End
+ :EndIf

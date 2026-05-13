@@ -1,0 +1,15 @@
+ r←table index(rows columns);cols;vecs;types;x
+⍝ Select rows and columns from a query result
+⍝ table: query result (cols data types)
+⍝ rows: row indices to select
+⍝ columns: column names (character) or column indices (numeric)
+ cols vecs types←table
+ :If ' '≡⊃0⍴∊columns
+     x←cols⍳(⊂⍣(1≥≡columns)),columns
+ :Else
+     x←columns
+ :EndIf
+ r←{⍵[rows]}¨vecs[x]
+ r←⊃⍣(⍬≡⍴x)⊢r
+
+⍝ KSL 2.0.3

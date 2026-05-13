@@ -27,5 +27,11 @@
     STRUCT←25
     MAP←26
     UUID←27
-    JSON←28
+    UNION←28
+    BIT←29
+    TIMETZ←30
+    TIMESTAMP_TZ←31
+    UHUGEINT←32
+    ARRAY←33
+    JSON←VARCHAR ⍝ JSON is stored as VARCHAR (type 17) in DuckDB
 :EndNamespace

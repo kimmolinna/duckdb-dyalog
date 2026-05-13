@@ -1,0 +1,22 @@
+ r←toShortTable x;cols;data;first;last;b;sep
+⍝ Display query results as a truncated table (first/last 20 rows if >40)
+⍝ x: query result (cols data types)
+ ⎕PP←18
+ cols data _←x
+ :If 0∊⍴cols
+     r←⊂'no cols'
+     →0
+ :EndIf
+ sep←(≢cols)⍴⊂,'-'
+ :If 0∊⍴⊃data
+     r←↓⎕FMT'|',⍨'|',¨cols⍪⍉⍪sep
+ :ElseIf 41>≢⊃data
+     r←↓⎕FMT'|',¨⍉cols,sep,↑data
+ :Else
+     first←⍉cols,sep,↑20↑¨data
+     last←⍉↑¯20↑¨data
+     b←↓⎕FMT'|',¨first⍪last
+     r←(21↑b),(⊂'|   ...'),¯20↑b
+ :EndIf
+
+⍝ KSL 2.0.0

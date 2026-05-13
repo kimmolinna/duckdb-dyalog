@@ -12,25 +12,36 @@ r←query _con ('DESCRIBE ',table)
             :if st
                 out←'Unable to create an appender!'
             :else
+                :If ∨/i←types=type.TIMESTAMP
+                    (i/data)←1000÷⍨(-ts_corr)+10 ⎕DT¨i/data
+                :EndIf
+                :If ∨/i←types=type.TIMESTAMP_MS
+                    (i/data)←12 ⎕DT¨i/data
+                :EndIf
+                :If ∨/i←types=type.TIMESTAMP_S
+                    (i/data)←20 ⎕DT¨i/data
+                :EndIf
+                :If ∨/i←types=type.TIMESTAMP_NS
+                    (i/data)←(-ts_corr)+10 ⎕DT¨i/data
+                :EndIf
+
                 sz←≢⊃data
                 :while sz>0
                     rows←(⌊/sz STANDARD_VECTOR_SIZE)
                     data_chunk←rows↑¨data ⋄ data←rows↓¨data ⋄ sz-←rows
                     nullmask←∨/¨¨data_chunk=null
-                    :if ∨/i←types∊type.TIMESTAMP
-                        (i/data_chunk)←1000÷⍨(-ts_corr)+10 ⎕dt¨i/data_chunk
-                    :endif
 
                     :for i :in ⍳≢data_chunk
                         _vector←api.duckdb_data_chunk_get_vector _data_chunk i
                         _data←api.duckdb_vector_get_data _vector
                         nm←i⊃nullmask
 
-                        :if 15>t←i⊃types
+                        t←i⊃types
+                        :if t∊(⍳15),20 21 22
                             (nm/i⊃data_chunk)←0
                             _←_data(write.⍎t⊃types_out)i⊃data_chunk
                         :elseif 17≡t
-                            d←i⊃data_chunk ⋄ (nm/d)←''
+                            d←i⊃data_chunk ⋄ (nm/d)←⊂''
                             us←('UTF-8'⎕UCS⊢)¨d
                             s←≢¨us ⋄ l←≢us
                             :if ∧/13>s
@@ -42,7 +53,7 @@ r←query _con ('DESCRIBE ',table)
                         :if ∨/nm
                             _←api.duckdb_vector_ensure_validity_writable _vector
                             _validity←api.duckdb_vector_get_validity _vector
-                            _←api.duckdb_validity_set_row_invalid _validity, ⊢¨⍸nm
+                            {_←api.duckdb_validity_set_row_invalid _validity ⍵}¨⍸nm
                         :endif
                     :endfor
 
@@ -65,4 +76,4 @@ r←query _con ('DESCRIBE ',table)
     out←r
 :endif
 
-⍝ KSL 1.0.3
+⍝ KSL 2.0.0

@@ -1,4 +1,4 @@
- col←readListColumn(vector data row_count);child_vector;child_type;child_type_id;child_data;entries;offsets;lengths;i;list_entry;child_count;child_col
+ col←readListColumn(vector data row_count);child_vector;child_type;entries;child_count;child_col
 ⍝ Read a LIST column from a DuckDB vector
 ⍝ vector: the DuckDB vector pointer
 ⍝ data: pointer to the list entry data
@@ -7,30 +7,13 @@
 
 ⎕io←0
 
-⍝ Get the child vector (contains the actual list elements)
 child_vector←api.duckdb_list_vector_get_child vector
-
-⍝ Get child vector info
 child_type←api.duckdb_vector_get_column_type child_vector
-child_type_id←api.duckdb_get_type_id child_type
-child_data←api.duckdb_vector_get_data child_vector
-
-⍝ Read list entries (offset and length pairs)
-⍝ Each entry is 16 bytes: offset (8 bytes) + length (8 bytes)
-entries←(row_count×2)read.u64 data
-offsets←entries[2×⍳row_count]
-lengths←entries[1+2×⍳row_count]
-
-⍝ Read all child elements at once based on child type
 child_count←api.duckdb_list_vector_get_size vector
-child_col←readChildElements child_vector child_type_id child_data child_count
+child_col←readVector child_vector child_type child_count
+{}api.duckdb_destroy_logical_type child_type
 
-⍝ Build the result: each row gets a list of its elements
-col←{
-    offset←offsets[⍵]
-    length←lengths[⍵]
-    0=length:⍬  ⍝ Empty list
-    child_col[offset+⍳length]  ⍝ Extract elements for this row
-}¨⍳row_count
+entries←(row_count,2)⍴(row_count×2)read.u64 data
+col←(,child_col)∘{⍺[⍵]}¨{⍺+⍳⍵}/entries
 
-⍝ KSL 2.0.0
+⍝ KSL 2.1.0

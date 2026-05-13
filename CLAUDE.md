@@ -45,13 +45,18 @@ This is a DuckDB interface for Dyalog APL, providing native bindings to the Duck
 
 **Memory I/O Namespaces (`db/read.apln`, `db/write.apln`)**
 - Use `MEMCPY` and `STRNCPY` from either `dyalog64.dll` or `dyalog64.so` for low-level memory operations
-- `read`: Provides functions to read C data types from memory (i8, i16, i32, i64, u8, u16, u32, u64, float, double, interval, string, hint, utf8)
+- `read`: Provides functions to read C data types from memory (i8, i16, i32, i64, u8, u16, u32, u64, float, double, interval, string, stringi, hint, decimal, utf8)
 - `write`: Provides functions to write APL arrays to C memory (same data types)
 - Both initialized during `db.init`
+- `read.stringi` reads signed-byte string structs (for BLOB)
+- `read.hint` reads hugeint (128-bit) pairs
+- `read.decimal` reads raw 16-byte decimal blocks
 
 **Type System (`db/type.apln`)**
-- Namespace containing DuckDB type constants (INTEGER=4, BIGINT=5, VARCHAR=17, TIMESTAMP=12, etc.)
-- Matches the DUCKDB_TYPE enum from duckdb.h
+- Namespace containing DuckDB type constants matching `DUCKDB_TYPE` enum from `duckdb.h`
+- Covers types 0-33: INVALID through ARRAY
+- Note: UNION=28 (not JSON), JSON is an alias for VARCHAR (17)
+- BIT=29, TIME_TZ=30, TIMESTAMP_TZ=31, UHUGEINT=32, ARRAY=33
 
 **Public API Functions**
 
@@ -79,26 +84,55 @@ This is a DuckDB interface for Dyalog APL, providing native bindings to the Duck
 - `destroyPrepared.aplf`: Destroys prepared statement
 
 *Data Operations:*
-- `readChunk.aplf`: Internal function to read data chunks with type-specific deserialization
-- `append.aplf`: Bulk insert data using DuckDB's appender API with data chunk batching
+- `readVector.aplf`: Recursive function handling ALL DuckDB types — integers, floats, strings, timestamps, DECIMAL, BLOB, BIT, LIST, STRUCT, MAP, ARRAY, ENUM
+- `readVectorSimple.aplf`: Helper for simple integer/unsigned types (0-9)
+- `readChunks.aplf`: Internal streaming chunk reader using `duckdb_fetch_chunk`, delegates to `readVector`
+- `readChunk.aplf`: Single-column chunk reader, delegates to `readVector` (backward compat)
+- `readStringElements.aplf`: VARCHAR element reader with correct UTF-8 decoding
+- `readListColumn.aplf`: LIST column reader using `readVector` for child elements
+- `readStructColumn.aplf`: STRUCT column reader using `readVector` per field
+- `readMapColumn.aplf`: MAP column reader (delegates to `readListColumn`)
+- `readEnumColumn.aplf`: ENUM column reader
+- `append.aplf`: Bulk insert data using DuckDB's appender API with data chunk batching, supports types 0-14 plus TIMESTAMP_S/MS/NS (20-22)
 - `appenderBeginRow.aplf` / `appenderEndRow.aplf`: Row-wise appender row lifecycle
 - `appenderFlush.aplf` / `appenderClose.aplf` / `appenderClear.aplf`: Row-wise appender buffer control
 - `appenderAddColumn.aplf` / `appenderClearColumns.aplf`: Active column-list control for appenders
 - `appenderError.aplf` / `appenderErrorData.aplf`: String and structured appender error retrieval
 - `errorDataHasError.aplf` / `errorDataType.aplf` / `errorDataMessage.aplf` / `destroyErrorData.aplf`: Structured error-data helpers
 - `toTable.aplf`: Formats query results as a table (transpose with column headers)
+- `toShortTable.aplf`: Truncated table display (first/last 20 rows for large results)
 - `toJson.aplf`: Converts results to JSON format
+- `index.aplf`: Column/row selection by name or numeric index
 
 *Testing:*
 - `test.aplf`: Comprehensive test suite for C API functionality
 - `testPhase1.aplf`: Tests for prepared statements, configuration, error handling, and parameter binding
 - `testPhase2.aplf`: Tests advanced types, pending/streaming execution, row-wise appender APIs, and structured appender errors
+- `testMergedTypes.aplf`: Tests DECIMAL, BLOB, BIT, HUGEINT, INTERVAL, ARRAY, NULL handling
+- `testTimestamps.aplf`: Tests all timestamp variants (S/MS/NS/TZ), DATE, TIME
+- `testUTF8.aplf`: Regression tests for UTF-8 bugs (short string read, append double-encoding)
+- `testAppendTypes.aplf`: Append+readback for various types, NULLs, large datasets
+- `testUtilities.aplf`: Tests toTable, toShortTable, index
 
 ### Data Flow
 
 1. **Initialization**: `db.init 'lib/'` sets up all FFI bindings and initializes memory I/O
-2. **Query Execution**: `query` uses result chunks API, iterating through chunks and calling `readChunk` per column
+2. **Query Execution**: `query` uses streaming result chunks API via `duckdb_fetch_chunk`, calling `readVector` per column per chunk
 3. **Data Insertion**: `append` validates table schema, creates data chunks, writes APL arrays to memory, handles NULL values via validity masks, and batches by STANDARD_VECTOR_SIZE (2048 rows)
+
+### Recursive readVector Architecture
+
+The `readVector` function is the core type dispatcher, handling ALL DuckDB types recursively:
+- **Simple types (0-9)**: Delegated to `readVectorSimple` (integer/unsigned dispatch)
+- **Float (10)**: IEEE 754 manual parsing when validity mask present, scoped `⎕FR←645`
+- **Double (11)**: `645 ⎕DR⊃0 83 ⎕DR` for workspace-compaction safety, scoped `⎕FR←645`
+- **Timestamps (12,20-22,31)**: Various `⎕DT` conversions with `ts_corr` offset
+- **VARCHAR (17)**: UTF-8 decoding with `'UTF-8'⎕UCS` for both short (≤12 bytes) and long strings
+- **BLOB (18) / BIT (29)**: Signed-byte string structs via `read.stringi`, BIT padding extraction
+- **DECIMAL (19)**: Width/scale/internal_type dispatch, hugeint base-decode for large decimals
+- **ENUM (23)**: Delegated to `readEnumColumn`
+- **LIST (24), STRUCT (25), MAP (26), ARRAY (33)**: Recursive calls to `readVector` on child vectors
+- **NULL masking**: Applied at end of each call level
 
 ### Key Implementation Details
 
@@ -109,9 +143,14 @@ This is a DuckDB interface for Dyalog APL, providing native bindings to the Duck
 
 **Type Conversions**
 - TIMESTAMP: APL timestamps converted to/from DuckDB microseconds with `ts_corr` offset (line 4 in init.aplf)
-- VARCHAR: Handles both short strings (≤12 bytes, inline) and long strings (>12 bytes, pointer-based)
+- TIMESTAMP_S/MS/NS: Additional timestamp precision variants using appropriate `⎕DT` codes
+- VARCHAR: Handles both short strings (≤12 bytes, inline) and long strings (>12 bytes, pointer-based). **Always uses `'UTF-8'⎕UCS` for decoding** — monadic `⎕UCS` breaks multi-byte sequences
+- BLOB: Read via `read.stringi` (signed-byte string struct), returns raw byte vectors
+- BIT: BLOB-like reading plus padding-bit extraction via `11 ⎕DR` and first-byte padding count
+- DECIMAL: Gets width/scale/internal_type from logical type, reads via integer or hugeint path, scales by `10*-scale`
 - INTERVAL: Converted to APL format as (months days hours minutes seconds microseconds)
-- Float/Double: Special handling for validity bitmasks using floating-point representation parsing
+- Float/Double: Special handling for validity bitmasks using floating-point representation parsing. Double uses `0 83 ⎕DR` before `645 ⎕DR` for workspace-compaction safety
+- ARRAY: Fixed-size arrays partitioned from child vector
 
 **Vector Size**
 - STANDARD_VECTOR_SIZE is 2048 (updated from older versions)
@@ -144,6 +183,12 @@ This is a DuckDB interface for Dyalog APL, providing native bindings to the Duck
 - Active appender column selection supported (`add_column`, `clear_columns`)
 - Structured appender error retrieval supported via `duckdb_appender_error_data`
 - Error-data helpers exposed (`duckdb_error_data_has_error`, `duckdb_error_data_error_type`, `duckdb_error_data_message`, `duckdb_destroy_error_data`)
+
+**UTF-8 Handling Rules (Critical)**
+- Sending strings to DuckDB API (open, query, prepare): use `<0UTF8[]` in `⎕NA` — runtime auto-encodes
+- Sending strings with known byte-length (`duckdb_vector_assign_string_element_len`): use `<0U1[]` + manual `'UTF-8'⎕UCS` to avoid double-encoding
+- Reading short VARCHAR (≤12 bytes): use `'UTF-8'⎕UCS` on raw bytes — **never** monadic `⎕UCS`
+- Reading long VARCHAR (>12 bytes): use `'UTF-8'⎕UCS` via `read.utf8_l`
 
 **Session Settings**
 - `⎕FR←1287`: Decimal floating point (128-bit)

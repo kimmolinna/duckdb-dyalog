@@ -1,4 +1,5 @@
-testValueApiBatch3;req;r;vi32;vf32;vdbl;x;tol;s;parsed;floatVals;doubleVals
+r←testValueApiBatch3;req;r;vi32;vf32;vdbl;x;tol;s;parsed;floatVals;doubleVals
+⎕CS ##
 ⍝ Isolated runtime test for Value API batch 3 scalar getters.
 
 :If 0=⎕NC'null'
@@ -53,8 +54,8 @@ doubleVals←0 1.25 ¯2.5 3.141592653589793
     :EndIf
 :EndFor
 
+r,←⊂''
+r,←⊂'Value API batch 3 runtime testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Value API batch 3 runtime testing complete!'
 
 ⍝ KSL 1.0.0

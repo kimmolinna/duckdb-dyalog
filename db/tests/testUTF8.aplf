@@ -1,4 +1,5 @@
- testUTF8;r;req;db;con;result;data;out
+ r←testUTF8;r;req;db;con;result;data;out
+⎕CS ##
 ⍝ Regression tests for UTF-8 bugs found during merge analysis
 ⍝ Bug #1: Short VARCHAR UTF-8 decoding (was monadic ⎕UCS, now 'UTF-8'⎕UCS)
 ⍝ Bug #2: Append string double-encoding (was <0UTF8[], now <0U1[])

@@ -1,4 +1,5 @@
-testAppenderDefaultToChunk;req;r;db;con;st;appender;lt0;lt1;lt2;chunk;vec;data_ptr;result
+r←testAppenderDefaultToChunk;req;r;db;con;st;appender;lt0;lt1;lt2;chunk;vec;data_ptr;result
+⎕CS ##
 ⍝ Isolated test for duckdb_append_default_to_chunk.
 
 :If 0=⎕NC'null'
@@ -61,8 +62,8 @@ chunk←0
 {}disconnect con
 {}close db
 
+r,←⊂''
+r,←⊂'Appender default-to-chunk testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Appender default-to-chunk testing complete!'
 
 ⍝ KSL 1.0.0

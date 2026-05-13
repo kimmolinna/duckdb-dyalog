@@ -1,4 +1,5 @@
- testPendingHelpers;r;req;db;con;st;pending;state;iter;out;msg
+ r←testPendingHelpers;r;req;db;con;st;pending;state;iter;out;msg
+⎕CS ##
 ⍝ Test high-level pending helpers in isolation
 
 :If 0=⎕NC'null'
@@ -54,8 +55,8 @@ r,←⊂'preparePending prepare-error has null pointer'req pending=0
 
 {}disconnect con
 {}close db
+r,←⊂''
+r,←⊂'Pending helpers testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Pending helpers testing complete!'
 
 ⍝ KSL 1.0.0

@@ -1,4 +1,5 @@
-testExtractedStatements;req;r;db;con;count;extracted;st;stmt;res;msg
+r←testExtractedStatements;req;r;db;con;count;extracted;st;stmt;res;msg
+⎕CS ##
 ⍝ Isolated tests for extracted statements API.
 
 :If 0=⎕NC'null'
@@ -51,8 +52,8 @@ r,←⊂'extract invalid SQL returned handle' req extracted≠0
 {}disconnect con
 {}close db
 
+r,←⊂''
+r,←⊂'Extracted statements testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Extracted statements testing complete!'
 
 ⍝ KSL 1.0.0

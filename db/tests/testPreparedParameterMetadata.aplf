@@ -1,4 +1,5 @@
-testPreparedParameterMetadata;req;r;db;con;stmt;cnt;nm1;nm2;nm3;lt
+r←testPreparedParameterMetadata;req;r;db;con;stmt;cnt;nm1;nm2;nm3;lt
+⎕CS ##
 ⍝ Isolated test for prepared-parameter metadata wrappers with bounds guards.
 
 :If 0=⎕NC'null'
@@ -51,8 +52,8 @@ r,←⊂'parameterLogicalType(null) guarded null' req 0=0 parameterLogicalType 1
 {}disconnect con
 {}close db
 
+r,←⊂''
+r,←⊂'Prepared parameter metadata wrapper testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Prepared parameter metadata wrapper testing complete!'
 
 ⍝ KSL 1.0.0

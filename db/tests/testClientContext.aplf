@@ -1,4 +1,5 @@
- testClientContext;r;req;db;con;ctx;id1;id2
+ r←testClientContext;r;req;db;con;ctx;id1;id2
+⎕CS ##
 ⍝ Test client context APIs in isolation
 
 :If 0=⎕NC'null'
@@ -33,8 +34,8 @@ r,←⊂'Connection created'req con≠0
 
 {}disconnect con
 {}close db
+r,←⊂''
+r,←⊂'Client context testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Client context testing complete!'
 
 ⍝ KSL 1.0.0

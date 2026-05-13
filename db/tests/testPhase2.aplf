@@ -1,4 +1,5 @@
- testPhase2;r;req;db;con;result;st;stmt;pending;state;iter;out;msg;appender;app_msg
+ r←testPhase2;r;req;db;con;result;st;stmt;pending;state;iter;out;msg;appender;app_msg
+⎕CS ##
 ⍝ Test Phase 2: Advanced Data Types
 :If 0=⎕NC'null'
     init 'lib/'
@@ -31,10 +32,9 @@ r,←⊂'LIST query executed'req 3=≢result
 
 {}disconnect con
 {}close db
-⎕←↑r
 
 ⍝ ===== STRUCT TYPE TEST =====
-r←⊂'Test STRUCT Type'
+r,←⊂'Test STRUCT Type'
 db←open':memory:'
 con←connect db
 
@@ -56,10 +56,9 @@ r,←⊂'STRUCT query executed'req 3=≢result
 
 {}disconnect con
 {}close db
-⎕←↑r
 
 ⍝ ===== MAP TYPE TEST =====
-r←⊂'Test MAP Type'
+r,←⊂'Test MAP Type'
 db←open':memory:'
 con←connect db
 
@@ -79,10 +78,9 @@ r,←⊂'MAP query executed'req 3=≢result
 
 {}disconnect con
 {}close db
-⎕←↑r
 
 ⍝ ===== ENUM TYPE TEST =====
-r←⊂'Test ENUM Type'
+r,←⊂'Test ENUM Type'
 db←open':memory:'
 con←connect db
 
@@ -103,10 +101,9 @@ r,←⊂'ENUM query executed'req 3=≢result
 
 {}disconnect con
 {}close db
-⎕←↑r
 
 ⍝ ===== NESTED LIST TEST =====
-r←⊂'Test Nested LIST'
+r,←⊂'Test Nested LIST'
 db←open':memory:'
 con←connect db
 
@@ -118,10 +115,9 @@ r,←⊂'Nested LIST query executed'req 3=≢result
 
 {}disconnect con
 {}close db
-⎕←↑r
 
 ⍝ ===== PENDING/STREAMING API TEST =====
-r←⊂'Test Pending/Streaming API'
+r,←⊂'Test Pending/Streaming API'
 db←open':memory:'
 con←connect db
 
@@ -157,10 +153,9 @@ r,←⊂'Prepare statement'req stmt≠0
 
 {}disconnect con
 {}close db
-⎕←↑r
 
 ⍝ ===== APPENDER ROW-WISE API TEST =====
-r←⊂'Test Appender Row-wise API'
+r,←⊂'Test Appender Row-wise API'
 db←open':memory:'
 con←connect db
 
@@ -199,10 +194,9 @@ r,←⊂'Close null pointer returns error'req DuckDBError=appenderClose 0
 
 {}disconnect con
 {}close db
-⎕←↑r
 
 ⍝ ===== APPENDER CLEAR/COLUMN API TEST =====
-r←⊂'Test Appender Clear/Columns API'
+r,←⊂'Test Appender Clear/Columns API'
 db←open':memory:'
 con←connect db
 
@@ -242,10 +236,9 @@ r,←⊂'Clear columns null pointer returns error'req DuckDBError=appenderClearC
 
 {}disconnect con
 {}close db
-⎕←↑r
 
 ⍝ ===== APPENDER ERROR API TEST =====
-r←⊂'Test Appender Error API'
+r,←⊂'Test Appender Error API'
 db←open':memory:'
 con←connect db
 
@@ -272,159 +265,11 @@ r,←⊂'Create appender for error API'req(DuckDBSuccess=st)∧appender≠0
 
 {}disconnect con
 {}close db
-⎕←↑r
-
-⍝ ===== ARROW CONVERSION SMOKE (ISOLATED TESTS) =====
-r←⊂'Test Arrow Conversion Smoke (isolated)'
-
-:If 3=⎕NC'testArrowConversion'
-    testArrowConversion
-    r,←⊂'Executed testArrowConversion' req 1
-:EndIf
-:If 3=⎕NC'testArrowConversionRuntime'
-    testArrowConversionRuntime
-    r,←⊂'Executed testArrowConversionRuntime' req 1
-:EndIf
-:If 3=⎕NC'testArrowConversionSchemaRuntime'
-    testArrowConversionSchemaRuntime
-    r,←⊂'Executed testArrowConversionSchemaRuntime' req 1
-:EndIf
-:If 3=⎕NC'testArrowConversionChunkRuntime'
-    testArrowConversionChunkRuntime
-    r,←⊂'Executed testArrowConversionChunkRuntime' req 1
-:EndIf
-:If 3=⎕NC'testArrowFromRuntime'
-    testArrowFromRuntime
-    r,←⊂'Executed testArrowFromRuntime' req 1
-:EndIf
-:If 3=⎕NC'testExtractedStatements'
-    testExtractedStatements
-    r,←⊂'Executed testExtractedStatements' req 1
-:EndIf
-:If 3=⎕NC'testAppenderMetadataDefault'
-    testAppenderMetadataDefault
-    r,←⊂'Executed testAppenderMetadataDefault' req 1
-:EndIf
-:If 3=⎕NC'testAppenderDefaultToChunk'
-    testAppenderDefaultToChunk
-    r,←⊂'Executed testAppenderDefaultToChunk' req 1
-:EndIf
-:If 3=⎕NC'testPreparedColumnMetadata'
-    testPreparedColumnMetadata
-    r,←⊂'Executed testPreparedColumnMetadata' req 1
-:EndIf
-:If 3=⎕NC'testPreparedParameterMetadata'
-    testPreparedParameterMetadata
-    r,←⊂'Executed testPreparedParameterMetadata' req 1
-:EndIf
-:If 3=⎕NC'testResultMetadataWrappers'
-    testResultMetadataWrappers
-    r,←⊂'Executed testResultMetadataWrappers' req 1
-:EndIf
-:If 3=⎕NC'testDateTimeHelpers'
-    testDateTimeHelpers
-    r,←⊂'Executed testDateTimeHelpers' req 1
-:EndIf
-:If 3=⎕NC'testArrow'
-    testArrow
-    r,←⊂'Executed testArrow' req 1
-:EndIf
-:If 3=⎕NC'testClientContext'
-    testClientContext
-    r,←⊂'Executed testClientContext' req 1
-:EndIf
-:If 3=⎕NC'testConfigFlags'
-    testConfigFlags
-    r,←⊂'Executed testConfigFlags' req 1
-:EndIf
-:If 3=⎕NC'testPendingHelpers'
-    testPendingHelpers
-    r,←⊂'Executed testPendingHelpers' req 1
-:EndIf
-:If 3=⎕NC'testPendingCheckState'
-    testPendingCheckState
-    r,←⊂'Executed testPendingCheckState' req 1
-:EndIf
-:If 3=⎕NC'testResultColumnMetadata'
-    testResultColumnMetadata
-    r,←⊂'Executed testResultColumnMetadata' req 1
-:EndIf
-:If 3=⎕NC'testValueApiBatch1'
-    testValueApiBatch1
-    r,←⊂'Executed testValueApiBatch1' req 1
-:EndIf
-:If 3=⎕NC'testValueApiBatch2'
-    testValueApiBatch2
-    r,←⊂'Executed testValueApiBatch2' req 1
-:EndIf
-:If 3=⎕NC'testValueApiBatch3'
-    testValueApiBatch3
-    r,←⊂'Executed testValueApiBatch3' req 1
-:EndIf
-:If 3=⎕NC'testValueApiCoverage'
-    testValueApiCoverage
-    r,←⊂'Executed testValueApiCoverage' req 1
-:EndIf
-:If 3=⎕NC'testPhase1'
-    testPhase1
-    r,←⊂'Executed testPhase1' req 1
-:EndIf
-:If 3=⎕NC'test'
-    test
-    r,←⊂'Executed test' req 1
-:EndIf
-:If 3=⎕NC'testApiCoverageBatchA'
-    testApiCoverageBatchA
-    r,←⊂'Executed testApiCoverageBatchA' req 1
-:EndIf
-:If 3=⎕NC'testApiCoverageBatchB'
-    testApiCoverageBatchB
-    r,←⊂'Executed testApiCoverageBatchB' req 1
-:EndIf
-:If 3=⎕NC'testApiCoverageBatchC'
-    testApiCoverageBatchC
-    r,←⊂'Executed testApiCoverageBatchC' req 1
-:EndIf
-:If 3=⎕NC'testApiCoverageBatchD'
-    testApiCoverageBatchD
-    r,←⊂'Executed testApiCoverageBatchD' req 1
-:EndIf
-:If 3=⎕NC'testApiCoverageBatchE'
-    testApiCoverageBatchE
-    r,←⊂'Executed testApiCoverageBatchE' req 1
-:EndIf
-:If 3=⎕NC'testApiCoverageBatchF'
-    testApiCoverageBatchF
-    r,←⊂'Executed testApiCoverageBatchF' req 1
-:EndIf
-
-⍝ ===== MERGE TESTS =====
-:If 3=⎕NC'testMergedTypes'
-    testMergedTypes
-    r,←⊂'Executed testMergedTypes' req 1
-:EndIf
-:If 3=⎕NC'testTimestamps'
-    testTimestamps
-    r,←⊂'Executed testTimestamps' req 1
-:EndIf
-:If 3=⎕NC'testUTF8'
-    testUTF8
-    r,←⊂'Executed testUTF8' req 1
-:EndIf
-:If 3=⎕NC'testAppendTypes'
-    testAppendTypes
-    r,←⊂'Executed testAppendTypes' req 1
-:EndIf
-:If 3=⎕NC'testUtilities'
-    testUtilities
-    r,←⊂'Executed testUtilities' req 1
-:EndIf
-
-⎕←↑r
 
 ⍝ ===== SUMMARY =====
-⎕←''
-⎕←'Phase 2 testing complete!'
-⎕←'Advanced data types plus pending/streaming, extended appender/error APIs, and Arrow conversion smoke coverage have been implemented.'
+r,←⊂''
+r,←⊂'Phase 2 testing complete!'
+r,←⊂'Advanced data types plus pending/streaming, extended appender/error APIs, and Arrow conversion smoke coverage have been implemented.'
+⎕←↑r
 
 ⍝ KSL 2.0.0

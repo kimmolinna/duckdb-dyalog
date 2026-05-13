@@ -1,4 +1,5 @@
-testValueApiBatch2;req;r;vbool;vint;vdbl;vstr
+r←testValueApiBatch2;req;r;vbool;vint;vdbl;vstr
+⎕CS ##
 ⍝ Isolated runtime test for Value API batch 2 getters.
 
 :If 0=⎕NC'null'
@@ -28,8 +29,8 @@ r,←⊂'createVarcharValue handle' req vstr≠0
 r,←⊂'getVarcharValue contains hello' req ∨/'hello'⍷getVarcharValue vstr
 {}destroyValue vstr
 
+r,←⊂''
+r,←⊂'Value API batch 2 runtime testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Value API batch 2 runtime testing complete!'
 
 ⍝ KSL 1.0.0

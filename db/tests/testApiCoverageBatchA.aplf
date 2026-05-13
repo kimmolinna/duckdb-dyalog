@@ -1,4 +1,5 @@
-testApiCoverageBatchA;req;r;st;db;con;result;name;err;cc;ct;lt;ltid;chunk;opts;ok;errptr;nameptr
+r←testApiCoverageBatchA;req;r;st;db;con;result;name;err;cc;ct;lt;ltid;chunk;opts;ok;errptr;nameptr
+⎕CS ##
 ⍝ Batch A runtime coverage for core lifecycle + result basics.
 ⍝ Every listed api.apln binding in this batch is called at least once.
 
@@ -97,8 +98,8 @@ r,←⊂'duckdb_open returns database handle' req db≠0
     {}api.duckdb_close db
 :EndIf
 
+r,←⊂''
+r,←⊂'API coverage batch A complete!'
 ⎕←↑r
-⎕←''
-⎕←'API coverage batch A complete!'
 
 ⍝ KSL 1.0.0

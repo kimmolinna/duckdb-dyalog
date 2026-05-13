@@ -1,4 +1,5 @@
-testResultMetadataWrappers;req;r;db;con;st;result;stmt_type;ret_type
+r←testResultMetadataWrappers;req;r;db;con;st;result;stmt_type;ret_type
+⎕CS ##
 ⍝ Isolated test for result metadata wrappers.
 
 :If 0=⎕NC'null'
@@ -30,8 +31,8 @@ r,←⊂'resultReturnType(null) guarded zero' req 0=resultReturnType 0
 {}disconnect con
 {}close db
 
+r,←⊂''
+r,←⊂'Result metadata wrapper testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Result metadata wrapper testing complete!'
 
 ⍝ KSL 1.0.0

@@ -1,4 +1,5 @@
-testPreparedColumnMetadata;req;r;db;con;stmt;cnt;lt
+r←testPreparedColumnMetadata;req;r;db;con;stmt;cnt;lt
+⎕CS ##
 ⍝ Isolated test for prepared-column metadata wrappers with bounds guards.
 
 :If 0=⎕NC'null'
@@ -50,8 +51,8 @@ r,←⊂'preparedColumnLogicalType(null) guarded null' req 0=0 preparedColumnLog
 {}disconnect con
 {}close db
 
+r,←⊂''
+r,←⊂'Prepared column metadata wrapper testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Prepared column metadata wrapper testing complete!'
 
 ⍝ KSL 1.0.0

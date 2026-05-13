@@ -1,4 +1,5 @@
-testArrowFromRuntime;req;r;db;con;err;msg;out_conv;out_chunk
+r←testArrowFromRuntime;req;r;db;con;err;msg;out_conv;out_chunk
+⎕CS ##
 ⍝ Runtime null-smoke tests for inbound Arrow conversion APIs.
 ⍝ Avoids Arrow struct marshalling by using null pointers.
 
@@ -37,8 +38,8 @@ r,←⊂'dataChunkFromArrow(null) returned error_data handle' req err≠0
 {}disconnect con
 {}close db
 
+r,←⊂''
+r,←⊂'Arrow from runtime null-smoke complete!'
 ⎕←↑r
-⎕←''
-⎕←'Arrow from runtime null-smoke complete!'
 
 ⍝ KSL 1.0.0

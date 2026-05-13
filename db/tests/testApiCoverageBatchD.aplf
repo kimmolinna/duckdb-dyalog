@@ -1,4 +1,5 @@
-testApiCoverageBatchD;req;r;lt0;lt1;chunk;cc;sz;vec0;vec1;vtype;data;valid;st;x;ok
+r←testApiCoverageBatchD;req;r;lt0;lt1;chunk;cc;sz;vec0;vec1;vtype;data;valid;st;x;ok
+⎕CS ##
 ⍝ Batch D runtime coverage for logical type + data chunk + vector/validity APIs.
 
 :If 0=⎕NC'null'
@@ -80,8 +81,8 @@ ok←0
 :EndTrap
 r,←⊂'duckdb_hugeint_to_double callable' req ok
 
+r,←⊂''
+r,←⊂'API coverage batch D complete!'
 ⎕←↑r
-⎕←''
-⎕←'API coverage batch D complete!'
 
 ⍝ KSL 1.0.0

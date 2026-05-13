@@ -1,4 +1,5 @@
-testArrowConversionSchemaRuntime;req;db;con;arrow_opts;lt;name_ptr;name_bytes;schema_ptr;err;msg;has_err;ok;r
+r←testArrowConversionSchemaRuntime;req;db;con;arrow_opts;lt;name_ptr;name_bytes;schema_ptr;err;msg;has_err;ok
+⎕CS ##
 ⍝ Isolated runtime smoke for a minimally valid toArrowSchema call.
 ⍝ Uses one INTEGER column and one column name.
 
@@ -69,8 +70,8 @@ ok∧←schema_ptr≠0
 {}disconnect con
 {}close db
 
+r,←⊂''
+r,←⊂'Arrow schema conversion runtime one-column complete!'
 ⎕←↑r
-⎕←''
-⎕←'Arrow schema conversion runtime one-column complete!'
 
 ⍝ KSL 1.0.0

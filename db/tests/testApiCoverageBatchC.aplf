@@ -1,4 +1,5 @@
-testApiCoverageBatchC;req;r;st;db;con;result;cfg;count;name;desc;etype;emsg;ed;cc;ptr;ctx;opts;cid;vs;days;ymd;ticks;hmsu;d;tm;ret;stmtType;vals;ok
+r←testApiCoverageBatchC;req;r;st;db;con;result;cfg;count;name;desc;etype;emsg;ed;cc;ptr;ctx;opts;cid;vs;days;ymd;ticks;hmsu;d;tm;ret;stmtType;vals;ok
+⎕CS ##
 ⍝ Batch C runtime coverage for config/error/connection/date/value-extraction helpers.
 
 :If 0=⎕NC'null'
@@ -136,8 +137,8 @@ r,←⊂'duckdb_open for connection helpers' req (0=st)∧db≠0
     {}api.duckdb_close db
 :EndIf
 
+r,←⊂''
+r,←⊂'API coverage batch C complete!'
 ⎕←↑r
-⎕←''
-⎕←'API coverage batch C complete!'
 
 ⍝ KSL 1.0.0

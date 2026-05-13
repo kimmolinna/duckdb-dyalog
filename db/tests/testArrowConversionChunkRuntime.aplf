@@ -1,4 +1,5 @@
-testArrowConversionChunkRuntime;req;r;db;con;arrow_opts;lt;chunk;vec;data_ptr;array_ptr;err;has_err;msg;ok
+r←testArrowConversionChunkRuntime;req;r;db;con;arrow_opts;lt;chunk;vec;data_ptr;array_ptr;err;has_err;msg;ok
+⎕CS ##
 ⍝ Isolated runtime smoke for a minimally valid dataChunkToArrow call.
 ⍝ Uses one INTEGER column and one row in a DuckDB data chunk.
 
@@ -87,8 +88,8 @@ ok∧←array_ptr≠0
 {}disconnect con
 {}close db
 
+r,←⊂''
+r,←⊂'Arrow chunk conversion runtime one-row complete!'
 ⎕←↑r
-⎕←''
-⎕←'Arrow chunk conversion runtime one-row complete!'
 
 ⍝ KSL 1.0.0

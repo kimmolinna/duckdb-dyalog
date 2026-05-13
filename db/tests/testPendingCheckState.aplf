@@ -1,4 +1,5 @@
- testPendingCheckState;r;req;db;con;stmt;st;pending;state;iter;out;msg
+ r←testPendingCheckState;r;req;db;con;stmt;st;pending;state;iter;out;msg
+⎕CS ##
 ⍝ Test duckdb_pending_execute_check_state in isolation
 
 :If 0=⎕NC'null'
@@ -53,8 +54,8 @@ r,←⊂'Prepare statement'req stmt≠0
 
 {}disconnect con
 {}close db
+r,←⊂''
+r,←⊂'Pending check_state testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Pending check_state testing complete!'
 
 ⍝ KSL 1.0.0

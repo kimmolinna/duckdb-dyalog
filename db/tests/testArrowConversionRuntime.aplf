@@ -1,4 +1,5 @@
-testArrowConversionRuntime;req;err;msg;args;types;names;r
+r←testArrowConversionRuntime;req;err;msg;args;types;names
+⎕CS ##
 ⍝ Runtime smoke tests for Arrow conversion APIs without Arrow struct marshalling.
 ⍝ We intentionally pass null pointers and verify structured error_data lifecycle.
 
@@ -33,8 +34,8 @@ r,←⊂'dataChunkToArrow(null) returned error_data handle' req err≠0
     {}api.duckdb_destroy_error_data ⊂err
 :EndIf
 
+r,←⊂''
+r,←⊂'Arrow conversion runtime null-smoke complete!'
 ⎕←↑r
-⎕←''
-⎕←'Arrow conversion runtime null-smoke complete!'
 
 ⍝ KSL 1.0.0

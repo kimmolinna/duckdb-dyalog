@@ -1,4 +1,5 @@
- testUtilities;r;req;db;con;result;tbl;sel
+ r←testUtilities;r;req;db;con;result;tbl;sel
+⎕CS ##
 ⍝ Test utility functions: toTable, toShortTable, index
 :If 0=⎕NC'null'
     init 'lib/'

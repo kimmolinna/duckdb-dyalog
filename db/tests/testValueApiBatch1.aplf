@@ -1,4 +1,5 @@
-testValueApiBatch1;req;r;vnull;vbool;vint;vdbl;vstr;t
+r←testValueApiBatch1;req;r;vnull;vbool;vint;vdbl;vstr;t
+⎕CS ##
 ⍝ Isolated runtime test for Value API batch 1 wrappers.
 
 :If 0=⎕NC'null'
@@ -48,8 +49,8 @@ r,←⊂'isNullValue(0)=1 guard' req 1=isNullValue 0
 r,←⊂'valueType(0)=INVALID guard' req type.INVALID=valueType 0
 r,←⊂'valueToString(0) empty guard' req ''≡valueToString 0
 
+r,←⊂''
+r,←⊂'Value API batch 1 runtime testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Value API batch 1 runtime testing complete!'
 
 ⍝ KSL 1.0.0

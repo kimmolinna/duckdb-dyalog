@@ -1,4 +1,5 @@
-testValueApiCoverage;req;r;v;t;s;x;ptr
+r←testValueApiCoverage;req;r;v;t;s;x;ptr
+⎕CS ##
 ⍝ Explicit runtime coverage for every current Value API function.
 
 :If 0=⎕NC'null'
@@ -82,8 +83,8 @@ r,←⊂'duckdb_create_varchar returns handle' req v≠0
     {}api.duckdb_destroy_value ⊂v
 :EndIf
 
+r,←⊂''
+r,←⊂'Value API coverage testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Value API coverage testing complete!'
 
 ⍝ KSL 1.0.0

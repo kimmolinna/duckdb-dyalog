@@ -1,4 +1,5 @@
-testArrowConversion;req;r
+r←testArrowConversion;req
+⎕CS ##
 ⍝ Isolated test for non-deprecated Arrow conversion wrappers.
 ⍝ This test intentionally avoids runtime ArrowSchema/ArrowArray marshalling until
 ⍝ explicit APL-side struct scaffolding is in place.
@@ -16,8 +17,8 @@ r,←⊂'duckdb_to_arrow_schema binding exists' req 3=api.⎕NC'duckdb_to_arrow_
 r,←⊂'duckdb_data_chunk_to_arrow binding exists' req 3=api.⎕NC'duckdb_data_chunk_to_arrow'
 r,←⊂'Runtime conversion skipped pending Arrow struct interop' req 1
 
+r,←⊂''
+r,←⊂'Arrow conversion API testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Arrow conversion API testing complete!'
 
 ⍝ KSL 1.0.0

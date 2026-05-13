@@ -1,4 +1,5 @@
-testAppenderMetadataDefault;req;r;db;con;st;appender;cc;lt0;lt1;lt2;result
+r←testAppenderMetadataDefault;req;r;db;con;st;appender;cc;lt0;lt1;lt2;result
+⎕CS ##
 ⍝ Isolated test for appender metadata APIs and append_default.
 
 :If 0=⎕NC'null'
@@ -60,8 +61,8 @@ r,←⊂'append_default null returns error' req DuckDBError=appendDefault 0
 {}disconnect con
 {}close db
 
+r,←⊂''
+r,←⊂'Appender metadata/default testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Appender metadata/default testing complete!'
 
 ⍝ KSL 1.0.0

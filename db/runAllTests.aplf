@@ -1,32 +1,37 @@
-runAllTests;req;r;tests;t;fq
-⍝ Unified runner for all test*.aplf functions in db/tests/.
-⍝ Uses one consistent execution/reporting pattern.
+ runAllTests;r;t;fq;tsts;res;blob;fail
+⍝ Unified runner: every test tradfn lives under db/tests/ as tests.<name>.
+⍝ Each test has header r←Name; last line ⎕←↑r (session log). runAllTests scans ⍕res for FAILED / ' - failed'.
 
-:If 0=⎕NC'null'
-    init 'lib/'
-:EndIf
+ :If 0=⎕NC'null'
+     init'lib/'
+ :EndIf
 
-req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
-r←⊂'Run All Tests'
+ r←⊂'Run All Tests'
 
-tests←' ' (≠⊆⊢) 'test testPhase1 testPhase2 testApiCoverageBatchA testApiCoverageBatchB testApiCoverageBatchC testApiCoverageBatchD testApiCoverageBatchE testApiCoverageBatchF testArrow testArrowConversion testArrowConversionRuntime testArrowConversionSchemaRuntime testArrowConversionChunkRuntime testArrowFromRuntime testAppenderMetadataDefault testAppenderDefaultToChunk testPreparedColumnMetadata testPreparedParameterMetadata testResultMetadataWrappers testResultColumnMetadata testExtractedStatements testDateTimeHelpers testClientContext testConfigFlags testPendingHelpers testPendingCheckState testValueApiBatch1 testValueApiBatch2 testValueApiBatch3 testValueApiCoverage'
+ tsts←' '(≠⊆⊢)'test testPhase1 testPhase2 testApiCoverageBatchA testApiCoverageBatchB testApiCoverageBatchC testApiCoverageBatchD testApiCoverageBatchE testApiCoverageBatchF testArrow testArrowConversion testArrowConversionRuntime testArrowConversionSchemaRuntime testArrowConversionChunkRuntime testArrowFromRuntime testAppenderMetadataDefault testAppenderDefaultToChunk testPreparedColumnMetadata testPreparedParameterMetadata testResultMetadataWrappers testResultColumnMetadata testExtractedStatements testDateTimeHelpers testClientContext testConfigFlags testPendingHelpers testPendingCheckState testValueApiBatch1 testValueApiBatch2 testValueApiBatch3 testValueApiCoverage testMergedTypes testTimestamps testUTF8 testAppendTypes testUtilities'
 
-:For t :In tests
-    fq←'tests.',t
-    :If 3=⎕NC fq
-        :Trap 0
-            ⍎fq
-            r,←⊂'Executed ',fq,' - OK'
-        :Else
-            r,←⊂'Executed ',fq,' - FAILED: ',⎕DMX.Message
-        :EndTrap
-    :Else
-        r,←⊂'Missing ',fq,' - FAILED'
-    :EndIf
-:EndFor
+ :For t :In tsts
+     fq←'tests.',t
+     :If 3=⌊⎕NC fq
+         :Trap 0
+             res←⍎fq
+             blob←,⍕res
+             fail←(+/,'FAILED'⍷blob)+(+/,(' - failed')⍷blob)
+             :If 0≠fail
+                 r,←⊂'Executed ',(⍕fq),' - FAILED (assertions)'
+             :Else
+                 r,←⊂'Executed ',(⍕fq),' - OK'
+             :EndIf
+         :Else
+             r,←⊂'Executed ',(⍕fq),' - FAILED: ',⎕DMX.Message
+         :EndTrap
+     :Else
+         r,←⊂'Missing ',(⍕fq),' - FAILED'
+     :EndIf
+ :EndFor
 
-⎕←↑r
-⎕←''
-⎕←'Unified test run complete.'
+ ⎕←↑r
+ ⎕←''
+ ⎕←'Unified test run complete.'
 
 ⍝ KSL 1.0.0

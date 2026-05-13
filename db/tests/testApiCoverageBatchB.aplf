@@ -1,4 +1,5 @@
-testApiCoverageBatchB;req;r;st;db;con;stmt;result;pending;state;iter;out;msg;n;ptype;plogic;pname;sidx;ct;cn;clt;sid;ok;ptr
+r←testApiCoverageBatchB;req;r;st;db;con;stmt;result;pending;state;iter;out;msg;n;ptype;plogic;pname;sidx;ct;cn;clt;sid;ok;ptr
+⎕CS ##
 ⍝ Batch B runtime coverage for prepared/pending and statement metadata APIs.
 
 :If 0=⎕NC'null'
@@ -136,8 +137,8 @@ r,←⊂'open for batch B' req (0=st)∧db≠0
     {}api.duckdb_close db
 :EndIf
 
+r,←⊂''
+r,←⊂'API coverage batch B complete!'
 ⎕←↑r
-⎕←''
-⎕←'API coverage batch B complete!'
 
 ⍝ KSL 1.0.0

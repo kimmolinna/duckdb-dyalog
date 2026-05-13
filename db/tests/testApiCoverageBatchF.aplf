@@ -1,4 +1,5 @@
-testApiCoverageBatchF;req;r;st;db;con;stmt;result;v;p16;p64;e;lt;lt2;lt3;x;ptr;nm;ed;dec
+r←testApiCoverageBatchF;req;r;st;db;con;stmt;result;v;p16;p64;e;lt;lt2;lt3;x;ptr;nm;ed;dec
+⎕CS ##
 ⍝ Batch F runtime coverage for bind_* APIs + remaining arrow/complex type APIs.
 
 :If 0=⎕NC'null'
@@ -148,8 +149,8 @@ r,←⊂'open for batch F' req (0=st)∧db≠0
     {}api.duckdb_close db
 :EndIf
 
+r,←⊂''
+r,←⊂'API coverage batch F complete!'
 ⎕←↑r
-⎕←''
-⎕←'API coverage batch F complete!'
 
 ⍝ KSL 1.0.0

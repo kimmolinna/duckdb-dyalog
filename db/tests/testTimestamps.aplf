@@ -1,4 +1,5 @@
- testTimestamps;r;req;db;con;result;data
+ r←testTimestamps;r;req;db;con;result;data
+⎕CS ##
 ⍝ Test timestamp variants: TIMESTAMP, TIMESTAMP_S, TIMESTAMP_MS, TIMESTAMP_NS, TIMESTAMP_TZ, DATE, TIME
 :If 0=⎕NC'null'
     init 'lib/'

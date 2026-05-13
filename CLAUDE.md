@@ -104,15 +104,15 @@ This is a DuckDB interface for Dyalog APL, providing native bindings to the Duck
 - `toJson.aplf`: Converts results to JSON format
 - `index.aplf`: Column/row selection by name or numeric index
 
-*Testing:*
-- `test.aplf`: Comprehensive test suite for C API functionality
-- `testPhase1.aplf`: Tests for prepared statements, configuration, error handling, and parameter binding
-- `testPhase2.aplf`: Tests advanced types, pending/streaming execution, row-wise appender APIs, and structured appender errors
-- `testMergedTypes.aplf`: Tests DECIMAL, BLOB, BIT, HUGEINT, INTERVAL, ARRAY, NULL handling
-- `testTimestamps.aplf`: Tests all timestamp variants (S/MS/NS/TZ), DATE, TIME
-- `testUTF8.aplf`: Regression tests for UTF-8 bugs (short string read, append double-encoding)
-- `testAppendTypes.aplf`: Append+readback for various types, NULLs, large datasets
-- `testUtilities.aplf`: Tests toTable, toShortTable, index
+*Testing (all under `db/tests/`):*
+- `tests/test.aplf`: Comprehensive test suite for C API functionality
+- `tests/testPhase1.aplf`: Tests for prepared statements, configuration, error handling, and parameter binding
+- `tests/testPhase2.aplf`: Tests advanced types, pending/streaming execution, row-wise appender APIs, and structured appender errors
+- `tests/testMergedTypes.aplf`: Tests DECIMAL, BLOB, BIT, HUGEINT, INTERVAL, ARRAY, NULL handling
+- `tests/testTimestamps.aplf`: Tests all timestamp variants (S/MS/NS/TZ), DATE, TIME
+- `tests/testUTF8.aplf`: Regression tests for UTF-8 bugs (short string read, append double-encoding)
+- `tests/testAppendTypes.aplf`: Append+readback for various types, NULLs, large datasets
+- `tests/testUtilities.aplf`: Tests toTable, toShortTable, index
 
 ### Data Flow
 

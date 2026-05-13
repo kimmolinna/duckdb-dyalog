@@ -1,4 +1,5 @@
- testAppendTypes;r;req;db;con;result;data;out
+ r←testAppendTypes;r;req;db;con;result;data;out
+⎕CS ##
 ⍝ Test append + readback for various types including timestamp variants
 :If 0=⎕NC'null'
     init 'lib/'

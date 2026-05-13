@@ -1,4 +1,5 @@
- testMergedTypes;r;req;db;con;result;cols;data;types
+ r←testMergedTypes;r;req;db;con;result;cols;data;types
+⎕CS ##
 ⍝ Test merged type coverage: DECIMAL, BLOB, BIT, HUGEINT, INTERVAL, ARRAY
 :If 0=⎕NC'null'
     init 'lib/'

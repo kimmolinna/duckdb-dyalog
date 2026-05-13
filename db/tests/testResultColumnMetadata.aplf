@@ -1,4 +1,5 @@
-testResultColumnMetadata;req;r;db;con;st;result;cnt;lt
+r←testResultColumnMetadata;req;r;db;con;st;result;cnt;lt
+⎕CS ##
 ⍝ Isolated test for result-column metadata wrappers with bounds guards.
 
 :If 0=⎕NC'null'
@@ -46,8 +47,8 @@ r,←⊂'resultColumnLogicalType(null) guarded null' req 0=0 resultColumnLogical
 {}disconnect con
 {}close db
 
+r,←⊂''
+r,←⊂'Result column metadata wrapper testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Result column metadata wrapper testing complete!'
 
 ⍝ KSL 1.0.0

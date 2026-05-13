@@ -1,4 +1,5 @@
- testArrow;r;req;db;con;st;out;arrow_opts;con_opts
+ r←testArrow;r;req;db;con;st;out;arrow_opts;con_opts
+⎕CS ##
 ⍝ Test non-deprecated Arrow APIs separately from Phase 2 core tests
 :If 0=⎕NC'null'
     init 'lib/'
@@ -29,9 +30,8 @@ r,←⊂'Query for result arrow options'req DuckDBSuccess=st
 
 {}disconnect con
 {}close db
+r,←⊂''
+r,←⊂'Arrow API testing complete!'
 ⎕←↑r
-
-⎕←''
-⎕←'Arrow API testing complete!'
 
 ⍝ KSL 1.0.0

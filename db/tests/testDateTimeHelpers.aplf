@@ -1,4 +1,5 @@
-testDateTimeHelpers;req;r;days;ymd;micros;hmsu
+r←testDateTimeHelpers;req;r;days;ymd;micros;hmsu
+⎕CS ##
 ⍝ Isolated test for date/time helper wrappers.
 
 :If 0=⎕NC'null'
@@ -20,8 +21,8 @@ hmsu←fromTime micros
 r,←⊂'fromTime(toTime(...)) roundtrip' req (1 2 3 4005)≡hmsu
 r,←⊂'isFiniteTimestamp(micros) true' req 1=isFiniteTimestamp micros
 
+r,←⊂''
+r,←⊂'Date/time helper wrapper testing complete!'
 ⎕←↑r
-⎕←''
-⎕←'Date/time helper wrapper testing complete!'
 
 ⍝ KSL 1.0.0

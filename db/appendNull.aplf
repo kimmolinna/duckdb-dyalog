@@ -1,4 +1,3 @@
 result←appendNull a1
 ⍝ Wrapper for api.duckdb_append_null
 result←api.duckdb_append_null a1
-

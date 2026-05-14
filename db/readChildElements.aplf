@@ -53,4 +53,3 @@ _validity←api.duckdb_vector_get_validity vector
         col←count⍴null
     :EndTrap
 :EndIf
-

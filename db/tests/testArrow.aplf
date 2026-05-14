@@ -33,4 +33,3 @@ r,←⊂'Query for result arrow options'req DuckDBSuccess=st
 r,←⊂''
 r,←⊂'Arrow API testing complete!'
 ⎕←↑r
-

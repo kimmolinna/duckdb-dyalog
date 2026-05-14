@@ -89,4 +89,3 @@ result←query con'SELECT NULL::TIMESTAMP AS ts, NULL::DATE AS d'
 disconnect con
 close db
 ⎕←↑r
-

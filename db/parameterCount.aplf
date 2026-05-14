@@ -7,4 +7,3 @@ count←parameterCount stmt
 :EndIf
 
 count←api.duckdb_nparams stmt
-

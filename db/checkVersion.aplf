@@ -11,4 +11,3 @@
  ⎕←''
  ⎕←'This implementation requires DuckDB v0.8.0 or later for bind functions.'
  ⎕←'If your version is older, prepared statements with binding may not work.'
-

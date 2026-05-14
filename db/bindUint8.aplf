@@ -7,4 +7,3 @@ status←stmt bindUint8 (idx val)
 :EndIf
 
 status←api.duckdb_bind_uint8 stmt idx val
-

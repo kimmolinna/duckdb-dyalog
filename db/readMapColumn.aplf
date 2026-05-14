@@ -29,4 +29,3 @@ col←row_count⍴⊂⎕NS''
     :EndIf
     col[i]←⊂ns
 :EndFor
-

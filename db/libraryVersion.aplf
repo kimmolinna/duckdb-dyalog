@@ -1,4 +1,3 @@
 result←libraryVersion
 ⍝ Wrapper for api.duckdb_library_version
 result←api.duckdb_library_version
-

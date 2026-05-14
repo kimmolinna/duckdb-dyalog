@@ -14,4 +14,3 @@ rem-←min×60000000
 sec←⌊rem÷1000000
 u←rem-sec×1000000
 hmsu←hour min sec u
-

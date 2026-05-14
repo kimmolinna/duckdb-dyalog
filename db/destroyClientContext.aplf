@@ -3,4 +3,3 @@ destroyClientContext←{
 ⍝ ⍵: duckdb_client_context pointer
     api.duckdb_destroy_client_context ⍵
 }
-

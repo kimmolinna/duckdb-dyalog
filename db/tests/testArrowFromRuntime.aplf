@@ -41,4 +41,3 @@ r,←⊂'dataChunkFromArrow(null) returned error_data handle' req err≠0
 r,←⊂''
 r,←⊂'Arrow from runtime null-smoke complete!'
 ⎕←↑r
-

@@ -17,4 +17,3 @@ y m d←v
 baseNs←10 ⎕DT⊂1970 1 1 0 0 0 0
 targetNs←10 ⎕DT⊂y m d 0 0 0 0
 days←⌊(targetNs-baseNs)÷8.64E13
-

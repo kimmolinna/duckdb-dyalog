@@ -9,4 +9,3 @@ resultColumnName←{
     ptr=0:''
     256 read.utf8 ptr
 }
-

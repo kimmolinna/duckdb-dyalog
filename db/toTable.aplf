@@ -1,4 +1,3 @@
 out←toTable in;data;cols
 cols data←2↑in
 out←⍉cols,↑,¨data
-

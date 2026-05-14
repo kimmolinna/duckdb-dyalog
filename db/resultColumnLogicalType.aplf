@@ -8,4 +8,3 @@ resultColumnLogicalType←{
     ⍵≥cnt:0
     api.duckdb_column_logical_type ⍺ ⍵
 }
-

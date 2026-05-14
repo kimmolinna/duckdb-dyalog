@@ -1,4 +1,3 @@
 result←createConfig a1
 ⍝ Wrapper for api.duckdb_create_config
 result←api.duckdb_create_config a1
-

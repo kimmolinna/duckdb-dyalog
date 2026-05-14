@@ -4,4 +4,3 @@ state←pendingCheckState pending
 ⍝ state: duckdb_pending_state enum (0 ready, 1 not ready, 2 error)
 
 state←api.duckdb_pending_execute_check_state pending
-

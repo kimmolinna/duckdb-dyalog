@@ -3,4 +3,3 @@ destroyConfig←{
   ⍝ ⍵: config pointer
     api.duckdb_destroy_config ⍵
 }
-

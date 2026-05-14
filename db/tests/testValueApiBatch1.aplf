@@ -52,4 +52,3 @@ r,←⊂'valueToString(0) empty guard' req ''≡valueToString 0
 r,←⊂''
 r,←⊂'Value API batch 1 runtime testing complete!'
 ⎕←↑r
-

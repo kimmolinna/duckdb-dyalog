@@ -7,4 +7,3 @@ status←stmt bindTimestampTz (idx val)
 :EndIf
 
 status←api.duckdb_bind_timestamp_tz stmt idx val
-

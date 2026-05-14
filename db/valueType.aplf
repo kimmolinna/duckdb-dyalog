@@ -12,4 +12,3 @@ lt←api.duckdb_get_value_type val
 t←api.duckdb_get_type_id lt
 ⍝ duckdb_get_value_type returns a borrowed logical type:
 ⍝ valid only while value lives, and must not be destroyed.
-

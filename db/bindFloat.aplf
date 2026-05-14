@@ -7,4 +7,3 @@ status←stmt bindFloat (idx val)
 :EndIf
 
 status←api.duckdb_bind_float stmt idx val
-

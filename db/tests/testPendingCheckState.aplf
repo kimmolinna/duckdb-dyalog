@@ -57,4 +57,3 @@ r,←⊂'Prepare statement'req stmt≠0
 r,←⊂''
 r,←⊂'Pending check_state testing complete!'
 ⎕←↑r
-

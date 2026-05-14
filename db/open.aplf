@@ -11,4 +11,3 @@ db_ptr←open db_str;st;con
 :if st
     db_ptr←0
 :endif
-

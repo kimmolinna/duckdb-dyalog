@@ -83,4 +83,3 @@ result←query con'SELECT * FROM utf8_null'
 disconnect con
 close db
 ⎕←↑r
-

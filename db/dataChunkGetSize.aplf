@@ -1,4 +1,3 @@
 result←dataChunkGetSize a1
 ⍝ Wrapper for api.duckdb_data_chunk_get_size
 result←api.duckdb_data_chunk_get_size a1
-

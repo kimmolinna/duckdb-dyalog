@@ -57,4 +57,3 @@ ok←1
         ok←0 ⋄ →0
     :EndIf
 :EndFor
-

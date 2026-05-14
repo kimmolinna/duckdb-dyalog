@@ -5,4 +5,3 @@ ymd←fromDate days;baseNs;dt
 baseNs←10 ⎕DT⊂1970 1 1 0 0 0 0
 dt←10 ¯2 ⎕DT baseNs+8.64E13×⌊days
 ymd←3↑⊃dt
-

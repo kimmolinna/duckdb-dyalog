@@ -7,4 +7,3 @@ status←stmt bindUhugeint (idx val)
 :EndIf
 
 status←api.duckdb_bind_uhugeint stmt idx val
-

@@ -15,4 +15,3 @@ child_col←readVector child_vector child_type child_count
 
 entries←(row_count,2)⍴(row_count×2)read.u64 data
 col←(,child_col)∘{⍺[⍵]}¨{⍺+⍳⍵}/entries
-

@@ -12,4 +12,3 @@ s←getVarcharValue val
     ⍝ Fallback to direct getter if parsing fails.
     x←api.duckdb_get_float val
 :EndTrap
-

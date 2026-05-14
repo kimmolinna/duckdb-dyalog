@@ -1,4 +1,3 @@
 result←appendDataChunk(a1 a2)
 ⍝ Wrapper for api.duckdb_append_data_chunk
 result←api.duckdb_append_data_chunk a1 a2
-

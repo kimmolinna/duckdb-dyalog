@@ -20,4 +20,3 @@ r,←⊂'Runtime conversion skipped pending Arrow struct interop' req 1
 r,←⊂''
 r,←⊂'Arrow conversion API testing complete!'
 ⎕←↑r
-

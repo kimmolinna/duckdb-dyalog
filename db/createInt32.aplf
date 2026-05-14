@@ -1,4 +1,3 @@
 result←createInt32 a1
 ⍝ Wrapper for api.duckdb_create_int32
 result←api.duckdb_create_int32 a1
-

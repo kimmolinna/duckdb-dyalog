@@ -9,4 +9,3 @@ vals←,result
 :EndIf
 
 count←api.duckdb_column_count ⊂result
-

@@ -2,4 +2,3 @@ destroyExtracted←{
 ⍝ Destroy extracted-statements handle.
     api.duckdb_destroy_extracted ⍵
 }
-

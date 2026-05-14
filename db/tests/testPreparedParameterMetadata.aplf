@@ -55,4 +55,3 @@ r,←⊂'parameterLogicalType(null) guarded null' req 0=0 parameterLogicalType 1
 r,←⊂''
 r,←⊂'Prepared parameter metadata wrapper testing complete!'
 ⎕←↑r
-

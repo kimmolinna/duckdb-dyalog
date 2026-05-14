@@ -32,4 +32,3 @@ r,←⊂'getVarcharValue contains hello' req ∨/'hello'⍷getVarcharValue vstr
 r,←⊂''
 r,←⊂'Value API batch 2 runtime testing complete!'
 ⎕←↑r
-

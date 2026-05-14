@@ -2,4 +2,3 @@ count←appenderColumnCount appender
 ⍝ Return number of columns in appender target table.
 
 count←api.duckdb_appender_column_count appender
-

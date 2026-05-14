@@ -1,4 +1,3 @@
 result←getInt64 a1
 ⍝ Wrapper for api.duckdb_get_int64
 result←api.duckdb_get_int64 a1
-

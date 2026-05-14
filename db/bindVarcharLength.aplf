@@ -7,4 +7,3 @@ status←stmt bindVarcharLength (idx val len)
 :EndIf
 
 status←api.duckdb_bind_varchar_length stmt idx val len
-

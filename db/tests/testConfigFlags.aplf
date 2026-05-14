@@ -35,4 +35,3 @@ r,←⊂'get_config_flag(out-of-range) guarded error' req (DuckDBError=st)∧(0=
 r,←⊂''
 r,←⊂'Config flag metadata testing complete!'
 ⎕←↑r
-

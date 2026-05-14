@@ -88,4 +88,3 @@ r,←⊂'open for batch E' req (0=st)∧db≠0
 r,←⊂''
 r,←⊂'API coverage batch E complete!'
 ⎕←↑r
-

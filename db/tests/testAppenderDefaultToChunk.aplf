@@ -65,4 +65,3 @@ chunk←0
 r,←⊂''
 r,←⊂'Appender default-to-chunk testing complete!'
 ⎕←↑r
-

@@ -84,4 +84,3 @@ result←query con'SELECT NULL::DECIMAL(5,2) AS d, NULL::BLOB AS b'
 disconnect con
 close db
 ⎕←↑r
-

@@ -1,12 +1,14 @@
- runAllTests;r;t;fq;tsts;res;blob;fail
+ nfail←runAllTests;r;t;fq;tsts;res;blob;fail
 ⍝ Unified runner: every test tradfn lives under db/tests/ as tests.<name>.
 ⍝ Each test has header r←Name; last line ⎕←↑r (session log). runAllTests scans ⍕res for FAILED / ' - failed'.
+⍝ Returns: nfail = number of test suites that failed (0 = all pass).
 
  :If 0=⎕NC'null'
      init'lib/'
  :EndIf
 
  r←⊂'Run All Tests'
+ nfail←0
 
  tsts←' '(≠⊆⊢)'test testPhase1 testPhase2 testApiCoverageBatchA testApiCoverageBatchB testApiCoverageBatchC testApiCoverageBatchD testApiCoverageBatchE testApiCoverageBatchF testArrow testArrowConversion testArrowConversionRuntime testArrowConversionSchemaRuntime testArrowConversionChunkRuntime testArrowFromRuntime testAppenderMetadataDefault testAppenderDefaultToChunk testPreparedColumnMetadata testPreparedParameterMetadata testResultMetadataWrappers testResultColumnMetadata testExtractedStatements testDateTimeHelpers testClientContext testConfigFlags testPendingHelpers testPendingCheckState testValueApiBatch1 testValueApiBatch2 testValueApiBatch3 testValueApiCoverage testMergedTypes testTimestamps testUTF8 testAppendTypes testUtilities'
 
@@ -19,18 +21,25 @@
              fail←(+/,'FAILED'⍷blob)+(+/,(' - failed')⍷blob)
              :If 0≠fail
                  r,←⊂'Executed ',(⍕fq),' - FAILED (assertions)'
+                 nfail+←1
              :Else
                  r,←⊂'Executed ',(⍕fq),' - OK'
              :EndIf
          :Else
              r,←⊂'Executed ',(⍕fq),' - FAILED: ',⎕DMX.Message
+             nfail+←1
          :EndTrap
      :Else
          r,←⊂'Missing ',(⍕fq),' - FAILED'
+         nfail+←1
      :EndIf
  :EndFor
 
  ⎕←↑r
  ⎕←''
+ :If 0=nfail
+     ⎕←'All tests passed.'
+ :Else
+     ⎕←(⍕nfail),' test suite(s) FAILED.'
+ :EndIf
  ⎕←'Unified test run complete.'
-

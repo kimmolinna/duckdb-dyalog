@@ -5,4 +5,3 @@ status←appenderAddColumn(appender col_name)
 ⍝ status: DuckDBSuccess(0) or DuckDBError(1)
 
 status←api.duckdb_appender_add_column appender col_name
-

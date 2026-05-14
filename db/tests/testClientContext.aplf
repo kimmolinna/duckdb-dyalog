@@ -37,4 +37,3 @@ r,←⊂'Connection created'req con≠0
 r,←⊂''
 r,←⊂'Client context testing complete!'
 ⎕←↑r
-

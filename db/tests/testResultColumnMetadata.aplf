@@ -50,4 +50,3 @@ r,←⊂'resultColumnLogicalType(null) guarded null' req 0=0 resultColumnLogical
 r,←⊂''
 r,←⊂'Result column metadata wrapper testing complete!'
 ⎕←↑r
-

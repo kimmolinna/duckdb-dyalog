@@ -1,4 +1,3 @@
 out←isFiniteTimestamp micros
 ⍝ Return 1 if duckdb_timestamp (micros) is finite else 0.
 out←api.duckdb_is_finite_timestamp micros
-

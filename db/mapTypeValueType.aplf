@@ -1,4 +1,3 @@
 result←mapTypeValueType a1
 ⍝ Wrapper for api.duckdb_map_type_value_type
 result←api.duckdb_map_type_value_type a1
-

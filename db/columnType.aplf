@@ -1,4 +1,3 @@
 result←columnType(a1 a2)
 ⍝ Wrapper for api.duckdb_column_type
 result←api.duckdb_column_type a1 a2
-

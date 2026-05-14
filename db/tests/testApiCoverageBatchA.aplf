@@ -101,4 +101,3 @@ r,←⊂'duckdb_open returns database handle' req db≠0
 r,←⊂''
 r,←⊂'API coverage batch A complete!'
 ⎕←↑r
-

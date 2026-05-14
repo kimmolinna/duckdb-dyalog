@@ -37,4 +37,3 @@ r,←⊂'dataChunkToArrow(null) returned error_data handle' req err≠0
 r,←⊂''
 r,←⊂'Arrow conversion runtime null-smoke complete!'
 ⎕←↑r
-

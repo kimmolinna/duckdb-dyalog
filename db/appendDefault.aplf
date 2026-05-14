@@ -2,4 +2,3 @@ st←appendDefault appender
 ⍝ Append DEFAULT value for current appender column in row-wise mode.
 
 st←api.duckdb_append_default appender
-

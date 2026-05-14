@@ -4,4 +4,3 @@ status←appenderClose appender
 ⍝ status: DuckDBSuccess(0) or DuckDBError(1)
 
 status←api.duckdb_appender_close appender
-

@@ -27,4 +27,3 @@ count←configCount
 :Else
     desc←512 read.utf8 desc_ptr
 :EndIf
-

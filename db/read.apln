@@ -20,4 +20,3 @@
       decimal_←⍎⎕NA lib,'|MEMCPY >{U1[16]}[] P U4' ⋄ decimal←{decimal_ ⍺ ⍵(⍺×16)}
     ∇
 :EndNamespace
-

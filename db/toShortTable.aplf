@@ -18,4 +18,3 @@
      b←↓⎕FMT'|',¨first⍪last
      r←(21↑b),(⊂'|   ...'),¯20↑b
  :EndIf
-

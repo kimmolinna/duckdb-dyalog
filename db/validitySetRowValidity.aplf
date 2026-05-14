@@ -1,4 +1,3 @@
 result←validitySetRowValidity(a1 a2 a3)
 ⍝ Wrapper for api.duckdb_validity_set_row_validity
 result←api.duckdb_validity_set_row_validity a1 a2 a3
-

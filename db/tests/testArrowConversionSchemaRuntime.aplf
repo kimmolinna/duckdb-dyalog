@@ -73,4 +73,3 @@ ok∧←schema_ptr≠0
 r,←⊂''
 r,←⊂'Arrow schema conversion runtime one-column complete!'
 ⎕←↑r
-

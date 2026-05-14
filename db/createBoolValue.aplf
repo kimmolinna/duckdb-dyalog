@@ -1,4 +1,3 @@
 val←createBoolValue b
 ⍝ Create boolean duckdb_value.
 val←api.duckdb_create_bool b
-

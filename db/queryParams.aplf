@@ -17,4 +17,3 @@ stmt←prepareQuery _con sql
 
 out←executePrepared stmt
 {}destroyPrepared stmt
-

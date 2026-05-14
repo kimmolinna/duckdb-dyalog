@@ -24,4 +24,3 @@ r,←⊂'isFiniteTimestamp(micros) true' req 1=isFiniteTimestamp micros
 r,←⊂''
 r,←⊂'Date/time helper wrapper testing complete!'
 ⎕←↑r
-

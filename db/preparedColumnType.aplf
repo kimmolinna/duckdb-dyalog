@@ -6,4 +6,3 @@ preparedColumnType←{
     ⍵≥cnt:type.INVALID
     api.duckdb_prepared_statement_column_type ⍺ ⍵
 }
-

@@ -7,4 +7,3 @@ count←preparedColumnCount stmt
 :EndIf
 
 count←api.duckdb_prepared_statement_column_count stmt
-

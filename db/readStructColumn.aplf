@@ -24,4 +24,3 @@ names←↑child_names
     vals←{i⊃⍵⊃child_cols}¨⍳child_count
     col[i]⎕VSET names vals
 :EndFor
-

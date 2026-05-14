@@ -16,4 +16,3 @@ cfg←config pairs;st;pair;name;value
         cfg←0 ⋄ →0
     :EndIf
 :EndFor
-

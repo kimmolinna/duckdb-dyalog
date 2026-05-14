@@ -5,4 +5,3 @@ b←getBoolValue val
     →0
 :EndIf
 b←api.duckdb_get_bool val
-

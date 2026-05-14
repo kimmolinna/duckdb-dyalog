@@ -1,4 +1,3 @@
 result←paramLogicalType(a1 a2)
 ⍝ Wrapper for api.duckdb_param_logical_type
 result←api.duckdb_param_logical_type a1 a2
-

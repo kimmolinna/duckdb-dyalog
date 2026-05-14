@@ -1,4 +1,3 @@
 result←appenderCreate(a1 a2 a3 a4)
 ⍝ Wrapper for api.duckdb_appender_create
 result←api.duckdb_appender_create a1 a2 a3 a4
-

@@ -83,4 +83,3 @@ result←query con'SELECT COUNT(*) AS c FROM big_test'
 disconnect con
 close db
 ⎕←↑r
-

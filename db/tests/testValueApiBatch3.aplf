@@ -57,4 +57,3 @@ doubleVals←0 1.25 ¯2.5 3.141592653589793
 r,←⊂''
 r,←⊂'Value API batch 3 runtime testing complete!'
 ⎕←↑r
-

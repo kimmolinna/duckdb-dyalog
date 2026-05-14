@@ -14,5 +14,3 @@ stmt←prepareQuery(_con sql);st;result
 :if st
   stmt←0
 :endif
-
-

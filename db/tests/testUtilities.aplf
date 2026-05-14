@@ -45,4 +45,3 @@ r,←⊂'Index multiple cols'req 2=≢sel
 disconnect con
 close db
 ⎕←↑r
-

@@ -8,4 +8,3 @@ err←dataChunkToArrow args;arrow_opts;chunk;out_array
 
 (arrow_opts chunk out_array)←args
 err←api.duckdb_data_chunk_to_arrow arrow_opts chunk out_array
-

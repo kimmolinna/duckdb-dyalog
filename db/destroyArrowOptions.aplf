@@ -3,4 +3,3 @@ destroyArrowOptions←{
 ⍝ ⍵: duckdb_arrow_options pointer
     api.duckdb_destroy_arrow_options ⍵
 }
-

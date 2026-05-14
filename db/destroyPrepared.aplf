@@ -3,4 +3,3 @@ destroyPrepared←{
   ⍝ ⍵: prepared statement pointer
     api.duckdb_destroy_prepare ⍵
 }
-

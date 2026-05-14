@@ -1,0 +1,18 @@
+# Normalize text to LF in the repository (all platforms).
+* text=auto eol=lf
+
+# Binary / non-text (do not line-normalize)
+*.dll binary
+*.exe binary
+*.pdb binary
+*.lib binary
+*.so binary
+*.dylib binary
+*.parquet binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary

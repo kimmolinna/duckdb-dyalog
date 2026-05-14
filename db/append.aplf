@@ -75,4 +75,3 @@ r←query _con ('DESCRIBE ',table)
 :else
     out←r
 :endif
-

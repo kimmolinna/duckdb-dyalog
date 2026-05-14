@@ -91,4 +91,3 @@ ok∧←array_ptr≠0
 r,←⊂''
 r,←⊂'Arrow chunk conversion runtime one-row complete!'
 ⎕←↑r
-

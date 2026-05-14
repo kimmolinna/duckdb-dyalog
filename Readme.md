@@ -8,7 +8,6 @@ Dyalog APL bindings for [DuckDB](https://duckdb.org/) via the C API (`⎕NA`). Q
 |----------|---------|
 | **[docs/getting-started.md](docs/getting-started.md)** | Step-by-step setup and usage examples |
 | **[demo.txt](demo.txt)** | Full paste-in session (parquet, bulk `append`, copy-out) |
-| **[duckdb-dyalog.ipynb](duckdb-dyalog.ipynb)** | Jupyter notebook walkthrough |
 | **[CLAUDE.md](CLAUDE.md)** | Contributor / agent notes: architecture, APL file rules, testing |
 
 ## Requirements
@@ -40,21 +39,13 @@ More patterns (parameters, bulk insert, NULLs) are in **[docs/getting-started.md
 
 ## Running tests
 
-Tests live under `db/tests/` and are run through **`duck.db.runAllTests`**.
+Tests live under `db/tests/` as tradfns under **`duck.db.tests`**. With the project linked and **`duck.db.init`** already called (same as in [Quick start](#quick-start)), run the full suite from the session:
 
-**Option A — Dyalog script (from repo root)**
-
-```text
-dyascript.exe run_tests.apls
+```apl
+duck.db.runAllTests
 ```
 
-**Option B — PowerShell helper**
-
-```powershell
-.\scripts\run-tests.ps1
-```
-
-The script links the `duck` namespace to the current directory, runs `duck.db.init` on `lib/`, then `duck.db.runAllTests`. Override the executable with `DUCKDB_DYALOG_SCRIPT` if `dyascript.exe` is not on `PATH`.
+Individual entry points such as **`duck.db.tests.test`** or **`duck.db.tests.testPhase1`** are ordinary tradfns you can call directly; the unified list is defined in **`db/runAllTests.aplf`**.
 
 ## Platform libraries
 
@@ -72,8 +63,6 @@ Dyalog’s own runtime (`dyalog64.dll` / `dyalog64.so`) is used for low-level me
 
 - `db/` — linked as `duck.db`: `init`, `open`, `query`, `append`, prepared/appender helpers, `api` (`⎕NA` map), `read` / `write`, `type`, tests under `db/tests/`
 - `lib/` — place vendor DuckDB binaries here (not always committed)
-- `run_tests.apls` — non-interactive test driver
-- `scripts/` — CI-friendly wrappers
 
 ## Roadmap / internal notes
 

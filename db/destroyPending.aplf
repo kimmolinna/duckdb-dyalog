@@ -1,4 +1,3 @@
 result←destroyPending a1
 ⍝ Wrapper for api.duckdb_destroy_pending
 result←api.duckdb_destroy_pending a1
-

@@ -1,3 +1,2 @@
 r←close _db
 r←api.duckdb_close _db
-

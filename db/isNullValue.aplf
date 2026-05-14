@@ -5,4 +5,3 @@ b←isNullValue val
     →0
 :EndIf
 b←api.duckdb_is_null_value val
-

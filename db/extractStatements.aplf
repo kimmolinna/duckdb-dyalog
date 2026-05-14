@@ -3,4 +3,3 @@
 ⍝ returns: (statement_count extracted_statements_ptr)
 
 (count extracted)←api.duckdb_extract_statements _con sql 0
-

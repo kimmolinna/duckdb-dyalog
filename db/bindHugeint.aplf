@@ -7,4 +7,3 @@ status←stmt bindHugeint (idx val)
 :EndIf
 
 status←api.duckdb_bind_hugeint stmt idx val
-

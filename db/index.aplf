@@ -11,4 +11,3 @@
  :EndIf
  r←{⍵[rows]}¨vecs[x]
  r←⊃⍣(⍬≡⍴x)⊢r
-

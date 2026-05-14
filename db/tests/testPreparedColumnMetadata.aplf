@@ -54,4 +54,3 @@ r,←⊂'preparedColumnLogicalType(null) guarded null' req 0=0 preparedColumnLog
 r,←⊂''
 r,←⊂'Prepared column metadata wrapper testing complete!'
 ⎕←↑r
-

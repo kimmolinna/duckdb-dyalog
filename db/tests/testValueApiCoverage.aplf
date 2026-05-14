@@ -86,4 +86,3 @@ r,←⊂'duckdb_create_varchar returns handle' req v≠0
 r,←⊂''
 r,←⊂'Value API coverage testing complete!'
 ⎕←↑r
-

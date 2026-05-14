@@ -1,4 +1,3 @@
 result←createErrorData(a1 a2)
 ⍝ Wrapper for api.duckdb_create_error_data
 result←api.duckdb_create_error_data a1 a2
-

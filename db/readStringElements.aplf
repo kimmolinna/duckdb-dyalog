@@ -24,4 +24,3 @@ b←~b
     ((~b)/col)←'UTF-8'∘⎕UCS¨(~b)/col
 :Else
 :EndTrap
-

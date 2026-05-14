@@ -1,4 +1,3 @@
 result←listTypeChildType a1
 ⍝ Wrapper for api.duckdb_list_type_child_type
 result←api.duckdb_list_type_child_type a1
-

@@ -1,4 +1,3 @@
 result←listVectorGetSize a1
 ⍝ Wrapper for api.duckdb_list_vector_get_size
 result←api.duckdb_list_vector_get_size a1
-

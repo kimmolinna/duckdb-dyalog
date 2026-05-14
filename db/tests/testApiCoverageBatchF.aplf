@@ -152,4 +152,3 @@ r,←⊂'open for batch F' req (0=st)∧db≠0
 r,←⊂''
 r,←⊂'API coverage batch F complete!'
 ⎕←↑r
-

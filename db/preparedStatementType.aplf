@@ -1,4 +1,3 @@
 result←preparedStatementType a1
 ⍝ Wrapper for api.duckdb_prepared_statement_type
 result←api.duckdb_prepared_statement_type a1
-

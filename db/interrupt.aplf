@@ -5,4 +5,3 @@ interrupt←{
     api.duckdb_interrupt ⍵
     1
 }
-

@@ -1,4 +1,3 @@
 val←createInt32Value n
 ⍝ Create int32 duckdb_value.
 val←api.duckdb_create_int32 n
-

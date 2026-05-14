@@ -84,4 +84,3 @@ r,←⊂'duckdb_hugeint_to_double callable' req ok
 r,←⊂''
 r,←⊂'API coverage batch D complete!'
 ⎕←↑r
-

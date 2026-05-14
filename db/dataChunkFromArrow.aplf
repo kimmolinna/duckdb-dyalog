@@ -6,4 +6,3 @@ err←dataChunkFromArrow args;con;arrow_array;converted_schema;out_chunk;res
 (con arrow_array converted_schema out_chunk)←args
 res←,api.duckdb_data_chunk_from_arrow con arrow_array converted_schema out_chunk
 err←⊃res
-

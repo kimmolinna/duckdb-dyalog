@@ -2,4 +2,3 @@ count←configCount
 ⍝ Return number of available DuckDB configuration flags.
 
 count←api.duckdb_config_count
-

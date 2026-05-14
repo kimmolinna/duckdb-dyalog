@@ -521,7 +521,7 @@ For each phase:
 
 After each phase:
 1. Update CLAUDE.md with new function descriptions
-2. Add usage examples to Jupyter notebook
+2. Add usage examples to Readme.md, docs/getting-started.md, and/or demo.txt
 3. Document type mappings between DuckDB and APL
 4. Create migration guide for users of older versions
 

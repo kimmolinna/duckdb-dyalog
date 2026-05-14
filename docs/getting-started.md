@@ -107,20 +107,19 @@ Discard functions that return no meaningful result are often invoked with `{}` s
 ## 9. Longer examples
 
 - **[demo.txt](../demo.txt)** — end-to-end script: parquet paths, million-row `append`, `COPY … PARQUET`  
-- **[duckdb-dyalog.ipynb](../duckdb-dyalog.ipynb)** — notebook version  
 - **`duck.db.tests.*`** — executable API usage in test tradfns under `db/tests/`
 
 ## 10. Running the test suite
 
-From the repo root (non-interactive):
+After **`]link.create`** and **`duck.db.init`** (as in section 1), run the full suite in the session:
 
-```text
-dyascript.exe run_tests.apls
+```apl
+duck.db.runAllTests
 ```
 
-or `.\scripts\run-tests.ps1` on Windows. See [Readme.md](../Readme.md#running-tests).
+Individual tradfns such as **`duck.db.tests.test`** or **`duck.db.tests.testPhase1`** can be called directly; the unified list is in **`db/runAllTests.aplf`**. See also [Readme.md — Running tests](../Readme.md#running-tests).
 
-## Session settings
+## 11. Session settings
 
 `duck.db.init` sets session globals used by the library (e.g. `⎕IO←0`, `⎕ML←1`, decimal float). If you rely on different `⎕IO` in your own code, call `duck.db` functions with awareness of index origin in *your* arrays vs what the library expects.
 

@@ -140,4 +140,3 @@ r,←⊂'duckdb_open for connection helpers' req (0=st)∧db≠0
 r,←⊂''
 r,←⊂'API coverage batch C complete!'
 ⎕←↑r
-

@@ -2,4 +2,3 @@ destroyValue←{
 ⍝ Destroy duckdb_value handle.
     api.duckdb_destroy_value ⊂⍵
 }
-

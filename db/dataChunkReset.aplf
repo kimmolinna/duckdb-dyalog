@@ -1,4 +1,3 @@
 result←dataChunkReset a1
 ⍝ Wrapper for api.duckdb_data_chunk_reset
 result←api.duckdb_data_chunk_reset a1
-

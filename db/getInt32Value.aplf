@@ -5,4 +5,3 @@ n←getInt32Value val
     →0
 :EndIf
 n←api.duckdb_get_int32 val
-

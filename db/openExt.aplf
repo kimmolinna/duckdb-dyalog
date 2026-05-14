@@ -17,4 +17,3 @@ db_ptr←openExt(db_str cfg);st;err
     :EndIf
     db_ptr←0
 :EndIf
-

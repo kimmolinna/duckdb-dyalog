@@ -55,4 +55,3 @@ r,←⊂'extract invalid SQL returned handle' req extracted≠0
 r,←⊂''
 r,←⊂'Extracted statements testing complete!'
 ⎕←↑r
-

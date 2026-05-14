@@ -8,4 +8,3 @@ status←stmt bindDecimal (idx dec)
 :EndIf
 
 status←api.duckdb_bind_decimal stmt idx dec
-

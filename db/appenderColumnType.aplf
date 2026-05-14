@@ -6,4 +6,3 @@ appenderColumnType←{
     (⍵<0)∨(⍵≥appenderColumnCount ⍺):0
     api.duckdb_appender_column_type ⍺ ⍵
 }
-

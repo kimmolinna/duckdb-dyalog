@@ -9,4 +9,3 @@ out←executePrepared stmt;result;_error_message;column_names;count;chunks;st
 
 (st result)←api.duckdb_execute_prepared stmt 6
 out←getResults (st result)
-

@@ -1,4 +1,3 @@
 result←destroyDataChunk a1
 ⍝ Wrapper for api.duckdb_destroy_data_chunk
 result←api.duckdb_destroy_data_chunk a1
-

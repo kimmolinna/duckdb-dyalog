@@ -7,4 +7,3 @@ status←clearBindings stmt
 :EndIf
 
 status←api.duckdb_clear_bindings stmt
-

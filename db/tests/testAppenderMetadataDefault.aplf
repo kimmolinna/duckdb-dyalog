@@ -64,4 +64,3 @@ r,←⊂'append_default null returns error' req DuckDBError=appendDefault 0
 r,←⊂''
 r,←⊂'Appender metadata/default testing complete!'
 ⎕←↑r
-

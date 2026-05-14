@@ -8,4 +8,3 @@ vals←,result
 :EndIf
 
 stmt_type←api.duckdb_result_statement_type ⊂result
-

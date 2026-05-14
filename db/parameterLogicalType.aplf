@@ -7,4 +7,3 @@ parameterLogicalType←{
     ⍵>cnt:0
     api.duckdb_param_logical_type ⍺ ⍵
 }
-

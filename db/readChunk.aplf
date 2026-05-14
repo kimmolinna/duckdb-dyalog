@@ -6,4 +6,3 @@
  type_id←api.duckdb_get_type_id _column_type
  col←readVector _vector _column_type row_count
  {}api.duckdb_destroy_logical_type _column_type
-

@@ -19,4 +19,3 @@ micros+←m×60
 micros+←s
 micros×←1000000
 micros+←u
-

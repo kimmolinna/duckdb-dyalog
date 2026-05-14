@@ -11,4 +11,3 @@ ptr←api.duckdb_get_varchar val
 :EndIf
 s←1024 read.utf8 ptr
 {}api.duckdb_free ptr
-

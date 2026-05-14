@@ -7,4 +7,3 @@ resultColumnType←{
     ⍵≥cnt:type.INVALID
     api.duckdb_column_type ⍺ ⍵
 }
-

@@ -1,4 +1,3 @@
 result←listVectorGetChild a1
 ⍝ Wrapper for api.duckdb_list_vector_get_child
 result←api.duckdb_list_vector_get_child a1
-

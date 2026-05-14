@@ -1,4 +1,3 @@
 result←valueVarchar(a1 a2 a3)
 ⍝ Wrapper for api.duckdb_value_varchar
 result←api.duckdb_value_varchar a1 a2 a3
-

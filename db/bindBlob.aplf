@@ -7,4 +7,3 @@ status←stmt bindBlob (idx data len)
 :EndIf
 
 status←api.duckdb_bind_blob stmt idx data len
-

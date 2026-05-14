@@ -10,4 +10,3 @@
 
  (arrow_opts types names col_count out_schema)←args
  err←api.duckdb_to_arrow_schema arrow_opts types names col_count out_schema
-

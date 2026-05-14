@@ -1,4 +1,3 @@
 result←nparams a1
 ⍝ Wrapper for api.duckdb_nparams
 result←api.duckdb_nparams a1
-

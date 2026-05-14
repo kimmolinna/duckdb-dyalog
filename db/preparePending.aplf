@@ -13,4 +13,3 @@ stmt←prepareQuery _con sql
 
 (st pending)←api.duckdb_pending_prepared stmt 0
 {}destroyPrepared stmt
-

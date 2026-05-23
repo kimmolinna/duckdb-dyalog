@@ -27,8 +27,14 @@
     ⍝ const char *duckdb_result_error(duckdb_result *result);
     ⎕NA'U8 ',lib,'|duckdb_result_error <P[]'
     ⍝ duckdb_data_chunk duckdb_fetch_chunk(duckdb_result result);
-    ⍝ NOTE: on macOS ARM in this project, <P[] is the stable calling convention.
-    ⎕NA'P ',lib,'|duckdb_fetch_chunk <P[]'
+    ⍝ On Linux x86_64, by-value struct passing segfaults with ⎕NA <P[].
+    ⍝ Use a C shim (libduckdb_shim.so) that accepts a pointer instead.
+    :If ∨/'.so'⍷lib
+        ⎕NA'P ',((-+/∧\⌽lib≠'/')↓lib),'libduckdb_shim.so|duckdb_fetch_chunk_ptr <P[]'
+        duckdb_fetch_chunk←{duckdb_fetch_chunk_ptr ⍵}
+    :Else
+        ⎕NA'P ',lib,'|duckdb_fetch_chunk <P[]'
+    :EndIf
     ⍝ duckdb_arrow_options duckdb_result_get_arrow_options(duckdb_result *result);
     ⎕NA'P ',lib,'|duckdb_result_get_arrow_options <P[]'
     ⍝ duckdb_error_data duckdb_to_arrow_schema(duckdb_arrow_options arrow_options, duckdb_logical_type *types, const char **names, idx_t column_count, struct ArrowSchema *out_schema);
@@ -211,9 +217,17 @@
 
     ⍝ ===== RESULT METADATA =====
     ⍝ duckdb_statement_type duckdb_result_statement_type(duckdb_result result);
-    ⎕NA'I4 ',lib,'|duckdb_result_statement_type <P[]'
     ⍝ duckdb_result_type duckdb_result_return_type(duckdb_result result);
-    ⎕NA'I4 ',lib,'|duckdb_result_return_type <P[]'
+    ⍝ These take duckdb_result by value — use shim on Linux (same issue as fetch_chunk).
+    :If ∨/'.so'⍷lib
+        ⎕NA'I4 ',((-+/∧\⌽lib≠'/')↓lib),'libduckdb_shim.so|duckdb_result_statement_type_ptr <P[]'
+        duckdb_result_statement_type←{duckdb_result_statement_type_ptr ⍵}
+        ⎕NA'I4 ',((-+/∧\⌽lib≠'/')↓lib),'libduckdb_shim.so|duckdb_result_return_type_ptr <P[]'
+        duckdb_result_return_type←{duckdb_result_return_type_ptr ⍵}
+    :Else
+        ⎕NA'I4 ',lib,'|duckdb_result_statement_type <P[]'
+        ⎕NA'I4 ',lib,'|duckdb_result_return_type <P[]'
+    :EndIf
 
     ⍝ ===== RESULT VALUE EXTRACTION =====
     ⍝ char *duckdb_value_varchar(duckdb_result *result, idx_t col, idx_t row);

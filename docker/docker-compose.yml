@@ -7,6 +7,7 @@ services:
     environment:
       RIDE_INIT: "http:*:8888"
       LOAD: "/workspace/scripts/cloudBootstrap.aplf"
+      LD_LIBRARY_PATH: "/workspace/lib"
     volumes:
       - ..:/workspace:rw
     working_dir: /workspace

@@ -5,7 +5,7 @@ services:
       - "8888:8888"
       - "4502:4502"
     environment:
-      RIDE_INIT: "http::8888"
+      RIDE_INIT: "http:*:8888"
       LOAD: "/workspace/scripts/cloudBootstrap.aplf"
     volumes:
       - ..:/workspace:rw

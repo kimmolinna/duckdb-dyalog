@@ -4,7 +4,7 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 LIB_DIR="$ROOT/lib"
-DUCKDB_VERSION="${DUCKDB_VERSION:-v1.1.3}"
+DUCKDB_VERSION="${DUCKDB_VERSION:-v1.5.3}"
 ARCH="${DUCKDB_LINUX_ARCH:-linux-amd64}"
 TARGET="$LIB_DIR/libduckdb.so"
 ZIP_NAME="libduckdb-${ARCH}.zip"

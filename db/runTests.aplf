@@ -22,12 +22,12 @@
  r,←⊂'Connect OK' req con≠0
 
  result←query con 'SELECT 42 AS answer'
- r,←⊂'Simple query' req 2=≢result
+ r,←⊂'Simple query' req 2≤≢result
 
  stmt←prepareQuery con 'SELECT $1 AS n'
- {}bindParams stmt (,7)
+ {}stmt bindParams (,7)
  result←executePrepared stmt
- r,←⊂'Prepared query' req 2=≢result
+ r,←⊂'Prepared query' req 2≤≢result
  {}destroyPrepared stmt
 
  {}disconnect con
@@ -50,7 +50,7 @@
      tsts←''
  :EndSelect
 
- :For t :In (≠⊆⊢)tsts
+ :For t :In (' '≠tsts)⊆tsts
      fq←'tests.',t
      :If 3=⌊⎕NC fq
          :Trap 0

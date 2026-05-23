@@ -1,11 +1,11 @@
  cloudBootstrap;folder;msg
  folder←'/workspace'
- msg←⎕SE.Link.Create 'duck' folder,'-fastload'
+ msg←⎕SE.Link.Create 'duck' folder
  :If 0≠≢msg
      ⎕←'Link.Create messages:'
      ⎕←↑msg
  :EndIf
- duck.db.init folder,'lib/'
+ duck.db.init folder,'/lib/'
  ⎕←'Cloud bootstrap OK'
  ⎕←'Library: ',duck.db.ducklibpath
  ⎕←'RIDE connected: ',(3501⌶0)

@@ -71,13 +71,24 @@ bash scripts/run-tests-headless.sh
 
 ### DuckDB Linux library
 
-`lib/libduckdb.so` is downloaded by [`scripts/download-duckdb-linux.sh`](scripts/download-duckdb-linux.sh) (default version `v1.1.3`, override with `DUCKDB_VERSION`).
+`lib/libduckdb.so` is downloaded by [`scripts/download-duckdb-linux.sh`](scripts/download-duckdb-linux.sh) (default version `v1.5.3`, override with `DUCKDB_VERSION`).
+
+### Linux C shim (`libduckdb_shim.so`)
+
+On Linux x86_64, Dyalog 20's `⎕NA` segfaults when calling DuckDB C functions that take `duckdb_result` by value (a 48-byte struct). A small C shim library wraps these as pointer-accepting functions. The shim source is [`lib/duckdb_shim.c`](lib/duckdb_shim.c) and must be compiled before running:
+
+```bash
+gcc -shared -fPIC -o lib/libduckdb_shim.so lib/duckdb_shim.c -Llib -lduckdb -Wl,-rpath,lib
+```
+
+The `LD_LIBRARY_PATH=/workspace/lib` env var is set in `docker-compose.yml` and `run-tests-headless.sh` so the shim can find `libduckdb.so` at runtime. If you add new DuckDB API calls that take `duckdb_result` by value, add corresponding `_ptr` wrappers to the shim.
 
 ### Troubleshooting
 
 | Issue | Action |
 |-------|--------|
 | `libduckdb.so` missing | Run `bash scripts/download-duckdb-linux.sh` |
+| `libduckdb_shim.so` missing | Compile: `gcc -shared -fPIC -o lib/libduckdb_shim.so lib/duckdb_shim.c -Llib -lduckdb` |
 | RIDE page not loading | Use `http:*:8888` in compose (not `http::8888`); check `docker compose -f docker/docker-compose.yml logs` |
 | RIDE not required for tests | Run `bash scripts/run-tests-headless.sh` or `docker exec` into the container |
 | Stale code after edits | `]link.refresh duck` |

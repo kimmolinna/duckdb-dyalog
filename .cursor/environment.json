@@ -1,0 +1,14 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "install": "bash .cursor/install.sh",
+  "start": "sudo service docker start",
+  "terminals": [
+    {
+      "name": "dyalog-ride",
+      "command": "docker compose -f docker/docker-compose.yml up"
+    }
+  ]
+}

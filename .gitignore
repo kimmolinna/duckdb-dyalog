@@ -1,6 +1,9 @@
 # DuckDB macOS binary (download separately; do not commit)
 lib/libduckdb.dylib
 
+# DuckDB Linux binary (downloaded by scripts/download-duckdb-linux.sh)
+lib/libduckdb.so
+
 # Generated audit artifacts (optional local tooling)
 audit_duckdb_bindings.json
 

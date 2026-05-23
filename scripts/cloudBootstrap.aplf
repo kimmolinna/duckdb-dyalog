@@ -1,0 +1,13 @@
+ cloudBootstrap;folder;msg
+ folder←'/workspace'
+ msg←⎕SE.Link.Create 'duck' folder,'-fastload'
+ :If 0≠≢msg
+     ⎕←'Link.Create messages:'
+     ⎕←↑msg
+ :EndIf
+ duck.db.init folder,'lib/'
+ ⎕←'Cloud bootstrap OK'
+ ⎕←'Library: ',duck.db.ducklibpath
+ ⎕←'RIDE connected: ',(3501⌶0)
+ ⎕←'Run tests: duck.db.runTests ''smoke'''
+ ⎕←'Full suite: duck.db.runAllTests'

@@ -1,0 +1,79 @@
+# duckdb-dyalog
+
+Dyalog APL bindings for DuckDB via the C API.
+
+## Cursor Cloud specific instructions
+
+This repository supports automated APL testing in [Cursor Cloud Agents](https://cursor.com/docs/cloud-agent) using Dyalog 20 in Docker with RIDE over TCP (Zero Footprint HTTP).
+
+### Environment
+
+Cloud agent configuration lives in [`.cursor/environment.json`](.cursor/environment.json):
+
+- Builds a Ubuntu image with Docker-in-Docker (see [`.cursor/Dockerfile`](.cursor/Dockerfile))
+- Runs [`.cursor/install.sh`](.cursor/install.sh) to pull `dyalog/dyalog:20.0` and download `lib/libduckdb.so`
+- Starts a long-lived Dyalog+RIDE service via `docker compose`
+
+### Starting Dyalog + RIDE
+
+From the repo root:
+
+```bash
+docker compose -f docker/docker-compose.yml up -d
+docker compose -f docker/docker-compose.yml ps
+```
+
+Open Zero Footprint RIDE in a browser (Computer Use or local):
+
+```
+http://127.0.0.1:8888
+```
+
+The Dyalog container loads [`scripts/cloudBootstrap.aplf`](scripts/cloudBootstrap.aplf) on startup, which:
+
+1. Links the repo as namespace `duck` via `⎕SE.Link.Create`
+2. Calls `duck.db.init '/workspace/lib/'`
+3. Waits for a RIDE connection (TCP session stays open for reuse)
+
+### Running tests in a RIDE session
+
+After connecting to RIDE once, run tests in the same session (no container restart needed):
+
+```apl
+duck.db.runTests 'smoke'
+duck.db.runTests 'phase1'
+duck.db.runTests 'full'
+duck.db.runAllTests
+```
+
+Individual suites live under `duck.db.tests.*` (files in `db/tests/`). Check `3501⌶0` to verify RIDE is connected.
+
+### After editing APL source
+
+Linux Link does not watch directories. Refresh before re-running tests:
+
+```apl
+]link.refresh duck
+duck.db.runTests 'smoke'
+```
+
+### Headless CI (no RIDE)
+
+For one-shot runs without an interactive session:
+
+```bash
+bash scripts/run-tests-headless.sh
+```
+
+### DuckDB Linux library
+
+`lib/libduckdb.so` is downloaded by [`scripts/download-duckdb-linux.sh`](scripts/download-duckdb-linux.sh) (default version `v1.1.3`, override with `DUCKDB_VERSION`).
+
+### Troubleshooting
+
+| Issue | Action |
+|-------|--------|
+| `libduckdb.so` missing | Run `bash scripts/download-duckdb-linux.sh` |
+| RIDE page not loading | Check `docker compose -f docker/docker-compose.yml logs` |
+| Stale code after edits | `]link.refresh duck` |
+| Port 8888 in use | Stop other services or change port mapping in `docker/docker-compose.yml` |

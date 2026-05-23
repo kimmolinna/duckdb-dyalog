@@ -1,0 +1,10 @@
+ cloudRunOnce;rc
+⍝ One-shot bootstrap + smoke tests for headless CI (no RIDE).
+ folder←'/workspace'
+ {}⎕SE.Link.Create 'duck' folder,'-fastload'
+ rc←duck.db.runTests 'smoke'
+ :If 0≠rc
+     ⎕←'cloudRunOnce: tests failed'
+     ⎕OFF 1
+ :EndIf
+ ⎕←'cloudRunOnce: tests passed'

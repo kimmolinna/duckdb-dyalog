@@ -1,0 +1,81 @@
+ nfail←runTests suite;r;t;fq;tsts;res;blob;fail;req;db;con;stmt;result
+⍝ Cloud Agent / RIDE test runner with suite selection.
+⍝ suite: 'smoke' | 'phase1' | 'full'
+⍝ Returns nfail (0 = pass).
+
+ :If 0=⎕NC'null'
+     init 'lib/'
+ :EndIf
+
+ nfail←0
+ req←{0::nfail+←1 ⋄ ⍵:1 ⋄ nfail+←1 ⋄ 0}
+
+ ⎕←'=== runTests: ',suite,' ==='
+
+ ⍝ Inline smoke checks
+ r←⊂'Version string present'
+ v←libraryVersion
+ r,←⊂'Version non-empty' req 0<≢v
+
+ db←open':memory:'
+ con←connect db
+ r,←⊂'Connect OK' req con≠0
+
+ result←query con 'SELECT 42 AS answer'
+ r,←⊂'Simple query' req 2=≢result
+
+ stmt←prepareQuery con 'SELECT $1 AS n'
+ {}bindParams stmt (,7)
+ result←executePrepared stmt
+ r,←⊂'Prepared query' req 2=≢result
+ {}destroyPrepared stmt
+
+ {}disconnect con
+ {}close db
+
+ ⎕←↑r
+ ⎕←'Inline smoke checks failed: ',⍕nfail
+
+ :Select suite
+ :Case 'smoke'
+     tsts←'test testPhase1'
+ :Case 'phase1'
+     tsts←'testPhase1'
+ :Case 'full'
+     nfail+←runAllTests
+     tsts←''
+ :Else
+     ⎕←'Unknown suite: ',suite,' (use smoke, phase1, or full)'
+     nfail+←1
+     tsts←''
+ :EndSelect
+
+ :For t :In (≠⊆⊢)tsts
+     fq←'tests.',t
+     :If 3=⌊⎕NC fq
+         :Trap 0
+             res←⍎fq
+             blob←,⍕res
+             fail←(+/,'FAILED'⍷blob)+(+/,(' - failed')⍷blob)
+             :If 0≠fail
+                 ⎕←'Executed ',(⍕fq),' - FAILED (assertions)'
+                 nfail+←1
+             :Else
+                 ⎕←'Executed ',(⍕fq),' - OK'
+             :EndIf
+         :Else
+             ⎕←'Executed ',(⍕fq),' - FAILED: ',⎕DMX.Message
+             nfail+←1
+         :EndTrap
+     :Else
+         ⎕←'Missing ',(⍕fq),' - FAILED'
+         nfail+←1
+     :EndIf
+ :EndFor
+
+ ⎕←''
+ :If 0=nfail
+     ⎕←'runTests PASSED'
+ :Else
+     ⎕←(⍕nfail),' failure(s) in runTests'
+ :EndIf

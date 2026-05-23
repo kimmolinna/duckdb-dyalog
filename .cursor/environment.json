@@ -8,7 +8,7 @@
   "terminals": [
     {
       "name": "dyalog-ride",
-      "command": "docker compose -f docker/docker-compose.yml up"
+      "command": "bash scripts/cloud-agent-up.sh"
     }
   ]
 }

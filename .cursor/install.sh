@@ -28,4 +28,7 @@ docker pull dyalog/dyalog:20.0
 echo "Ensuring DuckDB Linux library..."
 bash "$ROOT/scripts/download-duckdb-linux.sh"
 
+echo ""
+bash "$ROOT/scripts/cloud-agent-verify.sh"
+echo ""
 echo "Cloud agent install complete."

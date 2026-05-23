@@ -28,4 +28,11 @@ docker pull dyalog/dyalog:20.0
 echo "Ensuring DuckDB Linux library..."
 bash "$ROOT/scripts/download-duckdb-linux.sh"
 
+echo "Building Linux ABI shim (libduckdb_shim.so)..."
+if [[ ! -f "$ROOT/lib/libduckdb_shim.so" ]]; then
+  docker run --rm --entrypoint bash --user root -v "$ROOT:/workspace:rw" dyalog/dyalog:20.0 -c \
+    'apt-get update -qq && apt-get install -y -qq gcc > /dev/null 2>&1 && gcc -shared -fPIC -o /workspace/lib/libduckdb_shim.so /workspace/lib/duckdb_shim.c -L/workspace/lib -lduckdb -Wl,-rpath,/workspace/lib' \
+    && echo "Shim built OK" || echo "Shim build failed (non-fatal)"
+fi
+
 echo "Cloud agent install complete."

@@ -39,6 +39,60 @@ Cursor reads [`.cursor/environment.json`](.cursor/environment.json) from the **c
 
 **Dyalog/Docker config changes** (e.g. `RIDE_INIT`): restart the compose stack — `bash scripts/cloud-agent-up.sh` or start a new agent (terminal runs recreate automatically).
 
+### Syncing Cloud Agent changes back to local
+
+Cloud Agent changes **do not** appear in your local Cursor workspace automatically. The agent runs on an isolated VM, commits to a **separate branch** on GitHub, and hands off via git — the same as a colleague’s PR.
+
+**Recommended agent handoff:** At the end of a Cloud Agent task, ask it to **commit, push, and open a PR** (or report the branch name). Without a push, changes stay on the cloud VM only.
+
+#### If the agent opened a PR
+
+1. Open the PR link from the agent run or from GitHub (`kimmolinna/duckdb-dyalog`).
+2. Review and merge the PR.
+3. Locally:
+
+```bash
+git checkout master
+git pull origin master
+```
+
+4. In Dyalog (if using Link):
+
+```apl
+]link.refresh duck
+```
+
+#### If the agent pushed a branch without a PR
+
+Find the branch name on the agent page or on GitHub, then:
+
+```bash
+git fetch origin
+git checkout <branch-name>
+git pull origin <branch-name>
+```
+
+To merge into `master`:
+
+```bash
+git checkout master
+git merge origin/<branch-name>
+```
+
+#### If nothing appears on GitHub
+
+The agent may not have committed or pushed. Send a follow-up: *“Commit all changes, push to a branch, and open a PR.”* Use the agent’s **Files changed** / conversation view to confirm work was done.
+
+#### Optional: changes on your machine directly
+
+[My Machines](https://cursor.com/docs/cloud-agent/my-machines) runs agent tool calls on your laptop (same repo checkout), so file edits land locally without a PR. That is different from the default cloud VM setup used by this repo’s `.cursor/environment.json`.
+
+| Direction | How |
+|-----------|-----|
+| Local → Cloud Agent | `git push`, then start a **new** agent on that commit |
+| Cloud Agent → Local | PR or branch on GitHub → **`git pull`** locally |
+| Cloud VM only (no pull) | Remote desktop in the agent UI — test there, changes not local |
+
 ### Starting Dyalog + RIDE
 
 From the repo root:

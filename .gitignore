@@ -3,6 +3,7 @@ lib/libduckdb.dylib
 
 # DuckDB Linux binary (downloaded by scripts/download-duckdb-linux.sh)
 lib/libduckdb.so
+lib/.duckdb-version
 
 # Generated audit artifacts (optional local tooling)
 audit_duckdb_bindings.json

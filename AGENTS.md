@@ -71,7 +71,13 @@ bash scripts/run-tests-headless.sh
 
 ### DuckDB Linux library
 
-`lib/libduckdb.so` is downloaded by [`scripts/download-duckdb-linux.sh`](scripts/download-duckdb-linux.sh) (default version `v1.1.3`, override with `DUCKDB_VERSION`).
+DuckDB **v1.5.3** is the pinned release. Run:
+
+```bash
+bash scripts/download-duckdb-linux.sh
+```
+
+This installs `lib/libduckdb.so` (Linux), updates `lib/duckdb.dll` (Windows), and syncs `lib/duckdb.h` / `lib/duckdb.hpp`. Override the version with `DUCKDB_VERSION` if needed. Re-run after a version bump; the script replaces assets when the pinned version changes.
 
 ### Troubleshooting
 

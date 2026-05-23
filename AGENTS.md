@@ -11,8 +11,33 @@ This repository supports automated APL testing in [Cursor Cloud Agents](https://
 Cloud agent configuration lives in [`.cursor/environment.json`](.cursor/environment.json):
 
 - Builds a Ubuntu image with Docker-in-Docker (see [`.cursor/Dockerfile`](.cursor/Dockerfile))
-- Runs [`.cursor/install.sh`](.cursor/install.sh) to pull `dyalog/dyalog:20.0` and download `lib/libduckdb.so`
-- Starts a long-lived Dyalog+RIDE service via `docker compose`
+- Runs [`.cursor/install.sh`](.cursor/install.sh) on each agent boot (pulls Dyalog, downloads DuckDB, prints verify output)
+- Starts Dyalog+RIDE via [`scripts/cloud-agent-up.sh`](scripts/cloud-agent-up.sh) (`--force-recreate` so compose changes apply)
+
+### Syncing local changes to Cloud Agent
+
+Local Cursor edits **do not** automatically appear in the Cloud Agent window or dashboard environment UI. Three separate layers exist:
+
+| Layer | What it is | How it updates |
+|-------|------------|----------------|
+| Local IDE | Your machine | Save files, `git commit`, `git push` |
+| Git remote | Source of truth for the agent | `git push origin master` |
+| Cloud Agent VM | Isolated Ubuntu machine | **New agent run** from the pushed commit |
+| Dashboard environment | Cached Docker image / snapshot | Rebuild when `.cursor/Dockerfile` changes |
+
+**After changing `.cursor/*`, `docker/*`, `scripts/*`, or `AGENTS.md`:**
+
+1. Commit and push to GitHub.
+2. Open [Cloud Agents dashboard → Environments](https://cursor.com/dashboard/cloud-agents#environments).
+3. If you changed `.cursor/Dockerfile`, trigger an **environment rebuild** (or create a new environment version). Dockerfile layers are cached; editing `install.sh` alone does not rebuild the base image.
+4. Start a **new** Cloud Agent (do not resume an old run) on branch `master` at the latest commit.
+5. In the agent, run `bash scripts/cloud-agent-verify.sh` and confirm the commit hash and `RIDE_INIT=http:*:8888`.
+
+Cursor reads [`.cursor/environment.json`](.cursor/environment.json) from the **commit the agent starts on** (highest priority over dashboard defaults). The dashboard setup screen may still show an older snapshot until you rebuild — that is normal; trust the verify script inside a fresh agent run.
+
+**APL code changes** inside an already-running Dyalog session: `]link.refresh duck` (Link does not watch files on Linux).
+
+**Dyalog/Docker config changes** (e.g. `RIDE_INIT`): restart the compose stack — `bash scripts/cloud-agent-up.sh` or start a new agent (terminal runs recreate automatically).
 
 ### Starting Dyalog + RIDE
 

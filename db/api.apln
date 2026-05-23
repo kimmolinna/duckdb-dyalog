@@ -1,7 +1,7 @@
 :Namespace api
 ⎕ML←1 ⋄ ⎕io←0
 
-  ∇ init lib;wf;r
+  ∇ init lib;wf;r;shimlib
     ⍝ duckdb_state duckdb_open(const char *path, duckdb_database *out_database);
     ⎕NA'I4 ',lib,'|duckdb_open <0UTF8[] >P'
     ⍝ void duckdb_close(duckdb_database *database);
@@ -27,8 +27,15 @@
     ⍝ const char *duckdb_result_error(duckdb_result *result);
     ⎕NA'U8 ',lib,'|duckdb_result_error <P[]'
     ⍝ duckdb_data_chunk duckdb_fetch_chunk(duckdb_result result);
-    ⍝ NOTE: on macOS ARM in this project, <P[] is the stable calling convention.
-    ⎕NA'P ',lib,'|duckdb_fetch_chunk <P[]'
+    ⍝ NOTE: on macOS ARM, <P[] works directly. On Linux x86-64, Dyalog 20 cannot
+    ⍝ pass the 48-byte duckdb_result struct by value; use a C shim that takes a pointer.
+    shimlib←((-≢'libduckdb.so')↓lib),'libduckdb_shim.so'
+    :If (∨/'Linux'⍷⊃('.' ⎕WG'APLVersion'))∧⎕NEXISTS shimlib
+        ⎕NA'P ',shimlib,'|duckdb_fetch_chunk_ptr <P[]'
+        duckdb_fetch_chunk←duckdb_fetch_chunk_ptr
+    :Else
+        ⎕NA'P ',lib,'|duckdb_fetch_chunk <P[]'
+    :EndIf
     ⍝ duckdb_arrow_options duckdb_result_get_arrow_options(duckdb_result *result);
     ⎕NA'P ',lib,'|duckdb_result_get_arrow_options <P[]'
     ⍝ duckdb_error_data duckdb_to_arrow_schema(duckdb_arrow_options arrow_options, duckdb_logical_type *types, const char **names, idx_t column_count, struct ArrowSchema *out_schema);

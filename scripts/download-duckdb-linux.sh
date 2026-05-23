@@ -21,6 +21,6 @@ trap 'rm -rf "$TMP"' EXIT
 
 echo "Downloading DuckDB ${DUCKDB_VERSION} (${ARCH})..."
 curl -fsSL "$URL" -o "$TMP/${ZIP_NAME}"
-unzip -j "$TMP/${ZIP_NAME}" "libduckdb.so*" -d "$TMP"
-install -m 644 "$TMP"/libduckdb.so* "$TARGET"
+unzip -j "$TMP/${ZIP_NAME}" "libduckdb.so" -d "$TMP"
+install -m 755 "$TMP/libduckdb.so" "$TARGET"
 echo "Installed $TARGET"

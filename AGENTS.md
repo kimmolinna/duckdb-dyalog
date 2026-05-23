@@ -67,13 +67,39 @@ bash scripts/run-tests-headless.sh
 
 ### DuckDB Linux library
 
-`lib/libduckdb.so` is downloaded by [`scripts/download-duckdb-linux.sh`](scripts/download-duckdb-linux.sh) (default version `v1.1.3`, override with `DUCKDB_VERSION`).
+`lib/libduckdb.so` is downloaded by [`scripts/download-duckdb-linux.sh`](scripts/download-duckdb-linux.sh) (default version `v1.5.2`, override with `DUCKDB_VERSION`).
+
+### Linux x86-64 ABI shim (`libduckdb_shim.so`)
+
+Dyalog 20 on Linux x86-64 cannot correctly pass the 48-byte `duckdb_result` struct by value to `duckdb_fetch_chunk`. A small C shim library (`lib/libduckdb_shim.so`) wraps this call, accepting the struct by pointer instead. The shim is built by `.cursor/install.sh` and loaded automatically by `api.init` on Linux when present. If you see a segfault in `duckdb_fetch_chunk`, rebuild the shim:
+
+```bash
+docker run --rm --entrypoint bash --user root -v /workspace:/workspace:rw dyalog/dyalog:20.0 -c \
+  'apt-get update -qq && apt-get install -y -qq gcc > /dev/null 2>&1 && gcc -shared -fPIC -o /workspace/lib/libduckdb_shim.so /workspace/lib/duckdb_shim.c -L/workspace/lib -lduckdb -Wl,-rpath,/workspace/lib'
+```
+
+### Interacting with the Dyalog container
+
+If RIDE HTTP (port 8888) does not respond in a browser, use `docker exec` for direct APL REPL access:
+
+```bash
+docker exec -it docker-dyalog-1 /opt/mdyalog/20.0/64/unicode/dyalog +s
+```
+
+Then link and init manually if needed:
+
+```apl
+{}⎕SE.Link.Create 'duck' '/workspace'
+duck.db.init '/workspace/lib/'
+```
 
 ### Troubleshooting
 
 | Issue | Action |
 |-------|--------|
 | `libduckdb.so` missing | Run `bash scripts/download-duckdb-linux.sh` |
-| RIDE page not loading | Check `docker compose -f docker/docker-compose.yml logs` |
+| `libduckdb_shim.so` missing | Rebuild with the gcc command above |
+| RIDE page not loading | Use `docker exec` instead (see above) |
 | Stale code after edits | `]link.refresh duck` |
 | Port 8888 in use | Stop other services or change port mapping in `docker/docker-compose.yml` |
+| Segfault in `duckdb_fetch_chunk` | Rebuild shim or check DuckDB version matches `v1.5.2` |

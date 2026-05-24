@@ -28,6 +28,17 @@ docker pull dyalog/dyalog:20.0
 echo "Ensuring DuckDB Linux library..."
 bash "$ROOT/scripts/download-duckdb-linux.sh"
 
+if [[ ! -f "$ROOT/lib/nanoarrow/src/nanoarrow_ipc.c" ]]; then
+  echo "Vendoring nanoarrow..."
+  bash "$ROOT/scripts/vendor-nanoarrow.sh"
+fi
+
+echo "Building DuckDB C shims..."
+bash "$ROOT/scripts/build-arrow-export-shim.sh" --no-test
+if [[ "$(uname -s)" == "Linux" ]]; then
+  gcc -shared -fPIC -o "$ROOT/lib/libduckdb_shim.so" "$ROOT/lib/duckdb_shim.c" -L"$ROOT/lib" -lduckdb -Wl,-rpath,"$ROOT/lib"
+fi
+
 echo ""
 bash "$ROOT/scripts/cloud-agent-verify.sh"
 echo ""

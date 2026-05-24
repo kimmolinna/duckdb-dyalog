@@ -1,0 +1,26 @@
+∇ r←exportArrowBytes(con sql);rows;size;dataptr;errptr;st;msg;bytes
+⍝ Export aggregated query results to Arrow IPC bytes in memory.
+⍝ con: duckdb connection handle
+⍝ sql: SELECT with aggregation suitable for charts
+⍝ r: (bytes rows) — Arrow IPC bytes and row count
+ rows←0
+ size←0
+ dataptr←0
+ errptr←0
+ st←api.duckdb_export_query_arrow_ipc_buffer con sql rows dataptr size errptr
+ :If st≠DuckDBSuccess
+     :If errptr≠0
+         msg←1024 read.utf8 errptr
+         {}api.duckdb_free errptr
+     :Else
+         msg←'Arrow buffer export failed'
+     :EndIf
+     ⎕SIGNAL msg
+ :EndIf
+ :If (0=size)∨0=dataptr
+     ⎕SIGNAL 'Arrow buffer export returned no data'
+ :EndIf
+ bytes←size read.u8 dataptr
+ {}api.duckdb_free dataptr
+ r←bytes rows
+∇

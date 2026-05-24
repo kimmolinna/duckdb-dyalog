@@ -5,6 +5,15 @@ lib/libduckdb.dylib
 lib/libduckdb.so
 lib/.duckdb-version
 
+# Built C shims (scripts/build-arrow-export-shim.sh)
+lib/libduckdb_arrow_ipc.so
+lib/libduckdb_arrow_ipc.dylib
+lib/libduckdb_arrow_ipc.dll
+lib/test_arrow_export
+
+# Generated plot output
+out/
+
 # Generated audit artifacts (optional local tooling)
 audit_duckdb_bindings.json
 

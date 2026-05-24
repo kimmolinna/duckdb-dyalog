@@ -1,0 +1,23 @@
+ r←testPlotHtml;r;req;html;json
+⎕CS ##
+⍝ Test plot HTML/spec helpers (no GUI).
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Plot HTML Helpers'
+
+spec←'type' 'barY' 'x' 'dep' 'y' 'n' 'title' 'Top deps'
+json←plotSpecJson spec
+r,←⊂'plotSpecJson includes type'req(∨/'barY'⍷json)
+r,←⊂'plotSpecJson includes x column'req(∨/'dep'⍷json)
+
+html←plotHtml spec
+r,←⊂'plotHtml includes WebSocket'req(∨/'ws://dyalog_root/plot'⍷html)
+r,←⊂'plotHtml includes Observable Plot CDN'req(∨/'@observablehq/plot'⍷html)
+r,←⊂'plotHtml includes apache-arrow CDN'req(∨/'apache-arrow'⍷html)
+r,←⊂'plotHtml embeds spec'req(∨/'__PLOT_SPEC__'⍷html)
+
+r,←⊂''
+r,←⊂'Plot HTML helper tests complete!'
+⎕←↑r

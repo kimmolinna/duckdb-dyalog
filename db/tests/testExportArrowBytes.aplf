@@ -1,0 +1,28 @@
+ r←testExportArrowBytes;r;req;db;con;bytes;rows
+⎕CS ##
+⍝ Test in-memory Arrow IPC export (for plot WebSocket path).
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Export Arrow Bytes'
+
+:If 3≠api.⎕NC'duckdb_export_query_arrow_ipc_buffer'
+    r,←⊂'duckdb_export_query_arrow_ipc_buffer binding'req 0
+    ⎕←↑r
+    →0
+:EndIf
+
+db←open':memory:'
+con←connect db
+
+bytes rows←exportArrowBytes con 'SELECT i AS value, i*2 AS doubled FROM range(500) t(i)'
+r,←⊂'exportArrowBytes row count'req 500=rows
+r,←⊂'exportArrowBytes byte payload'req 1000<≢bytes
+
+disconnect con
+close db
+
+r,←⊂''
+r,←⊂'Export Arrow bytes smoke test complete!'
+⎕←↑r

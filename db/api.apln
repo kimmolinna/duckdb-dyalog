@@ -35,6 +35,17 @@
     :Else
         ⎕NA'P ',lib,'|duckdb_fetch_chunk <P[]'
     :EndIf
+    ⍝ duckdb_export_query_arrow_ipc — Arrow IPC export (libduckdb_arrow_ipc shim)
+    libdir←(-+/∧\⌽lib≠'/')↓lib
+    :If ∨/'.dylib'⍷lib
+        arrowlib←libdir,'libduckdb_arrow_ipc.dylib'
+    :ElseIf ∨/'.dll'⍷lib
+        arrowlib←libdir,'libduckdb_arrow_ipc.dll'
+    :Else
+        arrowlib←libdir,'libduckdb_arrow_ipc.so'
+    :EndIf
+    ⎕NA'I4 ',arrowlib,'|duckdb_export_query_arrow_ipc P <0UTF8[] <0UTF8[] >U8 >P'
+    ⎕NA'I4 ',arrowlib,'|duckdb_export_query_arrow_ipc_buffer P <0UTF8[] >U8 >P >U8 >P'
     ⍝ duckdb_arrow_options duckdb_result_get_arrow_options(duckdb_result *result);
     ⎕NA'P ',lib,'|duckdb_result_get_arrow_options <P[]'
     ⍝ duckdb_error_data duckdb_to_arrow_schema(duckdb_arrow_options arrow_options, duckdb_logical_type *types, const char **names, idx_t column_count, struct ArrowSchema *out_schema);

@@ -1,0 +1,18 @@
+ r←exportArrow(con sql path);rows;errptr;st;msg
+⍝ Export a SQL query result to an Arrow IPC stream file (.arrows).
+⍝ con: duckdb connection handle
+⍝ sql: SQL string (typically SELECT)
+⍝ path: output file path
+⍝ r: row count written
+⍝ Uses libduckdb_arrow_ipc (see scripts/build-arrow-export-shim.sh).
+ (st rows errptr)←api.duckdb_export_query_arrow_ipc con sql path
+ :If st≠DuckDBSuccess
+     :If errptr≠0
+         msg←1024 read.utf8 errptr
+         {}api.duckdb_free errptr
+     :Else
+         msg←'Arrow export failed'
+     :EndIf
+     ⎕SIGNAL msg
+ :EndIf
+ r←rows

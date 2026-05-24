@@ -1,0 +1,10 @@
+json←plotSpecJson spec;n;pairs;keys;vals
+⍝ Convert flat spec vector ('type' 'barY' 'x' 'dep' ...) to JSON object text.
+ :If 0≠2|≢spec
+     ⎕SIGNAL 'Spec vector must have an even number of elements'
+ :EndIf
+ n←(≢spec)÷2
+ pairs←(2,n)⍴spec
+ keys←pairs[0;]
+ vals←(⊂¨pairs[1;])
+ json←⎕JSON ⊂ 4 (vals keys)

@@ -1,0 +1,32 @@
+∇ resp←plotShowWebSocket args;ev;hr;wsid;data;bytes;rows;msg
+⍝ HTMLRenderer callback for plot WebSocket events (used with Event ''All'').
+ :If 0=≢args
+     →0
+ :EndIf
+ ev←2⊃args
+ :Select ev
+ :Case 'WebSocketUpgrade'
+     plotCtx.wsid←3⊃args
+     resp←args
+ :Case 'WebSocketReceive'
+     hr←1⊃args
+     wsid←3⊃args
+     data←4⊃args
+     :If (0=plotCtx.con)∨0=≢plotCtx.sql
+         →0
+     :EndIf
+     :If ~∨/'ready'⍷⊂,data
+         →0
+     :EndIf
+     :Trap 0
+         bytes rows←exportArrowBytes plotCtx.con plotCtx.sql
+     :Else
+         msg←'Plot export failed: ',⎕DMX.Message
+         {}hr.WebSocketSend wsid msg 1 1
+         →0
+     :EndTrap
+     {}hr.WebSocketSend wsid bytes 1 2
+ :Else
+     resp←⍬
+ :EndSelect
+∇

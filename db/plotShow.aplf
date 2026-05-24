@@ -1,0 +1,23 @@
+∇ hr←plotShow(con sql spec);html;urls
+⍝ Show an Observable Plot chart in HTMLRenderer for aggregated SQL results.
+⍝ con: duckdb connection
+⍝ sql: presentation SQL (GROUP BY / LIMIT — aggregation in DuckDB)
+⍝ spec: flat vector ('type' 'barY' 'x' 'col' 'y' 'col' ...)
+⍝ hr: HTMLRenderer object name
+⍝ Requires GUI (HTMLRenderer/CEF). Data path: DuckDB C API → Arrow IPC → WebSocket → Plot.
+ :If 0=⎕NC'HTMLRenderer'
+     ⎕SIGNAL 'HTMLRenderer is not available in this session'
+ :EndIf
+ :If 3≠api.⎕NC'duckdb_export_query_arrow_ipc_buffer'
+     ⎕SIGNAL 'Arrow buffer export is not available (build libduckdb_arrow_ipc)'
+ :EndIf
+ plotCtx.con←con
+ plotCtx.sql←sql
+ plotCtx.spec←spec
+ plotCtx.wsid←''
+ plotCtx.hrName←'dbplot'
+ html←plotHtml spec
+ urls←(3 2⍴⊢)'ws://dyalog_root/*' 1 '*://dyalog_root/*' 1 '*cdn.jsdelivr.net*' 0
+ hr←plotCtx.hrName ⎕WC'HTMLRenderer' html ('InterceptedURLs' urls) ('Event' 'All' 'plotShowWebSocket')
+ hr.Size←480 720
+∇

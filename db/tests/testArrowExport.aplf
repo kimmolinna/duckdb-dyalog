@@ -1,0 +1,33 @@
+ r←testArrowExport;r;req;db;con;path;rows;tmpdir
+⎕CS ##
+⍝ Smoke test for native C API Arrow IPC export via libduckdb_arrow_ipc.
+:If 0=⎕NC'null'
+    init 'lib/'
+:EndIf
+req←{0::⍺,' - FAILED: ',⎕DMX.Message ⋄ ⍵:⍺,' - OK' ⋄ ⍺,' - FAILED'}
+r←⊂'Test Arrow Export (C API)'
+
+:If 3≠api.⎕NC'duckdb_export_query_arrow_ipc'
+    r,←⊂'duckdb_export_query_arrow_ipc binding'req 0
+    ⎕←↑r
+    →0
+:EndIf
+
+tmpdir←(⎕SE.DUtil TEMP),'/duckdb-dyalog-arrow-test'
+{}⎕MKDIR tmpdir
+path←tmpdir,'/range1000.arrows'
+
+db←open':memory:'
+con←connect db
+
+rows←exportArrow con 'SELECT i AS value FROM range(1000) t(i)' path
+r,←⊂'exportArrow row count'req 1000=rows
+r,←⊂'exportArrow output file exists'req 1=⎕NEXISTS path
+
+disconnect con
+close db
+{}⎕DELETE path
+
+r,←⊂''
+r,←⊂'Arrow export smoke test complete!'
+⎕←↑r

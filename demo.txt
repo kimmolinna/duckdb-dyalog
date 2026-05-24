@@ -17,5 +17,8 @@ duck.db.query _con ('COPY test TO "',folder,'test.parquet" (FORMAT PARQUET, CODE
 (cols (aa bb) types)←duck.db.query _con ('SELECT * FROM "',folder,'test.parquet"')
 a≡aa
 b≡bb
+⍝ Plot demo (HTMLRenderer + aggregated SQL; build lib: bash scripts/build-arrow-export-shim.sh)
+duck.db.query _con 'CREATE TABLE sales AS SELECT mod(i, 5) AS category, i AS amount FROM range(1000) t(i)'
+duck.db.plotShow _con ('SELECT category, SUM(amount) AS total FROM sales GROUP BY 1 ORDER BY 2 DESC') ('type' 'barY' 'x' 'category' 'y' 'total' 'title' 'Sales by category')
 _←duck.db.disconnect _con
 _←duck.db.close _db

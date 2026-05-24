@@ -1,0 +1,8 @@
+:Namespace plotCtx
+⍝ Session state for HTMLRenderer plot WebSocket callbacks.
+ con←0
+ sql←''
+ spec←⍬
+ wsid←''
+ hrName←''
+:EndNamespace
